@@ -1,6 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+
 
 const Account = () => {
   const { user, logout } = UserAuth();
@@ -24,6 +25,12 @@ const Account = () => {
       <button onClick={handleLogout} className='border px-6 py-2 my-4'>
         Logout
       </button>
+      <Link to='/order' className='underline'>
+      <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
+          New Order
+        </button>
+        </Link>
+        
     </div>
   );
 };
