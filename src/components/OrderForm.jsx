@@ -1,10 +1,12 @@
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
-function OrderForm() {
+
+  const OrderForm = () => {
+    const { user, logout } = UserAuth();
+    const navigate = useNavigate();
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -41,15 +43,7 @@ function OrderForm() {
         <Form.Label>Customer Phone</Form.Label>
         <Form.Control type="Customer Phone"/>
       </Form.Group>
-
-    </Form>
-
-    
-  );
-  function CustomerForm() {
-    return (
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Recipient Name</Form.Label>
           <Form.Control type="Recipient Name"/>
         </Form.Group>
@@ -88,10 +82,12 @@ function OrderForm() {
           <Form.Label>Product</Form.Label>
           <Form.Control type="Product"/>
         </Form.Group>
+    </Form>
+
+    
+  );
   
-      </Form>
-    );
-  }
+  
 }
 
-export default BasicExample;
+export default OrderForm;
