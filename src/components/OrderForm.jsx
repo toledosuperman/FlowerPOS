@@ -2,11 +2,32 @@ import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-
+import { getDatabase, ref, set } from "firebase/database"; 
 
   const OrderForm = () => {
     const { user, logout } = UserAuth();
     const navigate = useNavigate();
+
+    function writeUserData(orderNumber, customerName, customerAddress, customerCity, customerState, 
+      customerZip, customerPhone) {
+      const db = getDatabase();
+      set(ref(db, 'orderdata/' + orderNumber), {
+        customername: customerName,
+        customeraddress : customerAddress,
+        customercity: customerCity,
+        customerstate: customerState,
+        customerzip: customerZip,
+        customerphone: customerPhone,
+        recipientname: recipientname,
+        recipientaddress: recipientAddress,
+        recipientcity: recipientCity,
+        recipientstate: recipientState,
+        recipientzip: recipientZip,
+        recipientphone: recipientPhone,
+        deliverydate: deliveryDate,
+        product: product
+      });
+    }
   return (
     <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
