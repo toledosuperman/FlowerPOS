@@ -8,7 +8,7 @@ import { getDatabase, ref, set } from "firebase/database";
     const { user, logout } = UserAuth();
     const navigate = useNavigate();
 
-    function writeUserData(orderNumber, customerName, customerAddress, customerCity, customerState, 
+    function writeOrderData(orderNumber, customerName, customerAddress, customerCity, customerState, 
       customerZip, customerPhone) {
       const db = getDatabase();
       set(ref(db, 'orderdata/' + orderNumber), {
