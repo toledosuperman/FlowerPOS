@@ -1,11 +1,25 @@
 import { initializeApp, db } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { useForm } from "react-hook-form";
+import React, { useState, useEffect } from "react";
+
+function OrderForm({ values, submit }) {
+  // initialize react-hook-form
+  const { register, reset, handleSubmit } = useForm();
+
+  // populate form fields
+  useEffect(() => {
+    reset(values);
+  }, [values]);
+
+  // call container submit handler to save new/updated values
+  const onSubmit = (submittedData) => {
+    submit(submittedData);
+  };
 
 
 
 
-
-function OrderForm ()  {
 return (
   
   <form>
@@ -14,10 +28,12 @@ return (
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer Name</label>
+  <input type="text" {...register("CustomerName")} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer Address</label>
+  <input type="text" {...register("CustomerAddress")} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
