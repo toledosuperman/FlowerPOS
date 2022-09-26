@@ -1,6 +1,7 @@
 import { initializeApp, db } from 'firebase/app';
 
 class DatabaseService {
+    
     collection;
   
     // Specify  collection name
