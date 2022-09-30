@@ -8,13 +8,18 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.2.1",
     "firebase": "^9.10.0",
+    "mdb-react-ui-kit": "^4.2.0",
+    "mdbreact": "^5.2.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-bootstrap-validation": "^0.1.11",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.1",
+    "react-hook-form-resolvers": "^0.0.1",
     "react-router-dom": "^6.4.1",
     "react-scripts": "^5.0.1",
     "react18": "^0.0.1-security",
+    "sass": "^1.55.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

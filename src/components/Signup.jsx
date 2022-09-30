@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBRow,
+  MDBCol,
+  MDBIcon,
+  MDBInput,
+  MDBCheckbox
+}
+from 'mdb-react-ui-kit';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -22,38 +35,37 @@ const Signup = () => {
   };
 
   return (
-    <div className='max-w-[700px] mx-auto my-16 p-4'>
-      <div>
-        <h1 className='text-2xl font-bold py-2'>Create account</h1>
-        <p className='py-2'>
-          User Sign in{' '}
-          <Link to='/' className='underline'>
-            Sign in.
-          </Link>
-        </p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className='flex flex-col py-2'>
-          <label className='py-2 font-medium'>Email Address</label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            className='border p-3'
-            type='email'
-          />
-        </div>
-        <div className='flex flex-col py-2'>
-          <label className='py-2 font-medium'>Password</label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            className='border p-3'
-            type='password'
-          />
-        </div>
-        <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
-          Sign Up
-        </button>
-      </form>
-    </div>
+    <MDBContainer fluid>
+
+      <div className="p-5 bg-image" style={{backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '300px'}}></div>
+
+      <MDBCard className='mx-5 mb-5 p-5 shadow-5' style={{marginTop: '-100px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)'}}>
+        <MDBCardBody className='p-5 text-center'>
+
+          <h2 className="fw-bold mb-5">Register</h2>
+
+          <MDBRow>
+            <MDBCol col='6'>
+              <MDBInput wrapperClass='mb-4' label='First nName' id='form1' type='text'/>
+            </MDBCol>
+
+            <MDBCol col='6'>
+              <MDBInput wrapperClass='mb-4' label='Last Name' id='form1' type='text'/>
+            </MDBCol>
+          </MDBRow>
+
+          <MDBInput wrapperClass='mb-4' label='Email' id='form1' type='email'/>
+          <MDBInput wrapperClass='mb-4' label='Password' id='form1' type='password'/>
+          <MDBInput wrapperClass='mb-4' label='Forgot Password' id='form1' type='forgotpassword'/>
+          
+
+          <MDBBtn className='w-100 mb-4' size='md'>Register</MDBBtn>
+
+          
+        </MDBCardBody>
+      </MDBCard>
+
+    </MDBContainer>
   );
 };
 
