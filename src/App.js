@@ -16,7 +16,7 @@ function App() {
         Welcome to Flower POS
       </h1>
 
-      <navbar />
+    <Navbar />
 
       <AuthContextProvider>
         <Routes>
