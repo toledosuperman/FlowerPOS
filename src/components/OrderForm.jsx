@@ -2,11 +2,14 @@ import { initializeApp, db } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
+import { UserAuth } from '../context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 function OrderForm({ values, submit }) {
   // initialize react-hook-form
   const { register, reset, handleSubmit } = useForm();
-
+  const { user, logout } = UserAuth();
+  const navigate = useNavigate();
   // populate form fields
   useEffect(() => {
     reset(values);
