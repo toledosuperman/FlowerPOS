@@ -2,16 +2,22 @@ import React from 'react';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Account from './components/Account';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/Nav/navbar';
 
 function App() {
   return (
+
     <div>
       <h1 className='text-center text-3xl font-bold'>
         Welcome to Flower POS
       </h1>
+
+      <navbar />
+
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={<Signin />} />
@@ -24,7 +30,9 @@ function App() {
           />
         </Routes>
       </AuthContextProvider>
+
     </div>
+
   );
 }
 
