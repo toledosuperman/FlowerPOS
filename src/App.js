@@ -2,6 +2,7 @@ import React from 'react';
 import OrderForm from './components/OrderForm';
 import Signin from './components/Signin';
 import ViewOrders from './components/ViewOrders';
+import ViewProducts from './components/ViewProducts';
 import Signup from './components/Signup';
 import Account from './components/Account';
 import { Route, Routes } from 'react-router-dom';
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworder' element={<ViewOrders />} />
+          <Route path='/viewproduct' element={<ViewProducts />} />
           <Route path='/' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/account' element={
