@@ -10,15 +10,17 @@ import { Route, Routes } from 'react-router-dom';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
+import Home from './components/home';
 
 function App() {
   return (
-    <div>
+    <div className="wrapper">
       <h1 className='text-center text-3xl font-bold'>
         Welcome to Flower POS
       </h1>
       <AuthContextProvider>
         <Routes>
+          <Route path='/home' element={<Home />} />
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworder' element={<ViewOrders />} />
           <Route path='/viewproduct' element={<ViewProducts />} />
