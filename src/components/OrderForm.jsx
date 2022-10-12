@@ -1,16 +1,32 @@
-import { initializeApp, db } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { addDoc, collection } from "firebase/firestore"; 
+import { getDatabase, ref, set } from "firebase/database";
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import { UserAuth } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 function OrderForm({ values, submit }) {
   // initialize react-hook-form
+  const db = getDatabase();
   const { register, reset, handleSubmit } = useForm();
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
-  // populate form fields
+  const [customername  , Setcustomername] = useState("");
+    const [customeraddress , Setcustomeraddress] = useState("");
+    const [customercity , Setcustomercity] = useState("");
+    const sub = async(e) => {
+        e.preventDefault();
+        try {
+          const docRef = await addDoc(collection(db, "Orders"), {
+            CustomerName: customername,
+            CustomerAddress: customeraddress,
+            CustomerCity: customercity
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
+      }
   useEffect(() => {
     reset(values);
   }, [values]);
@@ -25,23 +41,24 @@ function OrderForm({ values, submit }) {
 
 return (
   
-  <form>
+  <form style={{marginTop:"200px" }}
+  onSubmit={(event) => {sub(event)}}>
     <div className='max-w-[700px] mx-auto my-16 p-4'>
     <h1>Customer Info</h1>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer Name</label>
-  <input type="text" {...register("CustomerName")} />
+  <input type="text" onChange={(e)=>{Setcustomername(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer Address</label>
-  <input type="text" {...register("CustomerAddress")} />
+  <input type="text" onChange={(e)=>{Setcustomeraddress(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer City</label>
-  <input type="text" {...register("CustomerCity")} />
+  <input type="text" onChange={(e)=>{Setcustomercity(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
