@@ -1,20 +1,23 @@
-import { addDoc, collection } from "firebase/firestore"; 
+import { addDoc, collection, doc, setdoc } from "firebase/firestore"; 
 import { getDatabase, ref, set } from "firebase/database";
 import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import { UserAuth } from '../context/AuthContext';
 import {  useNavigate } from 'react-router-dom';
 
+
+
+
 function OrderForm({ values, submit }) {
   // initialize react-hook-form
   const db = getDatabase();
-  const { register, reset, handleSubmit } = useForm();
+  const { register, reset } = useForm();
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
   const [customername  , Setcustomername] = useState("");
-    const [customeraddress , Setcustomeraddress] = useState("");
-    const [customercity , Setcustomercity] = useState("");
-    const sub = async(e) => {
+  const [customeraddress , Setcustomeraddress] = useState("");
+  const [customercity , Setcustomercity] = useState("");
+  const handleSubmit = async(e) => {
         e.preventDefault();
         try {
           const docRef = await addDoc(collection(db, "Orders"), {
@@ -41,8 +44,8 @@ function OrderForm({ values, submit }) {
 
 return (
   
-  <form style={{marginTop:"200px" }}
-  onSubmit={(event) => {sub(event)}}>
+  <form 
+  onSubmit={handleSubmit}>
     <div className='max-w-[700px] mx-auto my-16 p-4'>
     <h1>Customer Info</h1>
 <div class="form-floating">
@@ -127,7 +130,9 @@ return (
   <label for="comment"> Delivery Date</label>
   <input type="text" {...register("DeliveryDate")} />
 </div>
-<input type="submit" value="Submit" />
+<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
+          Submit
+        </button>
 </div>
 </form>
    
