@@ -4,53 +4,24 @@ import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 import { UserAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import firebase from "firebase/compat/app";
+import 'firebase/compat/firestore';
 
 import Table from 'react-bootstrap/Table';
+import TableWithAPI from './APITable.js';
 
-function ViewOrders({ values, submit }) {
+const ViewOrders = () => {
 
 
 return (
 
-<div className='max-w-[700px] mx-auto my-16 p-4'>
-      <h1>View Orders</h1>
+ <div className='max-w-[600px] mx-auto my-16 p-4'>
+              <h1 className='text-2xl font-bold py-4'>View orders</h1>
 
-        <React.Fragment>
-        <Table responsive>
-              <thead>
-                <tr>
-                  <th></th>
-                  {Array.from({ length: 9 }).map((_, index) => (
-                    <th key={index}>Table heading</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  {Array.from({ length: 9 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>2</td>
-                  {Array.from({ length: 9 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                  ))}
-                </tr>
-                <tr>
-                  <td>3</td>
-                  {Array.from({ length: 9 }).map((_, index) => (
-                    <td key={index}>Table cell {index}</td>
-                  ))}
-                </tr>
-              </tbody>
-            </Table>
-            </React.Fragment>
+    < TableWithAPI />
+</div>
 
-            </ div>
-  );
-
+);
 };
 
 export default ViewOrders;
