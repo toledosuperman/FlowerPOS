@@ -1,18 +1,7 @@
-import { getDatabase } from "firebase/database";
+
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore,
-  query,
-  orderBy,
-  onSnapshot,
-  collection,
-  getDoc, 
-  getDocs, 
-  addDoc,
-  updateDoc,
-  doc, 
-  serverTimestamp, 
-  arrayUnion } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcc1jnbceSvBcBmDuN2nnMzMqAw3euNqE",
@@ -25,8 +14,9 @@ const firebaseConfig = {
   measurementId: "G-D9XSKRBLXV"
   };
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
- export const database = getDatabase();
+ 
+
   export const auth = getAuth(app);
-  export {db,app}
+  export const db = getFirestore(app)
+  export {app}
   
