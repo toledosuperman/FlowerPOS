@@ -1,11 +1,9 @@
-// import { addDoc, collection } from "firebase/firestore"; 
 import {db} from '../components/Firebase/firebase'
 import { collection, doc, addDoc } from "firebase/firestore"; 
-import { useForm } from "react-hook-form";
 import React, { useState, useEffect } from "react";
 
 
-const OrderForm = () => {
+const OrderForm = (userName) => {
  
   const [customername  , Setcustomername] = useState("");
   const [customeraddress , Setcustomeraddress] = useState("");
@@ -61,79 +59,79 @@ return (
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer Name</label>
-  <input type="text" onChange={(e)=>{Setcustomername(e.target.value)}} />
+  <input onChange={(e)=>{Setcustomername(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer Address</label>
-  <input type="text" onChange={(e)=>{Setcustomeraddress(e.target.value)}} />
+  <input onChange={(e)=>{Setcustomeraddress(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Customer City</label>
-  <input type="text" onChange={(e)=>{Setcustomercity(e.target.value)}} />
+  <input onChange={(e)=>{Setcustomercity(e.target.value)}} />
 </div>
  <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">State</label>
-  <input type="text" onChange={(e)=>{Setcustomerstate(e.target.value)}} />
+  <input onChange={(e)=>{Setcustomerstate(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Zip</label>
-  <input type="text" onChange={(e)=>{Setcustomerzip(e.target.value)}} />
+  <input  onChange={(e)=>{Setcustomerzip(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Phone</label>
-  <input type="text" onChange={(e)=>{Setcustomerphone(e.target.value)}}/>
+  <input  onChange={(e)=>{Setcustomerphone(e.target.value)}}/>
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Email</label>
-  <input type="text" onChange={(e)=>{Setcustomeremail(e.target.value)}} />
+  <input  onChange={(e)=>{Setcustomeremail(e.target.value)}} />
 </div>
 <h1>Recipient Info</h1>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment"> Name</label>
-  <input type="text" onChange={(e)=>{Setrecipientname(e.target.value)}} />
+  <input  onChange={(e)=>{Setrecipientname(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment"> Address</label>
-  <input type="text"  onChange={(e)=>{Setrecipientaddress(e.target.value)}}/>
+  <input   onChange={(e)=>{Setrecipientaddress(e.target.value)}}/>
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment"> City</label>
-  <input type="text"  onChange={(e)=>{Setrecipientcity(e.target.value)}} />
+  <input   onChange={(e)=>{Setrecipientcity(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">State</label>
-  <input type="text"  onChange={(e)=>{Setrecipientstate(e.target.value)}} />
+  <input   onChange={(e)=>{Setrecipientstate(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Zip</label>
-  <input type="text" onChange={(e)=>{Setrecipientzip(e.target.value)}} />
+  <input  onChange={(e)=>{Setrecipientzip(e.target.value)}} />
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">Phone</label>
-  <input type="text"  onChange={(e)=>{Setrecipientphone(e.target.value)}}/>
+  <input   onChange={(e)=>{Setrecipientphone(e.target.value)}}/>
 </div>
 <h1>Product Info</h1>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment"> Product</label>
-  <input type="text"  onChange={(e)=>{Setproduct(e.target.value)}}/>
+  <input  onChange={(e)=>{Setproduct(e.target.value)}}/>
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment"> Delivery Date</label>
-  <input type="text"  onChange={(e)=>{Setdeliverydate(e.target.value)}} /> 
+  <input  onChange={(e)=>{Setdeliverydate(e.target.value)}} /> 
 </div>
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
           Submit
