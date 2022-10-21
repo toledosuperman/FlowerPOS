@@ -60,7 +60,7 @@ function OrderForm({ values, onClose,open}) {
       alert(err)
     }}
 
-
+  
 
 
 return (
@@ -86,7 +86,7 @@ return (
   <input type="text" onChange={(e) => setCustomerCity(e.target.value.toUpperCase())} 
           value={CustomerCity} />
 </div>
-<div class="form-floating">
+ <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"></textarea>
   <label for="comment">State</label>
   <input type="text" onChange={(e) => setCustomerState(e.target.value.toUpperCase())} 
@@ -160,7 +160,9 @@ return (
   <input type="text" onChange={(e) => setDeliveryDate(e.target.value.toUpperCase())} 
           value={DeliveryDate} />
 </div>
-<input type="submit" value="Submit" />
+<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
+          Submit
+        </button>
 </div>
 </form>
    
@@ -168,6 +170,7 @@ return (
     
   );
   
-};
+
+}
 
 export default OrderForm;

@@ -6,17 +6,23 @@ import ViewProducts from './components/ViewProducts';
 import CreateRecipe from './components/CreateRecipe';
 import Signup from './components/Signup';
 import Account from './components/Account';
-import { Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import Navbar from './components/Nav/navbar';
 
 
 function App() {
   return (
+
     <div>
       <h1 className='text-center text-3xl font-bold'>
         Welcome to Flower POS
       </h1>
+
+    <Navbar />
+
       <AuthContextProvider>
         <Routes>
           <Route path='/order' element={<OrderForm />} />
@@ -33,7 +39,9 @@ function App() {
           />
         </Routes>
       </AuthContextProvider>
+
     </div>
+
   );
 }
 
