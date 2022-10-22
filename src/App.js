@@ -32,9 +32,9 @@ function App() {
         <Routes>
           <Route path='/home' element={<Home />} />
           <Route path='/order' element={<OrderForm />} />
-          <Route path='/vieworder' element={<ViewOrders />} />
+          <Route path='/vieworders' element={<ViewOrders />} />
           <Route path='/viewproduct' element={<ViewProducts />} />
-          <Route path='/recipe' element={<CreateRecipe />} />
+          <Route path='/createrecipe' element={<CreateRecipe />} />
           <Route path='/' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/account' element={

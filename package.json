@@ -15,6 +15,7 @@
     "react-infinite-scroller": "^1.2.6",
     "react-router-dom": "^6.4.1",
     "react-scripts": "^5.0.1",
+    "react-table": "^7.8.0",
     "react18": "^0.0.1-security",
     "web-vitals": "^2.1.4"
   },
@@ -45,6 +46,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.16",
+    "style-loader": "^3.3.1",
     "tailwindcss": "^3.1.8"
   }
 }
