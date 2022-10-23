@@ -1,24 +1,27 @@
 import { useForm } from "react-hook-form";
 import React, {  useEffect,useState } from "react";
-import { UserAuth } from '../context/AuthContext';
 import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
-import {collection, addDoc, Timestamp} from 'firebase/firestore';
-
-
-function CreateRecipe({ values,onClose,open }) {
+import {onSnapshot, collection, addDoc, Timestamp} from 'firebase/firestore';
+import Select from 'react-select';
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' },
+];
+function CreateRecipe({ onClose,open }) {
+  useEffect(() =>
+      onSnapshot(collection(db, "Products"), (snapshot) => console.log(snapshot.docs)
+    ));
+  
+  
 // initialize react-hook-form
 const {  reset} = useForm();
 const[ProductName, setProductName]= useState('');
-const[ ProductCost,setProductCost ]= useState('');
-
-
+const [selectedOption, setSelectedOption] = useState(null);
 const navigate = useNavigate();
 
-// populate form fields
-useEffect(() => {
-  reset(values);
-}, [values]);
+
 
 // call container submit handler to save new/updated values
 const handleSubmit = async (e) => {
@@ -26,7 +29,7 @@ const handleSubmit = async (e) => {
   try {
     await addDoc(collection(db, 'Products'), {
       ProductName: ProductName,
-      ProductCost: ProductCost,
+      
       Countable: true,
       Type: 'Arrangement',
       completed: false,
@@ -37,7 +40,7 @@ const handleSubmit = async (e) => {
     alert(err)
   }}
 
-
+;
 
 
 return (
@@ -51,12 +54,13 @@ return (
 <label for="comment">Product Name</label>
 
 </div>
-<div class="form-floating">
-<textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setProductCost(e.target.value.toUpperCase())} 
-        value={ProductCost}></textarea>
-<label for="comment">Product Cost</label>
-
-</div>
+<div className="App">
+      <Select
+        defaultValue={selectedOption}
+        onChange={setSelectedOption}
+        options={options}
+      />
+    </div>
 
 
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
