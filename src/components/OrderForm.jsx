@@ -1,7 +1,6 @@
 
 import { useForm } from "react-hook-form";
-import React, {  useEffect,useState } from "react";
-import { UserAuth } from '../context/AuthContext';
+import React, {  useState } from "react";
 import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
@@ -26,12 +25,7 @@ function OrderForm({ values, onClose,open}) {
   const[ DeliveryDate,setDeliveryDate]= useState('');
   const navigate = useNavigate();
  
-  // populate form fields
-  useEffect(() => {
-    reset(values);
-  }, [values]);
-
-  // call container submit handler to save new/updated values
+ 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
