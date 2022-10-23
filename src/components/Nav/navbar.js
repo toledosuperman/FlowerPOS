@@ -5,7 +5,7 @@ import './navbar.css';
 const navbar = props =>(
 <header className= "navbar">
 <div className="navbarLogo">
-<h2>Go To</h2>
+
 </div>
 <nav className ="navbarList">
 <ul id="navlinks">
