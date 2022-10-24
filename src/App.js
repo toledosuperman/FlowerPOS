@@ -24,9 +24,7 @@ function App() {
 
     <div className="wrapper">
 
-      <h1 className='text-center text-3xl font-bold'>
-        Welcome to Flower POS
-      </h1>
+      
 
     <Navbar />
 
