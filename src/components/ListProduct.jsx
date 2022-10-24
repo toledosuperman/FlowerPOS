@@ -25,10 +25,11 @@ export default function ListProducts() {
     };
     return (
         <div>
+            <ol style={{ listStyleType: 'lower-alpha' }}>
             
-            <ul>
-                {products.map(product =><li key={product.id}>{product.data.Name}</li>)}
-            </ul>
+                {products.map(product =>(<li key={product.id}>{product.data.Name}</li>))}
+            
+            </ol>
         </div>
     );
 };

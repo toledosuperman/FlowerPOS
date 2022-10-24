@@ -8,18 +8,27 @@ import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 
 
-const ViewProducts= () => {
-    const [products, setProducts] = useState([]);
-    const productsCollectionRef = collection(db, "Products");
-
-    useEffect(() => {
-        const getProducts = async () => {
-        const data = await getDocs(productsCollectionRef);
-          setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-    
-        getProducts();
-      }, []);
+function ViewProducts ()  {
+  const [products, setProducts] = useState([])
+  useEffect(()=>{
+  getProducts()
+},[])
+  useEffect(()=> {
+      console.log(products)
+  },[products]
+  )
+  function getProducts(){
+      const productCollectionRef = collection(db,'Products')
+      getDocs(productCollectionRef)
+          .then(response =>{
+              const prod = response.docs.map(doc => ({
+                  data: doc.data(),
+                  id: doc.id,
+              }))
+              setProducts(prod)
+          })
+          .catch(error => console.log(error.message))
+  };
 
 return (
     <div class="container ">
@@ -48,13 +57,13 @@ return (
                  <table class="table table-striped table-hover table-bordered">
                  {products.map((products) => ( 
             
-                    <thead>
+                    <thead key={products.id}>
                         <tr>
                             <th>#</th>
-                            <th>Product Name:{products.name}</th>
-                            <th>Product Cost:{products.cost}</th>
-                            <th>Product Price:{products.price}</th>
-                            <th>Product Type:{products.type}</th>
+                            <th>Product Name:{products.data.name}</th>
+                            <th>Product Cost:{products.data.cost}</th>
+                            <th>Product Price:{products.data.price}</th>
+                            <th>Product Type:{products.data.type}</th>
                             <th>Actions</th>
                         </tr>
                     </thead>))}
