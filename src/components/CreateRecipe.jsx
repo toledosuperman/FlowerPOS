@@ -2,34 +2,44 @@ import { useForm } from "react-hook-form";
 import React, {  useEffect,useState } from "react";
 import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
-import {onSnapshot, collection, addDoc, Timestamp} from 'firebase/firestore';
+import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
 import Select from 'react-select';
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
-function CreateRecipe({ onClose,open }) {
+
+ function CreateRecipe({ onClose,open }) {
   useEffect(() =>
       onSnapshot(collection(db, "Products"), (snapshot) => console.log(snapshot.docs)
     ));
+    
+    
+    
+
+    const options = [
+      { value: 'rose', label: 'Rose' },
+      { value: 'vase', label: 'Vase' },
+      { value: 'tulip', label: 'Tulip' },
+    ];
   
-  
-// initialize react-hook-form
+
 const {  reset} = useForm();
 const[ProductName, setProductName]= useState('');
 const [selectedOption, setSelectedOption] = useState(null);
 const navigate = useNavigate();
+const [ingredients, setIngredients] = useState([{ name: "Loading...", id: "initial"}]);
+useEffect(
+  () =>
+    onSnapshot(collection(db, "Ingredients"), (snapshot) =>
+      setIngredients(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    ),
+  []
+);
 
 
 
-// call container submit handler to save new/updated values
 const handleSubmit = async (e) => {
   e.preventDefault()
   try {
     await addDoc(collection(db, 'Products'), {
       ProductName: ProductName,
-      
       Countable: true,
       Type: 'Arrangement',
       completed: false,
@@ -45,7 +55,7 @@ const handleSubmit = async (e) => {
 
 return (
   
-<form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
+ <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
   <div className='max-w-[700px] mx-auto my-16 p-4'>
   <h1>Create New Recipe</h1>
 <div class="form-floating">
@@ -67,7 +77,7 @@ return (
         Submit
       </button>
 </div>
-</form>
+</form> 
  
 
   
