@@ -8,7 +8,7 @@ import CreateRecipe from './components/CreateRecipe';
 import Signup from './components/Signup';
 import Account from './components/Account';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ListProducts from './components/ListProduct';
+
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Nav/navbar';
