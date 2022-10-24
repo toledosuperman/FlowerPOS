@@ -21,7 +21,7 @@ import Select from 'react-select';
   
 
 const {  reset} = useForm();
-const[ProductName, setProductName]= useState('');
+const[Name, setName]= useState('');
 const [selectedOption, setSelectedOption] = useState(null);
 const navigate = useNavigate();
 const [ingredients, setIngredients] = useState([{ name: "Loading...", id: "initial"}]);
@@ -39,7 +39,7 @@ const handleSubmit = async (e) => {
   e.preventDefault()
   try {
     await addDoc(collection(db, 'Products'), {
-      ProductName: ProductName,
+      Name: Name,
       Countable: true,
       Type: 'Arrangement',
       completed: false,
@@ -59,8 +59,8 @@ return (
   <div className='max-w-[700px] mx-auto my-16 p-4'>
   <h1>Create New Recipe</h1>
 <div class="form-floating">
-<textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setProductName(e.target.value.toUpperCase())} 
-        value={ProductName}></textarea>
+<textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value.toUpperCase())} 
+        value={Name}></textarea>
 <label for="comment">Product Name</label>
 
 </div>

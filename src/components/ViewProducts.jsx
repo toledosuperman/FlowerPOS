@@ -55,15 +55,15 @@ return (
             <div class="row">
                 <div class="table-responsive " >
                  <table class="table table-striped table-hover table-bordered">
-                 {products.map((products) => ( 
+                 {products.map((product) => ( 
             
-                    <thead key={products.id}>
+                    <thead key={product.id}>
                         <tr>
                             <th>#</th>
-                            <th>Product Name:{products.data.name}</th>
-                            <th>Product Cost:{products.data.cost}</th>
-                            <th>Product Price:{products.data.price}</th>
-                            <th>Product Type:{products.data.type}</th>
+                            <th>Product Name: {product.data.name}</th>
+                            <th>Product Cost: {product.data.cost}</th>
+                            <th>Product Price: {product.data.price}</th>
+                            <th>Product Type: {product.data.type}</th>
                             <th>Actions</th>
                         </tr>
                     </thead>))}
