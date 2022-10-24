@@ -4,6 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
 import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
 import Select from 'react-select';
+import ListProducts from "./ListProduct";
 
  function CreateRecipe({ onClose,open }) {
   useEffect(() =>
@@ -68,19 +69,19 @@ return (
       <Select
         defaultValue={selectedOption}
         onChange={setSelectedOption}
-        options={options}
-        // {
-        //   ingredients.map(ingredients=>{
-        //     (
-              
-        //         <h4 key ={ingredients.id}>{ingredients.name}</h4>
-                
-        //     )
-        //   })
-        // }
-      />
+        options={<ListProducts />}/>
+         
+        
+      
     </div>
-
+{/* <div>
+  <header>
+    <h3>All Products</h3>
+    <main>
+      <ListProducts />
+    </main>
+  </header>
+</div> */}
 
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
         Submit
