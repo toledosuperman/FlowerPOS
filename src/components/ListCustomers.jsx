@@ -28,7 +28,8 @@ export default function ListCustomers() {
                  <h3>  
              Customers</h3>
             <ul>
-                {customers.map(customer =><li key={customer.id}>{customer.data.name}</li>)}
+                {customers.map(customer =>(
+                <li key={customer.id}>{customer.data.name}</li>))}
             </ul>
             
         </div>
