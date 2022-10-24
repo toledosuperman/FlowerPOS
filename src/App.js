@@ -8,7 +8,12 @@ import CreateRecipe from './components/CreateRecipe';
 import Signup from './components/Signup';
 import Account from './components/Account';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+<<<<<<< HEAD
 
+=======
+import ListProducts from './components/ListProduct';
+import ListCustomers from './components/ListCustomers';
+>>>>>>> e9327bd75644e2173f5f89780835265255d2f6e1
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Nav/navbar';
@@ -35,6 +40,7 @@ function App() {
           {/* <Route path='/passwordforget' element={<PasswordForgetPage />} /> */}
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworders' element={<ViewOrders />} />
+          <Route path='/customers' element={<ListCustomers />} />
           <Route path='/viewproduct' element={<ViewProducts />} />
           <Route path='/createrecipe' element={<CreateRecipe />} />
           <Route path='/' element={<Signin />} />

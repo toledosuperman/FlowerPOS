@@ -6,10 +6,13 @@ import Footer from './footer';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordtwo, setPasswordtwo]= useState('');
   const [error, setError] = useState('');
   const { createUser } = UserAuth();
   const navigate = useNavigate();
-
+  const isInvalid =
+  password !== passwordtwo 
+  ;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -23,6 +26,7 @@ const Signup = () => {
   };
 
   return (
+   
     // <div className='max-w-[700px] mx-auto my-16 p-4'>
     //   <div>
     //     <h1 className='text-2xl font-bold py-2'>Create account</h1>
@@ -76,13 +80,13 @@ const Signup = () => {
            </div>
         <div class="col-md-6">
           <div class="form-floating mb-3 mb-md-0">
-           <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+           <input onChange={(e) => setPasswordtwo(e.target.value)}class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
           <label for="inputPasswordConfirm">Confirm Password</label>
            </div>
            </div>
             </div>
              <div class="mt-4 mb-0">
-                 <div class="d-grid"><a class="btn btn-primary btn-block" href="/home">Create Account</a></div>
+                 <div class="d-grid"><button disabled={isInvalid} type="submit" href="/home">Create Account</button></div>
                 </div>
               </form>
                  </div>
