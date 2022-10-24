@@ -24,7 +24,7 @@ const {  reset} = useForm();
 const[ProductName, setProductName]= useState('');
 const [selectedOption, setSelectedOption] = useState(null);
 const navigate = useNavigate();
-const [ingredients, setIngredients] = useState([{ name: "Loading...", id: "initial"}]);
+const [ingredients, setIngredients] = useState([{ name: "Loading...", id: "initial" }]);
 useEffect(
   () =>
     onSnapshot(collection(db, "Ingredients"), (snapshot) =>
@@ -68,7 +68,15 @@ return (
       <Select
         defaultValue={selectedOption}
         onChange={setSelectedOption}
-        options={options}
+        options={
+          ingredients.map(ingredients=>{
+            (
+              
+                <h4 key ={ingredients.id}>{ingredients.name}</h4>
+                
+            )
+          })
+        }
       />
     </div>
 
