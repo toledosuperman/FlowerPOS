@@ -46,8 +46,8 @@ return (
             <div class="row">
                 <div class="table-responsive " >
                  <table class="table table-striped table-hover table-bordered">
-                 {products.map((products) => { 
-            {" "} 
+                 {products.map((products) => ( 
+            
                     <thead>
                         <tr>
                             <th>#</th>
@@ -57,23 +57,20 @@ return (
                             <th>Product Type:{products.type}</th>
                             <th>Actions</th>
                         </tr>
-                    </thead>
-                    {/* <tbody>
+                    </thead>))}
+                    </table>
+                     <tbody>
 
                         <tr>
-                            <td>1</td>
-                            <td>Flower</td>
-                            <td>$50</td>
-                            <td>1</td>
-                            <td>
+                            
                                <a href="#" class="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i class="material-icons">&#xE417;</i></a>
                                 <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                                 <a href="#" class="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i class="material-icons">&#xf070;</i></a>
                                  
-                            </td>
+                            
                         </tr>
-                    </tbody> */}
-                </table>
+                    </tbody> 
+                
             </div>   
         </div>  
        </div>  
@@ -81,7 +78,7 @@ return (
 
         
 
-  );
-};
+  );}
+
 
 export default ViewProducts;
