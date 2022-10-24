@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
  
-import Header from './header';
+
 import Footer from './footer';
 
     
@@ -23,7 +23,7 @@ class home extends Component {
         return (
             
     <div className="wrapper">
-		<Header />
+		
 		{/*body of the page */}
 		<Footer />
     </div>

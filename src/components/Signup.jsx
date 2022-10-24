@@ -65,7 +65,7 @@ const Signup = () => {
     <form onSubmit={handleSubmit}>
     <div class="form-floating mb-3">
     <input onChange={(e) => setEmail(e.target.value)} class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-     <label for="inputEmail">Email address</label>
+     <label for="inputEmail">Email Address</label>
        </div>
          <div class="row mb-3">
     <div class="col-md-6">

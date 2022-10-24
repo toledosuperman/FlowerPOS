@@ -36,7 +36,7 @@ return (
         </div>  
         <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Products</b></h2></div>
               <div class="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
-              <Link to="/recipe">
+              <Link to="/createrecipe">
               <Button variant="primary">
                 Create A Recipe
               </Button>
