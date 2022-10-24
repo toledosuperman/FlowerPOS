@@ -68,15 +68,16 @@ return (
       <Select
         defaultValue={selectedOption}
         onChange={setSelectedOption}
-        options={
-          ingredients.map(ingredients=>{
-            (
+        options={options}
+        // {
+        //   ingredients.map(ingredients=>{
+        //     (
               
-                <h4 key ={ingredients.id}>{ingredients.name}</h4>
+        //         <h4 key ={ingredients.id}>{ingredients.name}</h4>
                 
-            )
-          })
-        }
+        //     )
+        //   })
+        // }
       />
     </div>
 
