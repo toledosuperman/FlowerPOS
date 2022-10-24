@@ -9,8 +9,8 @@ const navbar = props =>(
 </div>
 <nav className ="navbarList">
 <ul id="navlinks">
-<li><NavLink to="/home">Home</NavLink> </li>
-<li><NavLink to="/account">Account</NavLink> </li>
+
+<li><NavLink to="/account">Home</NavLink> </li>
 <li><NavLink to="/order">New Order</NavLink> </li>
 <li><NavLink to="/vieworders">View Orders</NavLink> </li>
 <li><NavLink to="/viewproduct">Products</NavLink> </li>
