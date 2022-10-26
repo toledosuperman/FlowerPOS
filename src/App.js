@@ -14,7 +14,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Nav/navbar';
 
-import Home from './components/home';
+
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
 
       <AuthContextProvider>
         <Routes>
-          <Route path='/home' element={<Home />} />
+          
           {/* <Route path='/passwordforget' element={<PasswordForgetPage />} /> */}
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworders' element={<ViewOrders />} />
