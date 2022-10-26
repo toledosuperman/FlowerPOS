@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
@@ -8,18 +8,27 @@ import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 
 
-const ViewProducts= () => {
-    const [products, setProducts] = useState([]);
-    const productsCollectionRef = collection(db, "Products");
-
-    useEffect(() => {
-        const getProducts = async () => {
-        const data = await getDocs(productsCollectionRef);
-          setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-    
-        getProducts();
-      }, []);
+function ViewProducts ()  {
+  const [products, setProducts] = useState([])
+  useEffect(()=>{
+  getProducts()
+},[])
+  useEffect(()=> {
+      console.log(products)
+  },[products]
+  )
+  function getProducts(){
+      const productCollectionRef = collection(db,'Products')
+      getDocs(productCollectionRef)
+          .then(response =>{
+              const prod = response.docs.map(doc => ({
+                  data: doc.data(),
+                  id: doc.id,
+              }))
+              setProducts(prod)
+          })
+          .catch(error => console.log(error.message))
+  };
 
 return (
     <div class="container ">
@@ -36,7 +45,7 @@ return (
         </div>  
         <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Products</b></h2></div>
               <div class="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
-              <Link to="/recipe">
+              <Link to="/createrecipe">
               <Button variant="primary">
                 Create A Recipe
               </Button>
@@ -46,15 +55,15 @@ return (
             <div class="row">
                 <div class="table-responsive " >
                  <table class="table table-striped table-hover table-bordered">
-                 {products.map((products) => ( 
+                 {products.map((product) => ( 
             
-                    <thead>
+                    <thead key={product.id}>
                         <tr>
                             <th>#</th>
-                            <th>Product Name:{products.name}</th>
-                            <th>Product Cost:{products.cost}</th>
-                            <th>Product Price:{products.price}</th>
-                            <th>Product Type:{products.type}</th>
+                            <th>Product Name: {product.data.name}</th>
+                            <th>Product Cost: {product.data.cost}</th>
+                            <th>Product Price: {product.data.price}</th>
+                            <th>Product Type: {product.data.type}</th>
                             <th>Actions</th>
                         </tr>
                     </thead>))}
