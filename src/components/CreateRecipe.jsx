@@ -5,13 +5,7 @@ import {db} from '../firebase'
 import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
 import Select from 'react-select';
 import ReactDOM from 'react-dom/client'
-import './recipecss.css'
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
+
 
 
 
