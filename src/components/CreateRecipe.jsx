@@ -18,8 +18,7 @@ import {
 
 
 
-function CreateRecipe() {
-}
+
  function CreateRecipe({ onClose,open }) {
   useEffect(() =>
       onSnapshot(collection(db, "Products"), (snapshot) => console.log(snapshot.docs)
