@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { UserAuth } from '../context/AuthContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-import Table from 'react-bootstrap/Table';
 
 function ViewOrders ()  {
   const [orders, setOrders] = useState([])
@@ -43,7 +39,7 @@ return (
           </form>
         </div>
         </div>
-        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Products</b></h2></div>
+        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Orders</b></h2></div>
 
            </div>
             <div class="row">
@@ -53,7 +49,6 @@ return (
 
                     <thead key={order.id}>
                         <tr>
-                            <th>#</th>
                             <th>Customer Name: {order.data.CustomerName}</th>
                             <th>Customer Phone: {order.data.CustomerPhone}</th>
                             <th>Customer Email: {order.data.CustomerEmail}</th>
@@ -63,11 +58,9 @@ return (
                             <th>Customer State: {order.data.CustomerState}</th>
                             <th>Product: {order.data.Product}</th>
                             <th>Delivery Date: {order.data.DeliveryDate}</th>
-                            <th>Delivery Finished: {order.data.completed}</th>
-
+                            <th>Order Date: {order.data.completed}</th>
                             <th>Recipient Name: {order.data.RecipientName}</th>
                             <th>Recipient Phone: {order.data.RecipientPhone}</th>
-                            <th>Recipient Email: {order.data.RecipientEmail}</th>
                             <th>Recipient Address: {order.data.RecipientAddress}</th>
                             <th>Recipient City: {order.data.RecipientCity}</th>
                             <th>Recipient Zip code: {order.data.RecipientZip}</th>
