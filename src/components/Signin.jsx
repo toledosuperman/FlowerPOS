@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 
 
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [ setError] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { signIn } = UserAuth();
 
@@ -15,7 +15,7 @@ const Signin = () => {
     setError('')
     try {
       await signIn(email, password)
-      navigate('/')
+      navigate('/home')
     } catch (e) {
       setError(e.message)
       console.log(e.message)
