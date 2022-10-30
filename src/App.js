@@ -40,9 +40,9 @@ function App() {
           <Route path='/' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/account' element={
-              <ProtectedRoute>
+              
                 <Account />
-              </ProtectedRoute>
+              
             }
           />
         </Routes>
