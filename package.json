@@ -17,6 +17,7 @@
     "bootstrap": "^5.2.1",
     "fast-deep-equal": "^3.1.3",
     "firebase": "^9.10.0",
+    "formik": "^2.2.9",
     "functional-red-black-tree": "^1.0.1",
     "google-gax": "^3.5.2",
     "protobufjs": "^7.1.2",
