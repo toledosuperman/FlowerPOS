@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { UserAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
@@ -60,10 +59,10 @@ return (
                     <thead key={product.id}>
                         <tr>
                             <th>#</th>
-                            <th>Product Name: {product.data.name}</th>
-                            <th>Product Cost: {product.data.cost}</th>
-                            <th>Product Price: {product.data.price}</th>
-                            <th>Product Type: {product.data.type}</th>
+                            <th>Product Name: {product.data.Name}</th>
+                            <th>Product Cost: {product.data.Cost}</th>
+                            <th>Product Price: {product.data.Price}</th>
+                            <th>Product Type: {product.data.Type}</th>
                             <th>Actions</th>
                         </tr>
                     </thead>))}

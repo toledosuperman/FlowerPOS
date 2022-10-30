@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import OrderForm from './components/OrderForm';
 import Signin from './components/Signin';
 import ViewOrders from './components/ViewOrders';
@@ -14,7 +15,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Nav/navbar';
 
-import Home from './components/home';
+
 
 function App() {
   return (
@@ -30,8 +31,9 @@ function App() {
 
       <AuthContextProvider>
         <Routes>
-          <Route path='/home' element={<Home />} />
+          
           {/* <Route path='/passwordforget' element={<PasswordForgetPage />} /> */}
+          
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworders' element={<ViewOrders />} />
           <Route path='/customers' element={<ListCustomers />} />
