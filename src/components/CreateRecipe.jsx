@@ -117,11 +117,11 @@ import { getAuth } from "firebase/auth";
     }
 
 return (
-  <>
-  
+  <><>
+  {/* <h1>You're not logged in. Please <a href="/login">login</a> first then come to dashboard.</h1>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
-  {(user !== null) && <>
+  {(user !== null) && <> */}
       {/* Add/Edit Form START */}
       <Modal show={showAddEditForm} onHide={handleModalClose}>
           <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
@@ -247,7 +247,7 @@ return (
               <p style={{ marginTop: 8, fontSize: 12, color: '#A1A1A1' }}>Nandos Menu v1.0.0 - <a href="/login">Logout</a></p>
           </Card.Footer> */}
       </Card>
-  </>}
+  </>
 </>
 );
 }
