@@ -118,7 +118,7 @@ import { getAuth } from "firebase/auth";
 
 return (
   <>
-  {/* <h1>You're not logged in. Please <a href="/login">login</a> first then come to dashboard.</h1> */}
+  
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
   {(user !== null) && <>

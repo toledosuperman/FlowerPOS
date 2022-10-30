@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import OrderForm from './components/OrderForm';
 import Signin from './components/Signin';
 import ViewOrders from './components/ViewOrders';
@@ -8,8 +7,7 @@ import ViewProducts from './components/ViewProducts';
 import CreateRecipe from './components/CreateRecipe';
 import Signup from './components/Signup';
 import Account from './components/Account';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ListProducts from './components/ListProduct';
+import { Route, Routes } from 'react-router-dom';
 import ListCustomers from './components/ListCustomers';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
