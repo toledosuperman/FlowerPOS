@@ -58,13 +58,22 @@ return (
                             <th>Customer State: {order.data.CustomerState}</th>
                             <th>Product: {order.data.Product}</th>
                             <th>Delivery Date: {order.data.DeliveryDate}</th>
+
+                      <th>Delivery Finished: {order.data.completed.toString()}</th>
+                            <th>Delivery Ordered: {order.data.created.toDate().getMonth()+'/'+order.data.created.toDate().getDate()+'/'+order.data.created.toDate().getFullYear()}</th>
+                            <th>Recipient Name: {order.data.RecipientName}</th>
+                            <th>Recipient Phone: {order.data.RecipientPhone}</th>
+
+
                             <th>Order Date: {order.data.completed}</th>
                             <th>Recipient Name: {order.data.RecipientName}</th>
                             <th>Recipient Phone: {order.data.RecipientPhone}</th>
+
                             <th>Recipient Address: {order.data.RecipientAddress}</th>
                             <th>Recipient City: {order.data.RecipientCity}</th>
                             <th>Recipient Zip code: {order.data.RecipientZip}</th>
                             <th>Recipient State: {order.data.RecipientState}</th>
+
                         </tr>
                     </thead>))}
                     </table>
