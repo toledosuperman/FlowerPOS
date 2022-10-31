@@ -3,8 +3,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-
+import NoLoggedInView from '../components/NoLoggedInView';
+import { getAuth } from "firebase/auth";
+import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 'react-bootstrap';
 function ViewOrders ()  {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState([])
   useEffect(()=>{
   getOrders()
@@ -27,6 +32,11 @@ function ViewOrders ()  {
   };
 
 return (
+    <>
+    
+  {(user === null) && <NoLoggedInView />}
+  {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
+  {(user !== null) && <>
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
     <div class="row ">
@@ -94,7 +104,7 @@ return (
        </div>
       </div>
 
-
+      </>  }</>  
 
   );}
 

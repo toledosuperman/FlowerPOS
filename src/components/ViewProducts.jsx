@@ -5,9 +5,14 @@ import {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-
+import NoLoggedInView from '../components/NoLoggedInView';
+import { getAuth } from "firebase/auth";
+import { Spinner } from 'react-bootstrap';
 
 function ViewProducts ()  {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([])
   useEffect(()=>{
   getProducts()
@@ -29,7 +34,11 @@ function ViewProducts ()  {
           .catch(error => console.log(error.message))
   };
 
-return (
+return (<>
+  
+  {(user === null) && <NoLoggedInView />}
+  {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
+  {(user !== null) && <>
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"> 
     <div class="row ">
@@ -84,8 +93,8 @@ return (
        </div>  
       </div>    
 
-        
-
+      </>  }</>    
+                 
   );}
 
 

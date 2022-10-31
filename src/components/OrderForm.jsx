@@ -5,7 +5,7 @@ import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 
-function OrderForm({ values, onClose,open}) {
+function OrderForm({  onClose,open}) {
   // initialize react-hook-form
   const {  reset} = useForm();
   const[CustomerName, setCustomerName]= useState('');
@@ -65,15 +65,13 @@ return (
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerName(e.target.value.toUpperCase())} 
           value={CustomerName}></textarea>
   <label for="comment">Customer Name</label>
-  {/* <input type="text" onChange={(e) => setCustomerName(e.target.value.toUpperCase())} 
-          value={CustomerName} /> */}
+ 
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerAddress(e.target.value.toUpperCase())} 
           value={CustomerAddress}></textarea>
   <label for="comment">Customer Address</label>
-  {/* <input type="text" onChange={(e) => setCustomerAddress(e.target.value.toUpperCase())} 
-          value={CustomerAddress} /> */}
+  
 </div>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerCity(e.target.value.toUpperCase())} 
