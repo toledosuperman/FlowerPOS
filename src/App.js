@@ -12,7 +12,7 @@ import ListCustomers from './components/ListCustomers';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import Navbar from './components/Nav/navbar';
-
+import Reset from './components/Reset';
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
         <Routes>
           
           {/* <Route path='/passwordforget' element={<PasswordForgetPage />} /> */}
-          
+          <Route path='/reset' element={<Reset />} />
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworders' element={<ViewOrders />} />
           <Route path='/customers' element={<ListCustomers />} />

@@ -1,71 +1,70 @@
-import React, { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
-import { UserAuth } from '../context/AuthContext';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  auth,
+  registerWithEmailAndPassword,
+  signInWithGoogle,
+} from "../firebase";
+import "../components/Register.css";
 
-
-const Signup = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordtwo, setPasswordtwo]= useState('');
-  const [ setError] = useState('');
-  const { createUser } = UserAuth();
+function Signup() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const isInvalid =
-  password !== passwordtwo 
-  ;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-      await createUser(email, password);
-      navigate('/Account')
-    } catch (e) {
-      setError(e.message);
-      console.log(e.message);
-    }
+
+  const register = () => {
+    if (!name) alert("Please enter name");
+    registerWithEmailAndPassword(name, email, password);
   };
 
-  return (
-   
-    <div className="container">
-      <div className="row justify-content-center">
-     <div className="col-lg-7">
-    <div className="card shadow-lg border-0 rounded-lg mt-5">
-    <div className="card-header"><h3 className="text-center font-weight-light my-4">Create Account</h3></div>
-    <div className="card-body">
+  useEffect(() => {
+    if (loading) return;
+    if (user) navigate("/account");
+  }, [user, loading]);
 
-    <form onSubmit={handleSubmit}>
-    <div className="form-floating mb-3">
-    <input onChange={(e) => setEmail(e.target.value)} className="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-     <label htmlFor="inputEmail">Email Address</label>
-       </div>
-         <div className="row mb-3">
-    <div className="col-md-6">
-      <div className="form-floating mb-3 mb-md-0">
-        <input onChange={(e) => setPassword(e.target.value)} className="form-control" id="inputPassword" type="password" placeholder="Create a password" />
-       <label htmlFor="inputPassword">Password</label>
-           </div>
-           </div>
-        <div className="col-md-6">
-          <div className="form-floating mb-3 mb-md-0">
-           <input onChange={(e) => setPasswordtwo(e.target.value)}className="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
-          <label htmlFor="inputPasswordConfirm">Confirm Password</label>
-           </div>
-           </div>
-            </div>
-             <div className="mt-4 mb-0">
-                 <div className="d-grid"><button disabled={isInvalid} type="submit" href="/home">Create Account</button></div>
-                </div>
-              </form>
-                 </div>
-              <div className="card-footer text-center py-3">
-              <div className="small"><a href="/">Have an account? Login</a></div>
-            </div>
-           </div>
-          </div>
-         </div>
+  return (
+    <div className="register">
+      <div className="register__container">
+        <input
+          type="text"
+          className="register__textBox"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Full Name"
+        />
+        <input
+          type="text"
+          className="register__textBox"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="E-mail Address"
+        />
+        <input
+          type="password"
+          className="register__textBox"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button className="register__btn" onClick={register}>
+          Register
+        </button>
+        <button
+          className="register__btn register__google"
+          onClick={signInWithGoogle}
+        >
+          Register with Google
+        </button>
+
+        <div>
+          Already have an account? <Link to="/">Login</Link> now.
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default Signup;

@@ -1,60 +1,61 @@
-import React, { useState } from 'react';
-import {  useNavigate } from 'react-router-dom';
-import { UserAuth } from '../context/AuthContext';
-
+import React, { useState , useEffect} from 'react';
+import {  Link, useNavigate } from 'react-router-dom';
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import "../components/Login.css";
 
 const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  
+  const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
-  const { signIn } = UserAuth();
+  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('')
-    try {
-      await signIn(email, password)
-      navigate('/home')
-    } catch (e) {
-      setError(e.message)
-      console.log(e.message)
+  useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
     }
-  };
+    if (user) navigate("/account");
+  }, [user, loading]);
 
   return (
-   
-                <div className="container">
-                    <div className="row justify-content-center">
-                        <div className="col-lg-5">
-                            <div className="card shadow-lg border-0 rounded-lg mt-5">
-                                <div className="card-header"><h3 className="text-center font-weight-light my-4">Login</h3></div>
-                                <div className="card-body">
-                                <form onSubmit={handleSubmit}>
-                                        <div className="form-floating mb-3">
-                                        <input onChange={(e) => setEmail(e.target.value)} className="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
-                                            <label htmlFor="inputEmail">Email Address</label>
-                                        </div>
-                                        <div className="form-floating mb-3">
-                                        <input onChange={(e) => setPassword(e.target.value)} className="form-control" id="inputPassword" type="password" placeholder="Password" />
-                                            <label htmlFor="inputPassword">Password</label>
-                                        </div>
-                                        
-                                        <div className="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a className="small" href="password.html">Forgot Password?</a>
-                                            <a className="btn btn-primary" href="/account">Login</a>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div className="card-footer text-center py-3">
-                                <div className="small"><a href="/signup">Need an account? Sign up!</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
+    <div className="login">
+      <div className="login__container">
+        <input
+          type="text"
+          className="login__textBox"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="E-mail Address"
+        />
+        <input
+          type="password"
+          className="login__textBox"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+        />
+        <button
+          className="login__btn"
+          onClick={() => logInWithEmailAndPassword(email, password)}
+        >
+          Login
+        </button>
+        <button className="login__btn login__google" onClick={signInWithGoogle}>
+          Login with Google
+        </button>
+        <div>
+          <Link to="/reset">Forgot Password</Link>
+        </div>
+        <div>
+          Don't have an account? <Link to="/Signup">Register</Link> now.
+        </div>
+      </div>
+    </div>
   );
-};
+}
+
 
 export default Signin;
