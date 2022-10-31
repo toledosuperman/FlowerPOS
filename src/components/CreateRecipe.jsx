@@ -1,3 +1,52 @@
+// import React, { useState, useEffect } from "react";
+// import ReactDOM from "react-dom";
+// import { Formik, Form, FieldArray } from "formik";
+// import Input from "../components/CreateRecipe/Input.js";
+// import Products from "../components/CreateRecipe/Products.js";
+// import "../components/CreateRecipe/Recipe.css";
+
+
+// const initialFormData = { Name: "", products: [] };
+
+// function CreateRecipe() {
+//   const [formData, setFormData] = useState(initialFormData);
+
+//   useEffect(() => {
+//     // this is replacement for a network call that would load the data from a server
+//     setTimeout(() => {
+//       setFormData({
+//         id: 1,
+//         Name: "Name 1",
+//         Products: [
+//           { id: 2, Name: "Name 2", Price: "Price 2" },
+//           { id: 3, Name: "Name 3", Price: "Price 3" }
+//         ]
+//       });
+//     }, 1000);
+//   });
+
+//   return (
+//     <div className="app">
+//       <Formik initialValues={formData} enableReinitialize>
+//         <Form>
+//           <Input name="Name" label="Name: " />
+//           <FieldArray name="products">
+//             {arrayHelpers => (
+//               <Products
+//                 name="products"
+//                 handleAdd={arrayHelpers.push}
+//                 handleRemove={arrayHelpers.remove}
+//               />
+//             )}
+//           </FieldArray>
+//         </Form>
+//       </Formik>
+//     </div>
+//   );
+// }
+// export default CreateRecipe;
+
+
 
 import React,{useState, useEffect} from 'react';
 import {  useNavigate } from 'react-router-dom';
