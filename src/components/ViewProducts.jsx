@@ -9,7 +9,7 @@ import NoLoggedInView from '../components/NoLoggedInView';
 import { getAuth } from "firebase/auth";
 import { Spinner } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import Switch from 'react-switch'
+
 function ViewProducts ()  {
 
   const [show, setShow] = useState(false);
@@ -40,9 +40,9 @@ function ViewProducts ()  {
 
 return (<>
   
-  {(user === null) && <NoLoggedInView />}
+  {/* {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
-  {(user !== null) && <>
+  {(user !== null) && <> */}
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"> 
     <div class="row ">
@@ -139,7 +139,7 @@ return (<>
        </div>  
       </div>    
       </div>  
-  );
+ </> );
 }
 
 
