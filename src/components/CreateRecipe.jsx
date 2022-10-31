@@ -81,8 +81,8 @@ import Select from 'react-select';
   <label htmlFor="comment">Product Name</label>
   <Select
         isMulti
-        value={options.filter((obj) => selectedValue.includes(obj.value))} // Sets selected value
-        options={options}
+        value={products.filter((prod) => selectedValue.includes(prod.value))} // Sets selected value
+        options={products}
         onChange={handleChange}
         className="basic-multi-select"
         classNamePrefix="select"
