@@ -31,13 +31,9 @@ function App() {
 
       <AuthContextProvider>
         <Routes>
-        <Route exact path="/products">
-          <ProductScreen />
-          </Route>
-        <Route exact path="/cart">
-          <CartScreen />
-        </Route>
-          {/* <Route path='/passwordforget' element={<PasswordForgetPage />} /> */}
+          <Route path="/products"element={<ProductScreen />} />
+          <Route path="/cart" element={<CartScreen />} />
+           {/* <Route path='/passwordforget' element={<PasswordForgetPage />} /> */}
           <Route path='/reset' element={<Reset />} />
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworders' element={<ViewOrders />} />
