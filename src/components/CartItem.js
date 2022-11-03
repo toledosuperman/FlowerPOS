@@ -18,7 +18,7 @@ const CartItem = ({ item }) => {
   return (
     <>
       <CartItemStyle>
-        <img style={{ maxWidth: '150px', maxHeight: '150px' }} src={item.image} alt={item.title} />
+        {/* <img style={{ maxWidth: '150px', maxHeight: '150px' }} src={item.image} alt={item.title} /> */}
         <CartInfoStyle>
           <h3>Title</h3>
           <h4>{item.title}</h4>
@@ -28,7 +28,7 @@ const CartItem = ({ item }) => {
           <h3>Price</h3>
           <h4>
             {' '}
-            <span style={{ fontWeight: 600, marginRight: '2px' }}>R</span>
+            <span style={{ fontWeight: 600, marginRight: '2px' }}>$</span>
             {item.price}
           </h4>
         </CartInfoStyle>

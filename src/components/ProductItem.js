@@ -11,7 +11,7 @@ const ProductItem = ({ item }) => {
 
   return (
     <ProductItemStyle primary>
-      <img style={{ width: '100px' }} className="product-image" src={item.image} alt={item.title} />
+      
       <h3
         style={{
           border: '1px solid black',
@@ -27,7 +27,7 @@ const ProductItem = ({ item }) => {
           color: 'black'
         }}
       >
-        R{item.price}
+        ${item.price}
       </p>
       <p>{item.qtyInStock}</p>
       <p

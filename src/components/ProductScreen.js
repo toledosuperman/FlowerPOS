@@ -3,7 +3,8 @@ import { ProductContainerStyle, PageHeading } from '../components/styles/Product
 import ProductItem from '../components/ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from './productActions'
-
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 const ProductScreen = () => {
   const dispatch = useDispatch()
 
@@ -23,7 +24,7 @@ const ProductScreen = () => {
         <div>{error}</div>
       ) : (
         <>
-          <PageHeading primary>Products</PageHeading>
+          <PageHeading primary>Create Recipe</PageHeading>
           <ProductContainerStyle primary>
             {products.map((item) => (
               <ProductItem item={item} />
@@ -31,6 +32,11 @@ const ProductScreen = () => {
           </ProductContainerStyle>
         </>
       )}
+      <Link to="/cart">
+              <Button variant="primary">
+                Finalize Recipe
+              </Button>
+              </Link>
     </>
   )
 }

@@ -39,7 +39,7 @@ function App() {
           <Route path='/vieworders' element={<ViewOrders />} />
           <Route path='/customers' element={<ListCustomers />} />
           <Route path='/viewproduct' element={<ViewProducts />} />
-          <Route path='/createrecipe' element={<CreateRecipe />} />
+          <Route path='/createrecipe' element={<ProductScreen />} />
           <Route path='/' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/account' element={
