@@ -50,7 +50,7 @@ const ProductScreen = () => {
               </Link>
               </> 
 </fragment></>}
-);</>)
+</>)
   
 }
 
