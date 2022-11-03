@@ -12,7 +12,7 @@ import ListProducts from './components/ListProduct';
 import ListCustomers from './components/ListCustomers';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
-import Navbar from './components/Nav/navbar';
+
 
 import Home from './components/home';
 
@@ -26,7 +26,7 @@ function App() {
 
       
 
-    <Navbar />
+
 
       <AuthContextProvider>
         <Routes>

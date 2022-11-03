@@ -7,6 +7,8 @@ import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 import Table from 'react-bootstrap/Table';
+import { handleNew, handleEdit } from "./utils";
+import Navbar from './Nav/navbar';
 
 function ViewOrders ()  {
   const [orders, setOrders] = useState([])
@@ -31,6 +33,8 @@ function ViewOrders ()  {
   };
 
 return (
+<fragment>
+   <Navbar />
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
     <div class="row ">
@@ -72,7 +76,9 @@ return (
                             <th>Recipient City: {order.data.RecipientCity}</th>
                             <th>Recipient Zip code: {order.data.RecipientZip}</th>
                             <th>Recipient State: {order.data.RecipientState}</th>
-
+                            <th><a href="#" onClick={() => handleEdit(order.id)}>
+                                              edit
+                                            </a>{" "}</th>
                         </tr>
                     </thead>))}
                     </table>
@@ -81,7 +87,7 @@ return (
                         <tr>
 
                                <a href="#" class="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i class="material-icons">&#xE417;</i></a>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+
                                 <a href="#" class="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i class="material-icons">&#xf070;</i></a>
 
 
@@ -93,7 +99,7 @@ return (
        </div>
       </div>
 
-
+</fragment>
 
   );}
 

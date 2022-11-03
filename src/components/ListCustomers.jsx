@@ -1,6 +1,7 @@
 import { collection, getDocs } from "firebase/firestore"
 import React,{ useEffect,useState } from "react"
 import {db} from '../firebase'
+import Navbar from './Nav/navbar';
 
 export default function ListCustomers() {
     const [customers, setCustomers] = useState([])
@@ -24,7 +25,10 @@ export default function ListCustomers() {
             .catch(error => console.log(error.message))
     };
     return (
+    <fragment>
+    <Navbar />
         <div class="container">
+
                  <h3>  
              Customers</h3>
             <ul>
@@ -33,5 +37,6 @@ export default function ListCustomers() {
             </ul>
             
         </div>
+        </fragment>
     );
 };

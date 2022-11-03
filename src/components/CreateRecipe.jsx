@@ -4,6 +4,7 @@ import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
 import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
 import Select from 'react-select';
+import Navbar from './Nav/navbar';
 
  function CreateRecipe({ onClose,open }) {
   useEffect(() =>
@@ -54,9 +55,11 @@ const handleSubmit = async (e) => {
 
 
 return (
-  
+<fragment>
+  <Navbar />
  <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
   <div className='max-w-[700px] mx-auto my-16 p-4'>
+
   <h1>Create New Recipe</h1>
 <div class="form-floating">
 <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value.toUpperCase())} 
@@ -78,7 +81,7 @@ return (
       </button>
 </div>
 </form> 
- 
+ </fragment>
 
   
 );

@@ -6,6 +6,7 @@ import {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
+import Navbar from './Nav/navbar';
 
 
 function ViewProducts ()  {
@@ -31,10 +32,12 @@ function ViewProducts ()  {
   };
 
 return (
+<fragment>
+<Navbar />
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"> 
     <div class="row ">
-     
+
      <div class="col-sm-3 mt-5 mb-4 text-gred">
         <div className="search">
           <form class="form-inline">
@@ -85,7 +88,7 @@ return (
        </div>  
       </div>    
 
-        
+        </fragment>
 
   );}
 

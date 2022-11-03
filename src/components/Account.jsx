@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-
+import Navbar from './Nav/navbar';
 
 const Account = () => {
   const { user, logout } = UserAuth();
@@ -18,6 +18,8 @@ const Account = () => {
   };
 
   return (
+  <fragment>
+  <Navbar />
     <div className='max-w-[600px] mx-auto my-16 p-4'>
       <h1 className='text-2xl font-bold py-4'>Account</h1>
       <p>User Email: {user && user.email}</p>
@@ -36,6 +38,7 @@ const Account = () => {
         </button>
         </Link>
     </div>
+    </fragment>
   );
 };
 
