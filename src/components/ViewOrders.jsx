@@ -32,6 +32,8 @@ function ViewOrders ()  {
   };
 
 return (
+<fragment>
+   <Navbar />
     <>
     
   {(user === null) && <NoLoggedInView />}
@@ -83,7 +85,9 @@ return (
                             <th>Recipient City: {order.data.RecipientCity}</th>
                             <th>Recipient Zip code: {order.data.RecipientZip}</th>
                             <th>Recipient State: {order.data.RecipientState}</th>
-
+                            <th><a href="#" onClick={() => handleEdit(order.id)}>
+                                              edit
+                                            </a>{" "}</th>
                         </tr>
                     </thead>))}
                     </table>
@@ -92,7 +96,7 @@ return (
                         <tr>
 
                                <a href="#" class="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i class="material-icons">&#xE417;</i></a>
-                                <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+
                                 <a href="#" class="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i class="material-icons">&#xf070;</i></a>
 
 
@@ -104,6 +108,7 @@ return (
        </div>
       </div>
 
+</fragment>
       </>  }</>  
 
   );}

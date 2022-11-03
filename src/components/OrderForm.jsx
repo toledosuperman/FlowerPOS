@@ -4,6 +4,7 @@ import React, {  useState } from "react";
 import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
+import Navbar from './Nav/navbar';
 
 function OrderForm({  onClose,open}) {
   // initialize react-hook-form
@@ -57,9 +58,11 @@ function OrderForm({  onClose,open}) {
 
 
 return (
-    
+<fragment>
+<Navbar />
   <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
     <div className='max-w-[700px] mx-auto my-16 p-4'>
+
     <h1>Customer Info</h1>
 <div class="form-floating">
   <textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerName(e.target.value.toUpperCase())} 
@@ -172,7 +175,7 @@ return (
 </div>
 </form>
    
-
+</fragment>
     
   );
   

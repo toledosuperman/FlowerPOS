@@ -27,7 +27,7 @@ function App() {
 
       
 
-    <Navbar />
+
 
       <AuthContextProvider>
         <Routes>
