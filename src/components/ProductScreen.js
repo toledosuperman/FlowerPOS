@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProductContainerStyle, PageHeading } from '../components/styles/ProductScreen'
 import ProductItem from '../components/ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,7 +6,12 @@ import { listProducts } from './productActions'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from './Nav/navbar';
+import NoLoggedInView from '../components/NoLoggedInView';
+import { Spinner } from 'react-bootstrap';
+import { UserAuth } from '../context/AuthContext';
 const ProductScreen = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = UserAuth();
   const dispatch = useDispatch()
 
   const productsList = useSelector((state) => state.productsList)
@@ -17,7 +22,10 @@ const ProductScreen = () => {
     dispatch(listProducts())
   }, [dispatch])
 
-  return (
+  return (<>
+    {(user === null) && <NoLoggedInView />}
+   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
+   {(user !== null) && <> 
     <fragment>
   <Navbar />
     <>
@@ -40,9 +48,10 @@ const ProductScreen = () => {
                 Finalize Recipe
               </Button>
               </Link>
-    </>
-    </fragment>
-  )
+              </> 
+</fragment></>}
+);</>)
+  
 }
 
 export default ProductScreen
