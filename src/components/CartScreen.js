@@ -23,7 +23,7 @@ const CartScreen = () => {
         <div>{error}</div>
       ) : (
         <>
-          <PageHeading>Cart</PageHeading>
+          <PageHeading>Recipe</PageHeading>
           <CartContainerStyle>
             {cartItems.map((item) => (
               <CartItem item={item} key={item.id} />
