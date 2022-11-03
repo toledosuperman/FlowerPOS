@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from './productActions'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Navbar from './Nav/navbar';
 const ProductScreen = () => {
   const dispatch = useDispatch()
 
@@ -17,6 +18,8 @@ const ProductScreen = () => {
   }, [dispatch])
 
   return (
+    <fragment>
+  <Navbar />
     <>
       {loading ? (
         <div>Loading...</div>
@@ -38,6 +41,7 @@ const ProductScreen = () => {
               </Button>
               </Link>
     </>
+    </fragment>
   )
 }
 

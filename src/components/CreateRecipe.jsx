@@ -6,6 +6,8 @@ import { getAuth } from "firebase/auth";
 import Select from 'react-select';
 
  function CreateRecipe({  onClose,open}) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [user, setUser] = useState(null);
     
         const auth = getAuth();
         const [read01, setRead01] = useState([]);

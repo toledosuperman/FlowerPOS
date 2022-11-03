@@ -1,15 +1,20 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../context/AuthContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
+import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
+import Table from 'react-bootstrap/Table';
+import { handleNew, handleEdit } from "./utils";
+import Navbar from './Nav/navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
-import { getAuth } from "firebase/auth";
-import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
+
 function ViewOrders ()  {
-    const auth = getAuth();
-    const user = auth.currentUser;
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = UserAuth();
   const [orders, setOrders] = useState([])
   useEffect(()=>{
   getOrders()
@@ -31,14 +36,12 @@ function ViewOrders ()  {
           .catch(error => console.log(error.message))
   };
 
-return (
-<fragment>
-   <Navbar />
-    <>
-    
+return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
-  {(user !== null) && <>
+  {(user !== null) && <> 
+<fragment>
+   <Navbar />
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
     <div class="row ">
@@ -51,7 +54,7 @@ return (
           </form>
         </div>
         </div>
-        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Orders</b></h2></div>
+        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Products</b></h2></div>
 
            </div>
             <div class="row">
@@ -61,6 +64,7 @@ return (
 
                     <thead key={order.id}>
                         <tr>
+                            <th>#</th>
                             <th>Customer Name: {order.data.CustomerName}</th>
                             <th>Customer Phone: {order.data.CustomerPhone}</th>
                             <th>Customer Email: {order.data.CustomerEmail}</th>
@@ -70,14 +74,8 @@ return (
                             <th>Customer State: {order.data.CustomerState}</th>
                             <th>Product: {order.data.Product}</th>
                             <th>Delivery Date: {order.data.DeliveryDate}</th>
-
-                      <th>Delivery Finished: {order.data.completed.toString()}</th>
+                            <th>Delivery Finished: {order.data.completed.toString()}</th>
                             <th>Delivery Ordered: {order.data.created.toDate().getMonth()+'/'+order.data.created.toDate().getDate()+'/'+order.data.created.toDate().getFullYear()}</th>
-                            <th>Recipient Name: {order.data.RecipientName}</th>
-                            <th>Recipient Phone: {order.data.RecipientPhone}</th>
-
-
-                            <th>Order Date: {order.data.completed}</th>
                             <th>Recipient Name: {order.data.RecipientName}</th>
                             <th>Recipient Phone: {order.data.RecipientPhone}</th>
 
@@ -108,10 +106,10 @@ return (
        </div>
       </div>
 
-</fragment>
-      </>  }</>  
-
-  );}
+      
+</fragment></>}
+;</>)
+  ;}
 
 
 export default ViewOrders;

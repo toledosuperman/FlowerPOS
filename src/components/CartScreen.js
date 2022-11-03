@@ -3,6 +3,7 @@ import { CartContainerStyle, PageHeading } from '../components/styles/CartScreen
 import { listCartItems } from '../components/cartActions'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
+import Navbar from './Nav/navbar';
 
 const CartScreen = () => {
   const dispatch = useDispatch()
@@ -16,6 +17,8 @@ const CartScreen = () => {
   }, [dispatch])
 
   return (
+    <fragment>
+  <Navbar />
     <>
       {loading ? (
         <div>Loading...</div>
@@ -32,6 +35,7 @@ const CartScreen = () => {
         </>
       )}
     </>
+    </fragment>
   )
 }
 

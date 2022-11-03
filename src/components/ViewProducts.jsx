@@ -1,17 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { Button, Modal, Input } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 import NoLoggedInView from '../components/NoLoggedInView';
-import { getAuth } from "firebase/auth";
+import { UserAuth } from '../context/AuthContext';
 import { Spinner } from 'react-bootstrap';
-import Table from 'react-bootstrap/Table';
+import Navbar from './Nav/navbar';
+import 'firebase/compat/auth';
 
 function ViewProducts ()  {
-
+  const [isLoading, setIsLoading] = useState(false);
+  const { user } = UserAuth();
+  
   const [show, setShow] = useState(false);
  
   const handleClose = () => setShow(false);
@@ -39,10 +41,13 @@ function ViewProducts ()  {
   };
 
 return (<>
-  
-  {/* {(user === null) && <NoLoggedInView />}
+   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
-  {(user !== null) && <> */}
+  {(user !== null) && <> 
+<fragment>
+   <Navbar />
+   <>
+ 
     <div class="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded"> 
     <div class="row ">
@@ -139,7 +144,9 @@ return (<>
        </div>  
       </div>    
       </div>  
- </> );
+ </> 
+</fragment></>}
+);</>)
 }
 
 
