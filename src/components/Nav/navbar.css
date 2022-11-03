@@ -2,7 +2,7 @@
 position: fixed;
 left:0;
 top:0;
-background: #333333;
+background: linear-gradient(#c79d14cc, #d36d2a);;
 padding:0 1rem;
 display: flex;
 align: center;
@@ -12,6 +12,10 @@ align: center;
 margin: 1rem;
 
 }
+h1{
+    color: #FFFFFF;
+    background: linear-gradient(#c79d14cc, #d36d2a);;
+    }
 h2{
 color: #FFFFFF;
 }
@@ -26,7 +30,7 @@ nav ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333333;
+    background-color: linear-gradient(#e66465, #9198e5);
 }
 
 nav li {
@@ -42,5 +46,5 @@ nav li a {
 }
 
 nav li a:hover {
-    background-color: #111111;
+    background-color: #945757;
 }
