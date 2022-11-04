@@ -55,12 +55,12 @@ return (<>
      <div class="col-sm-3 mt-5 mb-4 text-gred">
         <div className="search">
           <form class="form-inline">
-           <input class="form-control mr-sm-2" type="search" placeholder="View Product" aria-label="Search"/>
+           <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search"/>
           
           </form>
         </div>    
         </div>  
-        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>View Products</b></h2></div>
+        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b>Products</b></h2></div>
               <div class="col-sm-3 offset-sm-1  mt-5 mb-4 text-gred">
               <Button variant="primary" onClick={handleShow}>
                 Add Product
@@ -74,8 +74,8 @@ return (<>
                         <tr>
                             <th>#</th>
                             <th>Product Name</th>
-                            <th>Product Cost</th>
-                            <th>Product Price</th>
+                            <th>Product Cost ($)</th>
+                            <th>Product Price ($)</th>
                             <th>Product Type</th>
                             <th>Actions</th>
                         </tr>

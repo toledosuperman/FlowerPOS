@@ -4,8 +4,10 @@ import './navbar.css';
 
 const navbar = props =>(
 <header className= "navbar">
+
+ 
 <div className="navbarLogo">
-<h1 className='text-center text-3xl font-bold text-white bg-dark'>
+<h1 className='text-center text-3xl font-bold text-white'>
         Flower POS
       </h1>
 

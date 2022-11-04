@@ -5,19 +5,26 @@ top:0;
 background: linear-gradient(#c79d14cc, #d36d2a);;
 padding:0 1rem;
 display: flex;
-align: center;
+text-align: center;
 }
 
 .navrbarLogo{
 margin: 1rem;
+background: linear-gradient(#c79d14cc, #d36d2a);;
 
 }
-h1{
+.active{
+    color: rgb(19, 18, 18);
+    background: linear-gradient(#b186a4cc, #c9cc1e);;
+};
+nav h1{
     color: #FFFFFF;
-    background: linear-gradient(#c79d14cc, #d36d2a);;
+    background: linear-gradient(#c79d14cc, #ac551b);;
     }
-h2{
+nav h2{
 color: #FFFFFF;
+background: linear-gradient(#c79d14cc, #ac551b);;
+
 }
 
 .navbarList{

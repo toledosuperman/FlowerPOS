@@ -21,6 +21,7 @@
     "formik": "^2.2.9",
     "functional-red-black-tree": "^1.0.1",
     "google-gax": "^3.5.2",
+    "jquery": "^3.6.1",
     "protobufjs": "^7.1.2",
     "react": "^18.2.0",
     "react-bootstrap-validation": "^0.1.11",
