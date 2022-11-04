@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 
 const Account = () => {
   const { user, logout } = UserAuth();

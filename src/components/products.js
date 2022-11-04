@@ -6,7 +6,8 @@ export const products = [
       description:
         "Long stem premium rose, multicolored",
       category: "Fresh",
-      
+      image:
+        "https://t3.ftcdn.net/jpg/01/05/57/38/360_F_105573812_cvD4P5jo6tMPhZULX324qUYFbNpXlisD.jpg",
     },
     {
       id: 2,

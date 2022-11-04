@@ -1,0 +1,70 @@
+.navbar {
+position: fixed;
+left:0;
+top:0;
+background: linear-gradient(#c79d14cc, #d36d2a);;
+padding:0 1rem;
+display: flex;
+text-align: center;
+}
+
+.navrbarLogo{
+margin: 1rem;
+background: linear-gradient(#c79d14cc, #d36d2a);;
+display: inline-block
+}
+.active{
+    color: rgb(19, 18, 18);
+    background: linear-gradient(#b186a4cc, #c9cc1e);;
+};
+nav h1{
+    color: #551414;
+    background: linear-gradient(#c79d14cc, #ac551b);;
+    
+    }
+nav h2{
+color: #4d2323;
+background: linear-gradient(#c79d14cc, #ac551b);;
+
+}
+
+.navbarList{
+display: flex;
+margin-left: 1rem;
+}
+.logo-image{
+    display: flex;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: -6px;
+    float: left;
+    
+    
+}
+nav ul {
+    
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: linear-gradient(#e66465, #9198e5);
+}
+
+nav li {
+    float: left;
+}
+
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: #945757;
+    color: white;
+}

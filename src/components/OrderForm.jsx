@@ -4,7 +4,7 @@ import React, {  useState } from "react";
 import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 

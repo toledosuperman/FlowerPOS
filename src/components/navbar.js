@@ -1,18 +1,26 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import './navbar.css';
-import { Col, Image, Row, Container } from 'react-bootstrap';
+import logo from '../assets/logo.png'
 
 const navbar = props =>(
 <header className= "navbar">
-
+<a class="navbar-brand" href="/">
+      <div class="logo-image">
+            <img src= {logo} class="img-fluid"/>
+      </div>
+</a> 
  
 <div className="navbarLogo">
-<h1 className='text-center text-3xl font-bold text-white'>
-        Flower POS
-      </h1>
 
+
+
+<h1 className='text-left text-3xl font-bold'>
+        Welcome to Flower POS!
+      </h1>
+      
 </div>
+
 <nav className ="navbarList">
 
 <ul id="navlinks">

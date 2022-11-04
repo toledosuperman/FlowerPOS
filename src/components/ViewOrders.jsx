@@ -8,7 +8,7 @@ import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 import Table from 'react-bootstrap/Table';
 import { handleNew, handleEdit } from "./utils";
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 

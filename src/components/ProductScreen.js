@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from './productActions'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 import { UserAuth } from '../context/AuthContext';

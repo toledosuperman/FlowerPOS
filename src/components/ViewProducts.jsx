@@ -7,7 +7,7 @@ import { collection, getDocs} from "firebase/firestore";
 import NoLoggedInView from '../components/NoLoggedInView';
 import { UserAuth } from '../context/AuthContext';
 import { Spinner } from 'react-bootstrap';
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 import 'firebase/compat/auth';
 
 function ViewProducts ()  {
