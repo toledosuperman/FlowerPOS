@@ -57,10 +57,10 @@ const handleSubmit = async (e) => {
         <>
           <PageHeading>Recipe</PageHeading>
           <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
-          <div class="form-floating">
-<textarea class="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setProductName(e.target.value.toUpperCase())} 
+          <div className="form-floating">
+<textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setProductName(e.target.value.toUpperCase())} 
         value={ProductName}></textarea>
-<label for="comment">Product Name</label>
+<label htmlFor="comment">Product Name</label>
 
 </div>
           <CartContainerStyle>
