@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { ProductContainerStyle, PageHeading } from '../components/styles/ProductScreen'
 import ProductItem from '../components/ProductItem'
+
 import { useDispatch, useSelector } from 'react-redux'
-import { listProducts } from './productActions'
+
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from './navbar';
@@ -18,10 +19,7 @@ const ProductScreen = () => {
 
   const { loading, error, products } = productsList
 
-  useEffect(() => {
-    dispatch(listProducts())
-  }, [dispatch])
-
+  
   return (<>
     {(user === null) && <NoLoggedInView />}
    {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
