@@ -11,8 +11,8 @@ import 'firebase/compat/auth';
 import FirestoreService from './FirestoreService.js';
 
 function ViewProducts(props) {
-
-  const [user, setUser] = useState(null);
+    const { user } = UserAuth();
+  
   const [Products, setProducts] = useState([]);
   
 
@@ -112,7 +112,7 @@ function ViewProducts(props) {
 
   return (
       <>
-          {/* {(user === null) && <NoLoggedInView />} */}
+          {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user === null) && <>
               {/* Add/Edit Form */}
