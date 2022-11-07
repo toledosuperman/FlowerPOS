@@ -2,8 +2,6 @@ import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 'react-bootstrap';
-import { db } from "../firebase.js";
-import { collection, getDocs} from "firebase/firestore";
 import NoLoggedInView from '../components/NoLoggedInView';
 import { UserAuth } from '../context/AuthContext';
 import Navbar from './navbar';
@@ -116,6 +114,8 @@ function ViewProducts(props) {
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user === null) && <>
               {/* Add/Edit Form */}
+              <fragment>
+   <Navbar />
               <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
                       <Modal.Header closeButton>
@@ -255,6 +255,7 @@ function ViewProducts(props) {
                       </Table>
                   </Card.Body>
               </Card>
+              </fragment>
           </>}
       </>
   );
