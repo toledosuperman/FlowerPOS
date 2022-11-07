@@ -1,69 +1,73 @@
+import {
+    collection,
+    addDoc,
+    doc,
+    deleteDoc,
+    getDocs,
+    updateDoc
+  } from "firebase/firestore";
+
 import { db } from '../firebase'
 
-function getAllProducts() {
-    return new Promise((resolve, reject) => {
-        db.collection("Products").get().then((allProducts) => {
-            resolve(allProducts);
-        }).catch((e) => {
-            reject(e);
+async function getAllProducts() {
+    try {
+        const colRef = collection(db, "Products");
+        const docsSnap = await getDocs(colRef);
+       return docsSnap;
+        docsSnap.forEach(doc => {
+            console.log(doc.data());
+            console.log(doc.id);
         })
-    })
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+
+
+function AddNewProduct(Name, Price, Count, Type) {
+    
+    const docRef = addDoc(collection(db, "Products"), {
+        Name,
+        Price,
+        Count,
+        Type
+      });
+      console.log("Document written with ID: ", docRef.id);
+
+    };
+
+
+function UpdateProduct(Name, Price, Count, Type) {
+    const docRef = doc(db, "Products", Name);
+
+    const data = {
+        Name,
+        Price,
+        Count,
+        Type
+      };
+      
+      updateDoc(docRef, data)
+      .then(docRef => {
+          console.log("Value of an Existing Document Field has been updated");
+      })
+      .catch(error => {
+          console.log(error);
+      })
 }
 
-function getAllProductCategories() {
-    return new Promise((resolve, reject) => {
-        db.collection("ProductCategories").get().then((allProductCategories) => {
-            resolve(allProductCategories);
-        }).catch((e) => {
-            reject(e);
-        })
-    })
+function DeleteProduct(Name) {
+    const docRef = doc(db, "Products", Name);
+
+deleteDoc(docRef)
+.then(() => {
+    console.log("Entire Document has been deleted successfully.")
+})
+.catch(error => {
+    console.log(error);
+})
 }
 
-function AddNewProduct(Name, Type, Price) {
-    return new Promise((resolve, reject) => {
-        const data = {
-            "Name": Name,
-            "Type": Type,
-            "Price": parseFloat(Price)
-        }
-
-        db.collection("Products").add(data).then((docRef) => {
-            resolve(docRef);
-        }).catch((e) => {
-            reject(e);
-        })
-
-    })
-}
-
-function UpateProduct(id, Name, Type, Price) {
-
-    return new Promise((resolve, reject) => {
-
-        const data = {
-            "Name": Name,
-            "Type": Type,
-            "Price": parseFloat(Price)
-        }
-
-        db.collection("Products").doc(id).update(data).then(() => {
-            resolve()
-        }).catch((e) => {
-            reject(e)
-        })
-    })
-}
-
-function DeleteProduct(id) {
-    return new Promise((resolve, reject) => {
-        db.collection("Products").doc(id).delete().then(() => {
-            resolve()
-        }).catch((e) => {
-            reject(e)
-        })
-    })
-}
-
-export default { getAllProducts, getAllProductCategories, AddNewProduct, UpateProduct, DeleteProduct }
+export default { getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct }
   
