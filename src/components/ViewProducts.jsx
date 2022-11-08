@@ -5,7 +5,6 @@ import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 
 import NoLoggedInView from '../components/NoLoggedInView';
 import { UserAuth } from '../context/AuthContext';
 import Navbar from './navbar';
-import 'firebase/compat/auth';
 import FirestoreService from './FirestoreService.js';
 
 function ViewProducts(props) {
@@ -221,19 +220,19 @@ function ViewProducts(props) {
                                 
                                   <tr key={index}>
                                       <td>{index + 1}</td>
-                                      {console.log(product.doc.data.value.mapValue.fields.Name.stringValue)}
-                                      <td>{product.doc.data.value.mapValue.fields.Name.stringValue}</td>
+                                      {console.log(product.doc.data.value.mapValue.fields.Name)}
+                                      <td>{product.doc.data.value.mapValue.fields.Name}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
                                       {/* <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td> */}
-                                      <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td>
+                                      <td>{product.doc.data.value.mapValue.fields.Type}</td> <td>{product.doc.data.value.mapValue.fields.Type}</td>
                                       <td>
                                           <Button variant='primary' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1])
                                               setCurrentProduct({
-                                                  "Name": product.doc.data.value.mapValue.fields.Name.stringValue,
+                                                  "Name": product.doc.data.value.mapValue.fields.Name,
                                                   "Price": product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue,
                                                   "Inventory": product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue,
-                                                  "Type": product.doc.data.value.mapValue.fields.Type.stringValue
+                                                  "Type": product.doc.data.value.mapValue.fields.Type
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
@@ -241,10 +240,10 @@ function ViewProducts(props) {
                                           <Button variant='danger' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1]);
                                               setCurrentProduct({
-                                                  "Name": product.doc.data.value.mapValue.fields.Name.stringValue,
+                                                  "Name": product.doc.data.value.mapValue.fields.Name,
                                                   "Price": product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue,
                                                   "Inventory": product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue,
-                                                  "Type": product.doc.data.value.mapValue.fields.Type.stringValue
+                                                  "Type": product.doc.data.value.mapValue.fields.Type
                                                 });
                                               setShowDeleteDialogue(true);
                                           }}>x Delete</Button>

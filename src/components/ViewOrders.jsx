@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-import Table from 'react-bootstrap/Table';
-import { handleNew, handleEdit } from "./utils";
+import {  handleEdit } from "./utils";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
