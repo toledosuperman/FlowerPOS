@@ -28,22 +28,23 @@ function ViewProducts(props) {
 
  
 
-  async function fetchProducts() {
-      setIsLoading(true);
-     
-      await FirestoreService.getAllProducts().then((response) => {
-          setIsLoading(false);
-          setProducts(response._snapshot.docChanges);
-          console.log(response._snapshot.docChanges)
-          console.log(currentProductId)
-         
-      }).catch((e) => {
-          setIsLoading(false);
-          alert("Error occured while fetching the menu Product. " + e);
-      })
-  }
+  
 
   useEffect(() => {
+    async function fetchProducts() {
+        setIsLoading(true);
+       
+        await FirestoreService.getAllProducts().then((response) => {
+            setIsLoading(false);
+            setProducts(response._snapshot.docChanges);
+            console.log(response._snapshot.docChanges)
+            console.log(currentProductId)
+           
+        }).catch((e) => {
+            setIsLoading(false);
+            alert("Error occured while fetching the menu Product. " + e);
+        })
+    }
       if (user != null) {
           
           fetchProducts();
