@@ -16,8 +16,22 @@ function ViewProducts(props) {
 
   const [user, setUser] = useState(null);
   const [Products, setProducts] = useState([]);
-    //search filter
-    const [search, setSearch] = useState('');
+    
+
+const [productsData, setProductsData] = useState(Products)//iterate this in table
+const [search, setSearch] = useState('')
+const changeSearch = (val) => {
+   setSearch(val)
+   if(val!=''){
+   setProductsData(Products.filter(product => {
+       product.Name.includes(val) 
+      
+   }))
+   }
+   else{
+      setProductsData(Products)
+   }
+}
   
 
   const [isLoading, setIsLoading] = useState(false);
@@ -233,11 +247,8 @@ function ViewProducts(props) {
                          </tr>
                      </thead>
                           <tbody>
-                              { (Products.filter((product) => {
-                return search() === ''
-                  ? product
-                  : product.Name.includes(search);
-              }).map((product, index) => (
+                          <input type='text' onChange={(e)=> changeSearch(e.target.value)}></input>
+                              { (Products.map((product, index) => (
                                 
                                   <tr key={index}>
                                       <td>{index + 1}</td>
