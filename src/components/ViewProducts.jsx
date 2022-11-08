@@ -1,7 +1,7 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 'react-bootstrap';
+import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner } from 'react-bootstrap';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { UserAuth } from '../context/AuthContext';
 import Navbar from './navbar';
@@ -44,7 +44,7 @@ function ViewProducts(props) {
   }
 
   useEffect(() => {
-      if (user === null) {
+      if (user != null) {
           
           fetchProducts();
       }
@@ -111,9 +111,9 @@ function ViewProducts(props) {
       <>
           {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
-          {(user === null) && <>
+          {(user !== null) && <>
               {/* Add/Edit Form */}
-              <fragment>
+              <React.Fragment>
    <Navbar />
               <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
@@ -220,19 +220,19 @@ function ViewProducts(props) {
                                 
                                   <tr key={index}>
                                       <td>{index + 1}</td>
-                                      {console.log(product.doc.data.value.mapValue.fields.Name)}
-                                      <td>{product.doc.data.value.mapValue.fields.Name}</td>
-                                      <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
+                                      {console.log(product.data.Name)}
+                                      <td>{product.data.Name}</td>
+                                      <td>{product.data.Price }</td>
                                       {/* <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td> */}
-                                      <td>{product.doc.data.value.mapValue.fields.Type}</td> <td>{product.doc.data.value.mapValue.fields.Type}</td>
+                                      <td>{product.data.Type}</td> <td>{product.data.Type}</td>
                                       <td>
                                           <Button variant='primary' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1])
                                               setCurrentProduct({
-                                                  "Name": product.doc.data.value.mapValue.fields.Name,
-                                                  "Price": product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue,
-                                                  "Inventory": product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue,
-                                                  "Type": product.doc.data.value.mapValue.fields.Type
+                                                  "Name": product.data.Name,
+                                                  "Price":product.data.Price,
+                                                  "Inventory": product.data.Inventory,
+                                                  "Type": product.data.Type
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
@@ -240,10 +240,10 @@ function ViewProducts(props) {
                                           <Button variant='danger' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1]);
                                               setCurrentProduct({
-                                                  "Name": product.doc.data.value.mapValue.fields.Name,
-                                                  "Price": product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue,
-                                                  "Inventory": product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue,
-                                                  "Type": product.doc.data.value.mapValue.fields.Type
+                                                  "Name": product.data.Name,
+                                                  "Price": product.data.Price,
+                                                  "Inventory": product.data.Inventory,
+                                                  "Type": product.data.Type
                                                 });
                                               setShowDeleteDialogue(true);
                                           }}>x Delete</Button>
@@ -254,7 +254,7 @@ function ViewProducts(props) {
                       </Table>
                   </Card.Body>
               </Card>
-              </fragment>
+              </React.Fragment>
           </>}
       </>
   );
