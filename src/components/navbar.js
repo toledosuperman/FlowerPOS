@@ -5,9 +5,9 @@ import logo from '../assets/logo.png'
 
 const navbar = props =>(
 <header className= "navbar">
-<a class="navbar-brand" href="/">
-      <div class="logo-image">
-            <img src= {logo} class="img-fluid"/>
+<a className="navbar-brand" href="/">
+      <div className="logo-image">
+            <img src= {logo} className="img-fluid"/>
       </div>
 </a> 
  

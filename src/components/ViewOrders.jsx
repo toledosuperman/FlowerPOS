@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Button } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-import Table from 'react-bootstrap/Table';
-import { handleNew, handleEdit } from "./utils";
+import {  handleEdit } from "./utils";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
@@ -40,26 +37,26 @@ return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
   {(user !== null) && <> 
-<fragment>
+<React.Fragment>
    <Navbar />
-    <div class="container ">
+    <div className="container ">
     <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
-    <div class="row ">
+    <div className="row ">
 
-     <div class="col-sm-3 mt-5 mb-4 text-gred">
+     <div className="col-sm-3 mt-5 mb-4 text-gred">
         <div className="search">
-          <form class="form-inline">
-           <input class="form-control mr-sm-2" type="search" placeholder="Search Orders" aria-label="Search"/>
+          <form className="form-inline">
+           <input className="form-control mr-sm-2" type="search" placeholder="Search Orders" aria-label="Search"/>
 
           </form>
         </div>
         </div>
-        <div class="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b> Orders</b></h2></div>
+        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b> Orders</b></h2></div>
 
            </div>
-            <div class="row">
-                <div class="table-responsive " >
-                 <table class="table table-striped table-hover table-bordered overflow-x:scroll ">
+            <div className="row">
+                <div className="table-responsive " >
+                 <table className="table table-striped table-hover table-bordered overflow-x:scroll ">
                  {orders.map((order) => (
 
                     <thead key={order.id}>
@@ -74,8 +71,8 @@ return (<>
                             <th>Customer State: {order.data.CustomerState}</th>
                             <th>Product: {order.data.Product}</th>
                             <th>Delivery Date: {order.data.DeliveryDate}</th>
-                            <th>Delivery Finished: {order.data.completed.toString()}</th>
-                            <th>Delivery Ordered: {order.data.created.toDate().getMonth()+'/'+order.data.created.toDate().getDate()+'/'+order.data.created.toDate().getFullYear()}</th>
+                            
+                            {/* <th>Delivery Ordered: {order.data.created.toDate().getMonth()+'/'+order.data.created.toDate().getDate()+'/'+order.data.created.toDate().getFullYear()}</th> */}
                             <th>Recipient Name: {order.data.RecipientName}</th>
                             <th>Recipient Phone: {order.data.RecipientPhone}</th>
 
@@ -93,9 +90,9 @@ return (<>
 
                         <tr>
 
-                               <a href="#" class="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i class="material-icons">&#xE417;</i></a>
+                               <a href="#" className="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i className="material-icons">&#xE417;</i></a>
 
-                                <a href="#" class="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i class="material-icons">&#xf070;</i></a>
+                                <a href="#" className="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i className="material-icons">&#xf070;</i></a>
 
 
                         </tr>
@@ -107,7 +104,7 @@ return (<>
       </div>
 
       
-</fragment></>}
+</React.Fragment></>}
 ;</>)
   ;}
 

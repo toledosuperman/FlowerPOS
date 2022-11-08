@@ -18,7 +18,7 @@ const Account = () => {
   };
 
   return (
-  <fragment>
+  <React.Fragment>
   <Navbar />
     <div className='max-w-[600px] mx-auto my-16 p-4'>
       <h1 className='text-2xl font-bold py-4'>Account</h1>
@@ -38,7 +38,7 @@ const Account = () => {
         </button>
         </Link>
     </div>
-    </fragment>
+    </React.Fragment>
   );
 };
 

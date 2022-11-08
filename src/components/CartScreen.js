@@ -46,7 +46,7 @@ const handleSubmit = async (e) => {
 ;
 
   return (
-    <fragment>
+    <React.Fragment>
   <Navbar />
     <>
       {loading ? (
@@ -75,7 +75,7 @@ const handleSubmit = async (e) => {
         </>
       )}
     </>
-    </fragment>
+    </React.Fragment>
   )
 }
 

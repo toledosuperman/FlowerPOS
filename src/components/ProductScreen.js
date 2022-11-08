@@ -61,7 +61,7 @@ const handleSubmit = async (e) => {
     {(user === null) && <NoLoggedInView />}
    {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
    {(user !== null) && <> 
-    <fragment>
+    <React.Fragment>
   <Navbar />
     <>
       {loading ? (
@@ -111,7 +111,7 @@ const handleSubmit = async (e) => {
         </>
       )}
     </>
-</fragment></>}
+</React.Fragment></>}
 </>)
   
 }
