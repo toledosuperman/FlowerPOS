@@ -1,19 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner } from 'react-bootstrap';
+import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-import NoLoggedInView from '../components/NoLoggedInView';
-import { UserAuth } from '../context/AuthContext';
-import Navbar from './navbar';
-import 'firebase/compat/auth';
 import FirestoreService from './FirestoreService.js';
+import NoLoggedInView from './NoLoggedInView.js';
+
+
 
 function ViewProducts(props) {
 
+  
+
   const [user, setUser] = useState(null);
   const [Products, setProducts] = useState([]);
+    //search filter
+    const [search, setSearch] = useState('');
   
 
   const [isLoading, setIsLoading] = useState(false);
@@ -110,6 +114,8 @@ function ViewProducts(props) {
       })
   }
 
+
+
   return (
       <>
           {/* {(user === null) && <NoLoggedInView />} */}
@@ -203,6 +209,16 @@ function ViewProducts(props) {
                       <Button style={{ backgroundColor: '#000', borderWidth: 0, }} onClick={() => {
                           setShowAddEditForm(true);
                       }}>Add New Product</Button>
+                      <Form>
+          <InputGroup className='my-3'>
+
+            {/* onChange for search */}
+            <Form.Control
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder='Search Products'
+            />
+          </InputGroup>
+        </Form>
                   </Card.Header>
                   <Card.Body>
                       <Table responsive>
@@ -217,7 +233,11 @@ function ViewProducts(props) {
                          </tr>
                      </thead>
                           <tbody>
-                              { (Products.map((product, index) => (
+                              { (Products.filter((product) => {
+                return search() === ''
+                  ? product
+                  : product.Name.includes(search);
+              }).map((product, index) => (
                                 
                                   <tr key={index}>
                                       <td>{index + 1}</td>
@@ -252,6 +272,17 @@ function ViewProducts(props) {
                                   </tr>
                               )))}
                           </tbody>
+                          <div>
+                          <Pagination>
+        <Pagination.Prev />
+        <Pagination.Ellipsis />
+        <Pagination.Item>{3}</Pagination.Item>
+        <Pagination.Item>{4}</Pagination.Item>
+        <Pagination.Item>{5}</Pagination.Item>
+        <Pagination.Ellipsis />
+        <Pagination.Next />
+      </Pagination>
+      </div>
                       </Table>
                   </Card.Body>
               </Card>
