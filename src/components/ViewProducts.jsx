@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Table, Card, Image, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
-import { db } from "../firebase.js";
-import { collection, getDocs} from "firebase/firestore";
+import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
+import Navbar from './navbar';
+import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 
 
 
 function ViewProducts(props) {
-
+    const { user } = UserAuth();
   
 
-  const [user, setUser] = useState(null);
+  
   const [Products, setProducts] = useState([]);
     
 
@@ -22,7 +22,7 @@ const [productsData, setProductsData] = useState(Products)//iterate this in tabl
 const [search, setSearch] = useState('')
 const changeSearch = (val) => {
    setSearch(val)
-   if(val!=''){
+   if(val!==''){
    setProductsData(Products.filter(product => {
        product.Name.includes(val) 
       
@@ -65,7 +65,7 @@ const changeSearch = (val) => {
   }
 
   useEffect(() => {
-      if (user === null) {
+      if (user !== null) {
           
           fetchProducts();
       }
@@ -132,9 +132,11 @@ const changeSearch = (val) => {
 
   return (
       <>
-          {/* {(user === null) && <NoLoggedInView />} */}
+          {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
-          {(user === null) && <>
+          {(user !== null) && <>
+            <React.Fragment>
+   <Navbar />
               {/* Add/Edit Form */}
               <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
@@ -297,7 +299,7 @@ const changeSearch = (val) => {
                       </Table>
                   </Card.Body>
               </Card>
-          </>}
+              </React.Fragment></>}
       </>
   );
 }

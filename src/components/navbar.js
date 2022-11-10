@@ -7,7 +7,7 @@ const navbar = props =>(
 <header className= "navbar">
 <a className="navbar-brand" href="/">
       <div className="logo-image">
-            <img src= {logo} className="img-fluid"/>
+            <img src= {logo} className="img-fluid"alt=""/>
       </div>
 </a> 
  
