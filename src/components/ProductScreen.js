@@ -8,25 +8,22 @@ import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 import { UserAuth } from '../context/AuthContext';
-import { CartContainerStyle } from '../components/styles/CartScreen'
 import { listCartItems } from '../components/cartActions'
-import CartItem from './CartItem'
-import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
-import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
+import {onSnapshot, collection} from 'firebase/firestore';
 import { listProducts } from './productActions'
-const ProductScreen = (onClose,open) => {
+const ProductScreen = () => {
   const dispatch = useDispatch()
 
-  const navigate = useNavigate();
+  
   useEffect(() =>
       onSnapshot(collection(db, "Products"), (snapshot) => console.log(snapshot.docs)
     ));
   
-  const[Name, setName]= useState('');
+  
   const cartItemsList = useSelector((state) => state.cartItemsList)
 
-  const { loading, error, cartItems } = cartItemsList
+  const { loading, error} = cartItemsList
 
   useEffect(() => {
     dispatch(listCartItems())
@@ -35,21 +32,9 @@ const ProductScreen = (onClose,open) => {
     dispatch(listProducts())
   }, [dispatch])
  
-const[ProductName, setProductName]= useState('');
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  try {
-    await addDoc(collection(db, 'Products'), {
-      ProductName: ProductName,
-      Countable: true,
-      Type: 'Arrangement',
-      created: Timestamp.now()
-    })
-    navigate('/account')
-  } catch (err) {
-    alert(err)
-  }}
-  const [isLoading, setIsLoading] = useState(false);
+
+
+  const [isLoading] = useState(false);
   const { user } = UserAuth();
 
   const productsList = useSelector((state) => state.productsList)

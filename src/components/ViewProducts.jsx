@@ -10,7 +10,7 @@ import NoLoggedInView from './NoLoggedInView.js';
 
 
 
-function ViewProducts(props) {
+function ViewProducts() {
     const { user } = UserAuth();
   
 
@@ -18,8 +18,8 @@ function ViewProducts(props) {
   const [Products, setProducts] = useState([]);
     
 
-const [productsData, setProductsData] = useState(Products)//iterate this in table
-const [search, setSearch] = useState([])
+const [ setProductsData] = useState(Products)//iterate this in table
+const [ setSearch] = useState([])
 const changeSearch = (val) => {
    setSearch(val)
    if(val!==''){

@@ -1,9 +1,9 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import './navbar.css';
-import { Col, Image, Row, Container } from 'react-bootstrap';
 
-const navbar = props =>(
+
+const navbar =() =>(
 <header className= "navbar">
 
  

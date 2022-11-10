@@ -1,5 +1,4 @@
 import { UserAuth } from '../context/AuthContext';
-import { useForm } from "react-hook-form";
 import React, {  useState } from "react";
 import {  useNavigate } from 'react-router-dom';
 import {db} from '../firebase'
@@ -9,10 +8,10 @@ import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 
 function OrderForm({  onClose,open}) {
-        const [isLoading, setIsLoading] = useState(false);
+        const [isLoading] = useState(false);
         const { user } = UserAuth();
   // initialize react-hook-form
-  const {  reset} = useForm();
+  
   const[CustomerName, setCustomerName]= useState('');
   const[ CustomerCity,setCustomerCity ]= useState('');
   const[ CustomerAddress,setCustomerAddress]= useState('');

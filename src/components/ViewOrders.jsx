@@ -10,7 +10,7 @@ import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 
 function ViewOrders ()  {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading] = useState(false);
   const { user } = UserAuth();
   const [orders, setOrders] = useState([])
   useEffect(()=>{
@@ -80,8 +80,8 @@ return (<>
                             <th>Recipient City: {order.data.RecipientCity}</th>
                             <th>Recipient Zip code: {order.data.RecipientZip}</th>
                             <th>Recipient State: {order.data.RecipientState}</th>
-                            <th><a href="#" onClick={() => handleEdit(order.id)}>
-                                              edit
+                            <th><a href="/#" onClick={() => handleEdit(order.id)}>
+                                              Edit
                                             </a>{" "}</th>
                         </tr>
                     </thead>))}
@@ -90,9 +90,9 @@ return (<>
 
                         <tr>
 
-                               <a href="#" className="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i className="material-icons">&#xE417;</i></a>
+                               <a href="/#" className="view" title="View" data-toggle="tooltip" style={{color:"#10ab80"}}><i className="material-icons">&#xE417;</i></a>
 
-                                <a href="#" className="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i className="material-icons">&#xf070;</i></a>
+                                <a href="/#" className="inactivate " title="Inactivate " data-toggle="tooltip" style={{color:"red"}}><i className="material-icons">&#xf070;</i></a>
 
 
                         </tr>

@@ -12,7 +12,7 @@ import Account from './components/Account';
 import { Route, Routes } from 'react-router-dom';
 import ListCustomers from './components/ListCustomers';
 import { AuthContextProvider } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
+
 
 import Reset from './components/Reset';
 

@@ -28,12 +28,13 @@ function CartScreen ({onClose,open})  {
     dispatch(listProducts())
   }, [dispatch])
  
-const[ProductName, setProductName]= useState('');
+
 const handleSubmit = async (e) => {
   e.preventDefault()
   try {
     await addDoc(collection(db, 'Products'), {
-      ProductName: ProductName,
+      Name: Name,
+      Inventory: 100,
       Countable: true,
       Type: 'Arrangement',
       created: Timestamp.now()
@@ -58,8 +59,8 @@ const handleSubmit = async (e) => {
           <PageHeading>Recipe</PageHeading>
           <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
           <div className="form-floating">
-<textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setProductName(e.target.value.toUpperCase())} 
-        value={ProductName}></textarea>
+<textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value.toUpperCase())} 
+        value={Name}></textarea>
 <label htmlFor="comment">Product Name</label>
 
 </div>

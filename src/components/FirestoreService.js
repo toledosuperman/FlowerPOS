@@ -13,14 +13,16 @@ async function getAllProducts() {
     try {
         const colRef = collection(db, "Products");
         const docsSnap = await getDocs(colRef);
-       return docsSnap;
         docsSnap.forEach(doc => {
             console.log(doc.data());
             console.log(doc.id);
         })
+       return docsSnap;
+        
     } catch (error) {
         console.log(error);
     }
+    
 };
 
 
@@ -68,6 +70,9 @@ deleteDoc(docRef)
     console.log(error);
 })
 }
+const FireStoreService = {
+    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct
+  };
 
-export default { getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct }
+export default  FireStoreService
   
