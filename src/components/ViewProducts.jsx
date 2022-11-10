@@ -19,7 +19,7 @@ function ViewProducts(props) {
     
 
 const [productsData, setProductsData] = useState(Products)//iterate this in table
-const [search, setSearch] = useState('')
+const [search, setSearch] = useState([])
 const changeSearch = (val) => {
    setSearch(val)
    if(val!==''){
@@ -43,7 +43,7 @@ const changeSearch = (val) => {
       "Type": ''
 
   });
-  const [currentProductId, setCurrentProductId] = useState("");
+  const [currentProductId, setCurrentProductId] = useState([]);
 
 
 
@@ -249,7 +249,10 @@ const changeSearch = (val) => {
                          </tr>
                      </thead>
                           <tbody>
+                            <tr>
+                            <td>
                           <input type='text' onChange={(e)=> changeSearch(e.target.value)}></input>
+                          </td></tr>
                               { (Products.map((product, index) => (
                                 
                                   <tr key={index}>
@@ -285,17 +288,17 @@ const changeSearch = (val) => {
                                   </tr>
                               )))}
                           </tbody>
-                          <div>
+                          <React.Fragment>
                           <Pagination>
         <Pagination.Prev />
-        <Pagination.Ellipsis />
+        
+        <Pagination.Item>{2}</Pagination.Item>
         <Pagination.Item>{3}</Pagination.Item>
         <Pagination.Item>{4}</Pagination.Item>
-        <Pagination.Item>{5}</Pagination.Item>
         <Pagination.Ellipsis />
         <Pagination.Next />
       </Pagination>
-      </div>
+      </React.Fragment>
                       </Table>
                   </Card.Body>
               </Card>
