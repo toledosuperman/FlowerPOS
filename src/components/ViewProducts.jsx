@@ -39,7 +39,7 @@ const changeSearch = (val) => {
   const [currentProduct, setCurrentProduct] = useState({
       "Name": '',
       "Price": 0,
-      "Inventory": '',
+      "Inventory": 0,
       "Type": ''
 
   });
@@ -82,7 +82,7 @@ const changeSearch = (val) => {
       setShowDeleteDialogue(false);
       setCurrentProductId("");
       setAddEditFormType("Add");
-      setCurrentProduct({ "Name": '', "Price": 0, "Inventory": '', "Type": ''})
+      setCurrentProduct({ "Name": '', "Price": 0, "Inventory": 0, "Type": ''})
       setIsLoading(false);
   }
 
@@ -257,7 +257,7 @@ const changeSearch = (val) => {
                                       {console.log(product.doc.data.value.mapValue.fields.Name.stringValue)}
                                       <td>{product.doc.data.value.mapValue.fields.Name.stringValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
-                                      {/* <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td> */}
+                                      <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td>
                                       <td>
                                           <Button variant='primary' onClick={() => {
