@@ -18,7 +18,7 @@ const Signin = () => {
       return;
     }
     if (user) navigate("/account");
-  }, [user, loading]);
+  }, [user, loading, navigate],);
 
   return (
     <div className="login">

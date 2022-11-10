@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {  useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext';
 import Navbar from './navbar';
+import NoLoggedInView from '../components/NoLoggedInView';
+import { Spinner } from 'react-bootstrap';
 
 const Account = () => {
+  const [isLoading] = useState(false);
   const { user, logout } = UserAuth();
   const navigate = useNavigate();
 
@@ -17,7 +20,10 @@ const Account = () => {
     }
   };
 
-  return (
+  return (<>
+    {(user === null) && <NoLoggedInView />}
+    {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
+    {(user !== null) && <> 
   <React.Fragment>
   <Navbar />
     <div className='max-w-[600px] mx-auto my-16 p-4'>
@@ -39,7 +45,7 @@ const Account = () => {
         </Link>
     </div>
     </React.Fragment>
-  );
+    </>} );</>)
 };
 
 export default Account;

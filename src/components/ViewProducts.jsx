@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useState, useEffect} from 'react';
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
 import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
@@ -41,10 +40,10 @@ const changeSearch = (val) => {
 
  
 
-  async function fetchProducts() {
+  const fetchProducts = useCallback(() =>{
       setIsLoading(true);
      
-      await FirestoreService.getAllProducts().then((response) => {
+      FirestoreService.getAllProducts().then((response) => {
           setIsLoading(false);
           setProducts(response._snapshot.docChanges);
           console.log(response._snapshot.docChanges)
@@ -54,14 +53,14 @@ const changeSearch = (val) => {
           setIsLoading(false);
           alert("Error occured while fetching the menu Product. " + e);
       })
-  }
+  }, [currentProductId]);
 
   useEffect(() => {
       if (user !== null) {
           
           fetchProducts();
       }
-  }, [user])
+  }, [user, fetchProducts])
 
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit

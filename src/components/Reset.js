@@ -13,7 +13,7 @@ function Reset() {
   useEffect(() => {
     if (loading) return;
     if (user) navigate("/account");
-  }, [user, loading]);
+  }, [user, loading, navigate]);
 
   return (
     <div className="reset">
