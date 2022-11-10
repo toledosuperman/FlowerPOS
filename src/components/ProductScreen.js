@@ -84,33 +84,9 @@ const handleSubmit = async (e) => {
               </Button>
               </Link>
               </> 
-              <>
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>{error}</div>
-      ) : (
-        <>
-          <PageHeading>Recipe</PageHeading>
-          <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
-          <div className="form-floating">
-<textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setProductName(e.target.value.toUpperCase())} 
-        value={ProductName}></textarea>
-<label htmlFor="comment">Product Name</label>
-
-</div>
-          <CartContainerStyle>
-            {cartItems.map((item) => (
-              <CartItem item={item} key={item.id} />
-            ))}
-          </CartContainerStyle>
-          <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-quarter p-4 my-2 text-white'>
-        Submit
-      </button>
-          </form>
-        </>
-      )}
-    </>
+             
+      
+    
 </React.Fragment></>}
 </>)
   
