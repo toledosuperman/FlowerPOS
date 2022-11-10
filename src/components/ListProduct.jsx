@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore"
 import React,{ useEffect,useState } from "react"
 import {db} from '../firebase'
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 
 export default function ListProducts() {
     const [products, setProducts] = useState([])

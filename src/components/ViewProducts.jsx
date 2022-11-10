@@ -8,7 +8,7 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 function ViewProducts() {
     const { user } = UserAuth();
-    const [Products, setProducts] = useState([]);
+  const [Products, setProducts] = useState([]);
 const [ setProductsData] = useState(Products)//iterate this in table
 const [ setSearch] = useState([])
 const changeSearch = (val) => {

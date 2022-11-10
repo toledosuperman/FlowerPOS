@@ -4,7 +4,7 @@ import { listCartItems } from '../components/cartActions'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
 import {  useNavigate } from 'react-router-dom';
-import Navbar from './Nav/navbar';
+import Navbar from './navbar';
 import {db} from '../firebase'
 import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
 import { listProducts } from './productActions'

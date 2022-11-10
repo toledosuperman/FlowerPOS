@@ -13,15 +13,18 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading] = useAuthState(auth);
-  
+  const navigate = useNavigate();
 
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
   };
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (loading) return;
+
+   useEffect(() => {
+    if (loading) {
+      // maybe trigger a loading screen
+      return;
+    }
     if (user) navigate("/account");
   }, [user, loading]);
 
