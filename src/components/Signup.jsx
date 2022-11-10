@@ -13,13 +13,13 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [user, loading] = useAuthState(auth);
-  const navigate = useNavigate();
+  
 
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
   };
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (loading) return;
     if (user) navigate("/account");
