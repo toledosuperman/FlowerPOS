@@ -1,5 +1,4 @@
 import React from 'react';
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
@@ -7,30 +6,23 @@ import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
-
-
-
 function ViewProducts() {
     const { user } = UserAuth();
-  
-
-  
-  const [Products, setProducts] = useState([]);
-    
-
+    const [Products, setProducts] = useState([]);
 const [ setProductsData] = useState(Products)//iterate this in table
 const [ setSearch] = useState([])
 const changeSearch = (val) => {
    setSearch(val)
    if(val!==''){
    setProductsData(Products.filter(product => {
-       product.Name.includes(val) 
+       return product.Name.includes(val) 
       
    }))
    }
    else{
       setProductsData(Products)
    }
+   return false;
 }
   
 
