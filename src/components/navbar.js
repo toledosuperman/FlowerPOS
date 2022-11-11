@@ -21,7 +21,7 @@ const navbar = props =>(
 <li><NavLink to="/vieworders">View Orders</NavLink> </li>
 <li><NavLink to="/viewproduct">Products</NavLink> </li>
 <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
-<li><NavLink to="/customers">Customers</NavLink> </li>
+{/* <li><NavLink to="/customers">Customers</NavLink> </li> */}
 </ul>
 </nav>
 </header>

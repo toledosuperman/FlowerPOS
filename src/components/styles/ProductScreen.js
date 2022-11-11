@@ -24,7 +24,7 @@ export const PageHeading = styled.h1`
   font-size: 4rem;
 `
 export const CartAddButton = styled.button`
-  background-color: ${(props) => (props.primary ? 'green' : 'red')};
+  background-color: ${(props) => (props.primary ? 'blue' : 'red')};
   border: none;
   margin-top: 20px;
   color: ${(props) => (props.primary ? 'yellow' : 'black')};
