@@ -12,7 +12,7 @@ const ProductItem = ({ item }) => {
   return (
     <ProductItemStyle primary>
       
-      <h3
+      <h3 
         style={{
           border: '1px solid black',
           borderRadius: '2px',

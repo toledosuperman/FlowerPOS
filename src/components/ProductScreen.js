@@ -56,9 +56,9 @@ const ProductScreen = () => {
       ) : (
         <>
           <PageHeading primary>Create Recipe</PageHeading>
-          <ProductContainerStyle primary>
+          <ProductContainerStyle primary >
             {products.map((item) => (
-              <ProductItem item={item} />
+              <ProductItem item={item} key={item.id}/>
             ))}
           </ProductContainerStyle>
         </>
