@@ -76,13 +76,13 @@ const ProductScreen = (props, open) => {
           <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={props.onClose} open={open}>
           <div className='max-w-[700px] mx-auto my-16 p-4'>
           <div className="form-floating">
-<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value.toUpperCase())} 
+<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value)} 
         value={Name}></textarea>
 <label htmlFor="comment">Product Name</label>
 
 </div>
 <div className="form-floating">
-<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setInventory(e.target.value)} 
+<textarea className="form-control" input type="number" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setInventory(e.target.value)} 
         value={Inventory}></textarea>
 <label htmlFor="comment">Starting Inventory Count</label>
 </div></div>

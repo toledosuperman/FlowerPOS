@@ -1,22 +1,15 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect} from 'react'
 import { CartContainerStyle, PageHeading } from '../components/styles/CartScreen'
 import { listCartItems } from '../components/cartActions'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
-import {  useNavigate } from 'react-router-dom';
 import Navbar from './navbar';
-import {db} from '../firebase'
-import {onSnapshot, collection, addDoc, Timestamp,} from 'firebase/firestore';
 import { listProducts } from './productActions'
 
 
-function CartScreen ({onClose,open})  {
-  const navigate = useNavigate();
-  useEffect(() =>
-      onSnapshot(collection(db, "Products"), (snapshot) => console.log(snapshot.docs)
-    ));
+function CartScreen ()  {
   const dispatch = useDispatch()
-  const[Name, setName]= useState('');
+  
   const cartItemsList = useSelector((state) => state.cartItemsList)
 
   const { loading, error, cartItems } = cartItemsList
@@ -29,20 +22,7 @@ function CartScreen ({onClose,open})  {
   }, [dispatch])
  
 
-const handleSubmit = async (e) => {
-  e.preventDefault()
-  try {
-    await addDoc(collection(db, 'Products'), {
-      Name: Name,
-      Inventory: 100,
-      Countable: true,
-      Type: 'Arrangement',
-      created: Timestamp.now()
-    })
-    navigate('/account')
-  } catch (err) {
-    alert(err)
-  }}
+
 
 ;
 
@@ -57,13 +37,7 @@ const handleSubmit = async (e) => {
       ) : (
         <>
           <PageHeading>Recipe</PageHeading>
-          <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
-          <div className="form-floating">
-<textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value.toUpperCase())} 
-        value={Name}></textarea>
-<label htmlFor="comment">Product Name</label>
-
-</div>
+          
           <CartContainerStyle>
             {cartItems.map((item) => (
               <CartItem item={item} key={item.id} />
@@ -72,7 +46,7 @@ const handleSubmit = async (e) => {
           <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-quarter p-4 my-2 text-white'>
         Submit
       </button>
-          </form>
+          
         </>
       )}
     </>
