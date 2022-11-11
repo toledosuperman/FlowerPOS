@@ -86,14 +86,7 @@ const ProductScreen = (props, open) => {
         value={Inventory}></textarea>
 <label htmlFor="comment">Starting Inventory Count</label>
 </div></div>
-          <ProductContainerStyle primary >
-            {products.map((item) => (
-              <ProductItem item={item} key={item.id}/>
-            ))}
-          </ProductContainerStyle>
-        
-      
-      <Container>
+<Container>
       <Row className="justify-content-md-center">
       <Col md="auto">
       <Link to="/cart">
@@ -104,6 +97,14 @@ const ProductScreen = (props, open) => {
               </Col>
               </Row>
               </Container>
+          <ProductContainerStyle primary >
+            {products.map((item) => (
+              <ProductItem item={item} key={item.id}/>
+            ))}
+          </ProductContainerStyle>
+        
+      
+      
               </form>
         </>
       )}
