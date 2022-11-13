@@ -27,27 +27,31 @@ async function getAllProducts() {
 
 
 
-function AddNewProduct(Name, Price, Count, Type) {
+function AddNewProduct(Name, Price, Inventory, Type, Cost) {
     
     const docRef = addDoc(collection(db, "Products"), {
         Name,
         Price,
-        Count,
-        Type
+        Inventory,
+        Type,
+        Countable: false,
+        Cost
       });
       console.log("Document written with ID: ", docRef.id);
 
     };
 
 
-function UpdateProduct(Name, Price, Count, Type) {
+function UpdateProduct(Name, Price, Inventory, Type, Countable,Cost) {
     const docRef = doc(db, "Products", Name);
 
     const data = {
         Name,
         Price,
-        Count,
-        Type
+        Inventory,
+        Type,
+        Countable,
+        Cost
       };
       
       updateDoc(docRef, data)

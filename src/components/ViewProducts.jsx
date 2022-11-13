@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
+import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
@@ -8,30 +8,34 @@ import NoLoggedInView from './NoLoggedInView.js';
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
-const [ setProductsData] = useState(Products)//iterate this in table
-const [ setSearch] = useState([])
-const changeSearch = (val) => {
-   setSearch(val)
-   if(val!==''){
-   setProductsData(Products.filter(product => {
-       return product.Name.includes(val) 
+  const[Name]= useState('');
+  const[ Price ]= useState('');
+  const[ Type]= useState('');
+  const[ Inventory]= useState('');
+// const [ setProductsData] = useState(Products)//iterate this in table
+const [  setSearch] = useState([])
+// const changeSearch = (val) => {
+//    setSearch(val)
+//    if(val!==''){
+//    setProductsData(Products.filter(product => {
+//        return product.Name.includes(val) 
       
-   }))
-   }
-   else{
-      setProductsData(Products)
-   }
-   return false;
-}
+//    }))
+//    }
+//    else{
+//       setProductsData(Products)
+//    }
+//    return false;
+// }
   
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentProduct, setCurrentProduct] = useState({
-      "Name": '',
-      "Price": 0,
-      "Inventory": 0,
-      "Type": ''
+      "Name": Name,
+      "Price": Price,
+      "Inventory": Inventory,
+      "Type": Type
 
   });
   const [currentProductId, setCurrentProductId] = useState([]);
@@ -73,7 +77,7 @@ const changeSearch = (val) => {
       setShowDeleteDialogue(false);
       setCurrentProductId("");
       setAddEditFormType("Add");
-      setCurrentProduct({ "Name": '', "Price": 0, "Inventory": 0, "Type": ''})
+      setCurrentProduct({ "Name": Name, "Price": Price, "Inventory": Inventory, "Type": Type})
       setIsLoading(false);
   }
 
@@ -230,29 +234,23 @@ const changeSearch = (val) => {
                   <Card.Body>
                       <Table responsive>
                       <thead>
-                        <tr>
-                             <th>#</th>
+                        <tr><th>#</th>
                              <th>Product Name</th>
                              <th>Product Price ($)</th>
                              <th>Product Count</th>
                              <th>Product Type</th>
-                             <th>Actions</th>
-                         </tr>
+                             <th>Actions</th></tr>
                      </thead>
                           <tbody>
-                            <tr>
-                            <td>
-                          <input type='text' onChange={(e)=> changeSearch(e.target.value)}></input>
-                          </td></tr>
+                            {/* <tr><td><input type='text' onChange={(e)=>changeSearch(e.target.value)}></input></td></tr> */}
                               { (Products.map((product, index) => (
-                                
                                   <tr key={index}>
                                       <td>{index + 1}</td>
                                       {console.log(product.doc.data.value.mapValue.fields.Name.stringValue)}
                                       <td>{product.doc.data.value.mapValue.fields.Name.stringValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td>
-                                      <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td>
+                                      <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> 
                                       <td>
                                           <Button variant='primary' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1])
@@ -280,15 +278,7 @@ const changeSearch = (val) => {
                               )))}
                           </tbody>
                           <React.Fragment>
-                          <Pagination>
-        <Pagination.Prev />
-        
-        <Pagination.Item>{2}</Pagination.Item>
-        <Pagination.Item>{3}</Pagination.Item>
-        <Pagination.Item>{4}</Pagination.Item>
-        <Pagination.Ellipsis />
-        <Pagination.Next />
-      </Pagination>
+                          
       </React.Fragment>
                       </Table>
                   </Card.Body>
