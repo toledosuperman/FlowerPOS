@@ -1,19 +1,16 @@
 import React from 'react';
 import { UserAuth } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
-import { format } from "date-fns";
+import { Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { Button, Modal, Input } from 'react-bootstrap';
 import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
-import {  handleEdit } from "./utils";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 
 function ViewOrders ()  {
-  var change = this;
+  
   const [isLoading] = useState(false);
   const { user } = UserAuth();
   const [orders, setOrders] = useState([])
