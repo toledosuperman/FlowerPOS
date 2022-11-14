@@ -42,20 +42,18 @@ function AddNewProduct(Name, Price, Inventory, Type, Cost) {
     };
 
 
-function UpdateProduct(Name, Price, Inventory, Type, Countable,Cost) {
-    const docRef = doc(db, "Products", Name);
+function UpdateProduct(id, Name, Price, Inventory, Type) {
+    const docRef = doc(db, "Products", id);
 
     const data = {
         Name,
         Price,
         Inventory,
         Type,
-        Countable,
-        Cost
       };
       
-      updateDoc(docRef, data)
-      .then(docRef => {
+      return updateDoc(docRef, data)
+      .then(() => {
           console.log("Value of an Existing Document Field has been updated");
       })
       .catch(error => {

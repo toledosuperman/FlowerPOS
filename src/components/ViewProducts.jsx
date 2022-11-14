@@ -8,34 +8,17 @@ import NoLoggedInView from './NoLoggedInView.js';
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
-  const[Name]= useState('');
-  const[ Price ]= useState('');
-  const[ Type]= useState('');
-  const[ Inventory]= useState('');
-// const [ setProductsData] = useState(Products)//iterate this in table
 const [  setSearch] = useState([])
-// const changeSearch = (val) => {
-//    setSearch(val)
-//    if(val!==''){
-//    setProductsData(Products.filter(product => {
-//        return product.Name.includes(val) 
-      
-//    }))
-//    }
-//    else{
-//       setProductsData(Products)
-//    }
-//    return false;
-// }
+
   
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentProduct, setCurrentProduct] = useState({
-      "Name": Name,
-      "Price": Price,
-      "Inventory": Inventory,
-      "Type": Type
+      "Name": " ",
+      "Price": " ",
+      "Inventory": " ",
+      "Type": " "
 
   });
   const [currentProductId, setCurrentProductId] = useState([]);
@@ -77,7 +60,7 @@ const [  setSearch] = useState([])
       setShowDeleteDialogue(false);
       setCurrentProductId("");
       setAddEditFormType("Add");
-      setCurrentProduct({ "Name": Name, "Price": Price, "Inventory": Inventory, "Type": Type})
+      setCurrentProduct({ "Name": " ", "Price": " ", "Inventory": " ", "Type": " "})
       setIsLoading(false);
   }
 
@@ -98,7 +81,7 @@ const [  setSearch] = useState([])
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
-              FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
+              return FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
                   alert(`${Name.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
