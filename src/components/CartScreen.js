@@ -4,7 +4,7 @@ import { listCartItems } from '../components/cartActions'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from './navbar';
-import { listProducts } from './productActions'
+
 
 
 function CartScreen ()  {
@@ -17,15 +17,7 @@ function CartScreen ()  {
   useEffect(() => {
     dispatch(listCartItems())
   }, [dispatch])
-  useEffect(() => {
-    dispatch(listProducts())
-  }, [dispatch])
- 
-
-
-
-;
-
+  
   return (
     <React.Fragment>
   <Navbar />
