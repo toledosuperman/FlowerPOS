@@ -27,7 +27,7 @@ async function getAllProducts() {
 
 
 
-function AddNewProduct(Name, Price, Inventory, Type, Cost) {
+function AddNewProduct(Name, Price, Inventory, Type) {
     
     const docRef = addDoc(collection(db, "Products"), {
         Name,
@@ -35,14 +35,14 @@ function AddNewProduct(Name, Price, Inventory, Type, Cost) {
         Inventory,
         Type,
         Countable: false,
-        Cost
+
       });
       console.log("Document written with ID: ", docRef.id);
 
     };
 
 
-function UpdateProduct(id, Name, Price, Inventory, Type) {
+async function UpdateProduct(id, Name, Price, Inventory, Type) {
     const docRef = doc(db, "Products", id);
 
     const data = {
@@ -52,13 +52,12 @@ function UpdateProduct(id, Name, Price, Inventory, Type) {
         Type,
       };
       
-      return updateDoc(docRef, data)
-      .then(() => {
-          console.log("Value of an Existing Document Field has been updated");
-      })
-      .catch(error => {
-          console.log(error);
-      })
+      try {
+        await updateDoc(docRef, data);
+        console.log("Value of an Existing Document Field has been updated");
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 function DeleteProduct(Name) {

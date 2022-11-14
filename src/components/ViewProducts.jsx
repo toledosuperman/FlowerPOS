@@ -15,10 +15,10 @@ const [  setSearch] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentProduct, setCurrentProduct] = useState({
-      "Name": " ",
-      "Price": " ",
-      "Inventory": " ",
-      "Type": " "
+      Name: " ",
+      Price: 0,
+      Inventory: 0,
+      Type: " "
 
   });
   const [currentProductId, setCurrentProductId] = useState([]);
@@ -60,7 +60,7 @@ const [  setSearch] = useState([])
       setShowDeleteDialogue(false);
       setCurrentProductId("");
       setAddEditFormType("Add");
-      setCurrentProduct({ "Name": " ", "Price": " ", "Inventory": " ", "Type": " "})
+      setCurrentProduct({ Name: " ", Price: 0, Inventory: 0, Type: " "})
       setIsLoading(false);
   }
 
@@ -71,7 +71,7 @@ const [  setSearch] = useState([])
       if (Price.value && Name.value) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
-              FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
+              return FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
                   alert(`${Name.value} is successfully added to the menu.`)
                   handleModalClose();
                   window.location.reload(false);
@@ -126,12 +126,12 @@ const [  setSearch] = useState([])
                               <Form.Control required type='text' placeholder='Enter Product Name' size='md' value={currentProduct?.Name} onChange={(e) => {
                                   setCurrentProduct({
                                       "Name": e.target.value,
-                                      "Price": currentProduct?.Price,
-                                      "Inventory": currentProduct?.Inventory,
-                                      "Type": currentProduct?.Type
+                                      
+                                      
+                                      
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Product Price is required</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Product Name is required</Form.Control.Feedback>
                           </FloatingLabel>
 
                           
@@ -139,22 +139,22 @@ const [  setSearch] = useState([])
                           <FloatingLabel controlId="Price" label="Price ($)" className="mb-3">
                               <Form.Control required type='number' placeholder='Enter Product Price' size='md' value={currentProduct?.Price} onChange={(e) => {
                                   setCurrentProduct({
-                                      "Name": currentProduct?.Name,
+                                      
                                       "Price": e.target.value,
-                                      "Inventory": currentProduct?.Inventory,
-                                      "Type": currentProduct?.Type
+                                      
+                                      
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Product Count is required</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Product Price is required</Form.Control.Feedback>
                           </FloatingLabel>
 
                           <FloatingLabel controlId="Inventory" label="Product Count" className="mb-3">
                               <Form.Control required type='number' placeholder='Enter Product Count' size='md' value={currentProduct?.Inventory} onChange={(e) => {
                                   setCurrentProduct({
-                                      "Name": currentProduct?.Name,
-                                      "Price": currentProduct?.Price,
+                                      
+                                      
                                       "Inventory": e.target.value,
-                                      "Type": currentProduct?.Type
+                                      
                                   })
                               }} />
                               <Form.Control.Feedback type='invalid'>Product Count is required</Form.Control.Feedback>
@@ -163,13 +163,13 @@ const [  setSearch] = useState([])
                           <FloatingLabel controlId="Type" label="Type" className="mb-3">
                               <Form.Control required type='text' placeholder='Enter Product Type' size='md' value={currentProduct?.Type} onChange={(e) => {
                                   setCurrentProduct({
-                                      "Name": currentProduct?.Name,
-                                      "Price": currentProduct?.Price,
-                                      "Inventory": currentProduct?.Inventory,
+                                      
+                                      
+                                      
                                       "Type": e.target.value
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Product Count is required</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Product Type is required</Form.Control.Feedback>
                           </FloatingLabel>
                       </Modal.Body>
                       <Modal.Footer>
