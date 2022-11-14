@@ -31,8 +31,8 @@ function AddNewProduct(Name, Price, Inventory, Type) {
     
     const docRef = addDoc(collection(db, "Products"), {
         Name,
-        Price,
-        Inventory,
+        Price: Number(Price),
+        Inventory: Number(Inventory),
         Type,
         Countable: false,
 
@@ -47,8 +47,8 @@ async function UpdateProduct(id, Name, Price, Inventory, Type) {
 
     const data = {
         Name,
-        Price,
-        Inventory,
+        Price: Number(Price),
+        Inventory: Number(Inventory),
         Type,
       };
       

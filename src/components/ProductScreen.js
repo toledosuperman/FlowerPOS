@@ -17,6 +17,7 @@ const ProductScreen = (props, open) => {
   const dispatch = useDispatch()
   const[Name, setName]= useState('');
   const[Inventory, setInventory]= useState('');
+  const[Price, setPrice]= useState('');
   const navigate = useNavigate();
   useEffect(() =>
       onSnapshot(collection(db, "Products"), (snapshot) => console.log(snapshot.docs)
@@ -39,10 +40,10 @@ const ProductScreen = (props, open) => {
     try {
       await addDoc(collection(db, 'Products'), {
         Name: Name,
-        Inventory: Inventory,
+        Inventory: Number(Inventory),
         Countable: true,
         Type: 'Arrangement',
-        Price: 0,
+        Price: Number(Price),
         created: Timestamp.now()
       })
       navigate('/account')
@@ -85,7 +86,13 @@ const ProductScreen = (props, open) => {
 <textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setInventory(e.target.value)} 
         value={Inventory}></textarea>
 <label htmlFor="comment">Starting Inventory Count</label>
-</div></div>
+</div>
+<div className="form-floating">
+<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setPrice(e.target.value)} 
+        value={Price}></textarea>
+<label htmlFor="comment">Starting Price</label>
+</div>
+</div>
 
 <Container>
       <Row className="justify-content-md-center">
