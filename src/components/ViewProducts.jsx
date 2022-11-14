@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
+import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
@@ -8,30 +8,17 @@ import NoLoggedInView from './NoLoggedInView.js';
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
-const [ setProductsData] = useState(Products)//iterate this in table
-const [ setSearch] = useState([])
-const changeSearch = (val) => {
-   setSearch(val)
-   if(val!==''){
-   setProductsData(Products.filter(product => {
-       return product.Name.includes(val) 
-      
-   }))
-   }
-   else{
-      setProductsData(Products)
-   }
-   return false;
-}
+const [  setSearch] = useState([])
+
   
 
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentProduct, setCurrentProduct] = useState({
-      "Name": '',
-      "Price": 0,
-      "Inventory": 0,
-      "Type": ''
+      Name: " ",
+      Price: 0,
+      Inventory: 0,
+      Type: " "
 
   });
   const [currentProductId, setCurrentProductId] = useState([]);
@@ -73,7 +60,7 @@ const changeSearch = (val) => {
       setShowDeleteDialogue(false);
       setCurrentProductId("");
       setAddEditFormType("Add");
-      setCurrentProduct({ "Name": '', "Price": 0, "Inventory": 0, "Type": ''})
+      setCurrentProduct({ Name: " ", Price: 0, Inventory: 0, Type: " "})
       setIsLoading(false);
   }
 
@@ -84,7 +71,7 @@ const changeSearch = (val) => {
       if (Price.value && Name.value) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
-              FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
+              return FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
                   alert(`${Name.value} is successfully added to the menu.`)
                   handleModalClose();
                   window.location.reload(false);
@@ -94,7 +81,7 @@ const changeSearch = (val) => {
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
-              FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
+              return FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
                   alert(`${Name.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -139,12 +126,12 @@ const changeSearch = (val) => {
                               <Form.Control required type='text' placeholder='Enter Product Name' size='md' value={currentProduct?.Name} onChange={(e) => {
                                   setCurrentProduct({
                                       "Name": e.target.value,
-                                      "Price": currentProduct?.Price,
-                                      "Inventory": currentProduct?.Inventory,
-                                      "Type": currentProduct?.Type
+                                      
+                                      
+                                      
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Product Price is required</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Product Name is required</Form.Control.Feedback>
                           </FloatingLabel>
 
                           
@@ -152,22 +139,22 @@ const changeSearch = (val) => {
                           <FloatingLabel controlId="Price" label="Price ($)" className="mb-3">
                               <Form.Control required type='number' placeholder='Enter Product Price' size='md' value={currentProduct?.Price} onChange={(e) => {
                                   setCurrentProduct({
-                                      "Name": currentProduct?.Name,
+                                      
                                       "Price": e.target.value,
-                                      "Inventory": currentProduct?.Inventory,
-                                      "Type": currentProduct?.Type
+                                      
+                                      
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Product Count is required</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Product Price is required</Form.Control.Feedback>
                           </FloatingLabel>
 
                           <FloatingLabel controlId="Inventory" label="Product Count" className="mb-3">
                               <Form.Control required type='number' placeholder='Enter Product Count' size='md' value={currentProduct?.Inventory} onChange={(e) => {
                                   setCurrentProduct({
-                                      "Name": currentProduct?.Name,
-                                      "Price": currentProduct?.Price,
+                                      
+                                      
                                       "Inventory": e.target.value,
-                                      "Type": currentProduct?.Type
+                                      
                                   })
                               }} />
                               <Form.Control.Feedback type='invalid'>Product Count is required</Form.Control.Feedback>
@@ -176,13 +163,13 @@ const changeSearch = (val) => {
                           <FloatingLabel controlId="Type" label="Type" className="mb-3">
                               <Form.Control required type='text' placeholder='Enter Product Type' size='md' value={currentProduct?.Type} onChange={(e) => {
                                   setCurrentProduct({
-                                      "Name": currentProduct?.Name,
-                                      "Price": currentProduct?.Price,
-                                      "Inventory": currentProduct?.Inventory,
+                                      
+                                      
+                                      
                                       "Type": e.target.value
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Product Count is required</Form.Control.Feedback>
+                              <Form.Control.Feedback type='invalid'>Product Type is required</Form.Control.Feedback>
                           </FloatingLabel>
                       </Modal.Body>
                       <Modal.Footer>
@@ -230,29 +217,23 @@ const changeSearch = (val) => {
                   <Card.Body>
                       <Table responsive>
                       <thead>
-                        <tr>
-                             <th>#</th>
+                        <tr><th>#</th>
                              <th>Product Name</th>
                              <th>Product Price ($)</th>
                              <th>Product Count</th>
                              <th>Product Type</th>
-                             <th>Actions</th>
-                         </tr>
+                             <th>Actions</th></tr>
                      </thead>
                           <tbody>
-                            <tr>
-                            <td>
-                          <input type='text' onChange={(e)=> changeSearch(e.target.value)}></input>
-                          </td></tr>
+                            {/* <tr><td><input type='text' onChange={(e)=>changeSearch(e.target.value)}></input></td></tr> */}
                               { (Products.map((product, index) => (
-                                
                                   <tr key={index}>
                                       <td>{index + 1}</td>
                                       {console.log(product.doc.data.value.mapValue.fields.Name.stringValue)}
                                       <td>{product.doc.data.value.mapValue.fields.Name.stringValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td>
-                                      <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td>
+                                      <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> 
                                       <td>
                                           <Button variant='primary' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1])
@@ -280,15 +261,7 @@ const changeSearch = (val) => {
                               )))}
                           </tbody>
                           <React.Fragment>
-                          <Pagination>
-        <Pagination.Prev />
-        
-        <Pagination.Item>{2}</Pagination.Item>
-        <Pagination.Item>{3}</Pagination.Item>
-        <Pagination.Item>{4}</Pagination.Item>
-        <Pagination.Ellipsis />
-        <Pagination.Next />
-      </Pagination>
+                          
       </React.Fragment>
                       </Table>
                   </Card.Body>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, classes } from 'react'
 import { ProductContainerStyle, PageHeading } from '../components/styles/ProductScreen'
 import ProductItem from '../components/ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
@@ -24,7 +24,7 @@ const ProductScreen = (props, open) => {
   
   
   const cartItemsList = useSelector((state) => state.cartItemsList)
-
+  console.log(classes)
   const { loading, error} = cartItemsList
 
   useEffect(() => {
@@ -82,10 +82,11 @@ const ProductScreen = (props, open) => {
 
 </div>
 <div className="form-floating">
-<textarea className="form-control" input type="number" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setInventory(e.target.value)} 
+<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setInventory(e.target.value)} 
         value={Inventory}></textarea>
 <label htmlFor="comment">Starting Inventory Count</label>
 </div></div>
+
 <Container>
       <Row className="justify-content-md-center">
       <Col md="auto">
