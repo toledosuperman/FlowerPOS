@@ -1,6 +1,6 @@
 import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup, Pagination } from 'react-bootstrap';
+import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
@@ -8,21 +8,8 @@ import NoLoggedInView from './NoLoggedInView.js';
 function ViewOrders() {
     const { user } = UserAuth();
   const [orders, setorders] = useState([]);
-const [ setordersData] = useState(orders)//iterate this in table
 const [ setSearch] = useState([])
-const changeSearch = (val) => {
-   setSearch(val)
-   if(val!==''){
-   setordersData(orders.filter(order => {
-       return order.Name.includes(val) 
-      
-   }))
-   }
-   else{
-      setordersData(orders)
-   }
-   return false;
-}
+
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -69,7 +56,7 @@ class ErrorBoundary extends React.Component {
           "CustomerPhone": '',
           "CustomerState": '',
           "CustomerZip": '',
-          "Delivery Date": '',
+          "DeliveryDate": '',
           "Product": '',
           "RecipientAddress": '',
           "RecipientCity": '',
@@ -150,7 +137,7 @@ class ErrorBoundary extends React.Component {
       if (DeliveryDate.value && CustomerName.value) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
-              FirestoreService.AddNeworder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
+              FirestoreService.AddNewOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
               CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
                 RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
                  RecipientZip.value,completed.value, created.value).then(() => {
@@ -163,7 +150,7 @@ class ErrorBoundary extends React.Component {
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
-              FirestoreService.Updateorder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
+              FirestoreService.UpdateOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
                                                          CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
                                                            RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
                                                             RecipientZip.value,completed.value, created.value).then(() => {
@@ -181,7 +168,7 @@ class ErrorBoundary extends React.Component {
 
   const handleorderDelete = () => {
       setIsLoading(true);
-      FirestoreService.Deleteorder(currentorderId).then(() => {
+      FirestoreService.DeleteOrder(currentorderId).then(() => {
           alert(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
@@ -282,14 +269,14 @@ class ErrorBoundary extends React.Component {
                <Modal show={showDeleteDialogue} onHide={handleModalClose}>
                   <Modal.Header closeButton>
                        <Modal.Title>Delete order</Modal.Title>
-                  </Modal.Header> */}
-                  <Modal.Body> */}
+                  </Modal.Header> 
+                  <Modal.Body> 
                        <p>Are you sure you want to delete {currentorder.id}?</p>
-                   </Modal.Body> */}
-                 <Modal.Footer> */}
+                   </Modal.Body> 
+                 <Modal.Footer> 
                      <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
                     <Button variant="danger" onClick={handleorderDelete}>Yes, Delete</Button>
-                 </Modal.Footer> */}
+                 </Modal.Footer> 
              </Modal>
              
  </ErrorBoundary>
@@ -299,14 +286,14 @@ class ErrorBoundary extends React.Component {
                    <Modal.Header closeButton>
                         <Modal.Title>Order </Modal.Title>
                         <Modal.Title>Order details</Modal.Title>
-                   </Modal.Header> */}
-                   <Modal.Body> */}
+                   </Modal.Header> 
+                   <Modal.Body> 
                         <p>Are you sure you want to delete {currentorder.id}?</p>
-                    </Modal.Body> */}
-                  <Modal.Footer> */}
+                    </Modal.Body> 
+                  <Modal.Footer> 
                       <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
                      <Button variant="danger" onClick={handleorderDelete}>Yes, Delete</Button>
-                  </Modal.Footer> */}
+                  </Modal.Footer> 
               </Modal>
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-orders-center">
@@ -314,9 +301,7 @@ class ErrorBoundary extends React.Component {
 
                           <h4 style={{ marginTop: 8, }}>View orders</h4>
                       </div>
-                      <Button style={{ backgroundColor: '#000', borderWidth: 0, }} onClick={() => {
-                          setShowAddEditForm(true);
-                      }}>Add New order</Button>
+                     
                       <Form>
           <InputGroup className='my-3'>
 
@@ -324,7 +309,7 @@ class ErrorBoundary extends React.Component {
 
             <Form.Control
               onChange={(e) => setSearch(e.target.value)}
-              placeholder='Search orders'
+              placeholder='Search Orders'
             />
           </InputGroup>
         </Form>
@@ -345,10 +330,7 @@ class ErrorBoundary extends React.Component {
                          </tr>
                      </thead>
                           <tbody>
-                            <tr>
-                            <td>
-                          <input type='text' onChange={(e)=> changeSearch(e.target.value)}></input>
-                          </td></tr>
+                            
                               { (orders.map((order, index) => (
 
                                   <tr key={index}>
@@ -388,17 +370,7 @@ class ErrorBoundary extends React.Component {
                               )))}
                           </tbody>
 
-                          <React.Fragment>
-                          <Pagination>
-        <Pagination.Prev />
-    <Pagination.Item>{1}</Pagination.Item>
-        <Pagination.Item>{2}</Pagination.Item>
-        <Pagination.Item>{3}</Pagination.Item>
-
-        <Pagination.Ellipsis />
-        <Pagination.Next />
-      </Pagination>
-      </React.Fragment>
+                          
                       </Table>
                       </ErrorBoundary>
                   </Card.Body>
