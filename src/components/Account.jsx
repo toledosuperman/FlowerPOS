@@ -9,7 +9,6 @@ import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 
-
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
@@ -47,10 +46,10 @@ return (<>
     <div className="row ">
 
      
-        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b> Account</b></h2></div>
+        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" ><h2><b> Account</b></h2></div>
 
            </div>
-      <p>User Name: { user.name}</p>
+      {/* <p>User Name: { user && user.displayName}</p> */}
       <p>User Email: {user && user.email}</p>
 
       <Link to='/order' className='underline'>
@@ -64,7 +63,7 @@ return (<>
     <div className="row ">
 
      
-        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" style={{color:"blue"}}><h2><b> Orders</b></h2></div>
+        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" ><h2><b> Orders</b></h2></div>
 
            </div>
             <div className="row">

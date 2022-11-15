@@ -5,7 +5,7 @@ import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Card, Button } from 'react-bootstrap';
 
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
@@ -67,9 +67,15 @@ return (<>
 <React.Fragment>
 <Navbar />
   <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
-    <div className='max-w-[700px] mx-auto my-16 p-4'>
+    <div className='max-w-[1000px] mx-auto my-16 p-4'>
 
-    <h1>Customer Info</h1>
+    <Card style={{ margin: 24 }}>
+                  <Card.Header className="d-flex justify-content-between align-Products-center">
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                          <h4 style={{ marginTop: 8, }}>Enter Customer Information</h4>
+                      </div></Card.Header>
+                      <Card.Body>
 <div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerName(e.target.value.toUpperCase())} 
           value={CustomerName}></textarea>
@@ -116,8 +122,12 @@ return (<>
   <label htmlFor="comment">Email</label>
   {/* <input type="text" onChange={(e) => setCustomerEmail(e.target.value.toUpperCase())} 
           value={CustomerEmail} /> */}
-</div>
-<h1>Recipient Info</h1>
+</div></Card.Body>
+<Card.Header className="d-flex justify-content-between align-Products-center">
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                          <h4 style={{ marginTop: 8, }}>Enter Recipient Information</h4>
+                      </div></Card.Header><Card.Body>
 <div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientName(e.target.value.toUpperCase())} 
           value={RecipientName}></textarea>
@@ -159,8 +169,12 @@ return (<>
   <label htmlFor="comment">Phone</label>
   {/* <input type="text" onChange={(e) => setRecipientPhone(e.target.value.toUpperCase())} 
           value={RecipientPhone} /> */}
-</div>
-<h1>Product Info</h1>
+</div></Card.Body>
+<Card.Header className="d-flex justify-content-between align-Products-center">
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                          <h4 style={{ marginTop: 8, }}>Enter Product and Delivery Information</h4>
+                      </div></Card.Header><Card.Body>
 <div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setProduct(e.target.value.toUpperCase())} 
           value={Product}></textarea>
@@ -174,13 +188,13 @@ return (<>
   <label htmlFor="comment"> Delivery Date</label>
   {/* <input type="text" onChange={(e) => setDeliveryDate(e.target.value.toUpperCase())} 
           value={DeliveryDate} /> */}
-</div>
-<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
+</div></Card.Body></Card>
+<div class="col text-center"><Button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
           Submit
-        </button>
+        </Button></div>
 </div>
 </form>
-   
+
 </React.Fragment></>}
 ;</>)
     
