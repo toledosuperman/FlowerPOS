@@ -72,24 +72,25 @@ deleteDoc(docRef)
 })
 }
 async function getAllOrders() {
-    try {
-        const colRef = collection(db, "Orders");
-        const docsSnap = await getDocs(colRef);
-        docsSnap.forEach(doc => {
-            console.log(doc.data());
-            console.log(doc.id);
-        })
-       return docsSnap;
+     try {
+            const colRef = collection(db, "Orders");
+            const docsSnap = await getDocs(colRef);
+            docsSnap.forEach(doc => {
+                console.log(doc.data());
+                console.log(doc.id);
+            })
+           return docsSnap;
 
-    } catch (error) {
-        console.log(error);
-    }
-
+        } catch (error) {
+            console.log(error);
+        }
 };
 
 
 
-function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState, CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState, RecipientZip,completed, created) {
+function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
+ CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
+ RecipientZip,completed, created) {
 
     const docRef = addDoc(collection(db, "Orders"), {
         CustomerAddress,
@@ -110,45 +111,47 @@ function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,Cus
         completed,
         created
       });
+
       console.log("Document written with ID: ", docRef.id);
 
     };
 
 
-function UpdateOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState, CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState, RecipientZip,completed, created) {
-    const docRef = doc(db, "Orders", CustomerName);
+async function UpdateOrder(id,CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
+CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
+RecipientZip,completed, created) {
+    const docRef = doc(db, "Orders", id);
 
     const data = {
         CustomerAddress,
-                CustomerCity,
-                CustomerEmail,
-                CustomerName,
-                CustomerPhone,
-                CustomerState,
-                CustomerZip,
-                DeliveryDate,
-                Product,
-                RecipientAddress,
-                RecipientCity,
-                RecipientName,
-                RecipientPhone,
-                RecipientState,
-                RecipientZip,
-                completed,
-                created
+        CustomerCity,
+        CustomerEmail,
+        CustomerName,
+        CustomerPhone,
+        CustomerState,
+        CustomerZip,
+        DeliveryDate,
+        Product,
+        RecipientAddress,
+        RecipientCity,
+        RecipientName,
+        RecipientPhone,
+        RecipientState,
+        RecipientZip,
+        completed,
+        created
       };
 
-      updateDoc(docRef, data)
-      .then(docRef => {
-          console.log("Value of an Existing Document Field has been updated");
-      })
-      .catch(error => {
-          console.log(error);
-      })
+      try {
+              await updateDoc(docRef, data);
+              console.log("Value of an Existing Document Field has been updated");
+          } catch (error) {
+              console.log(error);
+          }
 }
 
-function DeleteOrder(Name) {
-    const docRef = doc(db, "Orders", Name);
+function DeleteOrder(CustomerName) {
+    const docRef = doc(db, "Orders", CustomerName);
 
 deleteDoc(docRef)
 .then(() => {
