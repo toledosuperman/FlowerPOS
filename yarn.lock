@@ -3030,6 +3030,11 @@
     "@webassemblyjs/ast" "1.11.1"
     "@xtuc/long" "4.2.2"
 
+"@wojtekmaj/date-utils@^1.0.2":
+  "integrity" "sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw=="
+  "resolved" "https://registry.npmjs.org/@wojtekmaj/date-utils/-/date-utils-1.0.3.tgz"
+  "version" "1.0.3"
+
 "@xtuc/ieee754@^1.2.0":
   "integrity" "sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA=="
   "resolved" "https://registry.npmjs.org/@xtuc/ieee754/-/ieee754-1.2.0.tgz"
@@ -3887,6 +3892,11 @@
     "string-width" "^4.2.0"
     "strip-ansi" "^6.0.0"
     "wrap-ansi" "^7.0.0"
+
+"clsx@^1.2.1":
+  "integrity" "sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg=="
+  "resolved" "https://registry.npmjs.org/clsx/-/clsx-1.2.1.tgz"
+  "version" "1.2.1"
 
 "co@^4.6.0":
   "integrity" "sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ=="
@@ -5636,6 +5646,13 @@
     "call-bind" "^1.0.2"
     "get-intrinsic" "^1.1.1"
 
+"get-user-locale@^1.2.0":
+  "integrity" "sha512-WiNpoFRcHn1qxP9VabQljzGwkAQDrcpqUtaP0rNBEkFxJdh4f3tik6MfZsMYZc+UgQJdGCxWEjL9wnCUlRQXag=="
+  "resolved" "https://registry.npmjs.org/get-user-locale/-/get-user-locale-1.5.1.tgz"
+  "version" "1.5.1"
+  dependencies:
+    "lodash.memoize" "^4.1.1"
+
 "glob-parent@^5.1.2":
   "integrity" "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="
   "resolved" "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz"
@@ -6463,6 +6480,11 @@
     "filelist" "^1.0.1"
     "minimatch" "^3.0.4"
 
+"jalaali-js@^1.1.0":
+  "integrity" "sha512-io974va+Qyu+UfuVX3UIAgJlxLhAMx9Y8VMfh+IG00Js7hXQo1qNQuwSiSa0xxco0SVgx5HWNkaiCcV+aZ8WPw=="
+  "resolved" "https://registry.npmjs.org/jalaali-js/-/jalaali-js-1.2.6.tgz"
+  "version" "1.2.6"
+
 "jest-changed-files@^27.5.1":
   "integrity" "sha512-buBLMiByfWGCoMsLLzGUUSpAmIAGnbR2KJoMN10ziLhOLvP4e0SlypHnAel8iqQXTrcbmfEY9sSqae5sgUsTvw=="
   "resolved" "https://registry.npmjs.org/jest-changed-files/-/jest-changed-files-27.5.1.tgz"
@@ -7281,18 +7303,18 @@
   "version" "4.3.0"
 
 "loader-utils@^2.0.0", "loader-utils@^2.0.3":
-  "integrity" "sha512-THWqIsn8QRnvLl0shHYVBN9syumU8pYWEHPTmkiVGd+7K5eFNVSY6AJhRvgGF70gg1Dz+l/k8WicvFCxdEs60A=="
-  "resolved" "https://registry.npmjs.org/loader-utils/-/loader-utils-2.0.3.tgz"
-  "version" "2.0.3"
+  "integrity" "sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw=="
+  "resolved" "https://registry.npmjs.org/loader-utils/-/loader-utils-2.0.4.tgz"
+  "version" "2.0.4"
   dependencies:
     "big.js" "^5.2.2"
     "emojis-list" "^3.0.0"
     "json5" "^2.1.2"
 
 "loader-utils@^3.2.0":
-  "integrity" "sha512-HVl9ZqccQihZ7JM85dco1MvO9G+ONvxoGa9rkhzFsneGLKSUg1gJf9bWzhRhcvm2qChhWpebQhP44qxjKIUCaQ=="
-  "resolved" "https://registry.npmjs.org/loader-utils/-/loader-utils-3.2.0.tgz"
-  "version" "3.2.0"
+  "integrity" "sha512-ZvFw1KWS3GVyYBYb7qkmRM/WwL2TQQBxgCK62rlvm4WpVQ23Nb4tYjApUlfjrEGvOs7KHEsmyUn75OHZrJMWPw=="
+  "resolved" "https://registry.npmjs.org/loader-utils/-/loader-utils-3.2.1.tgz"
+  "version" "3.2.1"
 
 "locate-path@^3.0.0":
   "integrity" "sha512-7AO748wWnIhNqAuaty2ZWHkQHRSNfPVIsPIfwEOWO22AmaoVrWavlOcMR5nzTLNYvp36X220/maaRsrec1G65A=="
@@ -7331,7 +7353,7 @@
   "resolved" "https://registry.npmjs.org/lodash.debounce/-/lodash.debounce-4.0.8.tgz"
   "version" "4.0.8"
 
-"lodash.memoize@^4.1.2":
+"lodash.memoize@^4.1.1", "lodash.memoize@^4.1.2":
   "integrity" "sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag=="
   "resolved" "https://registry.npmjs.org/lodash.memoize/-/lodash.memoize-4.1.2.tgz"
   "version" "4.1.2"
@@ -8889,6 +8911,16 @@
     "uncontrollable" "^7.2.1"
     "warning" "^4.0.3"
 
+"react-calendar@^4.0.0":
+  "integrity" "sha512-y9Q5Oo3Mq869KExbOCP3aJ3hEnRZKZ0TqUa9QU1wJGgDZFrW1qTaWp5v52oZpmxTTrpAMTUcUGaC0QJcO1f8Nw=="
+  "resolved" "https://registry.npmjs.org/react-calendar/-/react-calendar-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.2"
+    "clsx" "^1.2.1"
+    "get-user-locale" "^1.2.0"
+    "prop-types" "^15.6.0"
+
 "react-dev-utils@^12.0.1":
   "integrity" "sha512-84Ivxmr17KjUupyqzFode6xKhjwuEJDROWKJy/BthkL7Wn6NJ8h4WE6k/exAv6ImS+0oZLRRW5j/aINMHyeGeQ=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
@@ -8919,7 +8951,7 @@
     "strip-ansi" "^6.0.1"
     "text-table" "^0.2.0"
 
-"react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>= 16.8.0", "react-dom@>=16", "react-dom@>=16.14.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
+"react-dom@^16.8 || ^17.0 || ^18.0", "react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.0.0", "react-dom@^18.2.0", "react-dom@>= 16.8.0", "react-dom@>=16", "react-dom@>=16.14.0", "react-dom@>=16.6.0", "react-dom@>=16.8", "react-dom@>=16.8.0":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -9002,6 +9034,13 @@
   "version" "0.8.17"
   dependencies:
     "prop-types" "15"
+
+"react-modern-calendar-datepicker@^3.1.6":
+  "integrity" "sha512-lnMqEMj9Wn32/sm119tjCl5lOkq4u9vJE7wggi7hdXV4s8rPdKlH56FVVehlBi0dfYeWQVZ9npY384Zprjn4WA=="
+  "resolved" "https://registry.npmjs.org/react-modern-calendar-datepicker/-/react-modern-calendar-datepicker-3.1.6.tgz"
+  "version" "3.1.6"
+  dependencies:
+    "jalaali-js" "^1.1.0"
 
 "react-query@^3.39.2":
   "integrity" "sha512-F6hYDKyNgDQfQOuR1Rsp3VRzJnWHx6aRnnIZHMNGGgbL3SBgpZTDg8MQwmxOgpCAoqZJA+JSNCydF1xGJqKOCA=="
