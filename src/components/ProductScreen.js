@@ -1,8 +1,8 @@
 import React, { useEffect, useState} from 'react'
-import { ProductContainerStyle, PageHeading } from '../components/styles/ProductScreen'
+import { ProductContainerStyle } from '../components/styles/ProductScreen'
 import ProductItem from '../components/ProductItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { Button, Container , Row, Col, Form} from 'react-bootstrap';
+import { Button, Container , Row, Col, Form, Card} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
@@ -66,8 +66,11 @@ const ProductScreen = () => {
         <div>{error}</div>
       ) : (
         <>
-          <PageHeading primary>Create Recipe</PageHeading>
-          <Form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'>
+          
+          <Card style={{ margin: 24 }}>
+                  <Card.Header className="d-flex justify-content-between align-Products-center"><div className="align-Products-center" style={{ marginRight: 8 }}>
+                  <h4 style={{ marginTop: 8, }}>Create Recipe</h4></div></Card.Header>
+                  <Card.Body><Form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'>
           <div className='max-w-[700px] mx-auto my-16 p-4'>
           <div className="form-floating">
 <textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value)} 
@@ -107,7 +110,8 @@ const ProductScreen = () => {
           </ProductContainerStyle>
         
           </Form>
-      
+          </Card.Body>
+              </Card>
               
         </>
       )}

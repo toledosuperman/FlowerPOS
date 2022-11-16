@@ -6,10 +6,13 @@ import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const { user } = UserAuth();
+        const [value, onChange] = useState(new Date());
   // initialize react-hook-form
   
   const[CustomerName, setCustomerName]= useState('');
@@ -168,13 +171,14 @@ return (<>
   {/* <input type="text" onChange={(e) => setProduct(e.target.value.toUpperCase())} 
           value={Product}/> */}
 </div>
-<div className="form-floating">
+{/* <div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setDeliveryDate(e.target.value.toUpperCase())} 
           value={DeliveryDate}></textarea>
   <label htmlFor="comment"> Delivery Date</label>
-  {/* <input type="text" onChange={(e) => setDeliveryDate(e.target.value.toUpperCase())} 
-          value={DeliveryDate} /> */}
-</div>
+  
+</div> */}
+<div>
+<Calendar onChange={setDeliveryDate} value={DeliveryDate} /></div>
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
           Submit
         </button>

@@ -634,7 +634,7 @@ class ErrorBoundary extends React.Component {
                   <Card.Header className="d-flex justify-content-between align-orders-center">
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
 
-                          <h4 style={{ marginTop: 8, }}>View orders</h4>
+                          <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
                      
                       <Form>
@@ -658,7 +658,7 @@ class ErrorBoundary extends React.Component {
                         <tr>
                              <th>Order number</th>
                              <th>Customer Name</th>
-                             <th>Date Ordered</th>
+                             <th>Delivery Date</th>
                              <th>Recipient Name</th>
                              <th>Recipient Phone</th>
                              <th>Actions</th>

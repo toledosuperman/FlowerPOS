@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from 'react-router-dom';
 import './navbar.css';
 import logo from '../assets/logo.png'
-import {  Form, } from 'react-bootstrap'
+import {  Form} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { UserAuth} from '../context/AuthContext';
 
@@ -24,7 +24,7 @@ const NavBar = (a={ }) => {
       const authButton = () => {
           if (user !== null) {
               
-              return <NavLink onClick={handleLogout}>Logout</NavLink>
+              return <button className="btn btn-primary btn-rounded;" onClick={handleLogout}>Logout</button>
           }
       }
   
@@ -37,7 +37,7 @@ const NavBar = (a={ }) => {
                   </a>
                   <div className="navbarLogo">
                         <h1 className='text-left text-3xl font-bold'>
-                              Welcome to Flower POS!
+                               Flower POS
                         </h1>
                   </div>
                   <nav className="navbarList">
@@ -47,7 +47,7 @@ const NavBar = (a={ }) => {
                               <li><NavLink to="/vieworders">View Orders</NavLink> </li>
                               <li><NavLink to="/viewproduct">Products</NavLink> </li>
                               <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
-                              <li><Form inline= "true">
+                              <li ><Form inline= "true">
                         {authButton()}
                   </Form>
                   </li>
