@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useState} from 'react'
 import { CartContainerStyle, PageHeading } from '../components/styles/CartScreen'
 import { listCartItems } from '../components/cartActions'
 import CartItem from './CartItem'
@@ -10,6 +10,7 @@ import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {  useNavigate } from 'react-router-dom';
 
 function CartScreen (onClose, open)  {
+  const[Price, setPrice]= useState('');
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const cartItemsList = useSelector((state) => state.cartItemsList)
@@ -49,7 +50,15 @@ function CartScreen (onClose, open)  {
               <CartItem item={item} key={item.id} />
             ))}
           </CartContainerStyle>
-          <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
+          <form onSubmit={handleSubmit}className='RecipeForm' name='RecipeForm' onClose={onClose} open={open}>
+          <div className='max-w-[700px] mx-auto my-16 p-4'>
+          <div className="form-floating">
+          <div className="form-floating">
+<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setPrice(e.target.value)} 
+        value={Price}></textarea>
+<label htmlFor="comment">My Price</label>
+</div></div>
+</div>
           <Container>
       <Row className="justify-content-md-center">
       <Col md="auto">
