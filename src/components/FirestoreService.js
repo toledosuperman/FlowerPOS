@@ -90,25 +90,25 @@ async function getAllOrders() {
 
 function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
  CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
- RecipientZip,completed, created) {
+ RecipientZip, created) {
 
     const docRef = addDoc(collection(db, "Orders"), {
         CustomerAddress,
         CustomerCity,
         CustomerEmail,
         CustomerName,
-        CustomerPhone:'',
+        CustomerPhone,
         CustomerState,
         CustomerZip,
         DeliveryDate,
-        Product:'',
+        Product,
         RecipientAddress,
         RecipientCity,
         RecipientName,
-        RecipientPhone:'',
+        RecipientPhone,
         RecipientState,
         RecipientZip,
-        completed,
+       // completed: Boolean(completed),
         created
       });
 
@@ -117,9 +117,9 @@ function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,Cus
     };
 
 
-async function UpdateOrder(id,CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
+async function UpdateOrder(id, CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
 CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-RecipientZip,completed, created) {
+RecipientZip, created) {
     const docRef = doc(db, "Orders", id);
 
     const data = {
@@ -138,7 +138,7 @@ RecipientZip,completed, created) {
         RecipientPhone,
         RecipientState,
         RecipientZip,
-        completed,
+        //completed:Boolean(completed),
         created
       };
 

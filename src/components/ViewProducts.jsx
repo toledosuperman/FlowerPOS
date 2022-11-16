@@ -215,7 +215,7 @@ const [  setSearch] = useState([])
         </Form>
                   </Card.Header>
                   <Card.Body>
-                      <Table responsive>
+                      <Table responsive className="table table-striped">
                       <thead>
                         <tr><th>#</th>
                              <th>Product Name</th>
