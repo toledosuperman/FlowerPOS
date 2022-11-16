@@ -82,21 +82,7 @@ const [ setSearch] = useState([])
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
              RecipientZip,completed, created } = e.target.elements;
 
-      if (true) {
-          if (addEditFormType === "Add") {
-              setIsLoading(true);
-             return FirestoreService.AddNewOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
-              CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
-                RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
-                 RecipientZip.value,completed.value, created.value).then(() => {
-                  alert(`${CustomerName.value} is successfully added to the menu.`)
-                  handleModalClose();
-                  window.location.reload(false);
-              }).catch((e) => {
-                  alert("Error occured: " + e.message);
-                  setIsLoading(false);
-              })
-          } else if (addEditFormType === "Edit") {
+      if (addEditFormType === "Edit") {
               setIsLoading(true);
              return FirestoreService.UpdateOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
                                                   CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
@@ -110,7 +96,7 @@ const [ setSearch] = useState([])
                   setIsLoading(false);
               })
           }
-      }
+
       setValidated(true)
   }
 
@@ -337,12 +323,7 @@ const [ setSearch] = useState([])
 
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-orders-center">
-                      <div className="align-orders-center" style={{ marginRight: 8 }}>
-                            <h4 style={{ marginTop: 8, }}>View Orders</h4>
-                      </div>
-                            <Button style={{ backgroundColor: '#000', borderWidth: 0, }} onClick={() => {
-                            setShowAddEditForm(true);
-                      }}>Add New Order</Button>
+
                       <Form>
           <InputGroup className='my-3'>
             {/* onChange for search */}
