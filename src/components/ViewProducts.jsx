@@ -38,7 +38,7 @@ const [  setSearch] = useState([])
          
       }).catch((e) => {
           setIsLoading(false);
-          alert("Error occured while fetching the menu Product. " + e);
+          alert("Error occurred while fetching the menu Product. " + e);
       })
   }, [currentProductId]);
 
@@ -101,7 +101,7 @@ const [  setSearch] = useState([])
           handleModalClose();
           window.location.reload(false);
       }).catch((e) => {
-          alert("Error occured: " + e.message);
+          alert("Error occurred: " + e.message);
           setIsLoading(false);
       })
   }

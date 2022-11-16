@@ -7,58 +7,54 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 function ViewOrders() {
     const { user } = UserAuth();
-  const [orders, setorders] = useState([]);
+  const [Orders, setOrders] = useState([]);
 const [ setSearch] = useState([])
 
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [currentorder, setCurrentorder] = useState({
-  "CustomerAddress": '',
-          "CustomerCity": '',
-          "CustomerEmail": '',
-          "CustomerName": '',
-          "CustomerPhone": '',
-          "CustomerState": '',
-          "CustomerZip": '',
-          "DeliveryDate": '',
-          "Product": '',
-          "RecipientAddress": '',
-          "RecipientCity": '',
-         "RecipientName": '',
-         "RecipientPhone": '',
-          "RecipientState": '',
-          "RecipientZip": '',
-          "completed": '',
-          "created": ''
+  const [currentOrder, setCurrentOrder] = useState({
+  "CustomerAddress": " ",
+          "CustomerCity": " ",
+          "CustomerEmail": " ",
+          "CustomerName": " ",
+          "CustomerPhone": " ",
+          "CustomerState": " ",
+          "CustomerZip": " ",
+          "DeliveryDate": " ",
+          "Product": " ",
+          "RecipientAddress": " ",
+          "RecipientCity": " ",
+         "RecipientName": " ",
+         "RecipientPhone": " ",
+          "RecipientState": " ",
+          "RecipientZip": " ",
+          "completed": " ",
+          "created": " "
   });
-  const [currentorderId, setCurrentorderId] = useState([]);
+  const [currentOrderId, setCurrentOrderId] = useState([]);
 
-
-
- 
-
-  const fetchorders = useCallback(() =>{
+  const fetchOrders = useCallback(() =>{
       setIsLoading(true);
      
       FirestoreService.getAllOrders().then((response) => {
           setIsLoading(false);
-          setorders(response._snapshot.docChanges);
+          setOrders(response._snapshot.docChanges);
           console.log(response._snapshot.docChanges)
-          console.log(currentorderId)
+          console.log(currentOrderId)
          
       }).catch((e) => {
           setIsLoading(false);
-          alert("Error occured while fetching the menu order. " + e);
+          alert("Error occurred while fetching the menu order. " + e);
       })
-  }, [currentorderId]);
+  }, [currentOrderId]);
 
   useEffect(() => {
       if (user !== null) {
           
-          fetchorders();
+          fetchOrders();
       }
-  }, [user, fetchorders])
+  }, [user, fetchOrders])
 
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
@@ -70,23 +66,23 @@ const [ setSearch] = useState([])
       setShowAddEditForm(false);
       setShowDeleteDialogue(false);
       setShowDetailsForm(false);
-      setCurrentorderId("");
+      setCurrentOrderId("");
       setAddEditFormType("Add");
-      setCurrentorder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
+      setCurrentOrder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
       CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: " ", Product: " ", RecipientAddress: " ",
        RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ",
-        completed: false, created: 0})
+        completed: false, created: " "})
       setIsLoading(false);
   }
 
   const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
       const { CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
-                            CustomerPhone,CustomerState, CustomerZip,DeliveryDate,Product,
-                              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-                               RecipientZip,completed, created } = e.target.elements;
+             CustomerPhone,CustomerState, CustomerZip,DeliveryDate,Product,
+             RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
+             RecipientZip,completed, created } = e.target.elements;
 
-      if (DeliveryDate.value && CustomerName.value) {
+      if (true) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
              return FirestoreService.AddNewOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
@@ -103,9 +99,9 @@ const [ setSearch] = useState([])
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
              return FirestoreService.UpdateOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
-                                                         CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
-                                                           RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
-                                                            RecipientZip.value,completed.value, created.value).then(() => {
+                                                  CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
+                                                  RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
+                                                  RecipientZip.value,completed.value, created.value).then(() => {
                   alert(`${CustomerName.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -118,9 +114,9 @@ const [ setSearch] = useState([])
       setValidated(true)
   }
 
-  const handleorderDelete = () => {
+  const handleOrderDelete = () => {
       setIsLoading(true);
-      FirestoreService.DeleteOrder(currentorderId).then(() => {
+      FirestoreService.DeleteOrder(currentOrderId).then(() => {
           alert(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
@@ -148,413 +144,146 @@ const [ setSearch] = useState([])
                   </Modal.Header>
                   <Modal.Body>
                      <FloatingLabel controlId="CustomerAddress" label="Customer Address" className="mb-3" >
-                     <Form.Control required type='text' placeholder='Enter Customer Address' size='md' value={currentorder?.CustomerAddress} onChange={(e) => {
-                        setCurrentorder({
+                     <Form.Control required type='text' placeholder='Enter Customer Address' size='md' value={currentOrder?.CustomerAddress} onChange={(e) => {
+                        setCurrentOrder({
                             "CustomerAddress": e.target.value,
-                            "CustomerCity": currentorder?.CustomerCity,
-                            "CustomerEmail": currentorder?.CustomerEmail,
-                            "CustomerName": currentorder?.CustomerName,
-                            "CustomerPhone": currentorder?.CustomerPhone,
-                            "CustomerState": currentorder?.CustomerState,
-                            "CustomerZip": currentorder?.CustomerZip,
-                            "Delivery Date": currentorder?.DeliveryDate,
-                            "Product": currentorder?.Product,
-                            "RecipientAddress": currentorder?.RecipientAddress,
-                            "RecipientCity": currentorder?.RecipientCity,
-                            "RecipientName": currentorder?.RecipientName,
-                            "RecipientPhone": currentorder?.RecipientPhone,
-                            "RecipientState": currentorder?.RecipientState,
-                            "RecipientZip": currentorder?.RecipientZip,
-                            "completed": currentorder?.completed,
-                            "created": currentorder?.created
                             })
                             }} />
                             <Form.Control.Feedback type='invalid'>Customer Address is required</Form.Control.Feedback>
-                          </FloatingLabel>
-                          <FloatingLabel controlId="CustomerCity" label="Customer City" className="mb-3" >
-                                     <Form.Control required type='text' placeholder='Enter Customer City' size='md' value={currentorder?.CustomerCity} onChange={(e) => {
-                                         setCurrentorder({
-                                             "CustomerAddress": currentorder?.CustomerAddress,
-                                             "CustomerCity": e.target.value,
-                                             "CustomerEmail": currentorder?.CustomerEmail,
-                                             "CustomerName": currentorder?.CustomerName,
-                                             "CustomerPhone": currentorder?.CustomerPhone,
-                                             "CustomerState": currentorder?.CustomerState,
-                                             "CustomerZip": currentorder?.CustomerZip,
-                                             "Delivery Date": currentorder?.DeliveryDate,
-                                             "Product": currentorder?.Product,
-                                             "RecipientAddress": currentorder?.RecipientAddress,
-                                             "RecipientCity": currentorder?.RecipientCity,
-                                             "RecipientName": currentorder?.RecipientName,
-                                             "RecipientPhone": currentorder?.RecipientPhone,
-                                             "RecipientState": currentorder?.RecipientState,
-                                             "RecipientZip": currentorder?.RecipientZip,
-                                             "completed": currentorder?.completed,
-                                             "created": currentorder?.created
+                     </FloatingLabel>
+                     <FloatingLabel controlId="CustomerCity" label="Customer City" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Customer City' size='md' value={currentOrder?.CustomerCity} onChange={(e) => {
+                        setCurrentOrder({
+                           "CustomerCity": e.target.value,
                                          })
                                      }} />
-                                   <Form.Control.Feedback type='invalid'>Customer City is required</Form.Control.Feedback>
-                               </FloatingLabel>
-                               <FloatingLabel controlId="CustomerEmail" label="Customer Email" className="mb-3" >
-                                 <Form.Control required type='text' placeholder='Enter Customer Email' size='md' value={currentorder?.CustomerEmail} onChange={(e) => {
-                                     setCurrentorder({
-                                         "CustomerAddress": currentorder?.CustomerAddress,
-                                         "CustomerCity": currentorder?.CustomerCity,
+                     <Form.Control.Feedback type='invalid'>Customer City is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="CustomerEmail" label="Customer Email" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Customer Email' size='md' value={currentOrder?.CustomerEmail} onChange={(e) => {
+                                     setCurrentOrder({
                                          "CustomerEmail": e.target.value,
-                                         "CustomerName": currentorder?.CustomerName,
-                                         "CustomerPhone": currentorder?.CustomerPhone,
-                                         "CustomerState": currentorder?.CustomerState,
-                                         "CustomerZip": currentorder?.CustomerZip,
-                                         "Delivery Date": currentorder?.DeliveryDate,
-                                         "Product": currentorder?.Product,
-                                         "RecipientAddress": currentorder?.RecipientAddress,
-                                         "RecipientCity": currentorder?.RecipientCity,
-                                         "RecipientName": currentorder?.RecipientName,
-                                         "RecipientPhone": currentorder?.RecipientPhone,
-                                         "RecipientState": currentorder?.RecipientState,
-                                         "RecipientZip": currentorder?.RecipientZip,
-                                         "completed": currentorder?.completed,
-                                         "created": currentorder?.created
-                                                                                      })
+                                      })
                                 }} />
-                               <Form.Control.Feedback type='invalid'>Customer Email is required</Form.Control.Feedback>
-                               </FloatingLabel>
-                          <FloatingLabel controlId="Name" label="Customer Name" className="mb-3" >
-                              <Form.Control required type='text' placeholder='Enter Customer Name' size='md' value={currentorder?.CustomerName} onChange={(e) => {
-                                  setCurrentorder({
-                                      "CustomerAddress": currentorder?.CustomerAddress,
-                                      "CustomerCity": currentorder?.CustomerCity,
-                                      "CustomerEmail": currentorder?.CustomerEmail,
-                                      "CustomerName": e.target.value,
-                                      "CustomerPhone": currentorder?.CustomerPhone,
-                                      "CustomerState": currentorder?.CustomerState,
-                                      "CustomerZip": currentorder?.CustomerZip,
-                                      "Delivery Date": currentorder?.DeliveryDate,
-                                      "Product": currentorder?.Product,
-                                      "RecipientAddress": currentorder?.RecipientAddress,
-                                      "RecipientCity": currentorder?.RecipientCity,
-                                      "RecipientName": currentorder?.RecipientName,
-                                      "RecipientPhone": currentorder?.RecipientPhone,
-                                      "RecipientState": currentorder?.RecipientState,
-                                      "RecipientZip": currentorder?.RecipientZip,
-                                      "completed": currentorder?.completed,
-                                      "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Customer Email is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Name" label="Customer Name" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Customer Name' size='md' value={currentOrder?.CustomerName} onChange={(e) => {
+                                  setCurrentOrder({
+                                      "CustomerName": e.target.value
+
                                   })
                               }} />
                               <Form.Control.Feedback type='invalid'>Customer Name is required</Form.Control.Feedback>
-                          </FloatingLabel>
-                       <FloatingLabel controlId="Phone" label="Customer Phone" className="mb-3" >
-                         <Form.Control required type='text' placeholder='Enter Customer Phone' size='md' value={currentorder?.CustomerPhone} onChange={(e) => {
-                             setCurrentorder({
-                                 "CustomerAddress": currentorder?.CustomerAddress,
-                                 "CustomerCity": currentorder?.CustomerCity,
-                                 "CustomerEmail": currentorder?.CustomerEmail,
-                                 "CustomerName": currentorder?.CustomerPhone,
-                                 "CustomerPhone": e.target.value,
-                                 "CustomerState": currentorder?.CustomerState,
-                                 "CustomerZip": currentorder?.CustomerZip,
-                                 "Delivery Date": currentorder?.DeliveryDate,
-                                 "Product": currentorder?.Product,
-                                 "RecipientAddress": currentorder?.RecipientAddress,
-                                 "RecipientCity": currentorder?.RecipientCity,
-                                 "RecipientName": currentorder?.RecipientName,
-                                 "RecipientPhone": currentorder?.RecipientPhone,
-                                 "RecipientState": currentorder?.RecipientState,
-                                 "RecipientZip": currentorder?.RecipientZip,
-                                 "completed": currentorder?.completed,
-                                     "created": currentorder?.created
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Phone" label="Customer Phone" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Customer Phone' size='md' value={currentOrder?.CustomerPhone} onChange={(e) => {
+                             setCurrentOrder({
+                             "CustomerPhone": e.target.value
                                      })
-                                        }} />
+                                     }} />
                                  <Form.Control.Feedback type='invalid'>Customer Phone is required</Form.Control.Feedback>
-                      </FloatingLabel>
-                      <FloatingLabel controlId="State" label="Customer State" className="mb-3" >
-                                                   <Form.Control required type='text' placeholder='Enter Customer State' size='md' value={currentorder?.CustomerState} onChange={(e) => {
-                                                       setCurrentorder({
-                                                           "CustomerAddress": currentorder?.CustomerAddress,
-                                                           "CustomerCity": currentorder?.CustomerCity,
-                                                           "CustomerEmail": currentorder?.CustomerEmail,
-                                                           "CustomerName":currentorder?.CustomerName,
-                                                           "CustomerPhone": currentorder?.CustomerPhone,
-                                                           "CustomerState": e.target.value,
-                                                           "CustomerZip": currentorder?.CustomerZip,
-                                                           "Delivery Date": currentorder?.DeliveryDate,
-                                                           "Product": currentorder?.Product,
-                                                           "RecipientAddress": currentorder?.RecipientAddress,
-                                                           "RecipientCity": currentorder?.RecipientCity,
-                                                           "RecipientName": currentorder?.RecipientName,
-                                                           "RecipientPhone": currentorder?.RecipientPhone,
-                                                           "RecipientState": currentorder?.RecipientState,
-                                                           "RecipientZip": currentorder?.RecipientZip,
-                                                           "completed": currentorder?.completed,
-                                                           "created": currentorder?.created
+                     </FloatingLabel>
+                     <FloatingLabel controlId="State" label="Customer State" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Customer State' size='md' value={currentOrder?.CustomerState} onChange={(e) => {
+                                                       setCurrentOrder({
+                                                           "CustomerState": e.target.value
                                                        })
                                                    }} />
-                                                   <Form.Control.Feedback type='invalid'>Customer State is required</Form.Control.Feedback>
-                                               </FloatingLabel>
-                       <FloatingLabel controlId="Zip" label="Customer Zip" className="mb-3" >
-                                                    <Form.Control required type='text' placeholder='Enter Customer zip' size='md' value={currentorder?.CustomerZip} onChange={(e) => {
-                                                        setCurrentorder({
-                                                            "CustomerAddress": currentorder?.CustomerAddress,
-                                                            "CustomerCity": currentorder?.CustomerCity,
-                                                            "CustomerEmail": currentorder?.CustomerEmail,
-                                                            "CustomerName": currentorder?.CustomerName,
-                                                            "CustomerPhone": currentorder?.CustomerPhone,
-                                                            "CustomerState": currentorder?.CustomerState,
-                                                            "CustomerZip": e.target.value,
-                                                            "Delivery Date": currentorder?.DeliveryDate,
-                                                            "Product": currentorder?.Product,
-                                                            "RecipientAddress": currentorder?.RecipientAddress,
-                                                            "RecipientCity": currentorder?.RecipientCity,
-                                                            "RecipientName": currentorder?.RecipientName,
-                                                            "RecipientPhone": currentorder?.RecipientPhone,
-                                                            "RecipientState": currentorder?.RecipientState,
-                                                            "RecipientZip": currentorder?.RecipientZip,
-                                                            "completed": currentorder?.completed,
-                                                            "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Customer State is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Zip" label="Customer Zip" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Customer zip' size='md' value={currentOrder?.CustomerZip} onChange={(e) => {
+                        setCurrentOrder({
+                        "CustomerZip": e.target.value
                                                         })
                                                     }} />
-                                                    <Form.Control.Feedback type='invalid'>Customer Zip is required</Form.Control.Feedback>
-                                                </FloatingLabel>
-                    <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
-                                                 <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentorder?.DeliveryDate} onChange={(e) => {
-                                                     setCurrentorder({
-                                                         "CustomerAddress": currentorder?.CustomerAddress,
-                                                         "CustomerCity": currentorder?.CustomerCity,
-                                                         "CustomerEmail": currentorder?.CustomerEmail,
-                                                         "CustomerName": currentorder?.CustomerName,
-                                                         "CustomerPhone": currentorder?.CustomerPhone,
-                                                         "CustomerState": currentorder?.CustomerState,
-                                                         "CustomerZip": currentorder?.CustomerZip,
-                                                         "Delivery Date": e.target.value,
-                                                         "Product": currentorder?.Product,
-                                                         "RecipientAddress": currentorder?.RecipientAddress,
-                                                         "RecipientCity": currentorder?.RecipientCity,
-                                                         "RecipientName": currentorder?.RecipientName,
-                                                         "RecipientPhone": currentorder?.RecipientPhone,
-                                                         "RecipientState": currentorder?.RecipientState,
-                                                         "RecipientZip": currentorder?.RecipientZip,
-                                                         "completed": currentorder?.completed,
-                                                         "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Customer Zip is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
+                                                     setCurrentOrder({
+                                                         "Delivery Date": e.target.value
                                                      })
                                                  }} />
-                                                 <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
-                                             </FloatingLabel>
-   <FloatingLabel controlId="Name" label="Product" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter Product' size='md' value={currentorder?.Product} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName":currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": e.target.value,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": currentorder?.RecipientCity,
-                                        "RecipientName": currentorder?.RecipientName,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": currentorder?.completed,
-                                        "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Product" label="Product" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Product' size='md' value={currentOrder?.Product} onChange={(e) => {
+                                    setCurrentOrder({
+                                        "Product": e.target.value
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Product is required</Form.Control.Feedback>
-                            </FloatingLabel>
-   <FloatingLabel controlId="Name" label="Recipient Address" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter Recipient Address' size='md' value={currentorder?.RecipientAddress} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": e.target.value,
-                                        "RecipientCity": currentorder?.RecipientCity,
-                                        "RecipientName": currentorder?.RecipientName,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": currentorder?.completed,
-                                        "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Product is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Name" label="Recipient Address" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Recipient Address' size='md' value={currentOrder?.RecipientAddress} onChange={(e) => {
+                                    setCurrentOrder({
+                                        "RecipientAddress": e.target.value
                                     })
                                 }} />
                                 <Form.Control.Feedback type='invalid'>Recipient Address is required</Form.Control.Feedback>
-                            </FloatingLabel>
-   <FloatingLabel controlId="Name" label="Recipient City" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter Recipient City' size='md' value={currentorder?.RecipientCity} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": e.target.value,
-                                        "RecipientName": currentorder?.RecipientName,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": currentorder?.completed,
-                                        "created": currentorder?.created
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Name" label="Recipient City" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Recipient City' size='md' value={currentOrder?.RecipientCity} onChange={(e) => {
+                                    setCurrentOrder({
+                                        "RecipientCity": e.target.value
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Recipient City is required</Form.Control.Feedback>
-                            </FloatingLabel>
-   <FloatingLabel controlId="Name" label="Recipient Name" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter Recipient Name' size='md' value={currentorder?.RecipientName} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": currentorder?.RecipientCity,
+                     <Form.Control.Feedback type='invalid'>Recipient City is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Name" label="Recipient Name" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Recipient Name' size='md' value={currentOrder?.RecipientName} onChange={(e) => {
+                                    setCurrentOrder({
                                         "RecipientName": e.target.value,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": currentorder?.completed,
-                                        "created": currentorder?.created
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Recipient Name is required</Form.Control.Feedback>
-                            </FloatingLabel>
-   <FloatingLabel controlId="Name" label="Recipient Phone" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter Recipient Phone' size='md' value={currentorder?.RecipientPhone} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": currentorder?.RecipientCity,
-                                        "RecipientName": currentorder?.RecipientName,
+                     <Form.Control.Feedback type='invalid'>Recipient Name is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Name" label="Recipient Phone" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Recipient Phone' size='md' value={currentOrder?.RecipientPhone} onChange={(e) => {
+                                    setCurrentOrder({
                                         "RecipientPhone": e.target.value,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": currentorder?.completed,
-                                        "created": currentorder?.created
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Recipient Phone is required</Form.Control.Feedback>
-                            </FloatingLabel>
-    <FloatingLabel controlId="Name" label="Recipient State" className="mb-3" >
-                                 <Form.Control required type='text' placeholder='Enter Recipient State' size='md' value={currentorder?.RecipientState} onChange={(e) => {
-                                     setCurrentorder({
-                                         "CustomerAddress": currentorder?.CustomerAddress,
-                                         "CustomerCity": currentorder?.CustomerCity,
-                                         "CustomerEmail": currentorder?.CustomerEmail,
-                                         "CustomerName": currentorder?.CustomerName,
-                                         "CustomerPhone": currentorder?.CustomerPhone,
-                                         "CustomerState": currentorder?.CustomerState,
-                                         "CustomerZip": currentorder?.CustomerZip,
-                                         "Delivery Date": currentorder?.DeliveryDate,
-                                         "Product": currentorder?.Product,
-                                         "RecipientAddress": currentorder?.RecipientAddress,
-                                         "RecipientCity": currentorder?.RecipientCity,
-                                         "RecipientName": currentorder?.RecipientName,
-                                         "RecipientPhone": currentorder?.RecipientPhone,
-                                         "RecipientState": e.target.value,
-                                         "RecipientZip": currentorder?.RecipientZip,
-                                         "completed": currentorder?.completed,
-                                         "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Recipient Phone is required</Form.Control.Feedback>
+                     </FloatingLabel>
+                     <FloatingLabel controlId="Name" label="Recipient State" className="mb-3" >
+                     <Form.Control required type='text' placeholder='Enter Recipient State' size='md' value={currentOrder?.RecipientState} onChange={(e) => {
+                                     setCurrentOrder({
+
+                                         "RecipientState": e.target.value
+
                                      })
                                  }} />
-                                 <Form.Control.Feedback type='invalid'>Recipient State is required</Form.Control.Feedback>
-                             </FloatingLabel>
-                             <FloatingLabel controlId="Name" label="Recipient Zip" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter Recipient Zip' size='md' value={currentorder?.RecipientZip} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": currentorder?.RecipientCity,
-                                        "RecipientName": currentorder?.RecipientName,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": e.target.value,
-                                        "completed": currentorder?.completed,
-                                        "created": currentorder?.created
+                     <Form.Control.Feedback type='invalid'>Recipient State is required</Form.Control.Feedback>
+                      </FloatingLabel>
+                      <FloatingLabel controlId="Name" label="Recipient Zip" className="mb-3" >
+                      <Form.Control required type='text' placeholder='Enter Recipient Zip' size='md' value={currentOrder?.RecipientZip} onChange={(e) => {
+                      setCurrentOrder({
+                                        "RecipientZip": e.target.value
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Recipient Zip is required</Form.Control.Feedback>
-                            </FloatingLabel>
-                            <FloatingLabel controlId="Name" label="completed" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter if the order is completed' size='md' value={currentorder?.completed} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": currentorder?.RecipientCity,
-                                        "RecipientName": currentorder?.RecipientName,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": e.target.value,
-                                        "created": currentorder?.created
+                      <Form.Control.Feedback type='invalid'>Recipient Zip is required</Form.Control.Feedback>
+                      </FloatingLabel>
+                      <FloatingLabel controlId="Name" label="completed" className="mb-3" >
+                      <Form.Control required type='text' placeholder='Enter if the order is completed' size='md' value={currentOrder?.completed} onChange={(e) => {
+                                    setCurrentOrder({
+
+                                        "completed": e.target.value
+
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Completion status is required</Form.Control.Feedback>
-                            </FloatingLabel>
-                            <FloatingLabel controlId="Name" label="created" className="mb-3" >
-                                <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentorder?.created} onChange={(e) => {
-                                    setCurrentorder({
-                                        "CustomerAddress": currentorder?.CustomerAddress,
-                                        "CustomerCity": currentorder?.CustomerCity,
-                                        "CustomerEmail": currentorder?.CustomerEmail,
-                                        "CustomerName": currentorder?.CustomerName,
-                                        "CustomerPhone": currentorder?.CustomerPhone,
-                                        "CustomerState": currentorder?.CustomerState,
-                                        "CustomerZip": currentorder?.CustomerZip,
-                                        "Delivery Date": currentorder?.DeliveryDate,
-                                        "Product": currentorder?.Product,
-                                        "RecipientAddress": currentorder?.RecipientAddress,
-                                        "RecipientCity": currentorder?.RecipientCity,
-                                        "RecipientName": currentorder?.RecipientName,
-                                        "RecipientPhone": currentorder?.RecipientPhone,
-                                        "RecipientState": currentorder?.RecipientState,
-                                        "RecipientZip": currentorder?.RecipientZip,
-                                        "completed": currentorder?.completed,
+                      <Form.Control.Feedback type='invalid'>Completion status is required</Form.Control.Feedback>
+                      </FloatingLabel>
+                      <FloatingLabel controlId="Name" label="created" className="mb-3" >
+                      <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
+                                    setCurrentOrder({
                                         "created": e.target.value
                                     })
                                 }} />
-                                <Form.Control.Feedback type='invalid'>Created is required</Form.Control.Feedback>
-                            </FloatingLabel>
+                      <Form.Control.Feedback type='invalid'>Created is required</Form.Control.Feedback>
+                      </FloatingLabel>
                       </Modal.Body>
                       <Modal.Footer>
                           <Button type="submit">{(addEditFormType === 'Add') ? 'Add' : 'Update'}</Button>
@@ -563,46 +292,42 @@ const [ setSearch] = useState([])
               </Modal>
 
                 {/* Delete Confirmation Dialogue START */}
-               <Modal show={showDeleteDialogue} onHide={handleModalClose}>
+              <Modal show={showDeleteDialogue} onHide={handleModalClose}>
                   <Modal.Header closeButton>
                        <Modal.Title>Delete order</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                       <p>Are you sure you want to delete {currentorder.CustomerName}'s order?</p>
+                       <p>Are you sure you want to delete {currentOrder.CustomerName}'s order?</p>
                    </Modal.Body>
                  <Modal.Footer>
                      <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
-                    <Button variant="danger" onClick={handleorderDelete}>Yes, Delete</Button>
+                    <Button variant="danger" onClick={handleOrderDelete}>Yes, Delete</Button>
                  </Modal.Footer>
-             </Modal>
-
-
-
- {/* Order details */}
+            </Modal>
+{/* Order details */}
                 <Modal show={showDetailsForm} onHide={handleModalClose}>
                    <Modal.Header closeButton>
-
-                        <Modal.Title>Order details</Modal.Title>
+                   <Modal.Title>Order details</Modal.Title>
                    </Modal.Header> 
                    <Modal.Body> 
                         <p>
-                        Customer Address: {currentorder?.CustomerAddress} <br />
-                        Customer City: {currentorder?.CustomerCity}           <br />
-                        Customer Email: {currentorder?.CustomerEmail}          <br />
-                        Customer Name: {currentorder?.CustomerName}          <br />
-                        Customer Phone: {currentorder?.CustomerPhone}        <br />
-                        Customer State: {currentorder?.CustomerState}        <br />
-                        Customer Zip: {currentorder?.CustomerZip}          <br />
-                        Delivery Date: {""+currentorder?.DeliveryDate}        <br />
-                        Product: {currentorder?.Product}                <br />
-                        Recipient Address: {currentorder?.RecipientAddress}    <br />
-                        Recipient City: {currentorder?.RecipientCity}       <br />
-                        Recipient Name: {currentorder?.RecipientName}       <br />
-                        Recipient Phone: {currentorder?.RecipientPhone}     <br />
-                        Recipient State: {currentorder?.RecipientState}     <br />
-                        Recipient Zip: {currentorder?.RecipientZip}       <br />
-                        Completed: {""+currentorder?.completed}           <br />
-                        Created: {""+currentorder?.created}<br />
+                        Customer Address: {currentOrder?.CustomerAddress} <br />
+                        Customer City: {currentOrder?.CustomerCity}           <br />
+                        Customer Email: {currentOrder?.CustomerEmail}          <br />
+                        Customer Name: {currentOrder?.CustomerName}          <br />
+                        Customer Phone: {currentOrder?.CustomerPhone}        <br />
+                        Customer State: {currentOrder?.CustomerState}        <br />
+                        Customer Zip: {currentOrder?.CustomerZip}          <br />
+                        Delivery Date: {currentOrder?.DeliveryDate}        <br />
+                        Product: {currentOrder?.Product}                <br />
+                        Recipient Address: {currentOrder?.RecipientAddress}    <br />
+                        Recipient City: {currentOrder?.RecipientCity}       <br />
+                        Recipient Name: {currentOrder?.RecipientName}       <br />
+                        Recipient Phone: {currentOrder?.RecipientPhone}     <br />
+                        Recipient State: {currentOrder?.RecipientState}     <br />
+                        Recipient Zip: {currentOrder?.RecipientZip}       <br />
+                        Completed: {currentOrder?.completed}           <br />
+                        Created: {currentOrder?.created}<br />
                         </p>
                     </Modal.Body> 
                   <Modal.Footer> 
@@ -629,7 +354,6 @@ const [ setSearch] = useState([])
         </Form>
                   </Card.Header>
                   <Card.Body>
-
                       <Table responsive>
                       <thead>
                         <tr>
@@ -642,20 +366,18 @@ const [ setSearch] = useState([])
                          </tr>
                      </thead>
                           <tbody>
-                            
-                              { (orders.map((order, index) => (
-
+                              { (Orders.map((order, index) => (
                                   <tr key={index}>
-                                      <td>{index + 1}</td>
-                                      {console.log(order.doc.data.value.mapValue.fields.CustomerName.stringValue)}
-                                       <td>{order.doc.data.value.mapValue.fields.CustomerName.stringValue}</td>
-                                      <td>{order.doc.data.value.mapValue.fields.DeliveryDate.stringValue}</td>
-                                       <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
-                                     <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
-                                      <td>
+                                    <td>{index + 1}</td>
+                                    {console.log(order.doc.data.value.mapValue.fields.CustomerName.stringValue)}
+                                    <td>{order.doc.data.value.mapValue.fields.CustomerName.stringValue}</td>
+                                    <td>{order.doc.data.value.mapValue.fields.DeliveryDate.stringValue}</td>
+                                    <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
+                                    <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
+                                    <td>
                                       <Button variant= 'primary' onClick={()=>{
-                                      setCurrentorderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
-                                      setCurrentorder({
+                                      setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
+                                      setCurrentOrder({
                                       "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
                                       "CustomerCity": order.doc.data.value.mapValue.fields.CustomerCity.stringValue,
                                       "CustomerEmail": order.doc.data.value.mapValue.fields.CustomerEmail.stringValue,
@@ -677,8 +399,8 @@ const [ setSearch] = useState([])
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
                                           <Button variant='primary' onClick={() => {
-                                              setCurrentorderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
-                                              setCurrentorder({
+                                              setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
+                                              setCurrentOrder({
                                               "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
                                               "CustomerCity": order.doc.data.value.mapValue.fields.CustomerCity.stringValue,
                                               "CustomerEmail": order.doc.data.value.mapValue.fields.CustomerEmail.stringValue,
@@ -701,8 +423,8 @@ const [ setSearch] = useState([])
                                               setShowAddEditForm(true);
                                           }}>✎ Edit</Button>{' '}
                                           <Button variant='danger' onClick={() => {
-                                              setCurrentorderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1]);
-                                              setCurrentorder({
+                                              setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1]);
+                                              setCurrentOrder({
                                                     "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
                                                     "CustomerCity": order.doc.data.value.mapValue.fields.CustomerCity.stringValue,
                                                     "CustomerEmail": order.doc.data.value.mapValue.fields.CustomerEmail.stringValue,
