@@ -312,7 +312,7 @@ const [ setSearch] = useState([])
 {/* Order details */}
                 <Modal show={showDetailsForm} onHide={handleModalClose}>
                    <Modal.Header closeButton>
-                   <Modal.Title>Order details</Modal.Title>
+                   <Modal.Title>Order Details</Modal.Title>
                    </Modal.Header> 
                    <Modal.Body>
 
@@ -337,7 +337,7 @@ const [ setSearch] = useState([])
                         </p>
                     </Modal.Body> 
                   <Modal.Footer> 
-                      <Button variant="secondary" onClick={handleModalClose}>Stop viewing</Button>
+                      <Button variant="danger" onClick={handleModalClose}>Stop Viewing</Button>
                   </Modal.Footer> 
               </Modal>
 

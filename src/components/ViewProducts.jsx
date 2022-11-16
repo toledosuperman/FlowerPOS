@@ -54,10 +54,12 @@ const [  setSearch] = useState([])
   const [validated, setValidated] = useState(false);
 
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
+  const [showDetailsForm, setShowDetailsForm] = useState(false);
 
   const handleModalClose = () => {
       setShowAddEditForm(false);
       setShowDeleteDialogue(false);
+      setShowDetailsForm(false);
       setCurrentProductId("");
       setAddEditFormType("Add");
       setCurrentProduct({ Name: " ", Price: 0, Inventory: 0, Type: " "})
@@ -192,7 +194,25 @@ const [  setSearch] = useState([])
                       <Button variant="danger" onClick={handleProductDelete}>Yes, Delete</Button>
                   </Modal.Footer>
               </Modal>
-             
+
+             {/* Product details */}
+             <Modal show={showDetailsForm} onHide={handleModalClose}>
+                   <Modal.Header closeButton>
+                   <Modal.Title>Product Details</Modal.Title>
+                   </Modal.Header> 
+                   <Modal.Body>
+
+                        <p>
+                        Product Name: {currentProduct?.Name}            <br />
+                        Product Price: {currentProduct?.Price}           <br />
+                        Product Count: {currentProduct?.Inventory}          <br />
+                        Product Type: {currentProduct?.Type}          <br />
+                        </p>
+                    </Modal.Body> 
+                  <Modal.Footer> 
+                      <Button variant="danger" onClick={handleModalClose}>Stop Viewing</Button>
+                  </Modal.Footer> 
+              </Modal>
 
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-Products-center">
@@ -235,6 +255,16 @@ const [  setSearch] = useState([])
                                       <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> 
                                       <td>
+                                      <Button variant= 'success' onClick={()=>{
+                                      setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1])
+                                      setCurrentProduct({
+                                        "Name": product.doc.data.value.mapValue.fields.Name.stringValue,
+                                        "Price": product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue,
+                                        "Inventory": product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue,
+                                        "Type": product.doc.data.value.mapValue.fields.Type.stringValue
+                                      });
+                                      setShowDetailsForm(true);
+                                      }}>Details</Button>{' '}
                                           <Button variant='primary' onClick={() => {
                                               setCurrentProductId(product.doc.key.path.segments[product.doc.key.path.segments.length - 1])
                                               setCurrentProduct({
