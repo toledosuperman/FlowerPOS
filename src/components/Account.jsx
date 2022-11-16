@@ -3,7 +3,7 @@ import { UserAuth } from '../context/AuthContext';
 import { Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
-import { db } from "../firebase.js";
+import { db} from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
@@ -49,7 +49,7 @@ return (<>
                           
                           <h4 style={{ marginTop: 8, }}>Welcome to Flower POS!</h4>
                       </div></Card.Header><Card.Body>
-      {/* <p>User Name: { user && user.displayName}</p> */}
+      {/* <p>User Name: { auth.currentUser?.displayName}</p> */}
       <p>User Email: {user && user.email}</p>
 
       <Link to='/order' className='underline'>
