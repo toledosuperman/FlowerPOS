@@ -12,7 +12,7 @@ import 'react-calendar/dist/Calendar.css';
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const { user } = UserAuth();
-        const [value, onChange] = useState(new Date());
+        // const [value, onChange] = useState(new Date());
   // initialize react-hook-form
   
   const[CustomerName, setCustomerName]= useState('');

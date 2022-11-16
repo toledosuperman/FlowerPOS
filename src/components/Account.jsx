@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { db} from "../firebase.js";
-import { collection, getDocs, query, orderBy, onSnapshot} from "firebase/firestore";
+import { collection, getDocs} from "firebase/firestore";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
