@@ -2,7 +2,7 @@ import React from "react";
 import {NavLink} from 'react-router-dom';
 import './navbar.css';
 import logo from '../assets/logo.png'
-import {  Form, Button} from 'react-bootstrap'
+import {  Form} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { UserAuth} from '../context/AuthContext';
 
@@ -24,7 +24,7 @@ const NavBar = (a={ }) => {
       const authButton = () => {
           if (user !== null) {
               
-              return <Button class="btn btn-outline-primary" onClick={handleLogout}>Logout</Button>
+              return <button className="btn btn-primary btn-rounded;" onClick={handleLogout}>Logout</button>
           }
       }
   
@@ -47,7 +47,7 @@ const NavBar = (a={ }) => {
                               <li><NavLink to="/vieworders">View Orders</NavLink> </li>
                               <li><NavLink to="/viewproduct">Products</NavLink> </li>
                               <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
-                              <li className="inactive"><Form inline= "true">
+                              <li ><Form inline= "true">
                         {authButton()}
                   </Form>
                   </li>

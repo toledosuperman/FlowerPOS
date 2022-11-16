@@ -323,7 +323,7 @@ class ErrorBoundary extends React.Component {
                         <tr>
                              <th>Order number</th>
                              <th>Customer Name</th>
-                             <th>Date Ordered</th>
+                             <th>Delivery Date</th>
                              <th>Recipient Name</th>
                              <th>Recipient Phone</th>
                              <th>Actions</th>
