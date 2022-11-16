@@ -7,7 +7,7 @@ import { db } from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Card } from 'react-bootstrap';
 
 function ViewOrders ()  {
   
@@ -41,14 +41,14 @@ return (<>
 <React.Fragment>
    <Navbar />
    
-   <div className="container ">
-    <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
-    <div className="row ">
+  
 
-     
-        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" ><h2><b> Account</b></h2></div>
-
-           </div>
+    <Card style={{ margin: 24 }}>
+                  <Card.Header className="d-flex justify-content-between align-Products-center">
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                          <h4 style={{ marginTop: 8, }}>Welcome to Flower POS!</h4>
+                      </div></Card.Header><Card.Body>
       {/* <p>User Name: { user && user.displayName}</p> */}
       <p>User Email: {user && user.email}</p>
 
@@ -56,16 +56,14 @@ return (<>
       <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
           Start New Order
         </button>
-        </Link>
-    </div></div>
-    <div className="container ">
-    <div className="crud shadow-lg p-3 mb-5 mt-5 bg-body rounded">
-    <div className="row ">
-
-     
-        <div className="col-sm-3 offset-sm-2 mt-5 mb-4 text-gred" ><h2><b> Orders</b></h2></div>
-
-           </div>
+        </Link></Card.Body></Card>
+    
+    <Card style={{ margin: 24 }}>
+                  <Card.Header className="d-flex justify-content-between align-Products-center">
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                          <h4 style={{ marginTop: 8, }}>Recent Orders</h4>
+                      </div></Card.Header><Card.Body>
             <div className="row">
                 <div className="table-responsive " >
                  <table className="table table-striped table-hover table-bordered overflow-x:scroll ">
@@ -91,11 +89,11 @@ return (<>
                     </tbody>
                     </table>
                         
-
+                    
             </div>
         </div>
-       </div>
-      </div>
+        </Card.Body></Card>
+      
 
       
 </React.Fragment></>}

@@ -37,7 +37,7 @@ const NavBar = (a={ }) => {
                   </a>
                   <div className="navbarLogo">
                         <h1 className='text-left text-3xl font-bold'>
-                              Welcome to Flower POS!
+                               Flower POS
                         </h1>
                   </div>
                   <nav className="navbarList">

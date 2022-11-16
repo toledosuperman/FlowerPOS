@@ -66,6 +66,14 @@ return (<>
         {(user !== null) && <> 
 <React.Fragment>
 <Navbar />
+<Card style={{ margin: 24 }}>
+                  <Card.Header >
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                      <div className="col text-center">  <h4 style={{ marginTop: 8, }}>Start a New Order</h4></div>
+                      </div></Card.Header></Card>
+
+           
   <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
     <div className='max-w-[1000px] mx-auto my-16 p-4'>
 
@@ -189,7 +197,7 @@ return (<>
   {/* <input type="text" onChange={(e) => setDeliveryDate(e.target.value.toUpperCase())} 
           value={DeliveryDate} /> */}
 </div></Card.Body></Card>
-<div class="col text-center"><Button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
+<div className="col text-center"><Button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
           Submit
         </Button></div>
 </div>
