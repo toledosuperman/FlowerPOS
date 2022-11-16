@@ -29,7 +29,7 @@ const [ setSearch] = useState([])
          "RecipientPhone": " ",
           "RecipientState": " ",
           "RecipientZip": " ",
-          "completed": " ",
+
           "created": " "
   });
   const [currentOrderId, setCurrentOrderId] = useState([]);
@@ -71,7 +71,7 @@ const [ setSearch] = useState([])
       setCurrentOrder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
       CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: " ", Product: " ", RecipientAddress: " ",
        RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ",
-        completed: false, created: " "})
+         created: " "})
       setIsLoading(false);
   }
 
@@ -80,28 +80,27 @@ const [ setSearch] = useState([])
       const { CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
              CustomerPhone,CustomerState, CustomerZip,DeliveryDate,Product,
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-             RecipientZip,completed, created } = e.target.elements;
+             RecipientZip, created } = e.target.elements;
 
-      if (true) {
-          if (addEditFormType === "Add") {
+      if (addEditFormType === "Edit") {
+
               setIsLoading(true);
-             return FirestoreService.AddNewOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
-              CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
-                RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
-                 RecipientZip.value,completed.value, created.value).then(() => {
-                  alert(`${CustomerName.value} is successfully added to the menu.`)
-                  handleModalClose();
-                  window.location.reload(false);
-              }).catch((e) => {
-                  alert("Error occured: " + e.message);
-                  setIsLoading(false);
-              })
-          } else if (addEditFormType === "Edit") {
-              setIsLoading(true);
-             return FirestoreService.UpdateOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
+             // alert(CustomerAddress.value);
+             //alert(CustomerCity.value);
+             //alert(CustomerEmail.value);
+            // alert(CustomerName.value);
+            // alert(CustomerPhone.value);
+            // alert(CustomerState.value);
+           //  alert(CustomerZip.value);
+           //  alert(DeliveryDate.value);
+           //  alert();
+             // alert(RecipientCity.value);
+            //  alert(RecipientZip.value);
+            //  alert(created.value );
+             return FirestoreService.UpdateOrder(currentOrderId, CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
                                                   CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
                                                   RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
-                                                  RecipientZip.value,completed.value, created.value).then(() => {
+                                                  RecipientZip.value, created.value).then(() => {
                   alert(`${CustomerName.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -110,7 +109,7 @@ const [ setSearch] = useState([])
                   setIsLoading(false);
               })
           }
-      }
+
       setValidated(true)
   }
 
@@ -145,6 +144,7 @@ const [ setSearch] = useState([])
                   <Modal.Body>
                      <FloatingLabel controlId="CustomerAddress" label="Customer Address" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Address' size='md' value={currentOrder?.CustomerAddress} onChange={(e) => {
+
                         setCurrentOrder({
                             "CustomerAddress": e.target.value,
                             })
@@ -153,6 +153,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="CustomerCity" label="Customer City" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer City' size='md' value={currentOrder?.CustomerCity} onChange={(e) => {
+
                         setCurrentOrder({
                            "CustomerCity": e.target.value,
                                          })
@@ -161,6 +162,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="CustomerEmail" label="Customer Email" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Email' size='md' value={currentOrder?.CustomerEmail} onChange={(e) => {
+
                                      setCurrentOrder({
                                          "CustomerEmail": e.target.value,
                                       })
@@ -169,6 +171,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Customer Name" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Name' size='md' value={currentOrder?.CustomerName} onChange={(e) => {
+
                                   setCurrentOrder({
                                       "CustomerName": e.target.value
 
@@ -178,6 +181,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Phone" label="Customer Phone" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Phone' size='md' value={currentOrder?.CustomerPhone} onChange={(e) => {
+
                              setCurrentOrder({
                              "CustomerPhone": e.target.value
                                      })
@@ -186,6 +190,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="State" label="Customer State" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer State' size='md' value={currentOrder?.CustomerState} onChange={(e) => {
+
                                                        setCurrentOrder({
                                                            "CustomerState": e.target.value
                                                        })
@@ -194,6 +199,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Zip" label="Customer Zip" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer zip' size='md' value={currentOrder?.CustomerZip} onChange={(e) => {
+
                         setCurrentOrder({
                         "CustomerZip": e.target.value
                                                         })
@@ -202,6 +208,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
+
                                                      setCurrentOrder({
                                                          "Delivery Date": e.target.value
                                                      })
@@ -210,6 +217,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Product" label="Product" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Product' size='md' value={currentOrder?.Product} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "Product": e.target.value
                                     })
@@ -218,6 +226,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient Address" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Address' size='md' value={currentOrder?.RecipientAddress} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientAddress": e.target.value
                                     })
@@ -226,6 +235,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient City" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient City' size='md' value={currentOrder?.RecipientCity} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientCity": e.target.value
                                     })
@@ -234,6 +244,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient Name" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Name' size='md' value={currentOrder?.RecipientName} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientName": e.target.value,
                                     })
@@ -242,6 +253,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient Phone" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Phone' size='md' value={currentOrder?.RecipientPhone} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientPhone": e.target.value,
                                     })
@@ -250,6 +262,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient State" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient State' size='md' value={currentOrder?.RecipientState} onChange={(e) => {
+
                                      setCurrentOrder({
 
                                          "RecipientState": e.target.value
@@ -260,14 +273,16 @@ const [ setSearch] = useState([])
                       </FloatingLabel>
                       <FloatingLabel controlId="Name" label="Recipient Zip" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter Recipient Zip' size='md' value={currentOrder?.RecipientZip} onChange={(e) => {
+
                       setCurrentOrder({
                                         "RecipientZip": e.target.value
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Recipient Zip is required</Form.Control.Feedback>
                       </FloatingLabel>
-                      <FloatingLabel controlId="Name" label="completed" className="mb-3" >
+                    {/*   <FloatingLabel controlId="Name" label="completed" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter if the order is completed' size='md' value={currentOrder?.completed} onChange={(e) => {
+                      setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
                                     setCurrentOrder({
 
                                         "completed": e.target.value
@@ -275,9 +290,10 @@ const [ setSearch] = useState([])
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Completion status is required</Form.Control.Feedback>
-                      </FloatingLabel>
+                      </FloatingLabel> */}
                       <FloatingLabel controlId="Name" label="created" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "created": e.target.value
                                     })
@@ -309,7 +325,8 @@ const [ setSearch] = useState([])
                    <Modal.Header closeButton>
                    <Modal.Title>Order details</Modal.Title>
                    </Modal.Header> 
-                   <Modal.Body> 
+                   <Modal.Body>
+
                         <p>
                         Customer Address: {currentOrder?.CustomerAddress} <br />
                         Customer City: {currentOrder?.CustomerCity}           <br />
@@ -326,7 +343,7 @@ const [ setSearch] = useState([])
                         Recipient Phone: {currentOrder?.RecipientPhone}     <br />
                         Recipient State: {currentOrder?.RecipientState}     <br />
                         Recipient Zip: {currentOrder?.RecipientZip}       <br />
-                        Completed: {currentOrder?.completed}           <br />
+
                         Created: {currentOrder?.created}<br />
                         </p>
                     </Modal.Body> 
@@ -337,12 +354,7 @@ const [ setSearch] = useState([])
 
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-orders-center">
-                      <div className="align-orders-center" style={{ marginRight: 8 }}>
-                            <h4 style={{ marginTop: 8, }}>View Orders</h4>
-                      </div>
-                            <Button style={{ backgroundColor: '#000', borderWidth: 0, }} onClick={() => {
-                            setShowAddEditForm(true);
-                      }}>Add New Order</Button>
+
                       <Form>
           <InputGroup className='my-3'>
             {/* onChange for search */}
@@ -385,7 +397,7 @@ const [ setSearch] = useState([])
                                       "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                       "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                       "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                      "Delivery Date": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                      "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue ? order.doc.data.value.mapValue.fields.DeliveryDate.stringValue: order.doc.data.value.mapValue.fields.DeliveryDate,
                                       "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                       "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                       "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -393,8 +405,8 @@ const [ setSearch] = useState([])
                                       "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                       "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                       "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                      "completed": order.doc.data.value.mapValue.fields.Completed,
-                                      "created": order.doc.data.value.mapValue.fields.Created,
+                                     // "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                      "created": order.doc.data.value.mapValue.fields.created.timestampValue,
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
@@ -408,7 +420,7 @@ const [ setSearch] = useState([])
                                               "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                               "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                               "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                              "Delivery Date": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                              "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
                                               "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                               "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                               "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -416,8 +428,8 @@ const [ setSearch] = useState([])
                                               "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                               "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                               "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                              "completed": order.doc.data.value.mapValue.fields.Completed,
-                                              "created": order.doc.data.value.mapValue.fields.Created,
+                                           //   "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                              "created": order.doc.data.value.mapValue.fields.created.timestampValue,
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
@@ -432,7 +444,7 @@ const [ setSearch] = useState([])
                                                     "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                                     "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                                     "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                                    "Delivery Date": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                                    "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
                                                     "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                                     "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                                     "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -440,8 +452,8 @@ const [ setSearch] = useState([])
                                                     "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                                     "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                                     "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                                    "completed": order.doc.data.value.mapValue.fields.completed,
-                                                    "created": order.doc.data.value.mapValue.fields.created,
+                                                   // "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                                    "created": order.doc.data.value.mapValue.fields.created.timestampValue,
                                                 });
                                               setShowDeleteDialogue(true);
                                           }}>x Delete</Button>
