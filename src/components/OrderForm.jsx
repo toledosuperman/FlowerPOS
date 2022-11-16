@@ -8,6 +8,8 @@ import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
@@ -107,19 +109,19 @@ return (<>
           value={CustomerZip} /> */}
 </div>
 <div className="form-floating">
-  <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerPhone(e.target.value.toUpperCase())} 
-          value={CustomerPhone} ></textarea>
-  <label htmlFor="comment">Phone</label>
-  {/* <input type="text" onChange={(e) => setCustomerPhone(e.target.value.toUpperCase())} 
-          value={CustomerPhone} /> */}
-</div>
-<div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerEmail(e.target.value.toUpperCase())} 
           value={CustomerEmail} ></textarea>
   <label htmlFor="comment">Email</label>
-  {/* <input type="text" onChange={(e) => setCustomerEmail(e.target.value.toUpperCase())} 
-          value={CustomerEmail} /> */}
+ 
 </div>
+
+  
+ <PhoneInput defaultCountry="US"
+      placeholder="Enter phone number"
+      value={CustomerPhone}
+      onChange={setCustomerPhone}/>
+
+
 <h1>Recipient Info</h1>
 <div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientName(e.target.value.toUpperCase())} 
@@ -156,13 +158,13 @@ return (<>
   {/* <input type="text" onChange={(e) => setRecipientZip(e.target.value.toUpperCase())} 
           value={RecipientZip} /> */}
 </div>
-<div className="form-floating">
-  <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientPhone(e.target.value.toUpperCase())} 
-          value={RecipientPhone}></textarea>
-  <label htmlFor="comment">Phone</label>
-  {/* <input type="text" onChange={(e) => setRecipientPhone(e.target.value.toUpperCase())} 
-          value={RecipientPhone} /> */}
-</div>
+
+<PhoneInput defaultCountry="US"
+      placeholder="Enter phone number"
+      value={RecipientPhone}
+      onChange={setRecipientPhone}/>
+  
+
 <h1>Product Info</h1>
 <div className="form-floating">
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setProduct(e.target.value.toUpperCase())} 
