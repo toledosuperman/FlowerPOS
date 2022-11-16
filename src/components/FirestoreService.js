@@ -117,7 +117,7 @@ function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,Cus
     };
 
 
-async function UpdateOrder(id,CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
+async function UpdateOrder(id, CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
 CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
 RecipientZip, created) {
     const docRef = doc(db, "Orders", id);

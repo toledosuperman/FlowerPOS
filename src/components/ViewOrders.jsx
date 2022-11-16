@@ -86,10 +86,18 @@ const [ setSearch] = useState([])
 
               setIsLoading(true);
              // alert(CustomerAddress.value);
-              alert(RecipientCity.value);
-              alert(RecipientZip.value);
-              alert(created.value );
-             return FirestoreService.UpdateOrder(CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
+             //alert(CustomerCity.value);
+             //alert(CustomerEmail.value);
+            // alert(CustomerName.value);
+            // alert(CustomerPhone.value);
+            // alert(CustomerState.value);
+           //  alert(CustomerZip.value);
+           //  alert(DeliveryDate.value);
+           //  alert();
+             // alert(RecipientCity.value);
+            //  alert(RecipientZip.value);
+            //  alert(created.value );
+             return FirestoreService.UpdateOrder(currentOrderId, CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
                                                   CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
                                                   RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
                                                   RecipientZip.value, created.value).then(() => {
@@ -107,7 +115,7 @@ const [ setSearch] = useState([])
 
   const handleOrderDelete = () => {
       setIsLoading(true);
-      FirestoreService.DeleteOrder(currentOrder.CustomerName).then(() => {
+      FirestoreService.DeleteOrder(currentOrderId).then(() => {
           alert(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
@@ -136,6 +144,7 @@ const [ setSearch] = useState([])
                   <Modal.Body>
                      <FloatingLabel controlId="CustomerAddress" label="Customer Address" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Address' size='md' value={currentOrder?.CustomerAddress} onChange={(e) => {
+
                         setCurrentOrder({
                             "CustomerAddress": e.target.value,
                             })
@@ -144,6 +153,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="CustomerCity" label="Customer City" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer City' size='md' value={currentOrder?.CustomerCity} onChange={(e) => {
+
                         setCurrentOrder({
                            "CustomerCity": e.target.value,
                                          })
@@ -152,6 +162,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="CustomerEmail" label="Customer Email" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Email' size='md' value={currentOrder?.CustomerEmail} onChange={(e) => {
+
                                      setCurrentOrder({
                                          "CustomerEmail": e.target.value,
                                       })
@@ -160,6 +171,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Customer Name" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Name' size='md' value={currentOrder?.CustomerName} onChange={(e) => {
+
                                   setCurrentOrder({
                                       "CustomerName": e.target.value
 
@@ -169,6 +181,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Phone" label="Customer Phone" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer Phone' size='md' value={currentOrder?.CustomerPhone} onChange={(e) => {
+
                              setCurrentOrder({
                              "CustomerPhone": e.target.value
                                      })
@@ -177,6 +190,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="State" label="Customer State" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer State' size='md' value={currentOrder?.CustomerState} onChange={(e) => {
+
                                                        setCurrentOrder({
                                                            "CustomerState": e.target.value
                                                        })
@@ -185,6 +199,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Zip" label="Customer Zip" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Customer zip' size='md' value={currentOrder?.CustomerZip} onChange={(e) => {
+
                         setCurrentOrder({
                         "CustomerZip": e.target.value
                                                         })
@@ -193,6 +208,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
+
                                                      setCurrentOrder({
                                                          "Delivery Date": e.target.value
                                                      })
@@ -201,6 +217,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Product" label="Product" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Product' size='md' value={currentOrder?.Product} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "Product": e.target.value
                                     })
@@ -209,6 +226,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient Address" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Address' size='md' value={currentOrder?.RecipientAddress} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientAddress": e.target.value
                                     })
@@ -217,6 +235,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient City" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient City' size='md' value={currentOrder?.RecipientCity} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientCity": e.target.value
                                     })
@@ -225,6 +244,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient Name" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Name' size='md' value={currentOrder?.RecipientName} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientName": e.target.value,
                                     })
@@ -233,6 +253,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient Phone" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Phone' size='md' value={currentOrder?.RecipientPhone} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "RecipientPhone": e.target.value,
                                     })
@@ -241,6 +262,7 @@ const [ setSearch] = useState([])
                      </FloatingLabel>
                      <FloatingLabel controlId="Name" label="Recipient State" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient State' size='md' value={currentOrder?.RecipientState} onChange={(e) => {
+
                                      setCurrentOrder({
 
                                          "RecipientState": e.target.value
@@ -251,6 +273,7 @@ const [ setSearch] = useState([])
                       </FloatingLabel>
                       <FloatingLabel controlId="Name" label="Recipient Zip" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter Recipient Zip' size='md' value={currentOrder?.RecipientZip} onChange={(e) => {
+
                       setCurrentOrder({
                                         "RecipientZip": e.target.value
                                     })
@@ -259,6 +282,7 @@ const [ setSearch] = useState([])
                       </FloatingLabel>
                     {/*   <FloatingLabel controlId="Name" label="completed" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter if the order is completed' size='md' value={currentOrder?.completed} onChange={(e) => {
+                      setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
                                     setCurrentOrder({
 
                                         "completed": e.target.value
@@ -269,6 +293,7 @@ const [ setSearch] = useState([])
                       </FloatingLabel> */}
                       <FloatingLabel controlId="Name" label="created" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
+
                                     setCurrentOrder({
                                         "created": e.target.value
                                     })
