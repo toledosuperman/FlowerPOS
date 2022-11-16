@@ -21,7 +21,7 @@ const [ setSearch] = useState([])
           "CustomerPhone": " ",
           "CustomerState": " ",
           "CustomerZip": " ",
-          "DeliveryDate": " ",
+          
           "Product": " ",
           "RecipientAddress": " ",
           "RecipientCity": " ",
@@ -69,7 +69,7 @@ const [ setSearch] = useState([])
       setCurrentOrderId("");
       setAddEditFormType("Add");
       setCurrentOrder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
-      CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: " ", Product: " ", RecipientAddress: " ",
+      CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", Product: " ", RecipientAddress: " ",
        RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ",
          created: " "})
       setIsLoading(false);
@@ -78,27 +78,16 @@ const [ setSearch] = useState([])
   const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
       const { CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
-             CustomerPhone,CustomerState, CustomerZip,DeliveryDate,Product,
+             CustomerPhone,CustomerState, CustomerZip,Product,
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
              RecipientZip, created } = e.target.elements;
 
       if (addEditFormType === "Edit") {
 
               setIsLoading(true);
-             // alert(CustomerAddress.value);
-             //alert(CustomerCity.value);
-             //alert(CustomerEmail.value);
-            // alert(CustomerName.value);
-            // alert(CustomerPhone.value);
-            // alert(CustomerState.value);
-           //  alert(CustomerZip.value);
-           //  alert(DeliveryDate.value);
-           //  alert();
-             // alert(RecipientCity.value);
-            //  alert(RecipientZip.value);
-            //  alert(created.value );
+             
              return FirestoreService.UpdateOrder(currentOrderId, CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
-                                                  CustomerPhone.value,CustomerState.value, CustomerZip.value,DeliveryDate.value,Product.value,
+                                                  CustomerPhone.value,CustomerState.value, CustomerZip.value,Product.value,
                                                   RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
                                                   RecipientZip.value, created.value).then(() => {
                   alert(`${CustomerName.value} is successfully updated.`);
@@ -206,7 +195,7 @@ const [ setSearch] = useState([])
                                                     }} />
                      <Form.Control.Feedback type='invalid'>Customer Zip is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
+                     {/* <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
 
                                                      setCurrentOrder({
@@ -214,7 +203,7 @@ const [ setSearch] = useState([])
                                                      })
                                                  }} />
                      <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
-                     </FloatingLabel>
+                     </FloatingLabel> */}
                      <FloatingLabel controlId="Product" label="Product" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Product' size='md' value={currentOrder?.Product} onChange={(e) => {
 
@@ -335,7 +324,7 @@ const [ setSearch] = useState([])
                         Customer Phone: {currentOrder?.CustomerPhone}        <br />
                         Customer State: {currentOrder?.CustomerState}        <br />
                         Customer Zip: {currentOrder?.CustomerZip}          <br />
-                        Delivery Date: {currentOrder?.DeliveryDate}        <br />
+                        {/* Delivery Date: {currentOrder?.DeliveryDate}        <br /> */}
                         Product: {currentOrder?.Product}                <br />
                         Recipient Address: {currentOrder?.RecipientAddress}    <br />
                         Recipient City: {currentOrder?.RecipientCity}       <br />
@@ -371,7 +360,7 @@ const [ setSearch] = useState([])
                         <tr>
                              <th>Order number</th>
                              <th>Customer Name</th>
-                             <th>Delivery Date</th>
+                             {/* <th>Delivery Date</th> */}
                              <th>Recipient Name</th>
                              <th>Recipient Phone</th>
                              <th>Actions</th>
@@ -383,7 +372,7 @@ const [ setSearch] = useState([])
                                     <td>{index + 1}</td>
                                     {console.log(order.doc.data.value.mapValue.fields.CustomerName.stringValue)}
                                     <td>{order.doc.data.value.mapValue.fields.CustomerName.stringValue}</td>
-                                    <td>{order.doc.data.value.mapValue.fields.DeliveryDate.stringValue}</td>
+                                    {/* <td>{order.doc.data.value.mapValue.fields.DeliveryDate.stringValue}</td> */}
                                     <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
                                     <td>
@@ -397,7 +386,7 @@ const [ setSearch] = useState([])
                                       "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                       "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                       "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                      "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue ? order.doc.data.value.mapValue.fields.DeliveryDate.stringValue: order.doc.data.value.mapValue.fields.DeliveryDate,
+                                    //   "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue ? order.doc.data.value.mapValue.fields.DeliveryDate.stringValue: order.doc.data.value.mapValue.fields.DeliveryDate,
                                       "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                       "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                       "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -420,7 +409,7 @@ const [ setSearch] = useState([])
                                               "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                               "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                               "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                              "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                            //   "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
                                               "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                               "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                               "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -444,7 +433,7 @@ const [ setSearch] = useState([])
                                                     "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                                     "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                                     "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                                    "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                                    // "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
                                                     "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                                     "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                                     "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
