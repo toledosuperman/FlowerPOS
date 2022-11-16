@@ -200,7 +200,7 @@ const [  setSearch] = useState([])
                           
                           <h4 style={{ marginTop: 8, }}>View Products</h4>
                       </div>
-                      <Button style={{ backgroundColor: '#000', borderWidth: 0, }} onClick={() => {
+                      <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, }} onClick={() => {
                           setShowAddEditForm(true);
                       }}>Add New Product</Button>
                       <Form>

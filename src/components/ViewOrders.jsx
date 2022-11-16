@@ -340,7 +340,7 @@ const [ setSearch] = useState([])
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
                             <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
-                            <Button style={{ backgroundColor: '#000', borderWidth: 0, }} onClick={() => {
+                            <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, }} onClick={() => {
                             setShowAddEditForm(true);
                       }}>Add New Order</Button>
                       <Form>
@@ -375,7 +375,7 @@ const [ setSearch] = useState([])
                                     <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
                                     <td>
-                                      <Button variant= 'primary' onClick={()=>{
+                                      <Button variant= 'success' onClick={()=>{
                                       setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
                                       setCurrentOrder({
                                       "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
