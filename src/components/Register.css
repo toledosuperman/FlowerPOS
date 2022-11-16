@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(#c79d14cc, #d36d2a);;
   }
   
   .register__container {

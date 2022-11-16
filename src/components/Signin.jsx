@@ -3,6 +3,7 @@ import {  Link, useNavigate } from 'react-router-dom';
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "../components/Login.css";
+import logo from '../assets/logo.png'
 
 const Signin = () => {
   const [email, setEmail] = useState('');
@@ -21,8 +22,18 @@ const Signin = () => {
   }, [user, loading, navigate],);
 
   return (
+  
     <div className="login">
+    
       <div className="login__container">
+      <div className="logo-image">
+    <img src={logo} className="img-fluid" alt="" />
+</div>
+<div className="navbarLogo">
+<h1 className='text-left text-3xl font-bold'>
+     Flower POS
+</h1>
+</div>
         <input
           type="text"
           className="login__textBox"

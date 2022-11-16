@@ -7,6 +7,7 @@ import {
   signInWithGoogle,
 } from "../firebase";
 import "../components/Register.css";
+import logo from '../assets/logo.png'
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,14 @@ function Signup() {
   return (
     <div className="register">
       <div className="register__container">
+      <div className="logo-image">
+    <img src={logo} className="img-fluid" alt="" />
+</div>
+<div className="navbarLogo">
+<h1 className='text-left text-3xl font-bold'>
+     Flower POS
+</h1>
+</div>
         <input
           type="text"
           className="register__textBox"

@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { db} from "../firebase.js";
-import { collection, getDocs} from "firebase/firestore";
+import { collection, getDocs, query, orderBy, onSnapshot} from "firebase/firestore";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
@@ -14,6 +14,7 @@ function ViewOrders ()  {
   const [isLoading] = useState(false);
   const { user } = UserAuth();
   const [orders, setOrders] = useState([])
+
   useEffect(()=>{
   getOrders()
 },[])
@@ -21,6 +22,19 @@ function ViewOrders ()  {
       console.log(orders)
   },[orders]
   )
+
+//   sort by date
+//   function getOrders(){
+//     const orderCollectionRef = collection(db,'Orders')
+//     const q = query(orderCollectionRef, orderBy("created", "desc"));
+
+//   const unsub = onSnapshot(q, (snapshot) =>
+//     setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+//   );
+
+//   return unsub;
+// } [];
+
   function getOrders(){
       const orderCollectionRef = collection(db,'Orders')
       getDocs(orderCollectionRef)
@@ -72,7 +86,7 @@ return (<>
                             <th>Customer Name</th>
                             <th>Recipient Name</th>
                             <th>Date Created</th>
-                            {/* <th>Delivery Date</th> */}
+                          
                             
                         </tr>
                     </thead>
@@ -82,7 +96,7 @@ return (<>
                             <td>{order.data.CustomerName}</td>
                             <td>{order.data.RecipientName}</td>
                             <td>{order.data.created.toDate().toDateString()}</td>
-                            {/* <td>{order.data.DeliveryDate.timestamp.toDate()}</td> */}
+                            
                         </tr>
 
                     ))}
