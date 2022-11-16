@@ -4,7 +4,7 @@ import { Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useState, useEffect} from 'react';
 import { db} from "../firebase.js";
-import { collection, getDocs} from "firebase/firestore";
+import { collection, getDocs, orderBy, limit, query} from "firebase/firestore";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
@@ -23,21 +23,11 @@ function ViewOrders ()  {
   },[orders]
   )
 
-//   sort by date
-//   function getOrders(){
-//     const orderCollectionRef = collection(db,'Orders')
-//     const q = query(orderCollectionRef, orderBy("created", "desc"));
-
-//   const unsub = onSnapshot(q, (snapshot) =>
-//     setOrders(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-//   );
-
-//   return unsub;
-// } [];
 
   function getOrders(){
       const orderCollectionRef = collection(db,'Orders')
-      getDocs(orderCollectionRef)
+      const q = query(orderCollectionRef, orderBy('created', 'desc'), limit(10))
+      getDocs(q)
           .then(response =>{
               const ord = response.docs.map(doc => ({
                   data: doc.data(),
