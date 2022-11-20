@@ -108,7 +108,7 @@ function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,Cus
         RecipientPhone,
         RecipientState,
         RecipientZip,
-       // completed: Boolean(completed),
+        completed: false,
         created
       });
 

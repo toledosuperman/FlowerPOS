@@ -21,7 +21,7 @@ const [ setSearch] = useState([])
           "CustomerPhone": " ",
           "CustomerState": " ",
           "CustomerZip": " ",
-          
+          "DeliveryDate": " ",
           "Product": " ",
           "RecipientAddress": " ",
           "RecipientCity": " ",
@@ -29,7 +29,7 @@ const [ setSearch] = useState([])
          "RecipientPhone": " ",
           "RecipientState": " ",
           "RecipientZip": " ",
-
+            "completed": " ",
           "created": " "
   });
   const [currentOrderId, setCurrentOrderId] = useState([]);
@@ -69,8 +69,8 @@ const [ setSearch] = useState([])
       setCurrentOrderId("");
       setAddEditFormType("Add");
       setCurrentOrder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
-      CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", Product: " ", RecipientAddress: " ",
-       RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ",
+      CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: " ", Product: " ", RecipientAddress: " ",
+       RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ", completed: " ",
          created: " "})
       setIsLoading(false);
   }
@@ -195,7 +195,7 @@ const [ setSearch] = useState([])
                                                     }} />
                      <Form.Control.Feedback type='invalid'>Customer Zip is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     {/* <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
+                      <FloatingLabel controlId="DDate" label="Delivery Date" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
 
                                                      setCurrentOrder({
@@ -203,7 +203,7 @@ const [ setSearch] = useState([])
                                                      })
                                                  }} />
                      <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
-                     </FloatingLabel> */}
+                     </FloatingLabel>
                      <FloatingLabel controlId="Product" label="Product" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Product' size='md' value={currentOrder?.Product} onChange={(e) => {
 
@@ -269,9 +269,9 @@ const [ setSearch] = useState([])
                                 }} />
                       <Form.Control.Feedback type='invalid'>Recipient Zip is required</Form.Control.Feedback>
                       </FloatingLabel>
-                    {/*   <FloatingLabel controlId="Name" label="completed" className="mb-3" >
+                       <FloatingLabel controlId="Name" label="completed" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter if the order is completed' size='md' value={currentOrder?.completed} onChange={(e) => {
-                      setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
+
                                     setCurrentOrder({
 
                                         "completed": e.target.value
@@ -279,7 +279,7 @@ const [ setSearch] = useState([])
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Completion status is required</Form.Control.Feedback>
-                      </FloatingLabel> */}
+                      </FloatingLabel>
                       <FloatingLabel controlId="Name" label="created" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
 
@@ -324,7 +324,7 @@ const [ setSearch] = useState([])
                         Customer Phone: {currentOrder?.CustomerPhone}        <br />
                         Customer State: {currentOrder?.CustomerState}        <br />
                         Customer Zip: {currentOrder?.CustomerZip}          <br />
-                        {/* Delivery Date: {currentOrder?.DeliveryDate}        <br /> */}
+                        Delivery Date: {currentOrder?.DeliveryDate}        <br />
                         Product: {currentOrder?.Product}                <br />
                         Recipient Address: {currentOrder?.RecipientAddress}    <br />
                         Recipient City: {currentOrder?.RecipientCity}       <br />
@@ -332,7 +332,7 @@ const [ setSearch] = useState([])
                         Recipient Phone: {currentOrder?.RecipientPhone}     <br />
                         Recipient State: {currentOrder?.RecipientState}     <br />
                         Recipient Zip: {currentOrder?.RecipientZip}       <br />
-
+                        Completion status:{currentOrder?.completed}<br />
                         Created: {currentOrder?.created}<br />
                         </p>
                     </Modal.Body> 
@@ -366,7 +366,7 @@ const [ setSearch] = useState([])
                         <tr>
                              <th>Order number</th>
                              <th>Customer Name</th>
-                             {/* <th>Delivery Date</th> */}
+                             <th>Delivery Date</th>
                              <th>Recipient Name</th>
                              <th>Recipient Phone</th>
                              <th>Actions</th>
@@ -378,7 +378,7 @@ const [ setSearch] = useState([])
                                     <td>{index + 1}</td>
                                     {console.log(order.doc.data.value.mapValue.fields.CustomerName.stringValue)}
                                     <td>{order.doc.data.value.mapValue.fields.CustomerName.stringValue}</td>
-                                    {/* <td>{order.doc.data.value.mapValue.fields.DeliveryDate.stringValue}</td> */}
+                                     <td>{Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue)}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
                                     <td>
@@ -392,7 +392,7 @@ const [ setSearch] = useState([])
                                       "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                       "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                       "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                    //   "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue ? order.doc.data.value.mapValue.fields.DeliveryDate.stringValue: order.doc.data.value.mapValue.fields.DeliveryDate,
+                                    "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
                                       "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                       "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                       "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -400,8 +400,8 @@ const [ setSearch] = useState([])
                                       "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                       "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                       "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                     // "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
-                                      "created": order.doc.data.value.mapValue.fields.created.timestampValue,
+                                     "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                      "created": Date(order.doc.data.value.mapValue.fields.created.timestampValue),
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
@@ -415,7 +415,7 @@ const [ setSearch] = useState([])
                                               "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                               "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                               "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                            //   "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                             "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
                                               "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                               "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                               "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -423,7 +423,7 @@ const [ setSearch] = useState([])
                                               "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                               "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                               "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                           //   "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                            "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
                                               "created": order.doc.data.value.mapValue.fields.created.timestampValue,
                                               });
                                               setAddEditFormType("Edit");
@@ -439,7 +439,7 @@ const [ setSearch] = useState([])
                                                     "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                                     "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                                     "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                                    // "DeliveryDate": order.doc.data.value.mapValue.fields.DeliveryDate.stringValue,
+                                                     "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
                                                     "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                                     "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                                     "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -447,7 +447,7 @@ const [ setSearch] = useState([])
                                                     "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                                     "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                                     "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                                   // "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                                    "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
                                                     "created": order.doc.data.value.mapValue.fields.created.timestampValue,
                                                 });
                                               setShowDeleteDialogue(true);
