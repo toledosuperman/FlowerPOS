@@ -5,6 +5,7 @@ import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
+import toast, { Toaster } from 'react-hot-toast';
 function ViewOrders() {
     const { user } = UserAuth();
   const [Orders, setOrders] = useState([]);
@@ -90,11 +91,11 @@ const [ setSearch] = useState([])
                                                   CustomerPhone.value,CustomerState.value, CustomerZip.value,Product.value,
                                                   RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
                                                   RecipientZip.value, created.value).then(() => {
-                  alert(`${CustomerName.value} is successfully updated.`);
+                  toast(`${CustomerName.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
-                  alert("Error occurred: " + e.message);
+                  toast("Error occurred: " + e.message);
                   setIsLoading(false);
               })
           }
@@ -105,11 +106,11 @@ const [ setSearch] = useState([])
   const handleOrderDelete = () => {
       setIsLoading(true);
       FirestoreService.DeleteOrder(currentOrderId).then(() => {
-          alert(`Deletion Successful`);
+          toast(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
       }).catch((e) => {
-          alert("Error occurred: " + e.message);
+          toast("Error occurred: " + e.message);
           setIsLoading(false);
       })
   }
@@ -339,6 +340,7 @@ const [ setSearch] = useState([])
                   <Modal.Footer> 
                       <Button variant="danger" onClick={handleModalClose}>Stop Viewing</Button>
                   </Modal.Footer> 
+                  <Toaster />
               </Modal>
 
               <Card style={{ margin: 24 }}>

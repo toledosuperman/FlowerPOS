@@ -5,6 +5,7 @@ import Navbar from './navbar';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
+import toast, { Toaster } from 'react-hot-toast';
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
