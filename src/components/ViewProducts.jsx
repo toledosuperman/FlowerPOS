@@ -292,11 +292,15 @@ const [  setSearch] = useState([])
                               )))}
                           </tbody>
                           <Toaster toastOptions={{
-    className: '',
-    style: {
-      border: '1px solid #713200',
-      padding: '16px',
-      color: '#713200',
+    success: {
+      style: {
+        background: 'green',
+      },
+    },
+    error: {
+      style: {
+        background: 'red',
+      },
     },
   }}/>
                           <React.Fragment>
