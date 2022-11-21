@@ -4,7 +4,7 @@ import { listCartItems } from '../components/cartActions'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from './navbar';
-import { Button, Container , Row, Col} from 'react-bootstrap';
+import { Button, Container , Row, Col, Form} from 'react-bootstrap';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {  useNavigate } from 'react-router-dom';
@@ -51,7 +51,7 @@ function CartScreen (onClose, open)  {
               <CartItem item={item} key={item.id} />
             ))}
           </CartContainerStyle>
-          <form onSubmit={handleSubmit}className='RecipeForm' name='RecipeForm' onClose={onClose} open={open}>
+          <Form onSubmit={handleSubmit}className='RecipeForm' name='RecipeForm' onClose={onClose} open={open}>
           <div className='max-w-[700px] mx-auto my-16 p-4'>
           <div className="form-floating">
           <div className="form-floating">
@@ -69,7 +69,7 @@ function CartScreen (onClose, open)  {
               </Col>
               </Row>
               </Container>
-              </form>
+              </Form>
         </>
       )}
     </><Toaster/>
