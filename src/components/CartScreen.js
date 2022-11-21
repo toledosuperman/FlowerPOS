@@ -27,7 +27,7 @@ function CartScreen (onClose, open)  {
       })
       navigate('/account')
     } catch (err) {
-      alert(err)
+      toast.error(err)
     }}
 
   useEffect(() => {
@@ -72,7 +72,7 @@ function CartScreen (onClose, open)  {
               </form>
         </>
       )}
-    </>
+    </><Toaster/>
     </React.Fragment>
   )
 }
