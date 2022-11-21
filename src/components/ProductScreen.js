@@ -12,7 +12,7 @@ import { listCartItems } from '../components/cartActions'
 import {db} from '../firebase'
 import { collection, addDoc, Timestamp,} from 'firebase/firestore';
 import { listProducts } from './productActions'
-import  { Toaster } from 'react-hot-toast';
+import  toast, { Toaster } from 'react-hot-toast';
 
 const ProductScreen = () => {
   const dispatch = useDispatch()
@@ -42,7 +42,7 @@ const ProductScreen = () => {
       })
       
     } catch (err) {
-      alert(err)
+      toast.error(err)
     }}
 
   const [isLoading] = useState(false);

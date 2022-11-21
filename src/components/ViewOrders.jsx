@@ -46,7 +46,7 @@ const [ setSearch] = useState([])
          
       }).catch((e) => {
           setIsLoading(false);
-          toast("Error occurred while fetching the menu order. " + e);
+          toast.error("Error occurred while fetching the menu order. " + e);
       })
   }, [currentOrderId]);
 
@@ -91,11 +91,11 @@ const [ setSearch] = useState([])
                                                   CustomerPhone.value,CustomerState.value, CustomerZip.value,Product.value,
                                                   RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
                                                   RecipientZip.value, created.value).then(() => {
-                  toast(`${CustomerName.value} is successfully updated.`);
+                  toast.success(`${CustomerName.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
-                  toast("Error occurred: " + e.message);
+                  toast.error("Error occurred: " + e.message);
                   setIsLoading(false);
               })
           }
@@ -106,11 +106,11 @@ const [ setSearch] = useState([])
   const handleOrderDelete = () => {
       setIsLoading(true);
       FirestoreService.DeleteOrder(currentOrderId).then(() => {
-          toast(`Deletion Successful`);
+          toast.success(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
       }).catch((e) => {
-          toast("Error occurred: " + e.message);
+          toast.error("Error occurred: " + e.message);
           setIsLoading(false);
       })
   }
