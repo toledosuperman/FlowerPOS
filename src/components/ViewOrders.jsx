@@ -46,7 +46,7 @@ const [ setSearch] = useState([])
          
       }).catch((e) => {
           setIsLoading(false);
-          alert("Error occurred while fetching the menu order. " + e);
+          toast("Error occurred while fetching the menu order. " + e);
       })
   }, [currentOrderId]);
 
@@ -340,7 +340,14 @@ const [ setSearch] = useState([])
                   <Modal.Footer> 
                       <Button variant="danger" onClick={handleModalClose}>Stop Viewing</Button>
                   </Modal.Footer> 
-                  <Toaster />
+                  <Toaster toastOptions={{
+    className: '',
+    style: {
+      border: '1px solid #713200',
+      padding: '16px',
+      color: '#713200',
+    },
+  }}/>
               </Modal>
 
               <Card style={{ margin: 24 }}>

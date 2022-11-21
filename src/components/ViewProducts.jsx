@@ -39,7 +39,7 @@ const [  setSearch] = useState([])
          
       }).catch((e) => {
           setIsLoading(false);
-          alert("Error occurred while fetching the menu Product. " + e);
+          toast("Error occurred while fetching the menu Product. " + e);
       })
   }, [currentProductId]);
 
@@ -75,21 +75,21 @@ const [  setSearch] = useState([])
           if (addEditFormType === "Add") {
               setIsLoading(true);
               return FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
-                  alert(`${Name.value} is successfully added to the menu.`)
+                  toast(`${Name.value} is successfully added to the menu.`)
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
-                  alert("Error occured: " + e.message);
+                  toast("Error occured: " + e.message);
                   setIsLoading(false);
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
               return FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
-                  alert(`${Name.value} is successfully updated.`);
+                  toast(`${Name.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
-                  alert("Error occured: " + e.message);
+                  toast("Error occured: " + e.message);
                   setIsLoading(false);
               })
           }
@@ -100,11 +100,11 @@ const [  setSearch] = useState([])
   const handleProductDelete = () => {
       setIsLoading(true);
       FirestoreService.DeleteProduct(currentProductId).then(() => {
-          alert(`Deletion Successful`);
+          toast(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
       }).catch((e) => {
-          alert("Error occurred: " + e.message);
+          toast("Error occurred: " + e.message);
           setIsLoading(false);
       })
   }
@@ -291,6 +291,14 @@ const [  setSearch] = useState([])
                                   </tr>
                               )))}
                           </tbody>
+                          <Toaster toastOptions={{
+    className: '',
+    style: {
+      border: '1px solid #713200',
+      padding: '16px',
+      color: '#713200',
+    },
+  }}/>
                           <React.Fragment>
                           
       </React.Fragment>
