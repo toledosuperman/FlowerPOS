@@ -15,7 +15,8 @@ import {
   import {db} from '../firebase'
   import nextId from 'react-id-generator'
   import { collection, getDocs, doc, setDoc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore'
-  
+  import  toast from 'react-hot-toast';
+
   export const listCartItems = () => async (dispatch) => {
     let cartData = []
     async function getCartItems(db) {
@@ -34,7 +35,7 @@ import {
       dispatch({
         type: CART_LIST_FAIL,
         payload:
-          error.response && error.response.data.message ? error.response.data.message : error.message
+          toast.error.response && toast.error.response.data.message ? toast.error.response.data.message : toast.error.message
       })
     }
   }
@@ -54,7 +55,7 @@ import {
   
       if (docSnap.exists()) {
         const existItem = docSnap.data()
-        alert(existItem.title + ' already in cart')
+        toast.error(existItem.title + ' already in cart')
         dispatch({
           type: CART_ITEM_ADD_SUCCESS,
           payload: existItem
@@ -69,7 +70,7 @@ import {
           image: new_cart_item.image,
           qtyInCart: 1
         })
-        alert('Item' + new_cart_item.title + ' successfully added')
+        toast.success(new_cart_item.title + ' successfully added')
   
         dispatch({
           type: CART_ITEM_ADD_SUCCESS,
@@ -77,7 +78,7 @@ import {
         })
       }
     } catch (error) {
-      alert('Failed To Add ' + new_cart_item.title + error)
+      toast.error('Failed To Add ' + new_cart_item.title + error)
       dispatch({
         type: CART_ITEM_ADD_FAIL,
         payload:
@@ -103,7 +104,7 @@ import {
       dispatch({
         type: CART_ITEM_UPDATE_FAIL,
         payload:
-          error.response && error.response.data.message ? error.response.data.message : error.message
+          toast.error.response && toast.error.response.data.message ? toast.error.response.data.message : toast.error.message
       })
     }
   }
@@ -114,7 +115,7 @@ import {
   
       await deleteDoc(doc(db, 'cartItems', cart_item_id))
   
-      alert(cart_item_id + ' was successfully deleted')
+      toast.success(cart_item_id + ' was successfully deleted')
   
       window.location.reload()
   
@@ -123,7 +124,7 @@ import {
       dispatch({
         type: CART_ITEM_REMOVE_FAIL,
         payload:
-          error.response && error.response.data.message ? error.response.data.message : error.message
+          toast.error.response && toast.error.response.data.message ? toast.error.response.data.message : toast.error.message
       })
     }
   }
