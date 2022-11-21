@@ -355,16 +355,18 @@ const [ setSearch] = useState([])
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
                             <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
-                            <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, }} onClick={() => {
-                            setShowAddEditForm(true);
-                      }}>Add New Order</Button>
+                            
 
                       <Form>
           <InputGroup className='my-3'>
+          <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, marginRight: 25, }} onClick={() => {
+                          setShowAddEditForm(true);
+                      }}>Add New Order</Button>
             {/* onChange for search */}
         <Form.Control
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Search Orders'
+            style={{ width: 350, }}
             />
         </InputGroup>
         </Form>
