@@ -4335,7 +4335,7 @@
   dependencies:
     "cssom" "~0.3.6"
 
-"csstype@^3.0.2":
+"csstype@^3.0.10", "csstype@^3.0.2":
   "integrity" "sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw=="
   "resolved" "https://registry.npmjs.org/csstype/-/csstype-3.1.1.tgz"
   "version" "3.1.1"
@@ -5799,6 +5799,11 @@
     "ignore" "^5.2.0"
     "merge2" "^1.4.1"
     "slash" "^3.0.0"
+
+"goober@^2.1.10":
+  "integrity" "sha512-5SS2lmxbhqH0u9ABEWq7WPU69a4i2pYcHeCxqaNq6Cw3mnrF0ghWNM4tEGid4dKy8XNIAUbuThuozDHHKJVh3A=="
+  "resolved" "https://registry.npmjs.org/goober/-/goober-2.1.11.tgz"
+  "version" "2.1.11"
 
 "google-auth-library@^8.0.2":
   "integrity" "sha512-1M0NG5VDIvJZEnstHbRdckLZESoJwguinwN8Dhae0j2ZKIQFIV63zxm6Fo6nM4xkgqUr2bbMtV5Dgo+Hy6oo0Q=="
@@ -9000,6 +9005,13 @@
   "integrity" "sha512-rCeCa1+sIcgI9PjgGmev9bVqHCwYwhjkbsXitr+giQ/P0mf/AGwUBtCdKC1lRu7egrxbLwqO9cWNWpXW4FrsHA=="
   "resolved" "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.39.2.tgz"
   "version" "7.39.2"
+
+"react-hot-toast@^2.4.0":
+  "integrity" "sha512-qnnVbXropKuwUpriVVosgo8QrB+IaPJCpL8oBI6Ov84uvHZ5QQcTp2qg6ku2wNfgJl6rlQXJIQU5q+5lmPOutA=="
+  "resolved" "https://registry.npmjs.org/react-hot-toast/-/react-hot-toast-2.4.0.tgz"
+  "version" "2.4.0"
+  dependencies:
+    "goober" "^2.1.10"
 
 "react-id-generator@^3.0.2":
   "integrity" "sha512-d0rqWzZ6g0P9agHtA7wX/ErQ4iV/657/0Oz+SX3kid7nR4d0YwaWjjOTIrgYHv2lICZKrxIH4BaKppKrM8fRfw=="

@@ -8,6 +8,7 @@ import { Button, Container , Row, Col} from 'react-bootstrap';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {  useNavigate } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 function CartScreen (onClose, open)  {
   const[Price, setPrice]= useState('');

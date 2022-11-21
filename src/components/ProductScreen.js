@@ -12,6 +12,7 @@ import { listCartItems } from '../components/cartActions'
 import {db} from '../firebase'
 import { collection, addDoc, Timestamp,} from 'firebase/firestore';
 import { listProducts } from './productActions'
+import  { Toaster } from 'react-hot-toast';
 
 const ProductScreen = () => {
   const dispatch = useDispatch()
@@ -108,7 +109,18 @@ const ProductScreen = () => {
               <ProductItem item={item} key={item.id}/>
             ))}
           </ProductContainerStyle>
-        
+          <Toaster toastOptions={{
+    success: {
+      style: {
+        background: 'green',
+      },
+    },
+    error: {
+      style: {
+        background: 'red',
+      },
+    },
+  }}/>
           </Form>
           </Card.Body>
               </Card>

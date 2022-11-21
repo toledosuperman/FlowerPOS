@@ -4,6 +4,7 @@ import {
     PRODUCT_LIST_FAIL
   } from './productConstants'
   import { products } from './products'
+  import toast from 'react-hot-toast';
   
   export const listProducts = () => async (dispatch) => {
     const productsData = []
@@ -20,7 +21,7 @@ import {
       dispatch({
         type: PRODUCT_LIST_FAIL,
         payload:
-          error.response && error.response.data.message ? error.response.data.message : error.message
+          toast.response && toast.response.data.message ? toast.response.data.message : toast.message
       })
     }
   }
