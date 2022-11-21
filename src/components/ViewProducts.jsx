@@ -39,7 +39,7 @@ const [  setSearch] = useState([])
          
       }).catch((e) => {
           setIsLoading(false);
-          toast("Error occurred while fetching the menu Product. " + e);
+          toast.error("Error occurred while fetching the menu Product. " + e);
       })
   }, [currentProductId]);
 
@@ -75,21 +75,21 @@ const [  setSearch] = useState([])
           if (addEditFormType === "Add") {
               setIsLoading(true);
               return FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
-                  toast(`${Name.value} is successfully added to the menu.`)
+                  toast.success(`${Name.value} is successfully added to the menu.`)
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
-                  toast("Error occured: " + e.message);
+                  toast.error("Error occured: " + e.message);
                   setIsLoading(false);
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
               return FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
-                  toast(`${Name.value} is successfully updated.`);
+                  toast.success(`${Name.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
-                  toast("Error occured: " + e.message);
+                  toast.error("Error occured: " + e.message);
                   setIsLoading(false);
               })
           }
@@ -100,11 +100,11 @@ const [  setSearch] = useState([])
   const handleProductDelete = () => {
       setIsLoading(true);
       FirestoreService.DeleteProduct(currentProductId).then(() => {
-          toast(`Deletion Successful`);
+          toast.success(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
       }).catch((e) => {
-          toast("Error occurred: " + e.message);
+          toast.error("Error occurred: " + e.message);
           setIsLoading(false);
       })
   }

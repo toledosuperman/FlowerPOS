@@ -21,7 +21,7 @@ import {
       case PRODUCT_LIST_FAIL:
         return {
           loading: false,
-          error: action.payload,
+          toast: action.payload,
         }
   
       default:
