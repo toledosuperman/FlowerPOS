@@ -10,7 +10,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
-
+import toast, { Toaster } from 'react-hot-toast';
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const { user } = UserAuth();
@@ -56,11 +56,12 @@ function OrderForm({  onClose,open}) {
         DeliveryDate: DeliveryDate,
         completed: false,
         active: true,
-        created: Timestamp.now()
+        created: Timestamp.now(),
+        user: user
       })
       navigate('/account')
     } catch (err) {
-      alert(err)
+      toast.error(err)
     }}
 
   
@@ -187,7 +188,18 @@ return (<>
         </button>
 </div>
 </form>
-   
+<Toaster toastOptions={{
+    success: {
+      style: {
+        background: 'green',
+      },
+    },
+    error: {
+      style: {
+        background: 'red',
+      },
+    },
+  }}/>
 </React.Fragment></>}
 ;</>)
     

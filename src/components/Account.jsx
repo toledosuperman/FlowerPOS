@@ -1,10 +1,10 @@
-import React from 'react';
-import { UserAuth } from '../context/AuthContext';
+import React, { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+// import { UserAuth } from '../context/AuthContext';
 import { Link} from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import {useState, useEffect} from 'react';
-import { db} from "../firebase.js";
-import { collection, getDocs, orderBy, limit, query} from "firebase/firestore";
+import { auth, db} from "../firebase.js";
+import { collection, getDocs, orderBy, limit, query, where} from "firebase/firestore";
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
@@ -12,9 +12,25 @@ import { Spinner, Card } from 'react-bootstrap';
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
-  const { user } = UserAuth();
+  const [user, loading, error] = useAuthState(auth);
   const [orders, setOrders] = useState([])
-
+  const [name, setName] = useState("");
+  const fetchUserName = async () => {
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      setName(data.name);
+    } catch (err) {
+      console.error(err);
+      alert("An error occured while fetching user data");
+    }
+  };
+  useEffect(() => {
+    if (loading) return;
+    
+    fetchUserName();
+  }, [user, loading]);
   useEffect(()=>{
   getOrders()
 },[])
@@ -54,7 +70,7 @@ return (<>
                           <h4 style={{ marginTop: 8, }}>Welcome to Flower POS!</h4>
                       </div></Card.Header><Card.Body>
       {/* <p>User Name: { auth.currentUser?.displayName}</p> */}
-      <p>User Email: {user && user.email}</p>
+      <p>User: {name}</p>
 
       <Link to='/order' className='underline'>
       <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
