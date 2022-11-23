@@ -7,11 +7,11 @@ import { collection, getDocs, orderBy, limit, query, where} from "firebase/fires
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
-
+import toast, { Toaster } from 'react-hot-toast';
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [orders, setOrders] = useState([])
   const [name, setName] = useState("");
   const fetchUserName = async () => {
@@ -22,7 +22,7 @@ function ViewOrders ()  {
       setName(data.name);
     } catch (err) {
       console.error(err);
-      alert("An error occured while fetching user data");
+      toast.error("An error occured while fetching user data");
     }
   };
   useEffect(() => {
@@ -112,7 +112,18 @@ return (<>
             </div>
         </div>
         </Card.Body></Card>
-      
+        <Toaster toastOptions={{
+    success: {
+      style: {
+        background: 'green',
+      },
+    },
+    error: {
+      style: {
+        background: 'red',
+      },
+    },
+  }}/>
 
       
 </React.Fragment></>}
