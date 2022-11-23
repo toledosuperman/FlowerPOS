@@ -24,7 +24,7 @@ const NavBar = (a={ }) => {
       const authButton = () => {
           if (user !== null) {
               
-              return <button className="btn btn-primary btn-rounded;" onClick={handleLogout}>Logout</button>
+            return <NavLink onClick={handleLogout}>Logout</NavLink>
           }
       }
   
@@ -47,10 +47,10 @@ const NavBar = (a={ }) => {
                               <li><NavLink to="/vieworders">View Orders</NavLink> </li>
                               <li><NavLink to="/viewproduct">Products</NavLink> </li>
                               <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
-                              <li ><Form inline= "true">
-                        {authButton()}
-                  </Form>
-                  </li>
+                              <li>
+                {authButton()}
+            
+            </li>
                         </ul> 
                   </nav>
             </header></>
