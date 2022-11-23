@@ -55,6 +55,7 @@ function OrderForm({  onClose,open}) {
         Product: Product,
         DeliveryDate: DeliveryDate,
         completed: false,
+        active: true,
         created: Timestamp.now()
       })
       navigate('/account')
