@@ -34,7 +34,9 @@ function OrderForm({  onClose,open}) {
   const[ DeliveryDate,setDeliveryDate]= useState('');
   const navigate = useNavigate();
  
- 
+  const tileDisabled = ({  date}) => {
+        return date < new Date() 
+     }
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -182,7 +184,7 @@ return (<>
   
 </div> */}
 <div>
-<Calendar onChange={setDeliveryDate} value={DeliveryDate} /></div>
+<Calendar onChange={setDeliveryDate} value={DeliveryDate} tileDisabled={tileDisabled}/></div>
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
           Submit
         </button>
