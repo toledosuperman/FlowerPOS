@@ -85,12 +85,9 @@ return (<>
   <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
     <div className='max-w-[700px] mx-auto my-16 p-4'>
     <div style={{border: '1px solid grey', padding:10, background:"darkgoldenrod"}} >
-   {/* <div style={{
-        backgroundColor: 'darkgoldenrod',
-        
-      }}> */}
+ 
     <h3>Customer Info</h3>
-    {/* </div> */}
+  
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerName(e.target.value.toUpperCase())} 
           value={CustomerName}></textarea>
@@ -107,22 +104,19 @@ return (<>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerCity(e.target.value.toUpperCase())} 
           value={CustomerCity}></textarea>
   <label htmlFor="comment">Customer City</label>
-  {/* <input type="text" onChange={(e) => setCustomerCity(e.target.value.toUpperCase())} 
-          value={CustomerCity} /> */}
+ 
 </div>
  <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerState(e.target.value.toUpperCase())} 
           value={CustomerState}></textarea>
   <label htmlFor="comment">State</label>
-  {/* <input type="text" onChange={(e) => setCustomerState(e.target.value.toUpperCase())} 
-          value={CustomerState} /> */}
+ 
 </div>
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerZip(e.target.value.toUpperCase())} 
           value={CustomerZip}></textarea>
   <label htmlFor="comment">Zip</label>
-  {/* <input type="text" onChange={(e) => setCustomerZip(e.target.value.toUpperCase())} 
-          value={CustomerZip} /> */}
+ 
 </div>
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerEmail(e.target.value.toUpperCase())} 
@@ -139,46 +133,38 @@ return (<>
 
 </div>
 <div style={{border: '1px solid grey', padding:10, background:"darkgoldenrod"}}>
-{/* <div style={{
-        backgroundColor: 'darkgoldenrod',
-        
-      }}> */}
+
 <h3>Recipient Info</h3>
-{/* </div> */}
+
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientName(e.target.value.toUpperCase())} 
           value={RecipientName}></textarea>
   <label htmlFor="comment"> Name</label>
-  {/* <input type="text" onChange={(e) => setRecipientName(e.target.value.toUpperCase())} 
-          value={RecipientName} /> */}
+
 </div>
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setRecipientAddress(e.target.value.toUpperCase())} 
           value={RecipientAddress}></textarea>
   <label htmlFor="comment"> Address</label>
-  {/* <input type="text" onChange={(e) => setRecipientAddress(e.target.value.toUpperCase())} 
-          value={RecipientAddress} /> */}
+
 </div>
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientCity(e.target.value.toUpperCase())} 
           value={RecipientCity}></textarea>
   <label htmlFor="comment"> City</label>
-  {/* <input type="text" onChange={(e) => setRecipientCity(e.target.value.toUpperCase())} 
-          value={RecipientCity}/> */}
+  
 </div>
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientState(e.target.value.toUpperCase())} 
           value={RecipientState}></textarea>
   <label htmlFor="comment">State</label>
-  {/* <input type="text" onChange={(e) => setRecipientState(e.target.value.toUpperCase())} 
-          value={RecipientState} /> */}
+ 
 </div>
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientZip(e.target.value.toUpperCase())} 
           value={RecipientZip}></textarea>
   <label htmlFor="comment">Zip</label>
-  {/* <input type="text" onChange={(e) => setRecipientZip(e.target.value.toUpperCase())} 
-          value={RecipientZip} /> */}
+  
 </div>
 
 <PhoneInput defaultCountry="US"
@@ -187,12 +173,9 @@ return (<>
       onChange={setRecipientPhone}/>
   
 </div> <div style={{border: '1px solid grey', padding:10, background:"darkgoldenrod"}}>
-{/* <div style={{
-        backgroundColor: 'darkgoldenrod',
-        
-      }}> */}
+
 <h3>Product Info</h3>
-{/* </div> */}
+
 <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setProduct(e.target.value.toUpperCase())} 
           value={Product}></textarea>
