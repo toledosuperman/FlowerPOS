@@ -6,6 +6,7 @@ import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
+import background from '../assets/FlowerField.jpg'
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
@@ -116,8 +117,12 @@ const [  setSearch] = useState([])
           {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user !== null) && <>
-            <React.Fragment>
+            <React.Fragment> <div style={{ backgroundImage: `url(${background})`,
+  
+  backgroundSize:"contain", 
+   }}>
    <Navbar />
+  
               {/* Add/Edit Form */}
               <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
@@ -309,7 +314,7 @@ const [  setSearch] = useState([])
       </React.Fragment>
                       </Table>
                   </Card.Body>
-              </Card>
+              </Card></div>
               </React.Fragment></>}
       </>
   );

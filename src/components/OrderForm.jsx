@@ -12,6 +12,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import toast, { Toaster } from 'react-hot-toast';
 import "./account.css";
+import background from '../assets/FlowerField.jpg'
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const { user } = UserAuth();
@@ -67,11 +68,7 @@ function OrderForm({  onClose,open}) {
       toast.error(err)
     }}
 
-    const backgroundStyle = {
-        backgroundColor: `linear-gradient(#c79d14cc, #ac551b),`,
-    
-       
-    }
+   
 
 
 return (<>
@@ -79,10 +76,15 @@ return (<>
         {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
         {(user !== null) && <> 
 <React.Fragment>
+<div style={{ backgroundImage: `url(${background})`,
+  
+  backgroundSize:"contain", 
+  }}>
 <Navbar />
+
   <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
     <div className='max-w-[700px] mx-auto my-16 p-4'>
-    <div style={{border: '1px solid grey', padding:10}} >
+    <div style={{border: '1px solid grey', padding:10, background:"darkgoldenrod"}} >
    {/* <div style={{
         backgroundColor: 'darkgoldenrod',
         
@@ -136,7 +138,7 @@ return (<>
       onChange={setCustomerPhone}/>
 
 </div>
-<div style={{border: '1px solid grey', padding:10}}>
+<div style={{border: '1px solid grey', padding:10, background:"darkgoldenrod"}}>
 {/* <div style={{
         backgroundColor: 'darkgoldenrod',
         
@@ -184,7 +186,7 @@ return (<>
       value={RecipientPhone}
       onChange={setRecipientPhone}/>
   
-</div> <div style={{border: '1px solid grey', padding:10}}>
+</div> <div style={{border: '1px solid grey', padding:10, background:"darkgoldenrod"}}>
 {/* <div style={{
         backgroundColor: 'darkgoldenrod',
         
@@ -225,7 +227,7 @@ return (<>
         background: 'red',
       },
     },
-  }}/>
+  }}/></div>
 </React.Fragment></>}
 ;</>)
     

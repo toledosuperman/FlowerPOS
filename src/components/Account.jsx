@@ -8,6 +8,7 @@ import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
+import background from '../assets/FlowerField.jpg'
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
@@ -57,7 +58,10 @@ return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
   {(user !== null) && <> 
-<React.Fragment>
+<React.Fragment><div style={{ backgroundImage: `url(${background})`,
+  
+  backgroundSize:"contain", 
+  }}>
    <Navbar />
    
   
@@ -125,7 +129,7 @@ return (<>
     },
   }}/>
 
-      
+      </div>
 </React.Fragment></>}
 ;</>)
   ;}
