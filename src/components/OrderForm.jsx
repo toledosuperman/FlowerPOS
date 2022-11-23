@@ -5,12 +5,13 @@ import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import Navbar from './navbar';
 import NoLoggedInView from '../components/NoLoggedInView';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Button } from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import toast, { Toaster } from 'react-hot-toast';
+import "./account.css";
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const { user } = UserAuth();
@@ -66,7 +67,11 @@ function OrderForm({  onClose,open}) {
       toast.error(err)
     }}
 
-  
+    const backgroundStyle = {
+        backgroundColor: `linear-gradient(#c79d14cc, #ac551b),`,
+    
+       
+    }
 
 
 return (<>
@@ -77,85 +82,96 @@ return (<>
 <Navbar />
   <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
     <div className='max-w-[700px] mx-auto my-16 p-4'>
-
-    <h1>Customer Info</h1>
-<div className="form-floating">
+    <div style={{border: '1px solid grey', padding:10}} >
+   {/* <div style={{
+        backgroundColor: 'darkgoldenrod',
+        
+      }}> */}
+    <h3>Customer Info</h3>
+    {/* </div> */}
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerName(e.target.value.toUpperCase())} 
           value={CustomerName}></textarea>
   <label htmlFor="comment">Customer Name</label>
  
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerAddress(e.target.value.toUpperCase())} 
           value={CustomerAddress}></textarea>
   <label htmlFor="comment">Customer Address</label>
   
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setCustomerCity(e.target.value.toUpperCase())} 
           value={CustomerCity}></textarea>
   <label htmlFor="comment">Customer City</label>
   {/* <input type="text" onChange={(e) => setCustomerCity(e.target.value.toUpperCase())} 
           value={CustomerCity} /> */}
 </div>
- <div className="form-floating">
+ <div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerState(e.target.value.toUpperCase())} 
           value={CustomerState}></textarea>
   <label htmlFor="comment">State</label>
   {/* <input type="text" onChange={(e) => setCustomerState(e.target.value.toUpperCase())} 
           value={CustomerState} /> */}
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerZip(e.target.value.toUpperCase())} 
           value={CustomerZip}></textarea>
   <label htmlFor="comment">Zip</label>
   {/* <input type="text" onChange={(e) => setCustomerZip(e.target.value.toUpperCase())} 
           value={CustomerZip} /> */}
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setCustomerEmail(e.target.value.toUpperCase())} 
           value={CustomerEmail} ></textarea>
   <label htmlFor="comment">Email</label>
  
-</div>
 
+</div>
   
  <PhoneInput defaultCountry="US"
       placeholder="Enter phone number"
       value={CustomerPhone}
       onChange={setCustomerPhone}/>
 
-
-<h1>Recipient Info</h1>
-<div className="form-floating">
+</div>
+<div style={{border: '1px solid grey', padding:10}}>
+{/* <div style={{
+        backgroundColor: 'darkgoldenrod',
+        
+      }}> */}
+<h3>Recipient Info</h3>
+{/* </div> */}
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientName(e.target.value.toUpperCase())} 
           value={RecipientName}></textarea>
   <label htmlFor="comment"> Name</label>
   {/* <input type="text" onChange={(e) => setRecipientName(e.target.value.toUpperCase())} 
           value={RecipientName} /> */}
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here" onChange={(e) => setRecipientAddress(e.target.value.toUpperCase())} 
           value={RecipientAddress}></textarea>
   <label htmlFor="comment"> Address</label>
   {/* <input type="text" onChange={(e) => setRecipientAddress(e.target.value.toUpperCase())} 
           value={RecipientAddress} /> */}
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientCity(e.target.value.toUpperCase())} 
           value={RecipientCity}></textarea>
   <label htmlFor="comment"> City</label>
   {/* <input type="text" onChange={(e) => setRecipientCity(e.target.value.toUpperCase())} 
           value={RecipientCity}/> */}
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientState(e.target.value.toUpperCase())} 
           value={RecipientState}></textarea>
   <label htmlFor="comment">State</label>
   {/* <input type="text" onChange={(e) => setRecipientState(e.target.value.toUpperCase())} 
           value={RecipientState} /> */}
 </div>
-<div className="form-floating">
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setRecipientZip(e.target.value.toUpperCase())} 
           value={RecipientZip}></textarea>
   <label htmlFor="comment">Zip</label>
@@ -168,27 +184,35 @@ return (<>
       value={RecipientPhone}
       onChange={setRecipientPhone}/>
   
-
-<h1>Product Info</h1>
-<div className="form-floating">
+</div> <div style={{border: '1px solid grey', padding:10}}>
+{/* <div style={{
+        backgroundColor: 'darkgoldenrod',
+        
+      }}> */}
+<h3>Product Info</h3>
+{/* </div> */}
+<div className="form-floating" style={{ padding:10}}>
   <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setProduct(e.target.value.toUpperCase())} 
           value={Product}></textarea>
   <label htmlFor="comment"> Product</label>
-  {/* <input type="text" onChange={(e) => setProduct(e.target.value.toUpperCase())} 
-          value={Product}/> */}
+
 </div>
-{/* <div className="form-floating">
-  <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setDeliveryDate(e.target.value.toUpperCase())} 
-          value={DeliveryDate}></textarea>
-  <label htmlFor="comment"> Delivery Date</label>
-  
-</div> */}
-<div>
+<div style={{ padding:10}}></div>
+<div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
 <Calendar onChange={setDeliveryDate} value={DeliveryDate} tileDisabled={tileDisabled}/></div>
-<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
+<div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+<Button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
           Submit
-        </button>
-</div>
+        </Button></div>
+</div></div>
 </form>
 <Toaster toastOptions={{
     success: {
