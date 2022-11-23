@@ -2,6 +2,7 @@ import React from "react";
 import {NavLink} from 'react-router-dom';
 import './navbar.css';
 import logo from '../assets/logo.png'
+import {  Form, Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { UserAuth} from '../context/AuthContext';
 
@@ -23,7 +24,7 @@ const NavBar = (a={ }) => {
       const authButton = () => {
           if (user !== null) {
               
-            return <NavLink onClick={handleLogout}>Logout</NavLink>
+              return <Button class="btn btn-outline-primary" onClick={handleLogout}>Logout</Button>
           }
       }
   
@@ -46,10 +47,10 @@ const NavBar = (a={ }) => {
                               <li><NavLink to="/vieworders">View Orders</NavLink> </li>
                               <li><NavLink to="/viewproduct">Products</NavLink> </li>
                               <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
-                              <li>
-                {authButton()}
-            
-            </li>
+                              <li className="inactive"><Form inline= "true">
+                        {authButton()}
+                  </Form>
+                  </li>
                         </ul> 
                   </nav>
             </header></>
@@ -62,4 +63,3 @@ const NavBar = (a={ }) => {
     }
   
   export default connect(mapStateToProps, {} )(NavBar)
-
