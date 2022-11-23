@@ -24,7 +24,14 @@ const NavBar = (a={ }) => {
       const authButton = () => {
           if (user !== null) {
               
-              return <Button class="btn btn-outline-primary" onClick={handleLogout}>Logout</Button>
+              return <Button style={{
+             fontSize: '17px',
+              border: 'none',
+              outline: 'none',
+              textAlign: 'center',
+              background: 'linear-gradient(#e5b518cc, #d36d2a)',
+              color: 'white',        
+              marginTop: 8,}}  onClick={handleLogout}>Logout</Button>
           }
       }
   
