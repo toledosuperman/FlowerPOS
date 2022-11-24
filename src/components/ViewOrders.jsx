@@ -359,9 +359,6 @@ const [ setSearch] = useState([])
 
                       <Form>
           <InputGroup className='my-3'>
-          <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, marginRight: 25, }} onClick={() => {
-                          setShowAddEditForm(true);
-                      }}>Add New Order</Button>
             {/* onChange for search */}
         <Form.Control
             onChange={(e) => setSearch(e.target.value)}
