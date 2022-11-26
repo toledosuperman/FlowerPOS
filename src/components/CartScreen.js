@@ -10,7 +10,7 @@ import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {  useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-function CartScreen (onClose, open)  {
+function CartScreen ({onClose, open})  {
   const[Price, setPrice]= useState('');
   const dispatch = useDispatch()
   const navigate = useNavigate();
