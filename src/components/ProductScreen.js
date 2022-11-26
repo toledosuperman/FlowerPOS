@@ -29,7 +29,7 @@ const ProductScreen = () => {
     dispatch(listProducts())
   }, [dispatch])
  
-  const handleSubmit = async (e) => {
+  const handleProductSubmit = async (e) => {
     e.preventDefault()
     try {
       await addDoc(collection(db, 'Products'), {
@@ -71,7 +71,7 @@ const ProductScreen = () => {
           <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-Products-center"><div className="align-Products-center" style={{ marginRight: 8 }}>
                   <h4 style={{ marginTop: 8, }}>Create Recipe</h4></div></Card.Header>
-                  <Card.Body><Form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'>
+                  <Card.Body><Form onSubmit={handleProductSubmit}className='CreateRecipe' name='CreateRecipe'>
           <div className='max-w-[700px] mx-auto my-16 p-4'>
           <div className="form-floating">
 <textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value)} 
