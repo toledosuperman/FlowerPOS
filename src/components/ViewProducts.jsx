@@ -76,7 +76,7 @@ const [  setSearch] = useState([])
           if (addEditFormType === "Add") {
               setIsLoading(true);
               return FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
-                  toast.success(`${Name.value} is successfully added to the menu.`)
+                  toast.success(`${Name.value} is successfully added.`)
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
