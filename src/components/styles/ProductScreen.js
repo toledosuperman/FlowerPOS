@@ -39,38 +39,3 @@ export const CartAddButton = styled.button`
   }
 `
 
-export const NavBarStyle = styled.nav`
-  width: 80%;
-  background-color: black;
-  height: 150px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  ul {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    display: flex;
-    list-style: none;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-  }
-  li {
-    margin: 0 auto;
-    a {
-      font-size: 2rem;
-      text-decoration: none;
-      transition: all 1s;
-      color: white;
-      &:hover {
-        background-color: white;
-        border: 1px solid black;
-        color: black;
-        padding: 0.4rem;
-        border-radius: 10px;
-      }
-    }
-  }
-`

@@ -11,7 +11,7 @@ const ProductItem = ({ item }) => {
 
   return (
     <ProductItemStyle primary>
-      
+       <img style={{ width: '100px' , height: '100px'}} className="product-image" src={item.image} alt={item.title} />
       <h3 
         style={{
           border: '1px solid black',
@@ -27,17 +27,17 @@ const ProductItem = ({ item }) => {
           color: 'black'
         }}
       >
-        ${item.price}
+        ${item.price} {item.unit}
       </p>
-      <p>{item.qtyInStock}</p>
-      <p
+      {/* <p>{item.unit}</p> */}
+      {/* <p
         style={{
           fontSize: '10px',
           color: 'black'
         }}
       >
         {item.description}
-      </p>
+      </p> */}
       <CartAddButton onClick={addToCartHandler} primary>
         Add To Cart
       </CartAddButton>
