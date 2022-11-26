@@ -9,6 +9,7 @@ import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner, Card } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
+import "./account.css";
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
