@@ -98,9 +98,10 @@ const [  setSearch] = useState([])
       setValidated(true)
   }
 
-  const handleProductDelete = () => {
+  const handleProductDelete = (e) => {
+    e.preventDefault();
       setIsLoading(true);
-      return FirestoreService.DeleteProduct(currentProductId).then(() => {
+      return Promise.resolve(FirestoreService.DeleteProduct(currentProductId)).then(() => {
           toast.success(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
