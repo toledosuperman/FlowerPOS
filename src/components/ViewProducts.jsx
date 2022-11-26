@@ -98,17 +98,18 @@ const [  setSearch] = useState([])
       setValidated(true)
   }
 
-  const handleProductDelete = (e) => {
+  const handleProductDelete = async (e) => {
     e.preventDefault();
       setIsLoading(true);
-      return Promise.resolve(FirestoreService.DeleteProduct(currentProductId)).then(() => {
+      try {
+          await Promise.resolve(FirestoreService.DeleteProduct(currentProductId));
           toast.success(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
-      }).catch((e) => {
-          toast.error("Error occurred: " + e.message);
+      } catch (e_1) {
+          toast.error("Error occurred: " + e_1.message);
           setIsLoading(false);
-      })
+      }
   }
 
 
