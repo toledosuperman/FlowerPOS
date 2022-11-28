@@ -32,7 +32,8 @@ var hideCompleted=false;
           "RecipientState": " ",
           "RecipientZip": " ",
             "completed": " ",
-          "created": " "
+          "created": " ",
+          "active": " "
   });
   const [currentOrderId, setCurrentOrderId] = useState([]);
 
@@ -316,6 +317,7 @@ var hideCompleted=false;
                         Recipient Zip: {currentOrder?.RecipientZip}       <br />
                         Completion status:{currentOrder?.completed}<br />
                         Created: {currentOrder?.created}<br />
+                        Active: {currentOrder?.active}<br />
                         </p>
                     </Modal.Body> 
                   <Modal.Footer> 
@@ -399,6 +401,7 @@ var hideCompleted=false;
                                       "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
                                      "completed ": String(order.doc.data.value.mapValue.fields.completed.booleanValue),
                                       "created": Date(order.doc.data.value.mapValue.fields.created.timestampValue),
+                                      "active": order.doc.data.value.mapValue.fields.created.active,
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
@@ -422,6 +425,7 @@ var hideCompleted=false;
                                               "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
                                             "completed": order.doc.data.value.mapValue.fields.completed.booleanValue,
                                               "created": order.doc.data.value.mapValue.fields.created.timestampValue,
+                                              "active": order.doc.data.value.mapValue.fields.created.active,
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
