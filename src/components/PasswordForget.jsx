@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { withFirebase } from './firebaseindex.js';
 import { PASSWORD_FORGET }  from './Routes';
+import Footer from './footer';
 
 const PasswordForgetPage = () => (
   <div>
@@ -62,6 +63,7 @@ class PasswordForgetFormBase extends Component {
 
         {error && <p>{error.message}</p>}
       </form>
+       <Footer />
     );
   }
 }

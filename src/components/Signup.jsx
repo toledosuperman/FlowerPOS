@@ -7,6 +7,7 @@ import {
   signInWithGoogle,
 } from "../firebase";
 import "../components/Register.css";
+import Footer from './footer';
 import logo from '../assets/logo.png'
 
 function Signup() {
@@ -30,6 +31,7 @@ function Signup() {
   }, [user, loading, navigate]);
 
   return (
+  <React.Fragment>
     <div className="register">
       <div className="register__container">
       <div className="logo-image">
@@ -76,6 +78,8 @@ function Signup() {
         </div>
       </div>
     </div>
+     <Footer />
+     </React.Fragment>
   );
 }
 

@@ -4,6 +4,7 @@ import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "../components/Login.css";
 import logo from '../assets/logo.png'
+import Footer from './footer';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
@@ -22,7 +23,7 @@ const Signin = () => {
   }, [user, loading, navigate],);
 
   return (
-  
+  <React.Fragment>
     <div className="login">
     
       <div className="login__container">
@@ -65,6 +66,8 @@ const Signin = () => {
         </div>
       </div>
     </div>
+     <Footer />
+     </React.Fragment>
   );
 }
 

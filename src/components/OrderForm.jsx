@@ -7,6 +7,7 @@ import NoLoggedInView from '../components/NoLoggedInView';
 import { Spinner } from 'react-bootstrap';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import Footer from './footer';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -192,7 +193,7 @@ onChange={setRecipientPhone}/>
   </button>
 </div>
 </form>
-
+ <Footer />
 </React.Fragment></>}
 ;</>)
 

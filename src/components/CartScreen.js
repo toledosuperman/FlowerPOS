@@ -9,6 +9,7 @@ import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {  useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import Footer from './footer';
 
 function CartScreen ({onClose, open})  {
   const[Price, setPrice]= useState('');
@@ -73,6 +74,7 @@ function CartScreen ({onClose, open})  {
         </>
       )}
     </><Toaster/>
+     <Footer />
     </React.Fragment>
   )
 }

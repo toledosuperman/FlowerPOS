@@ -2,6 +2,7 @@ import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
+import Footer from './footer';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
@@ -10,7 +11,7 @@ function ViewOrders() {
     const { user } = UserAuth();
   const [Orders, setOrders] = useState([]);
 const [ setSearch] = useState([])
-
+var hideCompleted=false;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -103,17 +104,7 @@ const [ setSearch] = useState([])
       setValidated(true)
   }
 
-  const handleOrderDelete = () => {
-      setIsLoading(true);
-      FirestoreService.DeleteOrder(currentOrderId).then(() => {
-          toast.success(`Deletion Successful`);
-          handleModalClose();
-          window.location.reload(false);
-      }).catch((e) => {
-          toast.error("Error occurred: " + e.message);
-          setIsLoading(false);
-      })
-  }
+
 
 
 
@@ -122,6 +113,7 @@ const [ setSearch] = useState([])
           {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user !== null) && <>
+
           <React.Fragment>
           <Navbar />
            {/* Add/Edit Form */}
@@ -297,19 +289,8 @@ const [ setSearch] = useState([])
                   </Form>
               </Modal>
 
-                {/* Delete Confirmation Dialogue START */}
-              <Modal show={showDeleteDialogue} onHide={handleModalClose}>
-                  <Modal.Header closeButton>
-                       <Modal.Title>Delete order</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                       <p>Are you sure you want to delete {currentOrder.CustomerName}'s order?</p>
-                   </Modal.Body>
-                 <Modal.Footer>
-                     <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
-                    <Button variant="danger" onClick={handleOrderDelete}>Yes, Delete</Button>
-                 </Modal.Footer>
-            </Modal>
+
+
 {/* Order details */}
                 <Modal show={showDetailsForm} onHide={handleModalClose}>
                    <Modal.Header closeButton>
@@ -348,6 +329,8 @@ const [ setSearch] = useState([])
       color: '#713200',
     },
   }}/>
+
+
               </Modal>
 
               <Card style={{ margin: 24 }}>
@@ -355,8 +338,12 @@ const [ setSearch] = useState([])
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
                             <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
-                            
+                        <Button variant='primary' onClick={() => {
+                        hideCompleted =!hideCompleted;
+                        setIsLoading(true)
 
+                        setIsLoading(false)
+                                                                  }}>Display/hide finished orders</Button>{' '}
                       <Form>
           <InputGroup className='my-3'>
             {/* onChange for search */}
@@ -381,7 +368,9 @@ const [ setSearch] = useState([])
                          </tr>
                      </thead>
                           <tbody>
+
                               { (Orders.map((order, index) => (
+
                                   <tr key={index}>
                                     <td>{index + 1}</td>
                                     {console.log(order.doc.data.value.mapValue.fields.CustomerName.stringValue)}
@@ -400,7 +389,7 @@ const [ setSearch] = useState([])
                                       "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                       "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                       "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                    "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
+                                      "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
                                       "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                       "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                       "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -408,7 +397,7 @@ const [ setSearch] = useState([])
                                       "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                       "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                       "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                     "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                     "completed ": String(order.doc.data.value.mapValue.fields.completed.booleanValue),
                                       "created": Date(order.doc.data.value.mapValue.fields.created.timestampValue),
                                       });
                                       setShowDetailsForm(true);
@@ -431,45 +420,24 @@ const [ setSearch] = useState([])
                                               "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                               "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                               "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                            "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
+                                            "completed": order.doc.data.value.mapValue.fields.completed.booleanValue,
                                               "created": order.doc.data.value.mapValue.fields.created.timestampValue,
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
                                           }}>✎ Edit</Button>{' '}
-                                          <Button variant='danger' onClick={() => {
-                                              setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1]);
-                                              setCurrentOrder({
-                                                    "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
-                                                    "CustomerCity": order.doc.data.value.mapValue.fields.CustomerCity.stringValue,
-                                                    "CustomerEmail": order.doc.data.value.mapValue.fields.CustomerEmail.stringValue,
-                                                    "CustomerName": order.doc.data.value.mapValue.fields.CustomerName.stringValue,
-                                                    "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
-                                                    "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
-                                                    "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                                     "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
-                                                    "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
-                                                    "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
-                                                    "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
-                                                    "RecipientName": order.doc.data.value.mapValue.fields.RecipientName.stringValue,
-                                                    "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
-                                                    "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
-                                                    "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                                    "completed": order.doc.data.value.mapValue.fields.completed.booleanValue?order.doc.data.value.mapValue.fields.completed.booleanValue:false,
-                                                    "created": order.doc.data.value.mapValue.fields.created.timestampValue,
-                                                });
-                                              setShowDeleteDialogue(true);
-                                          }}>x Delete</Button>
+
                                       </td>
                                   </tr>
+
                               )))}
                           </tbody>
-                       <React.Fragment>
-                       </React.Fragment>
+
                       </Table>
 
                   </Card.Body>
               </Card>
+              <Footer />
               </React.Fragment></>}
       </>
   );

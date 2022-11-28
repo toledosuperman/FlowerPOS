@@ -2,6 +2,7 @@ import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
+import Footer from './footer';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
@@ -299,6 +300,7 @@ const [  setSearch] = useState([])
                                   </tr>
                               )))}
                           </tbody>
+
                           <Toaster toastOptions={{
     success: {
       style: {
@@ -317,6 +319,7 @@ const [  setSearch] = useState([])
                       </Table>
                   </Card.Body>
               </Card></div>
+               <Footer />
               </React.Fragment></>}
       </>
   );
