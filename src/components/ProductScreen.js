@@ -13,7 +13,7 @@ import {db} from '../firebase'
 import { collection, addDoc, Timestamp,} from 'firebase/firestore';
 import { listProducts } from './productActions'
 import  toast, { Toaster } from 'react-hot-toast';
-
+import background from '../assets/FlowerField.jpg'
 const ProductScreen = () => {
   const dispatch = useDispatch()
   const[Name, setName]= useState('');
@@ -69,6 +69,10 @@ const ProductScreen = () => {
         <>
           
           <Card style={{ margin: 24 }}>
+          <div style={{ backgroundImage: `url(${background})`,
+  
+  backgroundSize:"contain", 
+  }}>
                   <Card.Header className="d-flex justify-content-between align-Products-center"><div className="align-Products-center" style={{ marginRight: 8 }}>
                   <h4 style={{ marginTop: 8, }}>Create Recipe</h4></div></Card.Header>
                   <Card.Body><Form onSubmit={handleProductSubmit}className='CreateRecipe' name='CreateRecipe'>
@@ -123,11 +127,13 @@ const ProductScreen = () => {
   }}/>
           </Form>
           </Card.Body>
+          </div>
               </Card>
               
         </>
       )}
    </> 
+  
     </React.Fragment>
     </>}
 ;</>)
