@@ -2,6 +2,7 @@ import React from 'react';
 import OrderForm from './components/OrderForm';
 import Signin from './components/Signin';
 import ViewOrders from './components/ViewOrders';
+import ViewUsers from './components/ViewUsers';
 import ViewProducts from './components/ViewProducts';
 import ProductScreen from './components/ProductScreen';
 import CartScreen from './components/CartScreen';
@@ -37,6 +38,7 @@ function App() {
           <Route path='/reset' element={<Reset />} />
           <Route path='/order' element={<OrderForm />} />
           <Route path='/vieworders' element={<ViewOrders />} />
+          <Route path='/users' element={<ViewUsers />} />
           <Route path='/customers' element={<ListCustomers />} />
           <Route path='/viewproduct' element={<ViewProducts />} />
           <Route path='/createrecipe' element={<ProductScreen />} />
