@@ -54,6 +54,8 @@ const NavBar = (a={ }) => {
                               <li><NavLink to="/vieworders">View Orders</NavLink> </li>
                               <li><NavLink to="/viewproduct">Products</NavLink> </li>
                               <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
+                              <li><NavLink to="/viewusers">Users</NavLink> </li>
+                              <li><NavLink to="/reports">Reports</NavLink> </li>
                               <li className="inactive"><Form inline= "true">
                         {authButton()}
                   </Form>
