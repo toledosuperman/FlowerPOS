@@ -178,35 +178,20 @@ async function getAllUsers() {
 
 
 
-function AddNewUser(authProvider, email, name, role, uid) {
 
-   const docRef = addDoc(collection(db, "users"), {
-       email,
-       name,
-       role,
-       uid,
-       authProvider
-
-     });
-
-     console.log("Document written with ID: ", docRef.id);
-
-   };
 
 
 async function UpdateUser(email,
     name,
     role,
-    uid,
-    authProvider) {
+   
+    ) {
    const docRef = doc(db, "users", name);
 
    const data = {
     email,
     name,
-    role,
-    uid,
-    authProvider
+    role
      };
 
      try {
@@ -229,7 +214,7 @@ deleteDoc(docRef)
 })
 }
 const FireStoreService = {
-    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder, getAllUsers, AddNewUser, UpdateUser, DeleteUser,
+    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder, getAllUsers, UpdateUser, DeleteUser,
   };
 
 export default  FireStoreService

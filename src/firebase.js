@@ -49,7 +49,7 @@ const signInWithGoogle = async () => {
         name: user.displayName,
         authProvider: "google",
         email: user.email,
-        role: "user",
+        role: false,
       });
     }
   } catch (err) {

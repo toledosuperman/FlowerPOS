@@ -22,7 +22,7 @@ const [  setSearch] = useState([])
   const [currentUsers, setCurrentUsers] = useState({
       name: " ",
       email: " ",
-      role: " ",
+      role: false,
       
   });
   const [currentUsersId, setCurrentUsersId] = useState([]);
@@ -56,7 +56,7 @@ const [  setSearch] = useState([])
       setShowDetailsForm(false);
       setCurrentUsersId(" ");
       setAddEditFormType("Add");
-      setCurrentUsers({ name: " ", role: " ", email: " "})
+      setCurrentUsers({ name: " ", role: false, email: " "})
       setIsLoading(false);
   }
   const handleAddEditFormSubmit = (e) => {
@@ -65,7 +65,7 @@ const [  setSearch] = useState([])
       if (name.value && email.value) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
-              return FirestoreService.AddNewUser(name.value, role.value,  email.value).then(() => {
+              return FirestoreService.AddNewUser(name.value, role.boolean,  email.value).then(() => {
                   toast.success(`${name.value} is successfully added.`)
                   handleModalClose();
                   window.location.reload(false);
@@ -75,7 +75,7 @@ const [  setSearch] = useState([])
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
-              return FirestoreService.UpdateUser(currentUsersId, name.value, email.value, role.value).then(() => {
+              return FirestoreService.UpdateUser(currentUsersId, name.value, email.value, role.boolean).then(() => {
                   toast.success(`${name.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -132,7 +132,7 @@ const [  setSearch] = useState([])
 
                           
 
-                          <FloatingLabel controlId="Role" label="Role" className="mb-3">
+                          {/* <FloatingLabel controlId="Role" label="Role" className="mb-3">
                    
                               <Form.Control required type='text' placeholder='Enter Role' size='md' value={currentUsers?.role} onChange={(e) => {
                                   setCurrentUsers({
@@ -142,8 +142,8 @@ const [  setSearch] = useState([])
                                       
                                   })
                               }} />
-                              <Form.Control.Feedback type='invalid'>Role is required</Form.Control.Feedback>
-                          </FloatingLabel>
+                              <Form.Control.Feedback type='invalid'>Role is required</Form.Control.Feedback> */}
+                          {/* </FloatingLabel> */}
 
                           <FloatingLabel controlId="email" label="Email" className="mb-3">
                               <Form.Control required type='text' placeholder='Enter Email' size='md' value={currentUsers?.email} onChange={(e) => {
@@ -190,7 +190,7 @@ const [  setSearch] = useState([])
                         <p>
                         User Name: {currentUsers?.name}            <br />
                         User Email: {currentUsers?.email}           <br />
-                        User Role: {currentUsers?.role}          <br />
+                       
                        
                         </p>
                     </Modal.Body> 
@@ -224,7 +224,7 @@ const [  setSearch] = useState([])
                         <tr><th>#</th>
                              <th>User Name</th>
                              <th>User Email</th>
-                             <th>User Role</th>
+                             <th>Admin</th>
                              
                              <th>Actions</th></tr>
                      </thead>
@@ -236,7 +236,7 @@ const [  setSearch] = useState([])
                                       {console.log(user.doc.data.value.mapValue.fields.name.stringValue)}
                                       <td>{user.doc.data.value.mapValue.fields.name.stringValue}</td>
                                       <td>{user.doc.data.value.mapValue.fields.email.stringValue}</td>
-                                      <td>{user.doc.data.value.mapValue.fields.role.stringValue}</td>
+                                      <td>{user.role}</td>
                                       
                                       <td>
                                       {' '}
@@ -245,7 +245,7 @@ const [  setSearch] = useState([])
                                               setCurrentUsers({
                                                   "name": user.doc.data.value.mapValue.fields.name.stringValue,
                                                   "email": user.doc.data.value.mapValue.fields.email.stringValue,
-                                                  "role": user.doc.data.value.mapValue.fields.role.stringValue
+                                                  "role": user.doc.data.value.mapValue.fields.role.booleanValue
                                                   
                                               });
                                               setAddEditFormType("Edit");
@@ -256,7 +256,7 @@ const [  setSearch] = useState([])
                                               setCurrentUsers({
                                                   "name": user.doc.data.value.mapValue.fields.name.stringValue,
                                                   "email": user.doc.data.value.mapValue.fields.email.stringValue ,
-                                                  "role": user.doc.data.value.mapValue.fields.role.stringValue,
+                                                  "role": user.doc.data.value.mapValue.fields.role.booleanValue,
                                                   
                                                 });
                                               setShowDeleteDialogue(true);
