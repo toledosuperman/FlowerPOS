@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useCallback} from "react";
+import React, { useEffect, useState , useCallback, Fragment} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
@@ -9,7 +9,12 @@ import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 
+
+
 function ViewUsers() {
+//     const read01 = ["admin", "sales"];
+
+// const options = read01.map((val) => ({ value: val, label: val }));
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
 const [  setSearch] = useState([])
@@ -128,6 +133,7 @@ const [  setSearch] = useState([])
                           
 
                           <FloatingLabel controlId="Role" label="Role" className="mb-3">
+                   
                               <Form.Control required type='text' placeholder='Enter Role' size='md' value={currentUsers?.role} onChange={(e) => {
                                   setCurrentUsers({
                                       
