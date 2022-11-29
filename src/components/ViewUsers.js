@@ -8,13 +8,19 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
-
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 function ViewUsers() {
-//     const read01 = ["admin", "sales"];
-
-// const options = read01.map((val) => ({ value: val, label: val }));
+    // const [checked, setChecked] = useState(false);
+    const [radioValue, setRadioValue] = useState('1');
+  
+    const radios = [
+      { name: 'Admin', value: '1' },
+      { name: 'Sales', value: '2' },
+      
+    ];
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
 const [  setSearch] = useState([])
@@ -236,7 +242,22 @@ const [  setSearch] = useState([])
                                       {console.log(user.doc.data.value.mapValue.fields.name.stringValue)}
                                       <td>{user.doc.data.value.mapValue.fields.name.stringValue}</td>
                                       <td>{user.doc.data.value.mapValue.fields.email.stringValue}</td>
-                                      <td>{user.role}</td>
+                                      <td> <ButtonGroup>
+        {radios.map((radio, idx) => (
+          <ToggleButton
+            key={idx}
+            id={`radio-${idx}`}
+            type="radio"
+            variant={idx % 2 ? 'outline-success' : 'outline-danger'}
+            name="radio"
+            value={radio.value}
+            checked={radioValue === radio.value}
+            onChange={(e) => setRadioValue(e.currentTarget.value)}
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup></td>
                                       
                                       <td>
                                       {' '}
