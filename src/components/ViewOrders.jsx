@@ -63,7 +63,7 @@ var hideCompleted=false;
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
 
-  const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
+  const [ setShowDeleteDialogue] = useState(false);
  const [showDetailsForm, setShowDetailsForm] = useState(false);
   const handleModalClose = () => {
       setShowAddEditForm(false);
