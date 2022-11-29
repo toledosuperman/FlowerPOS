@@ -161,8 +161,75 @@ deleteDoc(docRef)
     console.log(error);
 })
 }
+async function getAllUsers() {
+    try {
+           const colRef = collection(db, "users");
+           const docsSnap = await getDocs(colRef);
+           docsSnap.forEach(doc => {
+               console.log(doc.data());
+               console.log(doc.id);
+           })
+          return docsSnap;
+
+       } catch (error) {
+           console.log(error);
+       }
+};
+
+
+
+function AddNewUser(authProvider, email, name, role, uid) {
+
+   const docRef = addDoc(collection(db, "users"), {
+       email,
+       name,
+       role,
+       uid,
+       authProvider
+
+     });
+
+     console.log("Document written with ID: ", docRef.id);
+
+   };
+
+
+async function UpdateUser(email,
+    name,
+    role,
+    uid,
+    authProvider) {
+   const docRef = doc(db, "users", name);
+
+   const data = {
+    email,
+    name,
+    role,
+    uid,
+    authProvider
+     };
+
+     try {
+             await updateDoc(docRef, data);
+             console.log("Value of an Existing Document Field has been updated");
+         } catch (error) {
+             console.log(error);
+         }
+}
+
+function DeleteUser(name) {
+   const docRef = doc(db, "users", name);
+
+deleteDoc(docRef)
+.then(() => {
+   console.log("Entire Document has been deleted successfully.")
+})
+.catch(error => {
+   console.log(error);
+})
+}
 const FireStoreService = {
-    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder,
+    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder, getAllUsers, AddNewUser, UpdateUser, DeleteUser,
   };
 
 export default  FireStoreService
