@@ -18,7 +18,7 @@ const [  setSearch] = useState([])
       name: " ",
       email: " ",
       role: " ",
-      uid: " "
+      
   });
   const [currentUsersId, setCurrentUsersId] = useState([]);
 
@@ -51,16 +51,16 @@ const [  setSearch] = useState([])
       setShowDetailsForm(false);
       setCurrentUsersId(" ");
       setAddEditFormType("Add");
-      setCurrentUsers({ name: " ", role: " ", uid: " ", email: " "})
+      setCurrentUsers({ name: " ", role: " ", email: " "})
       setIsLoading(false);
   }
   const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
-      const { name, role, email, uid } = e.target.elements;
+      const { name, role, email } = e.target.elements;
       if (name.value && email.value) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
-              return FirestoreService.AddNewUser(name.value, role.value, uid.value, email.value).then(() => {
+              return FirestoreService.AddNewUser(name.value, role.value,  email.value).then(() => {
                   toast.success(`${name.value} is successfully added.`)
                   handleModalClose();
                   window.location.reload(false);
@@ -70,7 +70,7 @@ const [  setSearch] = useState([])
               })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
-              return FirestoreService.UpdateUser(currentUsersId, name.value, email.value, role.value, uid.value).then(() => {
+              return FirestoreService.UpdateUser(currentUsersId, name.value, email.value, role.value).then(() => {
                   toast.success(`${name.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -151,17 +151,7 @@ const [  setSearch] = useState([])
                               <Form.Control.Feedback type='invalid'>Email is required</Form.Control.Feedback>
                           </FloatingLabel>
 
-                          <FloatingLabel controlId="uid" label="uid" className="mb-3">
-                              <Form.Control required type='text' placeholder='Enter uid' size='md' value={currentUsers?.uid} onChange={(e) => {
-                                  setCurrentUsers({
-                                      
-                                      
-                                      
-                                      "uid": e.target.value
-                                  })
-                              }} />
-                              <Form.Control.Feedback type='invalid'>UID is required</Form.Control.Feedback>
-                          </FloatingLabel>
+                         
                       </Modal.Body>
                       <Modal.Footer>
                           <Button type="submit">{(addEditFormType === 'Add') ? 'Add' : 'Update'}</Button>
@@ -195,7 +185,7 @@ const [  setSearch] = useState([])
                         User Name: {currentUsers?.name}            <br />
                         User Email: {currentUsers?.email}           <br />
                         User Role: {currentUsers?.role}          <br />
-                        User ID: {currentUsers?.uid}          <br />
+                       
                         </p>
                     </Modal.Body> 
                   <Modal.Footer> 
@@ -247,10 +237,10 @@ const [  setSearch] = useState([])
                                           <Button variant='primary' onClick={() => {
                                               setCurrentUsersId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
                                               setCurrentUsers({
-                                                  "Name": user.doc.data.value.mapValue.fields.name.stringValue,
-                                                  "Price": user.doc.data.value.mapValue.fields.email.stringValue,
-                                                  "Inventory": user.doc.data.value.mapValue.fields.role.stringValue,
-                                                  "Type": user.doc.data.value.mapValue.fields.uid.stringValue
+                                                  "name": user.doc.data.value.mapValue.fields.name.stringValue,
+                                                  "email": user.doc.data.value.mapValue.fields.email.stringValue,
+                                                  "role": user.doc.data.value.mapValue.fields.role.stringValue
+                                                  
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
@@ -258,10 +248,10 @@ const [  setSearch] = useState([])
                                           <Button variant='danger' onClick={() => {
                                               setCurrentUsersId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1]);
                                               setCurrentUsers({
-                                                  "Name": user.doc.data.value.mapValue.fields.name.stringValue,
-                                                  "Price": user.doc.data.value.mapValue.fields.email.stringValue ,
-                                                  "Inventory": user.doc.data.value.mapValue.fields.role.stringValue,
-                                                  "Type": user.doc.data.value.mapValue.fields.uid.stringValue
+                                                  "name": user.doc.data.value.mapValue.fields.name.stringValue,
+                                                  "email": user.doc.data.value.mapValue.fields.email.stringValue ,
+                                                  "role": user.doc.data.value.mapValue.fields.role.stringValue,
+                                                  
                                                 });
                                               setShowDeleteDialogue(true);
                                           }}>x Delete</Button>
