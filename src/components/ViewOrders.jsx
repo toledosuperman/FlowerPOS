@@ -340,12 +340,12 @@ var hideCompleted=false;
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
                             <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
-                        <Button variant='primary' onClick={() => {
+                        <Button variant='primary' size="sm" onClick={() => {
                         hideCompleted =!hideCompleted;
                         setIsLoading(true)
 
                         setIsLoading(false)
-                                                                  }}>Display/hide finished orders</Button>{' '}
+                                                                  }}>Display/Hide finished orders</Button>{' '}
                       <Form>
           <InputGroup className='my-3'>
             {/* onChange for search */}
