@@ -99,7 +99,7 @@ const ProductScreen = () => {
       <Row className="justify-content-md-center">
       <Col md="auto">
       <Link to="/cart">
-              <Button variant="primary">
+              <Button variant="primary" size="lg">
                 Finalize Recipe
               </Button>
               
