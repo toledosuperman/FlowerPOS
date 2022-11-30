@@ -60,18 +60,6 @@ const [  setSearch] = useState([])
   const handleAddEditFormSubmit = async (e) => {
       e.preventDefault();
       const { name, role, email } = e.target.elements;
-    //   if (name.value && email.value) {
-    //       if (addEditFormType === "Add") {
-    //           setIsLoading(true);
-    //           return FirestoreService.AddNewUsers(name.value, role.value,  email.value).then(() => {
-    //               toast.success(`${name.value} is successfully added.`)
-    //               handleModalClose();
-    //               window.location.reload(false);
-    //           }).catch((e) => {
-    //               toast.error("Error occured: " + e.message);
-    //               setIsLoading(false);
-    //           })
-        //   } else if (addEditFormType === "Edit") {
               setIsLoading(true);
               try {
           await FirestoreService.UpdateUsers(currentUsersId, name.value, email.value, role.value);
@@ -116,7 +104,7 @@ const [  setSearch] = useState([])
               <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
                       <Modal.Header closeButton>
-                          <Modal.Title>{(addEditFormType === 'Add') ? 'Add User' : 'Edit'}</Modal.Title>
+                          <Modal.Title>{addEditFormType }</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                           <FloatingLabel controlId="Name" label="User Name" className="mb-3" >
@@ -131,9 +119,8 @@ const [  setSearch] = useState([])
 
                           
 
-                          <FloatingLabel controlId="Role"  className="mb-3">
-                          </FloatingLabel>
-                          <ToggleButtonGroup type="radio" name="options" defaultValue={currentUsers?.role} onChange={(e) => {
+                          
+                          <ToggleButtonGroup type="radio" name="options" value={currentUsers?.role} onChange={(e) => {
                                   setCurrentUsers({
                                       "role": e.target.value,                   
                                       
@@ -159,17 +146,6 @@ const [  setSearch] = useState([])
                               <Form.Control.Feedback type='invalid'>Role is required</Form.Control.Feedback> */}
                       
 
-                          {/* <FloatingLabel controlId="email" label="Email" className="mb-3">
-                              <Form.Control required type='text' placeholder='Enter Email' size='md' value={currentUsers?.email} onChange={(e) => {
-                                  setCurrentUsers({
-                                      
-                                      
-                                      "email": e.target.value,
-                                      
-                                  })
-                              }} />
-                              <Form.Control.Feedback type='invalid'>Email is required</Form.Control.Feedback>
-                          </FloatingLabel> */}
 
                          
                       </Modal.Body>
@@ -194,24 +170,7 @@ const [  setSearch] = useState([])
                   </Modal.Footer>
               </Modal>
 
-             {/* Users details */}
-             {/* <Modal show={showDetailsForm} onHide={handleModalClose}>
-                   <Modal.Header closeButton>
-                   <Modal.Title>User Details</Modal.Title>
-                   </Modal.Header> 
-                   <Modal.Body>
-
-                        <p>
-                        User Name: {currentUsers?.name}            <br />
-                        User Email: {currentUsers?.email}           <br />
-                       
-                       
-                        </p>
-                    </Modal.Body> 
-                  <Modal.Footer> 
-                      <Button variant="danger" onClick={handleModalClose}>Stop Viewing</Button>
-                  </Modal.Footer> 
-              </Modal> */}
+          
 
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-Users-center">

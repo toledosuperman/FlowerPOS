@@ -9,7 +9,7 @@ import  { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
 import "./account.css";
-import { collection, getDocs, orderBy, limit, query, where} from "firebase/firestore";
+import { collection, getDocs, orderBy, limit, query} from "firebase/firestore";
 
 
 function Reports ()  {
