@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useCallback, Fragment} from "react";
+import React, { useEffect, useState , useCallback} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
@@ -8,19 +8,11 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 function ViewUsers() {
-    // const [checked, setChecked] = useState(false);
-    const [radioValue, setRadioValue] = useState('1');
-  
-    const radios = [
-      { name: 'Admin', value: '1' },
-      { name: 'Sales', value: '2' },
-      
-    ];
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
 const [  setSearch] = useState([])
@@ -55,50 +47,51 @@ const [  setSearch] = useState([])
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
-  const [showDetailsForm, setShowDetailsForm] = useState(false);
+//   const [showDetailsForm, setShowDetailsForm] = useState(false);
   const handleModalClose = () => {
       setShowAddEditForm(false);
       setShowDeleteDialogue(false);
-      setShowDetailsForm(false);
+    //   setShowDetailsForm(false);
       setCurrentUsersId(" ");
       setAddEditFormType("Add");
       setCurrentUsers({ name: " ", role: false, email: " "})
       setIsLoading(false);
   }
-  const handleAddEditFormSubmit = (e) => {
+  const handleAddEditFormSubmit = async (e) => {
       e.preventDefault();
       const { name, role, email } = e.target.elements;
-      if (name.value && email.value) {
-          if (addEditFormType === "Add") {
+    //   if (name.value && email.value) {
+    //       if (addEditFormType === "Add") {
+    //           setIsLoading(true);
+    //           return FirestoreService.AddNewUsers(name.value, role.value,  email.value).then(() => {
+    //               toast.success(`${name.value} is successfully added.`)
+    //               handleModalClose();
+    //               window.location.reload(false);
+    //           }).catch((e) => {
+    //               toast.error("Error occured: " + e.message);
+    //               setIsLoading(false);
+    //           })
+        //   } else if (addEditFormType === "Edit") {
               setIsLoading(true);
-              return FirestoreService.AddNewUser(name.value, role.boolean,  email.value).then(() => {
-                  toast.success(`${name.value} is successfully added.`)
-                  handleModalClose();
-                  window.location.reload(false);
-              }).catch((e) => {
-                  toast.error("Error occured: " + e.message);
-                  setIsLoading(false);
-              })
-          } else if (addEditFormType === "Edit") {
-              setIsLoading(true);
-              return FirestoreService.UpdateUser(currentUsersId, name.value, email.value, role.boolean).then(() => {
-                  toast.success(`${name.value} is successfully updated.`);
-                  handleModalClose();
-                  window.location.reload(false);
-              }).catch((e) => {
-                  toast.error("Error occured: " + e.message);
-                  setIsLoading(false);
-              })
-          }
+              try {
+          await FirestoreService.UpdateUsers(currentUsersId, name.value, email.value, role.value);
+          toast.success(`${name.value} is successfully updated.`);
+          handleModalClose();
+          window.location.reload(false);
+      } catch (e_1) {
+          toast.error("Error occured: " + e_1.message);
+          setIsLoading(false);
       }
+          
+      
       setValidated(true)
   }
 
-  const handleUserDelete = async (e) => {
+  const handleUsersDelete = async (e) => {
     e.preventDefault();
       setIsLoading(true);
       try {
-          await Promise.resolve(FirestoreService.DeleteUser(currentUsersId));
+          await Promise.resolve(FirestoreService.DeleteUsers(currentUsersId));
           toast.success(`Deletion Successful`);
           handleModalClose();
           window.location.reload(false);
@@ -138,9 +131,24 @@ const [  setSearch] = useState([])
 
                           
 
-                          {/* <FloatingLabel controlId="Role" label="Role" className="mb-3">
+                          <FloatingLabel controlId="Role"  className="mb-3">
+                          </FloatingLabel>
+                          <ToggleButtonGroup type="radio" name="options" defaultValue={currentUsers?.role} onChange={(e) => {
+                                  setCurrentUsers({
+                                      "role": e.target.value,                   
+                                      
+                                  })
+                              }}>
+        <ToggleButton id="tbg-radio-1" value={false}>
+          Sales
+        </ToggleButton>
+        <ToggleButton id="tbg-radio-2" value={true}>
+          Admin
+        </ToggleButton>
+        
+      </ToggleButtonGroup>
                    
-                              <Form.Control required type='text' placeholder='Enter Role' size='md' value={currentUsers?.role} onChange={(e) => {
+                              {/* <Form.Control required type='text' placeholder='Enter Role' size='md' value={currentUsers?.role} onChange={(e) => {
                                   setCurrentUsers({
                                       
                                       "role": e.target.value,
@@ -149,9 +157,9 @@ const [  setSearch] = useState([])
                                   })
                               }} />
                               <Form.Control.Feedback type='invalid'>Role is required</Form.Control.Feedback> */}
-                          {/* </FloatingLabel> */}
+                      
 
-                          <FloatingLabel controlId="email" label="Email" className="mb-3">
+                          {/* <FloatingLabel controlId="email" label="Email" className="mb-3">
                               <Form.Control required type='text' placeholder='Enter Email' size='md' value={currentUsers?.email} onChange={(e) => {
                                   setCurrentUsers({
                                       
@@ -161,7 +169,7 @@ const [  setSearch] = useState([])
                                   })
                               }} />
                               <Form.Control.Feedback type='invalid'>Email is required</Form.Control.Feedback>
-                          </FloatingLabel>
+                          </FloatingLabel> */}
 
                          
                       </Modal.Body>
@@ -182,12 +190,12 @@ const [  setSearch] = useState([])
                   </Modal.Body>
                   <Modal.Footer>
                       <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
-                      <Button variant="danger" onClick={handleUserDelete}>Yes, Delete</Button>
+                      <Button variant="danger" onClick={handleUsersDelete}>Yes, Delete</Button>
                   </Modal.Footer>
               </Modal>
 
              {/* Users details */}
-             <Modal show={showDetailsForm} onHide={handleModalClose}>
+             {/* <Modal show={showDetailsForm} onHide={handleModalClose}>
                    <Modal.Header closeButton>
                    <Modal.Title>User Details</Modal.Title>
                    </Modal.Header> 
@@ -203,7 +211,7 @@ const [  setSearch] = useState([])
                   <Modal.Footer> 
                       <Button variant="danger" onClick={handleModalClose}>Stop Viewing</Button>
                   </Modal.Footer> 
-              </Modal>
+              </Modal> */}
 
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-Users-center">
@@ -242,22 +250,7 @@ const [  setSearch] = useState([])
                                       {console.log(user.doc.data.value.mapValue.fields.name.stringValue)}
                                       <td>{user.doc.data.value.mapValue.fields.name.stringValue}</td>
                                       <td>{user.doc.data.value.mapValue.fields.email.stringValue}</td>
-                                      <td> <ButtonGroup>
-        {radios.map((radio, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`radio-${idx}`}
-            type="radio"
-            variant={idx % 2 ? 'outline-success' : 'outline-danger'}
-            name="radio"
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-      </ButtonGroup></td>
+                                      <td> {user.doc.data.value.mapValue.fields.role.booleanValue ? 'Admin' : 'Sales'}</td>
                                       
                                       <td>
                                       {' '}

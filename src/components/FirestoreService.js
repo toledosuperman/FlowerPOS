@@ -181,28 +181,24 @@ async function getAllUsers() {
 
 
 
-async function UpdateUser(email,
-    name,
-    role,
-   
-    ) {
-   const docRef = doc(db, "users", name);
+async function UpdateUsers(id, name, email, role) {
+    const docRef = doc(db, "users", id);
 
-   const data = {
-    email,
-    name,
-    role
-     };
-
-     try {
-             await updateDoc(docRef, data);
-             console.log("Value of an Existing Document Field has been updated");
-         } catch (error) {
-             console.log(error);
-         }
+    const data = {
+        name,
+        role: Boolean(role),
+        email
+      };
+      
+      try {
+        await updateDoc(docRef, data);
+        console.log("Value of an Existing Document Field has been updated");
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-function DeleteUser(name) {
+function DeleteUsers(name) {
    const docRef = doc(db, "users", name);
 
 deleteDoc(docRef)
@@ -214,7 +210,7 @@ deleteDoc(docRef)
 })
 }
 const FireStoreService = {
-    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder, getAllUsers, UpdateUser, DeleteUser,
+    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder, getAllUsers, UpdateUsers, DeleteUsers,
   };
 
 export default  FireStoreService

@@ -12,9 +12,6 @@ function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
 const [  setSearch] = useState([])
-
-  
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentProduct, setCurrentProduct] = useState({
@@ -55,7 +52,6 @@ const [  setSearch] = useState([])
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
-
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
   const [showDetailsForm, setShowDetailsForm] = useState(false);
 
