@@ -7,13 +7,14 @@ import logo from '../assets/logo.png'
 import Footer from './footer';
 
 const Signin = () => {
+  //react state constants
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
   
-
+//use effect to redirect to account page
   useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -24,6 +25,7 @@ const Signin = () => {
 
   return (
   <React.Fragment>
+    {/* signin Form */}
     <div className="login">
     
       <div className="login__container">

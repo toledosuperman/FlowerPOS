@@ -6,7 +6,7 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth';
 import { auth } from '../firebase';
-
+//firestore data for user admin and signin
 const UserContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {

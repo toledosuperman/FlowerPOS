@@ -14,6 +14,8 @@ import { collection, addDoc, Timestamp,} from 'firebase/firestore';
 import { listProducts } from './productActions'
 import  toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
+
+//create recipe page
 const ProductScreen = () => {
   const dispatch = useDispatch()
   const[Name, setName]= useState('');

@@ -11,6 +11,7 @@ import Footer from './footer';
 import logo from '../assets/logo.png'
 
 function Signup() {
+  //react state constants
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -21,7 +22,7 @@ function Signup() {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
   };
-
+//redirect function
    useEffect(() => {
     if (loading) {
       // maybe trigger a loading screen
@@ -32,6 +33,7 @@ function Signup() {
 
   return (
   <React.Fragment>
+    {/* signup form view */}
     <div className="register">
       <div className="register__container">
       <div className="logo-image">

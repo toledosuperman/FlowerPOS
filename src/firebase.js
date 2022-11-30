@@ -17,7 +17,7 @@ import {
   addDoc,
 } from "firebase/firestore";
   
-
+//firestore API with basic functions
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcc1jnbceSvBcBmDuN2nnMzMqAw3euNqE",

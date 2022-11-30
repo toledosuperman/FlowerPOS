@@ -14,7 +14,7 @@ import ListCustomers from './components/ListCustomers';
 import { AuthContextProvider } from './context/AuthContext';
 import Reset from './components/Reset';
 
-
+//generate application views and basic logic
 function App() {
   return (
 
