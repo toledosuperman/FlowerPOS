@@ -13,6 +13,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 function ViewUsers() {
+    //create state for react components
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
 const [  setSearch] = useState([])
@@ -24,7 +25,7 @@ const [  setSearch] = useState([])
       
   });
   const [currentUsersId, setCurrentUsersId] = useState([]);
-
+ //function to retrieve users from database
   const fetchUsers = useCallback(() =>{
       setIsLoading(true);
       FirestoreService.getAllUsers().then((response) => {
@@ -37,26 +38,27 @@ const [  setSearch] = useState([])
           toast.error("Error occurred while fetching the user. " + e);
       })
   }, [currentUsersId]);
+  //use effect to utilize above function when event occurs
   useEffect(() => {
       if (user !== null) {  
           fetchUsers();
       }
   }, [user, fetchUsers])
-
+//more use state react components
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
-//   const [showDetailsForm, setShowDetailsForm] = useState(false);
+  //function to handle closing modals
   const handleModalClose = () => {
       setShowAddEditForm(false);
       setShowDeleteDialogue(false);
-    //   setShowDetailsForm(false);
       setCurrentUsersId(" ");
       setAddEditFormType("Add");
       setCurrentUsers({ name: " ", role: false, email: " "})
       setIsLoading(false);
   }
+  //function to submit update firestore data
   const handleAddEditFormSubmit = async (e) => {
       e.preventDefault();
       const { name, role, email } = e.target.elements;
@@ -74,7 +76,7 @@ const [  setSearch] = useState([])
       
       setValidated(true)
   }
-
+//function to delete firestore data
   const handleUsersDelete = async (e) => {
     e.preventDefault();
       setIsLoading(true);
@@ -90,10 +92,12 @@ const [  setSearch] = useState([])
   }
 
   return (
-      <>
+      <> 
+      {/* logged in view */}
           {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user !== null) && <>
+          {/* background image */}
             <React.Fragment> <div style={{ backgroundImage: `url(${background})`,
   
   backgroundSize:"contain", 
@@ -106,7 +110,7 @@ const [  setSearch] = useState([])
                       <Modal.Header closeButton>
                           <Modal.Title>{addEditFormType }</Modal.Title>
                       </Modal.Header>
-                      <Modal.Body>
+                      <Modal.Body> {/*change user name */}
                           <FloatingLabel controlId="Name" label="User Name" className="mb-3" >
                               <Form.Control required type='text' placeholder='Enter User Name' size='md' value={currentUsers?.name} onChange={(e) => {
                                   setCurrentUsers({
@@ -118,7 +122,7 @@ const [  setSearch] = useState([])
                           </FloatingLabel>
 
                           
-
+                                {/* change user roles*/}
                           
                           <ToggleButtonGroup type="radio" name="options" value={currentUsers?.role} onChange={(e) => {
                                   setCurrentUsers({
@@ -135,18 +139,6 @@ const [  setSearch] = useState([])
         
       </ToggleButtonGroup>
                    
-                              {/* <Form.Control required type='text' placeholder='Enter Role' size='md' value={currentUsers?.role} onChange={(e) => {
-                                  setCurrentUsers({
-                                      
-                                      "role": e.target.value,
-                                      
-                                      
-                                  })
-                              }} />
-                              <Form.Control.Feedback type='invalid'>Role is required</Form.Control.Feedback> */}
-                      
-
-
                          
                       </Modal.Body>
                       <Modal.Footer>
@@ -171,7 +163,7 @@ const [  setSearch] = useState([])
               </Modal>
 
           
-
+{/* table view*/}
               <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-Users-center">
                       <div className="align-Users-center" style={{ marginRight: 8 }}>
@@ -192,7 +184,7 @@ const [  setSearch] = useState([])
         </Form>
                   </Card.Header>
                   <Card.Body>
-                      <Table layout={{ isDiv: true, fixedHeader: true }} responsive className="table table-striped">
+                      <Table layout={{  fixedHeader: true }} responsive className="table table-striped">
                       <thead>
                         <tr><th>#</th>
                              <th>User Name</th>
@@ -238,7 +230,7 @@ const [  setSearch] = useState([])
                                   </tr>
                               )))}
                           </tbody>
-
+{/* toaster styling */}
                           <Toaster toastOptions={{
     success: {
       style: {
