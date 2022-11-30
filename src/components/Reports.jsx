@@ -10,9 +10,6 @@ import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
 import "./account.css";
 import { collection, getDocs, orderBy, limit, query, where} from "firebase/firestore";
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { Calendar } from 'react-date-range';
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
