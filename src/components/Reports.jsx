@@ -37,6 +37,13 @@ function Reports ()  {
   useEffect(() => {
     if (loading) return;
   }, [user, loading]);
+  useEffect(()=>{
+    getOrders()
+  },[])
+    useEffect(()=> {
+        console.log(orders)
+    },[orders]
+    )
   
 
 
