@@ -26,7 +26,7 @@ const [  setSearch] = useState([])
 
 
  
-
+  //fetching all products
   const fetchProducts = useCallback(() =>{
       setIsLoading(true);
      
@@ -52,8 +52,8 @@ const [  setSearch] = useState([])
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
-  const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
-  const [showDetailsForm, setShowDetailsForm] = useState(false);
+  const [showDeleteDialogue, setShowDeleteDialogue] = useState(false); //delete
+  const [showDetailsForm, setShowDetailsForm] = useState(false); //view details
 
   const handleModalClose = () => {
       setShowAddEditForm(false);
@@ -65,6 +65,7 @@ const [  setSearch] = useState([])
       setIsLoading(false);
   }
 
+  // handling for add/edit functionality
   const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
       const { Name, Price, Inventory, Type } = e.target.elements;
@@ -77,6 +78,7 @@ const [  setSearch] = useState([])
                   handleModalClose();
                   window.location.reload(false);
               }).catch((e) => {
+                //toast message
                   toast.error("Error occured: " + e.message);
                   setIsLoading(false);
               })
@@ -95,6 +97,7 @@ const [  setSearch] = useState([])
       setValidated(true)
   }
 
+  //handling delete functionality
   const handleProductDelete = async (e) => {
     e.preventDefault();
       setIsLoading(true);
@@ -296,7 +299,7 @@ const [  setSearch] = useState([])
                                   </tr>
                               )))}
                           </tbody>
-
+                            {/* toast message */}
                           <Toaster toastOptions={{
     success: {
       style: {
