@@ -11,6 +11,21 @@ import background from '../assets/FlowerField.jpg'
 // import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 // import ToggleButton from 'react-bootstrap/ToggleButton';
 
+                          
+                          /* <ToggleButtonGroup type="radio" name="options" value={currentUsers?.role} onChange={(e) => {
+                                  setCurrentUsers({
+                                      "role": e.target.value,                   
+                                      
+                                  })
+                              }}>
+        <ToggleButton id="tbg-radio-1" value={false}>
+          Sales
+        </ToggleButton>
+        <ToggleButton id="tbg-radio-2" value={true}>
+          Admin
+        </ToggleButton>
+        
+      </ToggleButtonGroup> */
 
 function ViewUsers() {
     //create state for react components
@@ -191,20 +206,5 @@ function ViewUsers() {
 }
 
 export default ViewUsers;
- {/* change user roles*/}
-                          
-                          {/* <ToggleButtonGroup type="radio" name="options" value={currentUsers?.role} onChange={(e) => {
-                                  setCurrentUsers({
-                                      "role": e.target.value,                   
-                                      
-                                  })
-                              }}>
-        <ToggleButton id="tbg-radio-1" value={false}>
-          Sales
-        </ToggleButton>
-        <ToggleButton id="tbg-radio-2" value={true}>
-          Admin
-        </ToggleButton>
-        
-      </ToggleButtonGroup> */}
+
                    
