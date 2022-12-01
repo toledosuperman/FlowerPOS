@@ -21,7 +21,7 @@ const [  setSearch] = useState([])
       Type: " "
 
   });
-  const [currentProductId, setCurrentProductId] = useState([]);
+  const [currentProductId, setCurrentProductId] = useState(['']);
 
 
 
