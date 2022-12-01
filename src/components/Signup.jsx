@@ -14,13 +14,13 @@ function Signup() {
   //react state constants
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const [posusername, setName] = useState("");
   const [user, loading] = useAuthState(auth);
   const navigate = useNavigate();
 
   const register = () => {
-    if (!name) alert("Please enter name");
-    registerWithEmailAndPassword(name, email, password);
+    if (!posusername) alert("Please enter name");
+    registerWithEmailAndPassword(posusername, email, password);
   };
 //redirect function
    useEffect(() => {
@@ -47,7 +47,7 @@ function Signup() {
         <input
           type="text"
           className="register__textBox"
-          value={name}
+          value={posusername}
           onChange={(e) => setName(e.target.value)}
           placeholder="Full Name"
         />

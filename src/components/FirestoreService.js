@@ -6,6 +6,7 @@ import {
     getDocs,
     updateDoc
   } from "firebase/firestore";
+import { boolean } from "yup";
 
 import { db } from '../firebase'
 
@@ -163,31 +164,46 @@ deleteDoc(docRef)
 }
 async function getAllUsers() {
     try {
-           const colRef = collection(db, "users");
-           const docsSnap = await getDocs(colRef);
-           docsSnap.forEach(doc => {
-               console.log(doc.data());
-               console.log(doc.id);
-           })
-          return docsSnap;
-
-       } catch (error) {
-           console.log(error);
-       }
+        const colRef = collection(db, "users");
+        const docsSnap = await getDocs(colRef);
+        docsSnap.forEach(doc => {
+            console.log(doc.data());
+            console.log(doc.id);
+        })
+       return docsSnap;
+        
+    } catch (error) {
+        console.log(error);
+    }
+    
 };
 
 
 
+function AddNewUsers(posusername, email, role, uid, authProvider) {
+    
+    const docRef = addDoc(collection(db, "users"), {
+        posusername,
+       email,
+        uid,
+        authProvider,
+        role: boolean(role),
+
+      });
+      console.log("Document written with ID: ", docRef.id);
+
+    };
 
 
-
-async function UpdateUsers(id, name, email, role) {
+async function UpdateUsers(id, posusername, role, uid, email, authProvider) {
     const docRef = doc(db, "users", id);
 
     const data = {
-        name,
-        role: Boolean(role),
-        email
+        posusername,
+       email,
+        uid,
+        authProvider,
+        role: boolean(role),
       };
       
       try {
@@ -198,19 +214,19 @@ async function UpdateUsers(id, name, email, role) {
     }
 }
 
-function DeleteUsers(name) {
-   const docRef = doc(db, "users", name);
+function DeleteUsers(posusername) {
+    const docRef = doc(db, "users", posusername);
 
 deleteDoc(docRef)
 .then(() => {
-   console.log("Entire Document has been deleted successfully.")
+    console.log("Entire Document has been deleted successfully.")
 })
 .catch(error => {
-   console.log(error);
+    console.log(error);
 })
 }
 const FireStoreService = {
-    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder, getAllUsers, UpdateUsers, DeleteUsers,
+    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder,AddNewUsers, getAllUsers, UpdateUsers, DeleteUsers,
   };
 
 export default  FireStoreService

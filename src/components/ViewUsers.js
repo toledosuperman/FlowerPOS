@@ -8,20 +8,23 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
+// import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+// import ToggleButton from 'react-bootstrap/ToggleButton';
 
 
 function ViewUsers() {
     //create state for react components
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
-const [  setSearch] = useState([])
+
   const [isLoading, setIsLoading] = useState(false);
   const [currentUsers, setCurrentUsers] = useState({
-      name: " ",
-      email: " ",
+      posusername: " ",
+      email: "",
+      uid: "",
       role: false,
+      authProvider: ""
+    //   role: <boolean>true</boolean>,
       
   });
   const [currentUsersId, setCurrentUsersId] = useState([]);
@@ -46,36 +49,49 @@ const [  setSearch] = useState([])
   }, [user, fetchUsers])
 //more use state react components
   const [showAddEditForm, setShowAddEditForm] = useState(false);
-  const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
+  const [addEditFormType, setAddEditFormType] = useState('Edit'); //Add, Edit
   const [validated, setValidated] = useState(false);
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
   //function to handle closing modals
   const handleModalClose = () => {
       setShowAddEditForm(false);
       setShowDeleteDialogue(false);
-      setCurrentUsersId(" ");
-      setAddEditFormType("Add");
-      setCurrentUsers({ name: " ", role: false, email: " "})
+      setCurrentUsersId("");
+      setAddEditFormType();
+      setCurrentUsers({ posusername: " ", role: false, email: " ", uid: "", authProvider: ""})
       setIsLoading(false);
   }
   //function to submit update firestore data
-  const handleAddEditFormSubmit = async (e) => {
-      e.preventDefault();
-      const { name, role, email } = e.target.elements;
-              setIsLoading(true);
-              try {
-          await FirestoreService.UpdateUsers(currentUsersId, name.value, email.value, role.value);
-          toast.success(`${name.value} is successfully updated.`);
-          handleModalClose();
-          window.location.reload(false);
-      } catch (e_1) {
-          toast.error("Error occured: " + e_1.message);
-          setIsLoading(false);
-      }
-          
-      
-      setValidated(true)
-  }
+  const handleAddEditFormSubmit = (e) => {
+    e.preventDefault();
+    const { posusername, role, email, uid, authProvider } = e.target.elements;
+
+    // if (posusername.value && uid.value) {
+        // if (addEditFormType === "Add") {
+        //     setIsLoading(true);
+        //     return FirestoreService.AddNewUsers(posusername.value, role.value, uid.value, email.value, authProvider.value).then(() => {
+        //         toast.success(`${posusername.value} is successfully added.`)
+        //         handleModalClose();
+        //         window.location.reload(false);
+        //     }).catch((e) => {
+        //         toast.error("Error occured: " + e.message);
+        //         setIsLoading(false);
+        //     })
+         if (addEditFormType === "Edit") {
+            setIsLoading(true);
+            return FirestoreService.UpdateUsers(currentUsersId, posusername.value, role.value, uid.value, email.value,authProvider.value).then(() => {
+                toast.success(`${posusername.value} is successfully updated.`);
+                handleModalClose();
+                window.location.reload(false);
+            }).catch((e) => {
+                toast.error("Error occured: " + e.message);
+                setIsLoading(false);
+            })
+        }
+        setValidated(true)
+    }
+    
+
 //function to delete firestore data
   const handleUsersDelete = async (e) => {
     e.preventDefault();
@@ -104,17 +120,18 @@ const [  setSearch] = useState([])
    }}>
    <Navbar />
   
-              {/* Add/Edit Form */}
-              <Modal show={showAddEditForm} onHide={handleModalClose}>
+   <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
                       <Modal.Header closeButton>
-                          <Modal.Title>{addEditFormType }</Modal.Title>
+                          <Modal.Title>{(addEditFormType === 'Add') ? 'Add User' : 'Edit'}</Modal.Title>
                       </Modal.Header>
-                      <Modal.Body> {/*change user name */}
-                          <FloatingLabel controlId="Name" label="User Name" className="mb-3" >
-                              <Form.Control required type='text' placeholder='Enter User Name' size='md' value={currentUsers?.name} onChange={(e) => {
+                      <Modal.Body>
+                          <FloatingLabel controlId="posusername" label="User Name" className="mb-3" >
+                              <Form.Control required type='text' placeholder='Enter User Name' size='md' value={setUsers.posusername} onChange={(e) => {
                                   setCurrentUsers({
-                                      "name": e.target.value,                   
+                                      "posusername": e.target.value,
+                                      
+                                      
                                       
                                   })
                               }} />
@@ -122,23 +139,7 @@ const [  setSearch] = useState([])
                           </FloatingLabel>
 
                           
-                                {/* change user roles*/}
-                          
-                          <ToggleButtonGroup type="radio" name="options" value={currentUsers?.role} onChange={(e) => {
-                                  setCurrentUsers({
-                                      "role": e.target.value,                   
-                                      
-                                  })
-                              }}>
-        <ToggleButton id="tbg-radio-1" value={false}>
-          Sales
-        </ToggleButton>
-        <ToggleButton id="tbg-radio-2" value={true}>
-          Admin
-        </ToggleButton>
-        
-      </ToggleButtonGroup>
-                   
+
                          
                       </Modal.Body>
                       <Modal.Footer>
@@ -154,7 +155,7 @@ const [  setSearch] = useState([])
                       <Modal.Title>Delete User</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                      <p>Are you sure you want to delete {currentUsers.name}?</p>
+                      <p>Are you sure you want to delete {currentUsers.posusername}?</p>
                   </Modal.Body>
                   <Modal.Footer>
                       <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
@@ -174,12 +175,7 @@ const [  setSearch] = useState([])
                       <Form>
           <InputGroup className='my-3'>
          
-            {/* onChange for search */}
-            <Form.Control
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder='Search Users'
-              style={{ width: 350, }}
-            />
+            
           </InputGroup>
         </Form>
                   </Card.Header>
@@ -198,8 +194,8 @@ const [  setSearch] = useState([])
                               { (Users.map((user, index) => (
                                   <tr key={index}>
                                       <td>{index + 1}</td>
-                                      {console.log(user.doc.data.value.mapValue.fields.name.stringValue)}
-                                      <td>{user.doc.data.value.mapValue.fields.name.stringValue}</td>
+                                      {console.log(user.doc.data.value.mapValue.fields.posusername.stringValue)}
+                                      <td>{user.doc.data.value.mapValue.fields.posusername.stringValue}</td>
                                       <td>{user.doc.data.value.mapValue.fields.email.stringValue}</td>
                                       <td> {user.doc.data.value.mapValue.fields.role.booleanValue ? 'Admin' : 'Sales'}</td>
                                       
@@ -208,18 +204,18 @@ const [  setSearch] = useState([])
                                           <Button variant='primary' onClick={() => {
                                               setCurrentUsersId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
                                               setCurrentUsers({
-                                                  "name": user.doc.data.value.mapValue.fields.name.stringValue,
+                                                  "name": user.doc.data.value.mapValue.fields.posusername.stringValue,
                                                   "email": user.doc.data.value.mapValue.fields.email.stringValue,
                                                   "role": user.doc.data.value.mapValue.fields.role.booleanValue
                                                   
                                               });
-                                              setAddEditFormType("Edit");
+                                              setAddEditFormType();
                                               setShowAddEditForm(true);
                                           }}>✎ Edit</Button>{' '}
                                           <Button variant='danger' onClick={() => {
                                               setCurrentUsersId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1]);
                                               setCurrentUsers({
-                                                  "name": user.doc.data.value.mapValue.fields.name.stringValue,
+                                                  "name": user.doc.data.value.mapValue.fields.posusername.stringValue,
                                                   "email": user.doc.data.value.mapValue.fields.email.stringValue ,
                                                   "role": user.doc.data.value.mapValue.fields.role.booleanValue,
                                                   
@@ -256,3 +252,20 @@ const [  setSearch] = useState([])
 }
 
 export default ViewUsers;
+ {/* change user roles*/}
+                          
+                          {/* <ToggleButtonGroup type="radio" name="options" value={currentUsers?.role} onChange={(e) => {
+                                  setCurrentUsers({
+                                      "role": e.target.value,                   
+                                      
+                                  })
+                              }}>
+        <ToggleButton id="tbg-radio-1" value={false}>
+          Sales
+        </ToggleButton>
+        <ToggleButton id="tbg-radio-2" value={true}>
+          Admin
+        </ToggleButton>
+        
+      </ToggleButtonGroup> */}
+                   

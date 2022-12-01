@@ -9,7 +9,9 @@ import  { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
 import "./account.css";
-import { collection, getDocs, orderBy, limit, query, where} from "firebase/firestore";
+import { collection, getDocs, 
+  // orderBy, limit,
+   query, where} from "firebase/firestore";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,6 +21,7 @@ function Reports ()  {
   const [isLoading] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [orders, setOrders] = useState([])
+ 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(null);
    const onChange = (dates) => {
@@ -36,7 +39,7 @@ function Reports ()  {
   }, [user, loading]);
   useEffect(()=>{
     getOrders()
-  },[])
+  })
     useEffect(()=> {
         console.log(orders)
     },[orders]
