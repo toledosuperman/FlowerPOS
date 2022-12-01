@@ -9,25 +9,28 @@ import  { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
 import "./account.css";
-import { collection, getDocs, orderBy, limit, query, where} from "firebase/firestore";
-import { DateRangePicker } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // main style file
-import 'react-date-range/dist/theme/default.css'; // theme css file
-import { addDays } from 'date-fns';
+import { collection, getDocs, 
+  // orderBy, limit,
+   query, where} from "firebase/firestore";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function Reports ()  {
   const [isLoading] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [orders, setOrders] = useState([])
-  const [state, setState] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: 'selection'
-    }
-  ]);
-  console.log(state)
+ 
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(null);
+   const onChange = (dates) => {
+        const [start, end] = dates;
+        setStartDate(start);
+        setEndDate(end);
+    };
+
+ 
 
 
 
@@ -36,7 +39,7 @@ function Reports ()  {
   }, [user, loading]);
   useEffect(()=>{
     getOrders()
-  },[])
+  })
     useEffect(()=> {
         console.log(orders)
     },[orders]
@@ -45,28 +48,30 @@ function Reports ()  {
 
 
   function getOrders(){
-    const orderCollectionRef = collection(db,'Orders')
-    const q = query(orderCollectionRef, orderBy('created', 'desc'), limit(10))
-    getDocs(q)
-        .then(response =>{
-            const ord = response.docs.map(doc => ({
-                data: doc.data(),
-                id: doc.id,
-            }))
-            setOrders(ord)
-        })
-        .catch(error => console.log(error.message))
-        };  
+    // const orderCollectionRef = collection(db,'Orders')
+    // const q = query(orderCollectionRef, orderBy('created', 'desc'), limit(10))
+    // getDocs(q)
+    //     .then(response =>{
+    //         const ord = response.docs.map(doc => ({
+    //             data: doc.data(),
+    //             id: doc.id,
+    //         }))
+    //         setOrders(ord)
+    //     })
+    //     .catch(error => console.log(error.message))
+    //     };  
 
-        function getOrdersbyDate(dates){
-          const {startDate, endDate} = dates;
-          console.log(startDate, endDate)
-          if (startDate === undefined && endDate === undefined) {
-            getOrders()
-            return
-          }
+    //     function getOrdersbyDate(dates){
+    //       const {startDate, endDate} = dates;
+    //       console.log(startDate, endDate)
+    //       if (startDate === undefined && endDate === undefined) {
+    //         getOrders()
+    //         return
+    //       }
           const orderCollectionRef = collection(db,'Orders')
-          const q = query(orderCollectionRef, where("created", ">=", startDate), where("created", "<=", endDate));
+          const q = query(orderCollectionRef, 
+            where("created", ">=", startDate), where("created", "<=", endDate
+            ));
           getDocs(q)
               .then(response =>{
                   const ord = response.docs.map(doc => ({
@@ -93,14 +98,14 @@ return (<>
                           <h4 style={{ marginTop: 8, }}>Reports</h4>
                         
 
-                          <DateRangePicker
-  onChange={item => setState([item.selection])}
-  showSelectionPreview={true}
-  moveRangeOnFirstSelection={false}
-  months={2}
-  ranges={state}
-  direction="horizontal"
-/>;
+                           <DatePicker
+            selected={startDate}
+            onChange={onChange}
+            startDate={startDate}
+            endDate={endDate}
+            selectsRange
+            inline
+        />
                           <DropdownButton id="dropdown-basic-button" title="Select Report">
       <Dropdown.Item href="#/action-1">COGS Report</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Products Report</Dropdown.Item>
