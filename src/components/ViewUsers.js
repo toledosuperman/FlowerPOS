@@ -180,6 +180,7 @@ function ViewUsers() {
                                   </tr>
                               )))}
                           </tbody>
+                          </Table>
 {/* toaster styling */}
                           <Toaster toastOptions={{
     success: {
@@ -193,10 +194,7 @@ function ViewUsers() {
       },
     },
   }}/>
-                          <React.Fragment>
-                          
-      </React.Fragment>
-                      </Table>
+                         
                   </Card.Body>
               </Card></div>
                <Footer />
