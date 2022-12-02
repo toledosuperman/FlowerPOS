@@ -8,6 +8,7 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
+import { FaRegTrashAlt } from 'react-icons/fa';
 // import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 // import ToggleButton from 'react-bootstrap/ToggleButton';
 
@@ -175,7 +176,7 @@ function ViewUsers() {
                                                   
                                                 });
                                               setShowDeleteDialogue(true);
-                                          }}>x Delete</Button>
+                                          }}>{<FaRegTrashAlt />}</Button>
                                       </td>
                                   </tr>
                               )))}

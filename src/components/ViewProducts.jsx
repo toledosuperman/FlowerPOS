@@ -8,6 +8,7 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
+import { FaRegTrashAlt } from 'react-icons/fa';
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
@@ -294,7 +295,7 @@ const [  setSearch] = useState([])
                                                   "Type": product.doc.data.value.mapValue.fields.Type.stringValue
                                                 });
                                               setShowDeleteDialogue(true);
-                                          }}>x Delete</Button>
+                                          }}>{<FaRegTrashAlt />}</Button>
                                       </td>
                                   </tr>
                               )))}
