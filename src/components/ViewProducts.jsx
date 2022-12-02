@@ -67,22 +67,22 @@ const [  setSearch] = useState([])
   }
 
   // handling for add/edit functionality
-  const handleAddEditFormSubmit = async (e) => {
+  const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
       const { Name, Price, Inventory, Type } = e.target.elements;
 
       if (Price.value && Name.value) {
           if (addEditFormType === "Add") {
               setIsLoading(true);
-              try{await Promise.resolve( FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value)).then(() => {
+              return FirestoreService.AddNewProduct(Name.value, Price.value, Inventory.value, Type.value).then(() => {
                   toast.success(`${Name.value} is successfully added.`)
                   handleModalClose();
                   window.location.reload(false);
-              })} catch(e)  {
+              }).catch((e) => {
                 //toast message
                   toast.error("Error occured: " + e.message);
                   setIsLoading(false);
-              }
+              })
           } else if (addEditFormType === "Edit") {
               setIsLoading(true);
               return FirestoreService.UpdateProduct(currentProductId, Name.value, Price.value, Inventory.value, Type.value).then(() => {
