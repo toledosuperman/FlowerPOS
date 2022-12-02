@@ -162,7 +162,7 @@ function ViewUsers() {
                                               setCurrentUsersId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
                                               setCurrentUsers({
                                                   
-                                                  "role": !user.doc.data.value.mapValue.fields.role.booleanValue
+                                                  "role": user.doc.data.value.mapValue.fields.role.booleanValue
                                                   
                                               });
                                               

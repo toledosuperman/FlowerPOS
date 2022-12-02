@@ -299,6 +299,7 @@ const [  setSearch] = useState([])
                                   </tr>
                               )))}
                           </tbody>
+                          </Table>
                             {/* toast message */}
                           <Toaster toastOptions={{
     success: {
@@ -312,10 +313,8 @@ const [  setSearch] = useState([])
       },
     },
   }}/>
-                          <React.Fragment>
-                          
-      </React.Fragment>
-                      </Table>
+                        
+                     
                   </Card.Body>
               </Card></div>
                <Footer />
