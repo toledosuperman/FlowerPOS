@@ -106,7 +106,7 @@ const [  setSearch] = useState([])
           await Promise.resolve(FirestoreService.DeleteProduct(currentProductId));
           toast.success(`Deletion Successful`);
           handleModalClose();
-          window.location.reload(false);
+        //   window.location.reload(false);
       } catch (e_1) {
           toast.error("Error occurred: " + e_1.message);
           setIsLoading(false);

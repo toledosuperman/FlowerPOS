@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { UserAuth} from '../context/AuthContext';
 
 
+
 const NavBar = (a={ }) => {
  
       const { user, logout } = UserAuth();
