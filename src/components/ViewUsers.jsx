@@ -59,7 +59,7 @@ function ViewUsers() {
       setShowDeleteDialogue(false);
       // setShowDetailsForm(false);
       setCurrentUserId("");
-      setAddEditFormType("Edit");
+      setAddEditFormType("Add");
       setCurrentUser({ posusername: " ", role: " "})
       setIsLoading(false);
   }
@@ -216,7 +216,7 @@ function ViewUsers() {
                                       <td>{user.doc.data.value.mapValue.fields.role.stringValue}</td> 
                                       <td>
                                 
-                                          <Button variant='primary' onClick={() => {
+                                          {/* <Button variant='primary' onClick={() => {
                                               setCurrentUserId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
                                               setCurrentUser({
                                                   "posusername": user.doc.data.value.mapValue.fields.posusername.stringValue,
@@ -226,7 +226,7 @@ function ViewUsers() {
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
-                                          }}>✎ Edit</Button>{' '}
+                                          }}>✎ Edit</Button>{' '} */}
                                           <Button variant='danger' onClick={() => {
                                               setCurrentUserId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1]);
                                               setCurrentUser({
