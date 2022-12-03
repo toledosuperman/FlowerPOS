@@ -36,7 +36,7 @@ var hideCompleted=false;
           "active": " "
   });
   const [currentOrderId, setCurrentOrderId] = useState([]);
-
+//fetching all orders from firestore
   const fetchOrders = useCallback(() =>{
       setIsLoading(true);
      
@@ -62,9 +62,9 @@ var hideCompleted=false;
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
+  const [ setShowDeleteDialogue] = useState(false); //delete functionality
+ const [showDetailsForm, setShowDetailsForm] = useState(false); //view details
 
-  const [ setShowDeleteDialogue] = useState(false);
- const [showDetailsForm, setShowDetailsForm] = useState(false);
   const handleModalClose = () => {
       setShowAddEditForm(false);
       setShowDeleteDialogue(false);
