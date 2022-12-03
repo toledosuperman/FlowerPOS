@@ -51,7 +51,7 @@ function ViewUsers() {
   }, [user, fetchUsers])
 
   const [showAddEditForm, setShowAddEditForm] = useState(false);
-  const [addEditFormrole, setAddEditFormrole] = useState('Add'); //Add, Edit
+  const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false); //delete
   const [showDetailsForm, setShowDetailsForm] = useState(false); //view details
@@ -61,7 +61,7 @@ function ViewUsers() {
       setShowDeleteDialogue(false);
       setShowDetailsForm(false);
       setCurrentUserId("");
-      setAddEditFormrole("Add");
+      setAddEditFormType("Add");
       setCurrentUser({ posusername: " ", email: " ", role: " "})
       setIsLoading(false);
   }
@@ -72,7 +72,7 @@ function ViewUsers() {
       const { posusername, email,  role } = e.target.elements;
 
       if (email.value && posusername.value) {
-          if (addEditFormrole === "Add") {
+          if (addEditFormType === "Add") {
               setIsLoading(true);
               return FirestoreService.AddNewUsers(posusername.value, email.value,  role.value).then(() => {
                   toast.success(`${posusername.value} is successfully added.`)
@@ -83,7 +83,7 @@ function ViewUsers() {
                   toast.error("Error occured: " + e.message);
                   setIsLoading(false);
               })
-          } else if (addEditFormrole === "Edit") {
+          } else if (addEditFormType === "Edit") {
               setIsLoading(true);
               return FirestoreService.UpdateUsers(currentUserId, posusername.value, email.value,  role.value).then(() => {
                   toast.success(`${posusername.value} is successfully updated.`);
@@ -130,7 +130,7 @@ function ViewUsers() {
               <Modal show={showAddEditForm} onHide={handleModalClose}>
                   <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
                       <Modal.Header closeButton>
-                          <Modal.Title>{(addEditFormrole === 'Add') ? 'Add User' : 'Edit'}</Modal.Title>
+                          <Modal.Title>{(addEditFormType === 'Add') ? 'Add User' : 'Edit'}</Modal.Title>
                       </Modal.Header>
                       <Modal.Body>
                           <FloatingLabel controlId="posusername" label="User posusername" classposusername="mb-3" >
@@ -147,7 +147,7 @@ function ViewUsers() {
 
                           
 
-                          <FloatingLabel controlId="email" label="email ($)" classposusername="mb-3">
+                          {/* <FloatingLabel controlId="email" label="email ($)" classposusername="mb-3">
                               <Form.Control required role='text' placeholder='Enter User email' size='md' value={currentUser?.email} onChange={(e) => {
                                   setCurrentUser({
                                       
@@ -157,7 +157,7 @@ function ViewUsers() {
                                   })
                               }} />
                               <Form.Control.Feedback role='invalid'>User email is required</Form.Control.Feedback>
-                          </FloatingLabel>
+                          </FloatingLabel> */}
 
                           
 
@@ -174,7 +174,7 @@ function ViewUsers() {
                           </FloatingLabel>
                       </Modal.Body>
                       <Modal.Footer>
-                          <Button role="submit">{(addEditFormrole === 'Add') ? 'Add' : 'Update'}</Button>
+                          <Button role="submit">{(addEditFormType === 'Add') ? 'Add' : 'Update'}</Button>
                       </Modal.Footer>
                   </Form>
               </Modal>
@@ -222,9 +222,9 @@ function ViewUsers() {
                       </div>
                       <Form>
           <InputGroup classposusername='my-3'>
-          <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, marginRight: 25, }} onClick={() => {
+          {/* <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, marginRight: 25, }} onClick={() => {
                           setShowAddEditForm(true);
-                      }}>Add New User</Button>
+                      }}>Add New User</Button> */}
             {/* onChange for search */}
             {/* <Form.Control
               onChange={(e) => setSearch(e.target.value)}
@@ -240,7 +240,7 @@ function ViewUsers() {
                         <tr><th>#</th>
                              <th>User posusername</th>
                              <th>User email</th>
-                             <th>User uid</th>
+                            
                              <th>User role</th>
                              <th>Actions</th></tr>
                      </thead>
@@ -255,7 +255,7 @@ function ViewUsers() {
                                      
                                       <td>{user.doc.data.value.mapValue.fields.role.stringValue}</td> 
                                       <td>
-                                      <Button variant= 'success' onClick={()=>{
+                                      {/* <Button variant= 'success' onClick={()=>{
                                       setCurrentUserId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
                                       setCurrentUser({
                                         "posusername": user.doc.data.value.mapValue.fields.posusername.stringValue,
@@ -264,7 +264,7 @@ function ViewUsers() {
                                         "role": user.doc.data.value.mapValue.fields.role.stringValue
                                       });
                                       setShowDetailsForm(true);
-                                      }}>Details</Button>{' '}
+                                      }}>Details</Button>{' '} */}
                                           <Button variant='primary' onClick={() => {
                                               setCurrentUserId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
                                               setCurrentUser({
@@ -273,7 +273,7 @@ function ViewUsers() {
                                                   
                                                   "role": user.doc.data.value.mapValue.fields.role.stringValue
                                               });
-                                              setAddEditFormrole("Edit");
+                                              setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
                                           }}>✎ Edit</Button>{' '}
                                           <Button variant='danger' onClick={() => {
