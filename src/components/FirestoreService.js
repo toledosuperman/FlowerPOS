@@ -6,7 +6,6 @@ import {
     getDocs,
     updateDoc
   } from "firebase/firestore";
-import { boolean } from "yup";
 
 import { db } from '../firebase'
 
@@ -180,14 +179,13 @@ async function getAllUsers() {
 
 
 
-function AddNewUsers(posusername, email, role, uid, authProvider) {
+function AddNewUsers(posusername, email, role) {
     
     const docRef = addDoc(collection(db, "users"), {
         posusername,
        email,
-        uid,
-        authProvider,
-        role: boolean(role),
+        
+        role
 
       });
       console.log("Document written with ID: ", docRef.id);
@@ -195,15 +193,14 @@ function AddNewUsers(posusername, email, role, uid, authProvider) {
     };
 
 
-async function UpdateUsers(id, posusername, role, uid, email, authProvider) {
+async function UpdateUsers(id, posusername, role, email) {
     const docRef = doc(db, "users", id);
 
     const data = {
         posusername,
        email,
-        uid,
-        authProvider,
-        role: boolean(role),
+      
+        role,
       };
       
       try {
