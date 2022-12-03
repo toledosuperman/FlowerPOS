@@ -16,8 +16,6 @@ function ViewUsers() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({
-      
-      
       posusername: " ",
       role: " "
 
@@ -51,7 +49,7 @@ function ViewUsers() {
   }, [user, fetchUsers])
 
   const [showAddEditForm, setShowAddEditForm] = useState(false);
-  const [addEditFormType, setAddEditFormType] = useState('Edit'); //Add, Edit
+  const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false); //delete
   // const [showDetailsForm, setShowDetailsForm] = useState(false); //view details
@@ -134,7 +132,7 @@ function ViewUsers() {
                       </Modal.Header>
                       <Modal.Body>
                           <FloatingLabel controlId="posusername" label="User Name" className="mb-3" >
-                              <Form.Control required role='text' placeholder='Enter User Name' size='md' value={currentUser?.posusername} onChange={(e) => {
+                              <Form.Control required type='text' placeholder='Enter User Name' size='md' value={currentUser?.posusername} onChange={(e) => {
                                   setCurrentUser({
                                       "posusername": e.target.value,
                                       
@@ -149,8 +147,8 @@ function ViewUsers() {
 
                           
 
-                          <FloatingLabel controlId="role" label="role" className="mb-3">
-                              <Form.Control required role='text' placeholder='Enter User role' size='md' value={currentUser?.role} onChange={(e) => {
+                          <FloatingLabel controlId="role" label="Role" className="mb-3">
+                              <Form.Control required type='text' placeholder='Enter User role' size='md' value={currentUser?.role} onChange={(e) => {
                                   setCurrentUser({
                                       
                                       
