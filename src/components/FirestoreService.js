@@ -193,12 +193,12 @@ function AddNewUsers(posusername, email, role) {
     };
 
 
-async function UpdateUsers(id, posusername, role, email) {
+async function UpdateUsers(id, posusername, role) {
     const docRef = doc(db, "users", id);
 
     const data = {
         posusername,
-       email,
+      
       
         role,
       };
