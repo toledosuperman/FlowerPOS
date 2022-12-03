@@ -9,6 +9,8 @@ import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { db} from '../firebase'
+import { query, onSnapshot, collection} from 'firebase/firestore';
 // import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 // import ToggleButton from 'react-bootstrap/ToggleButton';
 
@@ -29,6 +31,7 @@ import { FaRegTrashAlt } from 'react-icons/fa';
       </ToggleButtonGroup> */
 
 function ViewUsers() {
+  
     //create state for react components
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
@@ -63,18 +66,46 @@ function ViewUsers() {
           fetchUsers();
       }
   }, [user, fetchUsers])
+  useEffect(() => {
+    const q = query(collection(db, 'users'));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      let usersArr = [];
+      querySnapshot.forEach((doc) => {
+        usersArr.push({ ...doc.data(), id: doc.id });
+      });
+      setCurrentUsers(usersArr);
+    });
+    return () => unsubscribe();
+  }, []);
 //more use state react components
   const [showDeleteDialogue, setShowDeleteDialogue] = useState(false);
+  const [showRoleDialogue, setShowRoleDialogue] = useState(false);
   //function to handle closing modals
   const handleModalClose = () => {
-      
+    setShowRoleDialogue(false);
       setShowDeleteDialogue(false);
       setCurrentUsersId("");
      
       setCurrentUsers({role: false})
       setIsLoading(false);
   }
-
+  const toggleRole = async (e) => {
+    e.preventDefault();
+    const { role} = e.target.elements;
+      setIsLoading(true);
+      try {
+          await Promise.resolve(FirestoreService.UpdateUsers(currentUsersId, role.value));
+          toast.success(`Update Successful`);
+          handleModalClose();
+          window.location.reload(false);
+      } catch (e_1) {
+          toast.error("Error occurred: " + e_1.message);
+          setIsLoading(false);
+      }
+    // await updateDoc(doc(db, 'users', user.id), {
+    //   role: !user.role,
+    // });
+  };
 
 //function to delete firestore data
   const handleUsersDelete = async (e) => {
@@ -121,6 +152,19 @@ function ViewUsers() {
                   </Modal.Footer>
               </Modal>
 
+          {  /*toggle user */}
+          <Modal show={showRoleDialogue} onHide={handleModalClose}>
+                  <Modal.Header closeButton>
+                      <Modal.Title>Change User Permission</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                      <p>Are you sure you want to change {currentUsers.posusername}?</p>
+                  </Modal.Body>
+                  <Modal.Footer>
+                      <Button variant="secondary" onClick={handleModalClose}>Cancel</Button>
+                      <Button variant="danger" onClick={toggleRole} value={currentUsers?.role}>Yes</Button>
+                  </Modal.Footer>
+              </Modal>
           
 {/* table view*/}
               <Card style={{ margin: 24 }}>
@@ -161,11 +205,14 @@ function ViewUsers() {
                                       {' '}
                                           <Button variant='primary' onClick={() => {
                                               setCurrentUsersId(user.doc.key.path.segments[user.doc.key.path.segments.length - 1])
+                                              
                                               setCurrentUsers({
                                                   
                                                   "role": user.doc.data.value.mapValue.fields.role.booleanValue
                                                   
-                                              });
+                                              })
+                                              setShowRoleDialogue(true);
+                                              ;
                                               
                                           }}>Change Permissions</Button>{' '}
                                           <Button variant='danger' onClick={() => {

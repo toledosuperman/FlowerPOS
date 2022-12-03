@@ -25,7 +25,7 @@ const [  setSearch] = useState([])
   const [currentProductId, setCurrentProductId] = useState(['']);
 
 
-
+ 
  
   //fetching all products
   const fetchProducts = useCallback(() =>{
