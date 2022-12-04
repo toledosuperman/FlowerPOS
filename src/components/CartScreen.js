@@ -111,10 +111,10 @@ function CartScreen ({onClose,open})  {
 <label htmlFor="comment">Starting Price</label>
 </div>
 
-
-<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
+<div style={{ display: "flex", justifycontent: "center", alignitems: "center"}}>
+<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white' style={{justifycontent: "center"}} >
     Submit
-  </button>
+  </button></div>
               <Toaster toastOptions={{
     success: {
       style: {
@@ -129,14 +129,14 @@ function CartScreen ({onClose,open})  {
   }}/>
   </div>
               </form>
-             
+              <Footer />
           </div>
               
               
         </>
       )}
    </> 
-   <Footer />
+   
     </React.Fragment>
     </>}
 ;</>)
