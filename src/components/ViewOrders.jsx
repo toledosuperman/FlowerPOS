@@ -16,26 +16,26 @@ var hideCompleted=false;
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentOrder, setCurrentOrder] = useState({
-  "CustomerAddress": " ",
-          "CustomerCity": " ",
-          "CustomerEmail": " ",
-          "CustomerName": " ",
-          "CustomerPhone": " ",
-          "CustomerState": " ",
-          "CustomerZip": " ",
-          "DeliveryDate": " ",
-          "Product": " ",
-          "RecipientAddress": " ",
-          "RecipientCity": " ",
-         "RecipientName": " ",
-         "RecipientPhone": " ",
-          "RecipientState": " ",
-          "RecipientZip": " ",
-            "completed": " ",
-          "created": " ",
-          "active": " "
+  CustomerAddress: " ",
+          CustomerCity: " ",
+          CustomerEmail: " ",
+          CustomerName: " ",
+          CustomerPhone: " ",
+          CustomerState: " ",
+          CustomerZip: " ",
+          DeliveryDate: " ",
+          Product: " ",
+          RecipientAddress: " ",
+          RecipientCity: " ",
+         RecipientName: " ",
+         RecipientPhone: " ",
+          RecipientState: " ",
+          RecipientZip: " ",
+          completed: false,
+          created: " ",
+          active: false
   });
-  const [currentOrderId, setCurrentOrderId] = useState([]);
+  const [currentOrderId, setCurrentOrderId] = useState(['']);
 //fetching all orders from firestore
   const fetchOrders = useCallback(() =>{
       setIsLoading(true);
@@ -62,37 +62,50 @@ var hideCompleted=false;
   const [showAddEditForm, setShowAddEditForm] = useState(false);
   const [addEditFormType, setAddEditFormType] = useState('Add'); //Add, Edit
   const [validated, setValidated] = useState(false);
-  const [ setShowDeleteDialogue] = useState(false); //delete functionality
+
  const [showDetailsForm, setShowDetailsForm] = useState(false); //view details
 
   const handleModalClose = () => {
       setShowAddEditForm(false);
-      setShowDeleteDialogue(false);
+
       setShowDetailsForm(false);
       setCurrentOrderId("");
       setAddEditFormType("Add");
       setCurrentOrder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
       CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: " ", Product: " ", RecipientAddress: " ",
-       RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ", completed: " ",
-         created: " "})
+       RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ", completed: false,
+         created: " ", active: false})
       setIsLoading(false);
   }
 
   const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
       const { CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
-             CustomerPhone,CustomerState, CustomerZip,Product,
+             CustomerPhone,CustomerState, CustomerZip,DeliveryDate, Product,
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-             RecipientZip, created } = e.target.elements;
+             RecipientZip,completed, created } = e.target.elements;
 
       if (addEditFormType === "Edit") {
 
               setIsLoading(true);
              
-             return FirestoreService.UpdateOrder(currentOrderId, CustomerAddress.value,CustomerCity.value,CustomerEmail.value,CustomerName.value,
-                                                  CustomerPhone.value,CustomerState.value, CustomerZip.value,Product.value,
-                                                  RecipientAddress.value, RecipientCity.value,RecipientName.value,RecipientPhone.value,RecipientState.value,
-                                                  RecipientZip.value, created.value).then(() => {
+             return FirestoreService.UpdateOrder(currentOrderId,CustomerAddress,
+                                                                       CustomerCity,
+                                                                      CustomerEmail,
+                                                                       CustomerName,
+                                                                       CustomerPhone,
+                                                                       CustomerState,
+                                                                       CustomerZip,
+                                                                      DeliveryDate,
+                                                                      Product,
+                                                                      RecipientAddress,
+                                                                       RecipientCity,
+                                                                       RecipientName,
+                                                                       RecipientPhone,
+                                                                       RecipientState,
+                                                                      RecipientZip,
+                                                                       completed,
+                                                                       created ).then(() => {
                   toast.success(`${CustomerName.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -315,9 +328,9 @@ var hideCompleted=false;
                         Recipient Phone: {currentOrder?.RecipientPhone}     <br />
                         Recipient State: {currentOrder?.RecipientState}     <br />
                         Recipient Zip: {currentOrder?.RecipientZip}       <br />
-                        Completion status:{currentOrder?.completed}<br />
+                        Completion status:{String(currentOrder?.completed)}<br />
                         Created: {currentOrder?.created}<br />
-                        Active: {currentOrder?.active}<br />
+                        Active: {String(currentOrder?.active)}<br />
                         </p>
                     </Modal.Body> 
                   <Modal.Footer> 
@@ -401,7 +414,7 @@ var hideCompleted=false;
                                       "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
                                      "completed ": String(order.doc.data.value.mapValue.fields.completed.booleanValue),
                                       "created": Date(order.doc.data.value.mapValue.fields.created.timestampValue),
-                                      "active": order.doc.data.value.mapValue.fields.created.active,
+                                      "active": String(order.doc.data.value.mapValue.fields.created.active),
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
@@ -423,9 +436,9 @@ var hideCompleted=false;
                                               "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                               "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                               "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                            "completed": order.doc.data.value.mapValue.fields.completed.booleanValue,
+                                            "completed": Boolean(order.doc.data.value.mapValue.fields.completed.booleanValue),
                                               "created": order.doc.data.value.mapValue.fields.created.timestampValue,
-                                              "active": order.doc.data.value.mapValue.fields.created.active,
+                                              "active": Boolean(order.doc.data.value.mapValue.fields.created.active),
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);

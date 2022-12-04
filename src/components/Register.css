@@ -1,5 +1,5 @@
 .register {
-    height: 100vh;
+    min-height: calc(100vh - 69px);
     width: 100vw;
     display: flex;
     align-items: center;

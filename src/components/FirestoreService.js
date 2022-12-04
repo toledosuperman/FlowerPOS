@@ -6,7 +6,7 @@ import {
     getDocs,
     updateDoc
   } from "firebase/firestore";
-
+import toast, { Toaster } from 'react-hot-toast';
 import { db } from '../firebase'
 
 async function getAllProducts() {
@@ -109,7 +109,8 @@ function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,Cus
         RecipientState,
         RecipientZip,
         completed: false,
-        created
+        created,
+        active: false
       });
 
       console.log("Document written with ID: ", docRef.id);
@@ -117,50 +118,54 @@ function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,Cus
     };
 
 
-async function UpdateOrder(id, CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
-CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-RecipientZip, created) {
+async function UpdateOrder(id,CustomerAddress,
+                                      CustomerCity,
+                                     CustomerEmail,
+                                      CustomerName,
+                                      CustomerPhone,
+                                      CustomerState,
+                                      CustomerZip,
+                                     DeliveryDate,
+                                     Product,
+                                     RecipientAddress,
+                                      RecipientCity,
+                                      RecipientName,
+                                      RecipientPhone,
+                                      RecipientState,
+                                     RecipientZip,
+                                      completed,
+                                      created ) {
     const docRef = doc(db, "Orders", id);
 
     const data = {
         CustomerAddress,
         CustomerCity,
-        CustomerEmail,
+       CustomerEmail,
         CustomerName,
         CustomerPhone,
         CustomerState,
         CustomerZip,
-        DeliveryDate,
-        Product,
-        RecipientAddress,
+       DeliveryDate,
+       Product,
+       RecipientAddress,
         RecipientCity,
         RecipientName,
         RecipientPhone,
         RecipientState,
-        RecipientZip,
-        //completed:Boolean(completed),
+       RecipientZip,
+        completed:Boolean(completed),
         created
       };
 
       try {
               await updateDoc(docRef, data);
-              console.log("Value of an Existing Document Field has been updated");
+              toast.success("Value of an Existing Document Field has been updated");
           } catch (error) {
-              console.log(error);
+             toast.error("Error occurred: " + error.message);
           }
 }
 
-function DeleteOrder(CustomerName) {
-    const docRef = doc(db, "Orders", CustomerName);
 
-deleteDoc(docRef)
-.then(() => {
-    console.log("Entire Document has been deleted successfully.")
-})
-.catch(error => {
-    console.log(error);
-})
-}
 async function getAllUsers() {
     try {
         const colRef = collection(db, "users");
@@ -223,7 +228,7 @@ deleteDoc(docRef)
 })
 }
 const FireStoreService = {
-    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder, DeleteOrder,AddNewUsers, getAllUsers, UpdateUsers, DeleteUsers,
+    getAllProducts, AddNewProduct, UpdateProduct, DeleteProduct, getAllOrders, AddNewOrder, UpdateOrder,AddNewUsers, getAllUsers, UpdateUsers, DeleteUsers,
   };
 
 export default  FireStoreService

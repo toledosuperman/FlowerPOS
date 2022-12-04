@@ -26,7 +26,7 @@ const Signin = () => {
   return (
   <React.Fragment>
     {/* signin Form */}
-    <div className="login">
+    <div className="login" >
     
       <div className="login__container">
       <div className="logo-image">

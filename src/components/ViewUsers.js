@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
 import Footer from './footer';
+import './footer.css';
 import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
@@ -115,15 +116,12 @@ function ViewUsers() {
 
 
 
-  return (
+  return ( <React.Fragment>
       <>
           {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user !== null) && <>
-            <React.Fragment> <div style={{ backgroundImage: `url(${background})`,
-  
-  backgroundSize:"contain", 
-   }}>
+            <React.Fragment> <div class="background" style={{ backgroundImage: `url(${background})`,backgroundSize:"contain", }} >
    <Navbar />
   
               {/* Add/Edit Form */}
@@ -308,9 +306,10 @@ function ViewUsers() {
                      
                   </Card.Body>
               </Card></div>
-               <Footer />
+
+
               </React.Fragment></>}
-      </>
+      </> <Footer /> </React.Fragment>
   );
 }
 
