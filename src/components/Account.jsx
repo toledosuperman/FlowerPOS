@@ -74,7 +74,7 @@ return (<>
                           
                           <h4 style={{ marginTop: 8, }}>Welcome to Flower POS!</h4>
                       </div></Card.Header><Card.Body>
-      {/* <p>User Name: { auth.currentUser?.displayName}</p> */}
+     
       <p>User: {name}</p>
 
       <Link to='/order' className='underline'>
