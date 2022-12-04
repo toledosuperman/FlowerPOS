@@ -184,12 +184,10 @@ async function getAllUsers() {
 
 
 
-function AddNewUsers(posusername, email, role) {
+function AddNewUsers(posusername, role) {
     
     const docRef = addDoc(collection(db, "users"), {
         posusername,
-       email,
-        
         role
 
       });
@@ -198,13 +196,11 @@ function AddNewUsers(posusername, email, role) {
     };
 
 
-async function UpdateUsers(id, posusername, role, email) {
+async function UpdateUsers(id, posusername, role) {
     const docRef = doc(db, "users", id);
 
     const data = {
         posusername,
-       email,
-      
         role,
       };
       
@@ -215,6 +211,7 @@ async function UpdateUsers(id, posusername, role, email) {
         console.log(error);
     }
 }
+
 
 function DeleteUsers(posusername) {
     const docRef = doc(db, "users", posusername);
