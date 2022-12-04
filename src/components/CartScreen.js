@@ -111,10 +111,10 @@ function CartScreen ({onClose,open})  {
 <label htmlFor="comment">Starting Price</label>
 </div>
 
-<div style={{ display: "flex", justifycontent: "center", alignitems: "center"}}>
-<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white' style={{justifycontent: "center"}} >
+{/* <div style={{ display: "flex", justifycontent: "center", alignitems: "center"}}> */}
+<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white' >
     Submit
-  </button></div>
+  </button>
               <Toaster toastOptions={{
     success: {
       style: {
