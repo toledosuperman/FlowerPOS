@@ -6,7 +6,7 @@ import {
     getDocs,
     updateDoc
   } from "firebase/firestore";
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { db } from '../firebase'
 
 async function getAllProducts() {
