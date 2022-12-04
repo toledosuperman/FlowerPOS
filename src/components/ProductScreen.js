@@ -46,6 +46,10 @@ const ProductScreen = () => {
    {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
    {(user !== null) && <>
     <React.Fragment>
+    <div style={{ backgroundImage: `url(${background})`,
+  
+  backgroundSize:"contain", 
+  }}>
     <Navbar />
     <>
       {loading ? (
@@ -56,10 +60,7 @@ const ProductScreen = () => {
         <>
           
           <Card style={{ margin: 24 }}>
-          <div style={{ backgroundImage: `url(${background})`,
-  
-  backgroundSize:"contain", 
-  }}>
+         
                   <Card.Header className="d-flex justify-content-between align-Products-center"><div className="align-Products-center" style={{ marginRight: 8 }}>
                   <h4 style={{ marginTop: 8, }}>Create Recipe</h4></div></Card.Header>
                   <Card.Body>
@@ -115,12 +116,12 @@ const ProductScreen = () => {
   }}/>
           {/* </Form> */}
           </Card.Body>
-          </div>
+          
               </Card>
               
         </>
       )}
-   </> 
+   </> </div>
   
     </React.Fragment>
     </>}
