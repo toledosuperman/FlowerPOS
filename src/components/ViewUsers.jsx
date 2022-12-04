@@ -10,6 +10,8 @@ import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import { FaRegTrashAlt } from 'react-icons/fa';
+import Toggle from 'react-toggle'
+import "react-toggle/style.css"
 function ViewUsers() {
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
@@ -146,14 +148,15 @@ function ViewUsers() {
                           
 
                           <FloatingLabel controlId="role" label="Role" className="mb-3">
-                              <Form.Control required type='text' placeholder='Enter User role' size='md' value={currentUser?.role} onChange={(e) => {
+                         
+                              {/* <Form.Control required type='text' placeholder='Enter User role' size='md' value={currentUser?.role} onChange={(e) => {
                                   setCurrentUser({
                                       
                                       
                                       
                                       "role": e.target.value
                                   })
-                              }} />
+                              }} /> */}
                           
                           </FloatingLabel>
                       </Modal.Body>
@@ -211,7 +214,15 @@ function ViewUsers() {
                                       <td>{user.doc.data.value.mapValue.fields.posusername.stringValue}</td>
                                       <td>{user.doc.data.value.mapValue.fields.email.stringValue }</td>
                                      
-                                      <td>{user.doc.data.value.mapValue.fields.role.stringValue}</td> 
+                                      <td>{user.doc.data.value.mapValue.fields.role.stringValue} <Toggle
+                            id='role'
+                            defaultChecked={currentUser?.role}
+                            onChange={(e) =>setCurrentUser({
+                                      
+                                      
+                                      
+                                "role": e.target.value
+                            })} /></td> 
                                       <td>
                                 
                                           {/* <Button variant='primary' onClick={() => {
