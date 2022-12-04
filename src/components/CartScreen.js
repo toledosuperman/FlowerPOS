@@ -86,6 +86,7 @@ function CartScreen ({onClose,open})  {
                  
                   
           <CartContainerStyle>
+          
             {cartItems.map((item) => (
               <CartItem item={item} key={item.id} />
             ))}
