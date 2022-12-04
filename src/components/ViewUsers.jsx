@@ -1,6 +1,4 @@
 import React, { useEffect, useState , useCallback} from "react";
-import { collection, query, where, getDocs, updateDoc, doc} from "firebase/firestore";
-import {db} from '../firebase'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
@@ -15,8 +13,6 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
 function ViewUsers() {
-    const [role, setRole] = useState(false);
-    const [posusername,setposusername] = useState('');
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
 // const [  setSearch] = useState([])
@@ -102,23 +98,7 @@ function ViewUsers() {
       }
       setValidated(true)
   }
-const RoleSubmit = async (posusername, role) => {
-    const q = query(collection(db, "users"), where("posusername", "==", posusername));
 
-        const querySnapshot = await getDocs(q);
-        let docID = '';
-        querySnapshot.forEach((doc) => {
-        // if email is you primary key then only document will be fetched so it is safe to continue, this line will get the documentID of user so that we can update it
-          docID = doc.id;
-        });
-        const user = doc(db, "users", docID);
-
-        // Set the "capital" field of the city 'DC'
-        await updateDoc(user, {
-            
-            role: role
-        });
-    }
   //handling delete functionality
   const handleUserDelete = async (e) => {
     e.preventDefault();
@@ -237,9 +217,9 @@ const RoleSubmit = async (posusername, role) => {
                                       <td>{user.doc.data.value.mapValue.fields.role.booleanValue ? 'Admin' : 'Sales'} <Toggle
                             id='role'
                             defaultChecked={user.doc.data.value.mapValue.fields.role.booleanValue}
-                            onChange={(e) =>RoleSubmit({
+                            onChange={(e) =>setCurrentUser({
                                       
-                                "posusername": user.doc.data.value.mapValue.fields.posusername.stringValue,
+                                      
                                       
                                 "role": !(user.doc.data.value.mapValue.fields.role.booleanValue)
                             })} /></td> 
