@@ -23,12 +23,12 @@ const CartItem = ({ item }) => {
       <CartItemStyle>
         <img style={{ maxWidth: '75px', maxHeight: '100px' }} src={item.image} alt={item.title} />
         <CartInfoStyle>
-          <h3>Title</h3>
+          {/* <h2>Title</h2> */}
           <h4>{item.title}</h4>
         </CartInfoStyle>
 
         <CartInfoStyle>
-          <h3>Price</h3>
+          {/* <h2>Price</h2> */}
           <h4>
             {' '}
             <span style={{ fontWeight: 600, marginRight: '2px' }}>$</span>
@@ -37,7 +37,7 @@ const CartItem = ({ item }) => {
         </CartInfoStyle>
 
         <CartInfoStyle>
-          <h3>Qty In Cart</h3>
+          {/* <h2>Qty In Cart</h2> */}
           <input
             type="number"
             min="1"
@@ -50,7 +50,7 @@ const CartItem = ({ item }) => {
           />
         </CartInfoStyle>
         <CartInfoStyle>
-          <h3>Subtotal</h3>
+          {/* <h2>Subtotal</h2> */}
           <h4>
           {' '}
             <span style={{ fontWeight: 600, marginRight: '2px' }}>$</span>
