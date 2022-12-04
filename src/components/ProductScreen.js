@@ -11,7 +11,7 @@ import { listCartItems } from '../components/cartActions'
 import { listProducts } from './productActions'
 import  { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
-
+import Footer from './footer';
 //create recipe page
 const ProductScreen = () => {
   const dispatch = useDispatch()
@@ -102,7 +102,7 @@ const ProductScreen = () => {
         </>
       )}
    </> </div>
-  
+   <Footer />
     </React.Fragment>
     </>}
 ;</>)
