@@ -119,7 +119,7 @@ function ViewUsers() {
           {(user === null) && <NoLoggedInView />}
           {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
           {(user !== null) && <>
-            <React.Fragment> <div class="background" style={{ backgroundImage: `url(${background})`,backgroundSize:"contain", }} >
+            <React.Fragment> <div className="background" style={{ backgroundImage: `url(${background})`,backgroundSize:"contain", }} >
    <Navbar />
   
               {/* Add/Edit Form */}

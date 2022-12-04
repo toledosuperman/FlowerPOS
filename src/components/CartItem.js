@@ -1,8 +1,9 @@
 import React from 'react'
-import { CartItemStyle, CartDeleteButtonStyle, CartInfoStyle } from './styles/CartScreen'
+import { CartItemStyle, CartInfoStyle } from './styles/CartScreen'
 import { useDispatch } from 'react-redux'
 import { deleteItemFromCart, updateCartQty } from '../components/cartActions'
-
+import { FaRegTrashAlt } from 'react-icons/fa';
+import { Button} from 'react-bootstrap';
 const CartItem = ({ item }) => {
   const [stateQty, setStateQty] = React.useState(item.qtyInCart)
   const dispatch = useDispatch()
@@ -47,9 +48,9 @@ const CartItem = ({ item }) => {
           />
         </CartInfoStyle>
 
-        <CartDeleteButtonStyle primary onClick={() => handleCartDelete(item.id)}>
-          Delete
-        </CartDeleteButtonStyle>
+        <Button onClick={() => handleCartDelete(item.id)}variant='danger'>
+        {<FaRegTrashAlt />}
+        </Button>
       </CartItemStyle>
     </>
   )
