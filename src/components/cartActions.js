@@ -68,7 +68,8 @@ import {
           title: new_cart_item.title,
           price: new_cart_item.price,
           image: new_cart_item.image,
-          qtyInCart: 1
+          qtyInCart: 1,
+          subtotal: 1
         })
         toast.success(new_cart_item.title + ' successfully added')
   
@@ -87,14 +88,15 @@ import {
     }
   }
   
-  export const updateCartQty = (cart_item_id, qty) => async (dispatch) => {
+  export const updateCartQty = (cart_item_id, qty, subtotal) => async (dispatch) => {
     try {
       dispatch({
         type: CART_ITEM_UPDATE_REQUEST
       })
   
       await updateDoc(doc(db, 'cartItems', cart_item_id), {
-        qtyInCart: qty
+        qtyInCart: qty,
+        subtotal: subtotal
       })
   
       dispatch({
