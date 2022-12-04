@@ -1,4 +1,6 @@
 import React, { useEffect, useState , useCallback} from "react";
+import { collection, query, where, getDocs, updateDoc, doc} from "firebase/firestore";
+import {db} from '../firebase'
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Card, Button, Modal, Form, FloatingLabel, Spinner, InputGroup} from 'react-bootstrap';
 import Navbar from './navbar';
@@ -13,14 +15,16 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import Toggle from 'react-toggle'
 import "react-toggle/style.css"
 function ViewUsers() {
+    const [role, setRole] = useState(false);
+    const [posusername,setposusername] = useState('');
     const { user } = UserAuth();
   const [Users, setUsers] = useState([]);
 // const [  setSearch] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentUser, setCurrentUser] = useState({
-      posusername: " ",
-      role: " "
+      
+      role: false
 
 });
   const [currentUserId, setCurrentUserId] = useState(['']);
@@ -63,7 +67,7 @@ function ViewUsers() {
       // setShowDetailsForm(false);
       setCurrentUserId("");
       setAddEditFormType("Add");
-      setCurrentUser({ posusername: " ", role: " "})
+      setCurrentUser({  role: false})
       setIsLoading(false);
   }
 
@@ -98,7 +102,23 @@ function ViewUsers() {
       }
       setValidated(true)
   }
+const RoleSubmit = async (posusername, role) => {
+    const q = query(collection(db, "users"), where("posusername", "==", posusername));
 
+        const querySnapshot = await getDocs(q);
+        let docID = '';
+        querySnapshot.forEach((doc) => {
+        // if email is you primary key then only document will be fetched so it is safe to continue, this line will get the documentID of user so that we can update it
+          docID = doc.id;
+        });
+        const user = doc(db, "users", docID);
+
+        // Set the "capital" field of the city 'DC'
+        await updateDoc(user, {
+            
+            role: role
+        });
+    }
   //handling delete functionality
   const handleUserDelete = async (e) => {
     e.preventDefault();
@@ -214,14 +234,14 @@ function ViewUsers() {
                                       <td>{user.doc.data.value.mapValue.fields.posusername.stringValue}</td>
                                       <td>{user.doc.data.value.mapValue.fields.email.stringValue }</td>
                                      
-                                      <td>{user.doc.data.value.mapValue.fields.role.stringValue} <Toggle
+                                      <td>{user.doc.data.value.mapValue.fields.role.booleanValue ? 'Admin' : 'Sales'} <Toggle
                             id='role'
-                            defaultChecked={currentUser?.role}
-                            onChange={(e) =>setCurrentUser({
+                            defaultChecked={user.doc.data.value.mapValue.fields.role.booleanValue}
+                            onChange={(e) =>RoleSubmit({
                                       
+                                "posusername": user.doc.data.value.mapValue.fields.posusername.stringValue,
                                       
-                                      
-                                "role": e.target.value
+                                "role": !(user.doc.data.value.mapValue.fields.role.booleanValue)
                             })} /></td> 
                                       <td>
                                 
