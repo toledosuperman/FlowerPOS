@@ -43,7 +43,7 @@ function OrderForm({  onClose,open}) {
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
         const data = doc.docs[0].data();
-        setName(data.name);
+        setName(data.posusername);
       } catch (err) {
         console.error(err);
         toast.error("An error occured while fetching user data");

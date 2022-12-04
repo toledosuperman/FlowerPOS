@@ -5,23 +5,24 @@ import CartItem from './CartItem'
 import NoLoggedInView from '../components/NoLoggedInView';
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from './navbar';
-import { Button, Container , Row, Col, Form, Card, Spinner} from 'react-bootstrap';
+import {  Card, Spinner} from 'react-bootstrap';
 import {db} from '../firebase'
 import {collection, addDoc, Timestamp} from 'firebase/firestore';
 import {  useNavigate } from 'react-router-dom';
 import toast ,{Toaster} from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import { UserAuth } from '../context/AuthContext';
+import Footer from './footer';
 
-function CartScreen ()  {
+function CartScreen ({onClose,open})  {
   const [isLoading] = useState(false);
   const { user } = UserAuth();
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const cartItemsList = useSelector((state) => state.cartItemsList)
   const[Name, setName]= useState('');
-  const[Inventory, setInventory]= useState('');
-  const[Price, setPrice]= useState('');
+  const[Inventory, setInventory]= useState(0);
+  const[Price, setPrice]= useState(0);
   const { loading, error, cartItems } = cartItemsList
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -69,14 +70,14 @@ function CartScreen ()  {
         <div>{error}</div>
       ) : (
         <>
-        <Card style={{ margin: 24 }}>
+        {/* <Card style={{ margin: 24 }}> */}
         <div style={{ backgroundImage: `url(${background})`,
   
   backgroundSize:"contain", 
   }}>
           <Card.Header className="d-flex justify-content-between align-Products-center"><div className="align-Products-center" style={{ marginRight: 8 }}>
                   <h4 style={{ marginTop: 8, }}>Finalize Recipe</h4></div></Card.Header>
-                  <Card.Body>
+                  {/* <Card.Body> */}
                  
                   
           <CartContainerStyle>
@@ -85,13 +86,9 @@ function CartScreen ()  {
             ))}
           </CartContainerStyle>
           
-          <Form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'>
+          <form onSubmit={handleSubmit}className='CreateRecipe' name='CreateRecipe'onClose={onClose} open={open}>
           <div className='max-w-[700px] mx-auto my-16 p-4'>
-          {/* <div className="form-floating">
-          
-<textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setPrice(e.target.value)} 
-        value={Price}></textarea>
-<label htmlFor="comment">My Price</label></div> */}
+         
 <div className="form-floating">
 <textarea className="form-control" id="comment" cols="18"name="text" placeholder="Comment goes here" onChange={(e) => setName(e.target.value)} 
         value={Name}></textarea>
@@ -109,16 +106,10 @@ function CartScreen ()  {
 <label htmlFor="comment">Starting Price</label>
 </div>
 
-</div>
-          <Container>
-      <Row className="justify-content-md-center">
-      <Col md="auto">
-              <Button variant="primary">
-                Submit
-              </Button>
-              </Col>
-              </Row>
-              </Container>
+
+<button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
+    Submit
+  </button>
               <Toaster toastOptions={{
     success: {
       style: {
@@ -131,15 +122,16 @@ function CartScreen ()  {
       },
     },
   }}/>
-              </Form>
-              </Card.Body>
+  </div>
+              </form>
+             
           </div>
-              </Card>
+              
               
         </>
       )}
    </> 
-  
+   <Footer />
     </React.Fragment>
     </>}
 ;</>)
