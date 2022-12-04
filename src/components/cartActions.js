@@ -88,7 +88,7 @@ import {
     }
   }
   
-  export const updateCartQty = (cart_item_id, qty, subtotal) => async (dispatch) => {
+  export const updateCartQty = (cart_item_id, qty) => async (dispatch) => {
     try {
       dispatch({
         type: CART_ITEM_UPDATE_REQUEST
@@ -96,7 +96,7 @@ import {
   
       await updateDoc(doc(db, 'cartItems', cart_item_id), {
         qtyInCart: qty,
-        subtotal: subtotal
+        
       })
   
       dispatch({

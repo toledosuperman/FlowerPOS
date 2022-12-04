@@ -7,6 +7,7 @@ import { Button} from 'react-bootstrap';
 const CartItem = ({ item }) => {
   const [stateQty, setStateQty] = React.useState(item.qtyInCart)
   const dispatch = useDispatch()
+  
   const handleCartDelete = (cartItemId) => {
     dispatch(deleteItemFromCart(cartItemId))
   }
