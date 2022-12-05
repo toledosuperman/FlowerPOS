@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {NavLink} from 'react-router-dom';
 import './navbar.css';
 import logo from '../assets/logo.png'
 import {  Form, Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { UserAuth} from '../context/AuthContext';
-
-
+import {  db, auth} from "../firebase.js";
+import { collection, getDocs, query, where} from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import toast from 'react-hot-toast';
 
 const NavBar = (a={ }) => {
- 
-      const { user, logout } = UserAuth();
+      const [role, setRole] = useState(false);
+      const [user, loading] = useAuthState(auth);
+      useEffect(() => {
+            if (loading) return;
+            const fetchUserRole = async () => {
+              try {
+                const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+                const doc = await getDocs(q);
+                const data = doc.docs[0].data();
+                setRole(data.role);
+              } catch (err) {
+                console.error(err);
+                toast.error("An error occured while fetching user data");
+              }
+            };
+            fetchUserRole();
+          }, [user, loading]);
+      const {  logout } = UserAuth();
       
       const handleLogout = async () => {
             try {
@@ -52,11 +70,14 @@ const NavBar = (a={ }) => {
                         <ul id="navlinks">
                               <li><NavLink to="/account">Home</NavLink> </li>
                               <li><NavLink to="/order">New Order</NavLink> </li>
-                              <li><NavLink to="/vieworders">View Orders</NavLink> </li>
+                              <li><NavLink to="/vieworders">View Orders</NavLink> </li> </ul>
+                              {role === true &&
+                              <ul id="navlinks">
                               <li><NavLink to="/viewproduct">Products</NavLink> </li>
                               <li><NavLink to="/createrecipe">Create Recipes</NavLink> </li>
                               <li><NavLink to="/viewusers">Users</NavLink> </li>
-                              <li><NavLink to="/reports">Reports</NavLink> </li>
+                              <li><NavLink to="/reports">Reports</NavLink> </li></ul> }
+                              <ul id="navlinks">
                               <li className="inactive"><Form inline= "true">
                         {authButton()}
                   </Form>
