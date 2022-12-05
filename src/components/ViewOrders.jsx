@@ -7,6 +7,7 @@ import { UserAuth } from '../context/AuthContext';
 import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
+
 function ViewOrders() {
     const { user } = UserAuth();
   const [Orders, setOrders] = useState([]);
@@ -23,7 +24,7 @@ var hideCompleted=false;
           CustomerPhone: " ",
           CustomerState: " ",
           CustomerZip: " ",
-          DeliveryDate: " ",
+          DeliveryDate: 0,
           Product: " ",
           RecipientAddress: " ",
           RecipientCity: " ",
@@ -32,7 +33,7 @@ var hideCompleted=false;
           RecipientState: " ",
           RecipientZip: " ",
           completed: false,
-          created: " ",
+          created: 0,
           active: false
   });
   const [currentOrderId, setCurrentOrderId] = useState(['']);
@@ -72,20 +73,20 @@ var hideCompleted=false;
       setCurrentOrderId("");
       setAddEditFormType("Add");
       setCurrentOrder({ CustomerAddress: " ", CustomerCity: " ",CustomerEmail: " ", CustomerName: " ",
-      CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: " ", Product: " ", RecipientAddress: " ",
+      CustomerPhone: " ", CustomerState: " ", CustomerZip: " ", DeliveryDate: 0, Product: " ", RecipientAddress: " ",
        RecipientCity: " ",RecipientName: " ",RecipientPhone: " ", RecipientState: " ", RecipientZip: " ", completed: false,
-         created: " ", active: false})
+         created: 0, active: false})
       setIsLoading(false);
   }
 
   const handleAddEditFormSubmit = (e) => {
       e.preventDefault();
-      const { CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
+      const {currentOrderId, CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
              CustomerPhone,CustomerState, CustomerZip,DeliveryDate, Product,
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-             RecipientZip,completed, created } = e.target.elements;
+             RecipientZip,completed, created, active } = e.target.elements;
 
-      if (addEditFormType === "Edit") {
+
 
               setIsLoading(true);
              
@@ -105,7 +106,7 @@ var hideCompleted=false;
                                                                        RecipientState,
                                                                       RecipientZip,
                                                                        completed,
-                                                                       created ).then(() => {
+                                                                       created, active ).then(() => {
                   toast.success(`${CustomerName.value} is successfully updated.`);
                   handleModalClose();
                   window.location.reload(false);
@@ -113,7 +114,7 @@ var hideCompleted=false;
                   toast.error("Error occurred: " + e.message);
                   setIsLoading(false);
               })
-          }
+
 
       setValidated(true)
   }
@@ -206,7 +207,7 @@ var hideCompleted=false;
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
 
                                                      setCurrentOrder({
-                                                         "Delivery Date": e.target.value
+                                                         "Delivery Date":Date(e.target.value)
                                                      })
                                                  }} />
                      <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
@@ -220,7 +221,7 @@ var hideCompleted=false;
                                 }} />
                      <Form.Control.Feedback type='invalid'>Product is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     <FloatingLabel controlId="Name" label="Recipient Address" className="mb-3" >
+                     <FloatingLabel controlId="raddress" label="Recipient Address" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Address' size='md' value={currentOrder?.RecipientAddress} onChange={(e) => {
 
                                     setCurrentOrder({
@@ -229,7 +230,7 @@ var hideCompleted=false;
                                 }} />
                                 <Form.Control.Feedback type='invalid'>Recipient Address is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     <FloatingLabel controlId="Name" label="Recipient City" className="mb-3" >
+                     <FloatingLabel controlId="rcity" label="Recipient City" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient City' size='md' value={currentOrder?.RecipientCity} onChange={(e) => {
 
                                     setCurrentOrder({
@@ -238,7 +239,7 @@ var hideCompleted=false;
                                 }} />
                      <Form.Control.Feedback type='invalid'>Recipient City is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     <FloatingLabel controlId="Name" label="Recipient Name" className="mb-3" >
+                     <FloatingLabel controlId="RName" label="Recipient Name" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Name' size='md' value={currentOrder?.RecipientName} onChange={(e) => {
 
                                     setCurrentOrder({
@@ -247,7 +248,7 @@ var hideCompleted=false;
                                 }} />
                      <Form.Control.Feedback type='invalid'>Recipient Name is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     <FloatingLabel controlId="Name" label="Recipient Phone" className="mb-3" >
+                     <FloatingLabel controlId="rphone" label="Recipient Phone" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient Phone' size='md' value={currentOrder?.RecipientPhone} onChange={(e) => {
 
                                     setCurrentOrder({
@@ -256,7 +257,7 @@ var hideCompleted=false;
                                 }} />
                      <Form.Control.Feedback type='invalid'>Recipient Phone is required</Form.Control.Feedback>
                      </FloatingLabel>
-                     <FloatingLabel controlId="Name" label="Recipient State" className="mb-3" >
+                     <FloatingLabel controlId="rstate" label="Recipient State" className="mb-3" >
                      <Form.Control required type='text' placeholder='Enter Recipient State' size='md' value={currentOrder?.RecipientState} onChange={(e) => {
 
                                      setCurrentOrder({
@@ -267,7 +268,7 @@ var hideCompleted=false;
                                  }} />
                      <Form.Control.Feedback type='invalid'>Recipient State is required</Form.Control.Feedback>
                       </FloatingLabel>
-                      <FloatingLabel controlId="Name" label="Recipient Zip" className="mb-3" >
+                      <FloatingLabel controlId="rzip" label="Recipient Zip" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter Recipient Zip' size='md' value={currentOrder?.RecipientZip} onChange={(e) => {
 
                       setCurrentOrder({
@@ -276,26 +277,35 @@ var hideCompleted=false;
                                 }} />
                       <Form.Control.Feedback type='invalid'>Recipient Zip is required</Form.Control.Feedback>
                       </FloatingLabel>
-                       <FloatingLabel controlId="Name" label="completed" className="mb-3" >
+                       <FloatingLabel controlId="compstat" label="completed" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter if the order is completed' size='md' value={currentOrder?.completed} onChange={(e) => {
 
                                     setCurrentOrder({
 
-                                        "completed": e.target.value
+                                        "completed": Boolean(e.target.value)
 
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Completion status is required</Form.Control.Feedback>
                       </FloatingLabel>
-                      <FloatingLabel controlId="Name" label="created" className="mb-3" >
+                      <FloatingLabel controlId="created" label="created" className="mb-3" >
                       <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
 
                                     setCurrentOrder({
-                                        "created": e.target.value
+                                        "created": Date(e.target.value)
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Created is required</Form.Control.Feedback>
                       </FloatingLabel>
+                       <FloatingLabel controlId="active" label="active" className="mb-3" >
+                                            <Form.Control required type='text' placeholder='Enter order status' size='md' value={currentOrder?.active} onChange={(e) => {
+
+                                                          setCurrentOrder({
+                                                              "active": Boolean(e.target.value)
+                                                          })
+                                                      }} />
+                                            <Form.Control.Feedback type='invalid'>active status is required</Form.Control.Feedback>
+                                            </FloatingLabel>
                       </Modal.Body>
                       <Modal.Footer>
                           <Button type="submit">{(addEditFormType === 'Add') ? 'Add' : 'Update'}</Button>
@@ -328,9 +338,9 @@ var hideCompleted=false;
                         Recipient Phone: {currentOrder?.RecipientPhone}     <br />
                         Recipient State: {currentOrder?.RecipientState}     <br />
                         Recipient Zip: {currentOrder?.RecipientZip}       <br />
-                        Completion status:{String(currentOrder?.completed)}<br />
+                        Completion status: {String(Boolean(currentOrder?.completed))}<br />
                         Created: {currentOrder?.created}<br />
-                        Active: {String(currentOrder?.active)}<br />
+                        Active: {String(Boolean(currentOrder?.active))}<br />
                         </p>
                     </Modal.Body> 
                   <Modal.Footer> 

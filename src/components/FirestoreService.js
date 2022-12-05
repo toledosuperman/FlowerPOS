@@ -134,7 +134,7 @@ async function UpdateOrder(id,CustomerAddress,
                                       RecipientState,
                                      RecipientZip,
                                       completed,
-                                      created ) {
+                                      created, active ) {
     const docRef = doc(db, "Orders", id);
 
     const data = {
@@ -154,7 +154,8 @@ async function UpdateOrder(id,CustomerAddress,
         RecipientState,
        RecipientZip,
         completed:Boolean(completed),
-        created
+        created,
+        active:Boolean(completed),
       };
 
       try {
