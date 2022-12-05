@@ -196,8 +196,8 @@ onChange={setRecipientPhone}/>
     Submit
   </button>
 </div>
-</form></div>
- <Footer />
+</form><Footer /></div>
+ 
 </React.Fragment></>}
 ;</>)
 
