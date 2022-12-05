@@ -1,13 +1,15 @@
 import React  from 'react'
 import { CartItemStyle, CartInfoStyle } from './styles/CartScreen'
 import { useDispatch } from 'react-redux'
-import { deleteItemFromCart, updateCartQty } from '../components/cartActions'
+import { deleteItemFromCart, updateCartQty , updateCartSubtotal} from '../components/cartActions'
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { Button} from 'react-bootstrap';
+
 const CartItem = ({ item }) => {
-  const [stateQty, setStateQty] = React.useState(item.qtyInCart)
-  const dispatch = useDispatch()
   
+  const [stateQty, setStateQty] = React.useState(item.qtyInCart)
+  const [subtotal, setSubtotal] = React.useState(0)
+  const dispatch = useDispatch()
   const handleCartDelete = (cartItemId) => {
     dispatch(deleteItemFromCart(cartItemId))
   }
@@ -15,6 +17,10 @@ const CartItem = ({ item }) => {
   const handleCartQty = (itemId, qty) => {
     dispatch(updateCartQty(itemId, qty))
   }
+  // const handleCartSubtotal = (itemId, qty, price) => {
+    
+  //   dispatch(updateCartSubtotal(itemId, qty*price))
+  // }
   const handlesubtotal = (price, qty) => {
     dispatch(price*qty)
   }
@@ -43,10 +49,13 @@ const CartItem = ({ item }) => {
             type="number"
             min="1"
             value={stateQty}
+            
             onChange={(e) => {
-              setStateQty((prev) => Number(e.target.value))
+              setStateQty(() => Number(e.target.value))
               console.log(stateQty)
               handleCartQty(item.id, stateQty)
+              // handleCartSubtotal(item.id,stateQty)
+             
             }}
           />
         </CartInfoStyle>
@@ -60,7 +69,9 @@ const CartItem = ({ item }) => {
             min="1"
             value={stateQty*item.price}
             onChange={(e) => {
+              setSubtotal(() => Number(e.target.value))
               handlesubtotal(item.price, stateQty)
+              // handleCartSubtotal(item.id, stateQty, item.price)
             }}
            
           />

@@ -110,6 +110,28 @@ import {
       })
     }
   }
+  export const updateCartSubtotal = (cart_item_id, subtotal) => async (dispatch) => {
+    try {
+      dispatch({
+        type: CART_ITEM_UPDATE_REQUEST
+      })
+  
+      await updateDoc(doc(db, 'cartItems', cart_item_id), {
+        subtotal: subtotal,
+        
+      })
+  
+      dispatch({
+        type: CART_ITEM_UPDATE_SUCCESS
+      })
+    } catch (error) {
+      dispatch({
+        type: CART_ITEM_UPDATE_FAIL,
+        payload:
+          toast.error.response && toast.error.response.data.message ? toast.error.response.data.message : toast.error.message
+      })
+    }
+  }
   
   export const deleteItemFromCart = (cart_item_id) => async (dispatch) => {
     try {
