@@ -1,10 +1,18 @@
-# Getting Started with Create React App
+# Getting Started with FlowerPOS
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Firestore Connection
+
+The test build uses a Firestore database to read and write data. The firebase.js file contains the API for the test server. For official deployment, users will need to change those values to their own Firestore database.
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+
+This will install npm/node as well as the needed dependencies. The development team recommends using the VSCode IDE for ease of use and compatibility.
 
 ### `npm start`
 
@@ -41,9 +49,11 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started) or the included FlowerPOS User Manual.
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
 
 ### Code Splitting
 
