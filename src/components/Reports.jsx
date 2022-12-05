@@ -28,6 +28,22 @@ function Reports ()  {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
+        const orderCollectionRef = collection(db,'Orders')
+          const q = query(orderCollectionRef, 
+            where("created", ">=", start), where("created", "<=", end
+            ));
+          getDocs(q)
+              .then(response =>{
+                  const ord = response.docs.map(doc => ({
+                      data: doc.data(),
+                      id: doc.id,
+                  }))
+                  setOrders(ord)
+              })
+              .catch(error => console.log(error.message))
+
+
+
     };
 
  
@@ -37,17 +53,18 @@ function Reports ()  {
   useEffect(() => {
     if (loading) return;
   }, [user, loading]);
-  useEffect(()=>{
-    getOrders()
-  })
-    useEffect(()=> {
-        console.log(orders)
-    },[orders]
-    )
+  // useEffect(()=>{
+  //   (endDate !== null) &&
+  //   getOrders()
+  // })
+    // useEffect(()=> {
+    //     console.log(orders)
+    // },[orders]
+    // )
   
 
 
-  function getOrders(){
+  // function getOrders(){
     // const orderCollectionRef = collection(db,'Orders')
     // const q = query(orderCollectionRef, orderBy('created', 'desc'), limit(10))
     // getDocs(q)
@@ -68,20 +85,20 @@ function Reports ()  {
     //         getOrders()
     //         return
     //       }
-          const orderCollectionRef = collection(db,'Orders')
-          const q = query(orderCollectionRef, 
-            where("created", ">=", startDate), where("created", "<=", endDate
-            ));
-          getDocs(q)
-              .then(response =>{
-                  const ord = response.docs.map(doc => ({
-                      data: doc.data(),
-                      id: doc.id,
-                  }))
-                  setOrders(ord)
-              })
-              .catch(error => console.log(error.message))
-              };  
+          // const orderCollectionRef = collection(db,'Orders')
+          // const q = query(orderCollectionRef, 
+          //   where("created", ">=", startDate), where("created", "<=", endDate
+          //   ));
+          // getDocs(q)
+          //     .then(response =>{
+          //         const ord = response.docs.map(doc => ({
+          //             data: doc.data(),
+          //             id: doc.id,
+          //         }))
+          //         setOrders(ord)
+          //     })
+          //     .catch(error => console.log(error.message))
+          //     };  
 return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
