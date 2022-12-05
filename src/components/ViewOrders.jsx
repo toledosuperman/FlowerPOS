@@ -8,14 +8,15 @@ import FirestoreService from './FirestoreService.js';
 import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 
+
 function ViewOrders() {
     const { user } = UserAuth();
   const [Orders, setOrders] = useState([]);
 const [ setSearch] = useState([])
-var hideCompleted=false;
+const [hideCompleted]=useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-
+//all values in the order document, Currentorder used for passthrough
   const [currentOrder, setCurrentOrder] = useState({
   CustomerAddress: " ",
           CustomerCity: " ",
@@ -65,7 +66,7 @@ var hideCompleted=false;
   const [validated, setValidated] = useState(false);
 
  const [showDetailsForm, setShowDetailsForm] = useState(false); //view details
-
+//cleanup function
   const handleModalClose = () => {
       setShowAddEditForm(false);
 
@@ -89,7 +90,7 @@ var hideCompleted=false;
 
 
               setIsLoading(true);
-             
+            //meant to update firebase. throws console errors atm
              return FirestoreService.UpdateOrder(currentOrderId,CustomerAddress,
                                                                        CustomerCity,
                                                                       CustomerEmail,
@@ -115,8 +116,6 @@ var hideCompleted=false;
                   setIsLoading(false);
               })
 
-
-      setValidated(true)
   }
 
 
@@ -131,7 +130,7 @@ var hideCompleted=false;
 
           <React.Fragment>
           <Navbar />
-           {/* Add/Edit Form */}
+           {/* Edit modal */}
 
             <Modal show={showAddEditForm} onHide={handleModalClose}>
                <Form noValidate validated={validated} onSubmit={handleAddEditFormSubmit}>
@@ -207,7 +206,7 @@ var hideCompleted=false;
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
 
                                                      setCurrentOrder({
-                                                         "Delivery Date":Date(e.target.value)
+                                                         "Delivery Date":Date.getTime(e.target.value)
                                                      })
                                                  }} />
                      <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
@@ -292,7 +291,7 @@ var hideCompleted=false;
                       <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
 
                                     setCurrentOrder({
-                                        "created": Date(e.target.value)
+                                        "created": Date.getTime(e.target.value)
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Created is required</Form.Control.Feedback>
@@ -315,7 +314,7 @@ var hideCompleted=false;
 
 
 
-{/* Order details */}
+{/* Order details modal*/}
                 <Modal show={showDetailsForm} onHide={handleModalClose}>
                    <Modal.Header closeButton>
                    <Modal.Title>Order Details</Modal.Title>
@@ -363,12 +362,12 @@ var hideCompleted=false;
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
                             <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
-                        <Button variant='primary' size="sm" onClick={() => {
-                        hideCompleted =!hideCompleted;
-                        setIsLoading(true)
+{/*                         <Button variant='primary' size="sm" onClick={() => { */}
+{/*                         hideCompleted =!hideCompleted; //flips boolean value */}
+{/*                         setIsLoading(true) */}
 
-                        setIsLoading(false)
-                                                                  }}>Display/Hide finished orders</Button>{' '}
+{/*                         setIsLoading(false) */}
+{/*                                                                   }}>Display/Hide finished orders</Button>{' '} */}
                       <Form>
           <InputGroup className='my-3'>
             {/* onChange for search */}
@@ -398,13 +397,13 @@ var hideCompleted=false;
 
                                   <tr key={index}>
                                     <td>{index + 1}</td>
-                                    {console.log(order.doc.data.value.mapValue.fields.CustomerName.stringValue)}
+
                                     <td>{order.doc.data.value.mapValue.fields.CustomerName.stringValue}</td>
-                                     <td>{Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue)}</td>
+                                     <td>{String(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue)}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
                                     <td>
-                                      <Button variant= 'success' onClick={()=>{
+                                      <Button variant= 'success' onClick={()=>{ //calls the detail modal while initializing the passthrough object
                                       setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
                                       setCurrentOrder({
                                       "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
@@ -414,7 +413,7 @@ var hideCompleted=false;
                                       "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                       "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                       "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                      "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
+                                      "DeliveryDate": String(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
                                       "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                       "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                       "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -423,12 +422,12 @@ var hideCompleted=false;
                                       "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                       "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
                                      "completed ": String(order.doc.data.value.mapValue.fields.completed.booleanValue),
-                                      "created": Date(order.doc.data.value.mapValue.fields.created.timestampValue),
-                                      "active": String(order.doc.data.value.mapValue.fields.created.active),
+                                      "created": String(order.doc.data.value.mapValue.fields.created.timestampValue),
+                                      "active": String(order.doc.data.value.mapValue.fields.active),
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
-                                          <Button variant='primary' onClick={() => {
+                                          <Button variant='primary' onClick={() => { //calls the edit modal while initializing the passthrough object
                                               setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
                                               setCurrentOrder({
                                               "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
@@ -438,7 +437,7 @@ var hideCompleted=false;
                                               "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
                                               "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
                                               "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                             "DeliveryDate": Date(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
+                                             "DeliveryDate": String(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
                                               "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
                                               "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
                                               "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
@@ -446,9 +445,9 @@ var hideCompleted=false;
                                               "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
                                               "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
                                               "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                            "completed": Boolean(order.doc.data.value.mapValue.fields.completed.booleanValue),
+                                            "completed": String(order.doc.data.value.mapValue.fields.completed.booleanValue),
                                               "created": order.doc.data.value.mapValue.fields.created.timestampValue,
-                                              "active": Boolean(order.doc.data.value.mapValue.fields.created.active),
+                                              "active": String(order.doc.data.value.mapValue.fields.active.booleanValue),
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);

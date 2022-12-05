@@ -90,7 +90,7 @@ async function getAllOrders() {
 
 function AddNewOrder(CustomerAddress,CustomerCity,CustomerEmail,CustomerName,CustomerPhone,CustomerState,
  CustomerZip,DeliveryDate,Product,  RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
- RecipientZip, created) {
+ RecipientZip, created, active) {
 
     const docRef = addDoc(collection(db, "Orders"), {
         CustomerAddress,
