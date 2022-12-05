@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { auth, db} from "../firebase.js";
 import Navbar from './navbar';
 import NoLoggedInView from './NoLoggedInView';
-import { Spinner, Card, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Spinner, Card} from 'react-bootstrap';
 import  { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
@@ -106,11 +106,7 @@ return (<>
             selectsRange
             inline
         />
-                          <DropdownButton id="dropdown-basic-button" title="Select Report">
-      <Dropdown.Item href="#/action-1">COGS Report</Dropdown.Item>
-      <Dropdown.Item href="#/action-2">Products Report</Dropdown.Item>
-      <Dropdown.Item href="#/action-3">Profits and Loss</Dropdown.Item>
-    </DropdownButton>
+                          
                       </div></Card.Header><Card.Body>
                       <div className="row">
                 <div className="table-responsive " >
