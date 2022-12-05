@@ -9,7 +9,7 @@ import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import { FaRegTrashAlt } from 'react-icons/fa';
-// import Toggle from 'react-toggle'
+import Toggle from 'react-toggle'
 
 function ViewProducts() {
     const { user } = UserAuth();
