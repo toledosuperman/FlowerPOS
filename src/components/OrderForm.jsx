@@ -12,7 +12,7 @@ import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from 'react-hot-toast';
-
+import background from '../assets/FlowerField.jpg'
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const [user, loading] = useAuthState(auth);
@@ -90,7 +90,11 @@ return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
   {(user !== null) && <> 
-<React.Fragment>
+    <React.Fragment> <div style={{ backgroundImage: `url(${background})`,
+  
+  backgroundSize:"contain", 
+   }}>
+
 <Navbar />
 <form onSubmit={handleSubmit}className='OrderForm' name='OrderForm'onClose={onClose} open={open}>
 <div className='max-w-[700px] mx-auto my-16 p-4'>
@@ -192,7 +196,7 @@ onChange={setRecipientPhone}/>
     Submit
   </button>
 </div>
-</form>
+</form></div>
  <Footer />
 </React.Fragment></>}
 ;</>)
