@@ -254,6 +254,7 @@ const [  setSearch] = useState([])
                              <th>Product Price ($)</th>
                              <th>Product Count</th>
                              <th>Product Type</th>
+                             <th>Status</th>
                              <th>Actions</th></tr>
                      </thead>
                           <tbody>
@@ -266,7 +267,7 @@ const [  setSearch] = useState([])
                                       <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> 
-                                      <td>{product.doc.data.value.mapValue.fields.Countable.booleanValue ? 'Active' : 'Inactive'} <Toggle
+                                      <td>{product.doc.data.value.mapValue.fields.Countable.booleanValue ? '' : ''} <Toggle
                                         id='Countable'
                                         defaultChecked={product.doc.data.value.mapValue.fields.Countable.booleanValue}
                                         onChange={(e) =>setCurrentProduct({
