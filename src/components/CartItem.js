@@ -1,14 +1,14 @@
 import React  from 'react'
 import { CartItemStyle, CartInfoStyle } from './styles/CartScreen'
 import { useDispatch } from 'react-redux'
-import { deleteItemFromCart, updateCartQty , updateCartSubtotal} from '../components/cartActions'
+import { deleteItemFromCart, updateCartQty } from '../components/cartActions'
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { Button} from 'react-bootstrap';
 
 const CartItem = ({ item }) => {
   
   const [stateQty, setStateQty] = React.useState(item.qtyInCart)
-  const [subtotal, setSubtotal] = React.useState(0)
+  const [ setSubtotal] = React.useState(0)
   const dispatch = useDispatch()
   const handleCartDelete = (cartItemId) => {
     dispatch(deleteItemFromCart(cartItemId))
