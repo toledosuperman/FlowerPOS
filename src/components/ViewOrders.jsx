@@ -371,13 +371,13 @@ const [hideCompleted]=useState(false);
                       <Form>
           <InputGroup className='my-3'>
             {/* onChange for search */}
-        <Form.Control
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder='Search Orders'
-            style={{ width: 350, }}
-            />
+{/*         <Form.Control */}
+{/*             onChange={(e) => setSearch(e.target.value)} */}
+{/*             placeholder='Search Orders' */}
+{/*             style={{ width: 350, }} */}
+{/*             /> */}
         </InputGroup>
-        </Form>
+         </Form>
                   </Card.Header>
                   <Card.Body>
                       <Table responsive className="table table-striped">
