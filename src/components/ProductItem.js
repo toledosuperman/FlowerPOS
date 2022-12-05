@@ -39,7 +39,7 @@ const ProductItem = ({ item }) => {
         {item.description}
       </p> */}
       <CartAddButton onClick={addToCartHandler} primary>
-        Add To Cart
+        Add To Recipe
       </CartAddButton>
     </ProductItemStyle>
   )

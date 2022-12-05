@@ -185,7 +185,7 @@ onChange={setRecipientPhone}/>
 <label htmlFor="comment"> Product</label>
 
 </div>
-
+<h2>Select Delivery Date</h2>
 <div>
 <Calendar onChange={setDeliveryDate} value={DeliveryDate} tileDisabled={tileDisabled}/></div>
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white'>
