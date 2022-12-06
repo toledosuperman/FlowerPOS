@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {Spinner} from 'react-bootstrap';
+import {Spinner, Card} from 'react-bootstrap';
 import Navbar from './navbar';
 import Footer from './footer';
 import './footer.css';
@@ -53,6 +53,12 @@ return (
           {(user !== null) && <>
             <React.Fragment> <div className="background" style={{ backgroundImage: `url(${background})`,backgroundSize:"contain", }} >
   <Navbar />
+  <Card style={{ margin: 24 }}>
+                  <Card.Header className="d-flex justify-content-between align-Products-center">
+                      <div className="align-Products-center" style={{ marginRight: 8 }}>
+                          
+                          <h4 style={{ marginTop: 8, }}>Users</h4>
+                          </div></Card.Header><Card.Body>
   <div style={{ height: 400, width: "100%" }}>
     <DataGrid
       rows={row}
@@ -67,8 +73,8 @@ return (
           color: 'primary.main',
         },}}
       checkboxSelection
-    />
-  </div>
+    /></div>
+  </Card.Body></Card>
   {/* toast message */}
   <Toaster toastOptions={{
     success: {
