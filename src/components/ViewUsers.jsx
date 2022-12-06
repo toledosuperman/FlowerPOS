@@ -59,6 +59,13 @@ return (
       columns={columns}
       pageSize={10}
       rowsPerPageOptions={[10]}
+      sx={{
+        boxShadow: 2,
+        border: 2,
+        borderColor: 'primary.light',
+        '& .MuiDataGrid-cell:hover': {
+          color: 'primary.main',
+        },}}
       checkboxSelection
     />
   </div>
