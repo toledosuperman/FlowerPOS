@@ -10,7 +10,7 @@ import CartScreen from './components/CartScreen';
 import Signup from './components/Signup';
 import Account from './components/Account';
 import { Route, Routes } from 'react-router-dom';
-import ListCustomers from './components/ListCustomers';
+
 import { AuthContextProvider } from './context/AuthContext';
 import Reset from './components/Reset';
 
@@ -36,7 +36,7 @@ function App() {
           <Route path='/vieworders' element={<ViewOrders />} />
           <Route path='/viewusers' element={<ViewUsers />} />
           <Route path='/reports' element={<Reports />} />
-          <Route path='/customers' element={<ListCustomers />} />
+        
           <Route path='/viewproduct' element={<ViewProducts />} />
           <Route path='/createrecipe' element={<ProductScreen />} />
           <Route path='/' element={<Signin />} />
