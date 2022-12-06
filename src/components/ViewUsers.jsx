@@ -12,17 +12,30 @@ import {  db} from "../firebase.js";
 import { collection, getDocs} from "firebase/firestore";
 import "react-toggle/style.css"
 import { DataGrid } from '@mui/x-data-grid'
-const columns = [
-    { field: "name", headerName: "Name", width: 160 },
-    { field: "email", headerName: "Email", width: 210 },
-    { field: "role", headerName: "Role", width: 160 }
-    
-  ];
+
+
+
   export default function ViewUsers () {
-    const [isLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+ 
+      
+    
+    const columns = [
+      { field: "name", headerName: "Name", width: 160 },
+      { field: "email", headerName: "Email", width: 210 },
+      { field: "role", headerName: "Role", width: 160 },
+   
+      
+    ];
+   
+  
+    
+
+ 
+  
     const { user } = UserAuth();
     const [row, setRow] = useState([]);
-  
+    
     useEffect(() => {
       const getAdmins = async () => {
         const admins = await getDocs(collection(db, "users"));
@@ -53,6 +66,7 @@ return (
           {(user !== null) && <>
             <React.Fragment> <div className="background" style={{ backgroundImage: `url(${background})`,backgroundSize:"contain", }} >
   <Navbar />
+
   <Card style={{ margin: 24 }}>
                   <Card.Header className="d-flex justify-content-between align-Products-center">
                       <div className="align-Products-center" style={{ marginRight: 8 }}>
@@ -72,7 +86,7 @@ return (
         '& .MuiDataGrid-cell:hover': {
           color: 'primary.main',
         },}}
-      checkboxSelection
+      // checkboxSelection
     /></div>
   </Card.Body></Card>
   {/* toast message */}
