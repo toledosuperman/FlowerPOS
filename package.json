@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@google-cloud/firestore": "^6.4.0",
+    "@mui/material": "^5.10.16",
+    "@mui/styled-engine-sc": "^5.10.16",
+    "@mui/x-data-grid": "^5.17.14",
     "@reduxjs/toolkit": "^1.8.6",
     "@tanstack/react-table": "^8.5.15",
     "@testing-library/jest-dom": "^5.16.5",
