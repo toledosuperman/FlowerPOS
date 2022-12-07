@@ -14,9 +14,9 @@ import "react-toggle/style.css"
 import { DataGrid } from '@mui/x-data-grid'
 
 
-
+//create user table
   export default function ViewUsers () {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading] = useState(false);
  
       
     
@@ -35,7 +35,7 @@ import { DataGrid } from '@mui/x-data-grid'
   
     const { user } = UserAuth();
     const [row, setRow] = useState([]);
-    
+    //fetch data from firestore
     useEffect(() => {
       const getAdmins = async () => {
         const admins = await getDocs(collection(db, "users"));
@@ -57,7 +57,7 @@ getAdmins();
 }, []);
 
 console.log("row", row);
-
+//user view
 return (
     <React.Fragment>
       <>

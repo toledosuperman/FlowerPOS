@@ -17,7 +17,7 @@ function ViewOrders ()  {
   const [user, loading] = useAuthState(auth);
   const [orders, setOrders] = useState([])
   const [name, setName] = useState("");
-  
+  //fetch firestore users
   useEffect(() => {
     if (loading) return;
     const fetchUserName = async () => {
@@ -33,6 +33,7 @@ function ViewOrders ()  {
     };
     fetchUserName();
   }, [user, loading]);
+  //fetch orders
   useEffect(()=>{
   getOrders()
 },[])
@@ -55,8 +56,9 @@ function ViewOrders ()  {
           })
           .catch(error => console.log(error.message))
   };
-
+//display page
 return (<>
+
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
   {(user !== null) && <> 

@@ -35,7 +35,7 @@ function OrderForm({  onClose,open}) {
   const[ DeliveryDate,setDeliveryDate]= useState(new Date());
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  
+  //firestore data fetch
   useEffect(() => {
     if (loading) return;
     const fetchUserName = async () => {
@@ -51,9 +51,11 @@ function OrderForm({  onClose,open}) {
     };
     fetchUserName();
   }, [user, loading]);
+  //calendar disable function
   const tileDisabled = ({  date}) => {
         return date < new Date() 
      }
+     //write to firestore upon submit
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -85,7 +87,7 @@ function OrderForm({  onClose,open}) {
 
    
 
-
+//display form
 return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}

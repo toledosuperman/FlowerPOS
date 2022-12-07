@@ -2,7 +2,7 @@ import React from 'react'
 import { ProductItemStyle, CartAddButton } from '../components/styles/ProductScreen'
 import { useDispatch } from 'react-redux'
 import { addProductToCart } from './cartActions'
-
+//display for items in recipe page pt 1
 const ProductItem = ({ item }) => {
   const dispatch = useDispatch()
   const addToCartHandler = () => {
@@ -29,15 +29,7 @@ const ProductItem = ({ item }) => {
       >
         ${item.price} {item.unit}
       </p>
-      {/* <p>{item.unit}</p> */}
-      {/* <p
-        style={{
-          fontSize: '10px',
-          color: 'black'
-        }}
-      >
-        {item.description}
-      </p> */}
+      
       <CartAddButton onClick={addToCartHandler} primary>
         Add To Recipe
       </CartAddButton>

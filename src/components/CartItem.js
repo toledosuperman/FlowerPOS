@@ -17,14 +17,11 @@ const CartItem = ({ item }) => {
   const handleCartQty = (itemId, qty) => {
     dispatch(updateCartQty(itemId, qty))
   }
-  // const handleCartSubtotal = (itemId, qty, price) => {
-    
-  //   dispatch(updateCartSubtotal(itemId, qty*price))
-  // }
+ 
   const handlesubtotal = (price, qty) => {
     dispatch(price*qty)
   }
- 
+ //display items
   return (
     <>
       <CartItemStyle>
@@ -54,7 +51,7 @@ const CartItem = ({ item }) => {
               setStateQty(() => Number(e.target.value))
               console.log(stateQty)
               handleCartQty(item.id, stateQty)
-              // handleCartSubtotal(item.id,stateQty)
+              
              
             }}
           />
@@ -71,7 +68,7 @@ const CartItem = ({ item }) => {
             onChange={(e) => {
               setSubtotal(() => Number(e.target.value))
               handlesubtotal(item.price, stateQty)
-              // handleCartSubtotal(item.id, stateQty, item.price)
+              
             }}
            
           />
