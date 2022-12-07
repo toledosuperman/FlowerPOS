@@ -16,7 +16,7 @@ import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-
+//fetch data and calendar constants
 function Reports ()  {
   const [isLoading] = useState(false);
   const [user, loading] = useAuthState(auth);
@@ -28,49 +28,9 @@ function Reports ()  {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
-    };
-
- 
-
-
-
-  useEffect(() => {
-    if (loading) return;
-  }, [user, loading]);
-  useEffect(()=>{
-    getOrders()
-  })
-    useEffect(()=> {
-        console.log(orders)
-    },[orders]
-    )
-  
-
-
-  function getOrders(){
-    // const orderCollectionRef = collection(db,'Orders')
-    // const q = query(orderCollectionRef, orderBy('created', 'desc'), limit(10))
-    // getDocs(q)
-    //     .then(response =>{
-    //         const ord = response.docs.map(doc => ({
-    //             data: doc.data(),
-    //             id: doc.id,
-    //         }))
-    //         setOrders(ord)
-    //     })
-    //     .catch(error => console.log(error.message))
-    //     };  
-
-    //     function getOrdersbyDate(dates){
-    //       const {startDate, endDate} = dates;
-    //       console.log(startDate, endDate)
-    //       if (startDate === undefined && endDate === undefined) {
-    //         getOrders()
-    //         return
-    //       }
-          const orderCollectionRef = collection(db,'Orders')
+        const orderCollectionRef = collection(db,'Orders')
           const q = query(orderCollectionRef, 
-            where("created", ">=", startDate), where("created", "<=", endDate
+            where("created", ">=", start), where("created", "<=", end
             ));
           getDocs(q)
               .then(response =>{
@@ -81,7 +41,19 @@ function Reports ()  {
                   setOrders(ord)
               })
               .catch(error => console.log(error.message))
-              };  
+
+
+
+    };
+
+ 
+
+
+
+  useEffect(() => {
+    if (loading) return;
+  }, [user, loading]);
+  //display page
 return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}

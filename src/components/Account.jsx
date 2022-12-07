@@ -10,14 +10,13 @@ import { Spinner, Card } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
-import "./account.css";
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [orders, setOrders] = useState([])
   const [name, setName] = useState("");
-  
+  //fetch firestore users
   useEffect(() => {
     if (loading) return;
     const fetchUserName = async () => {
@@ -33,6 +32,7 @@ function ViewOrders ()  {
     };
     fetchUserName();
   }, [user, loading]);
+  //fetch orders
   useEffect(()=>{
   getOrders()
 },[])
@@ -55,8 +55,9 @@ function ViewOrders ()  {
           })
           .catch(error => console.log(error.message))
   };
-
+//display page
 return (<>
+
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
   {(user !== null) && <> 

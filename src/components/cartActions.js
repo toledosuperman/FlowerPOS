@@ -16,7 +16,7 @@ import {
   import nextId from 'react-id-generator'
   import { collection, getDocs, doc, setDoc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore'
   import  toast from 'react-hot-toast';
-
+//actions for recipe page
   export const listCartItems = () => async (dispatch) => {
     let cartData = []
     async function getCartItems(db) {

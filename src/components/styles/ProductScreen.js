@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+//css for pt 1 of recipe page
 export const ProductContainerStyle = styled.div`
   width: 80%;
   margin: 2% auto;

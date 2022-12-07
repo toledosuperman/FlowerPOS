@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Image, Row, Container } from 'react-bootstrap';
 
 import notLoggedInImage from '../assets/undraw_Login_re_4vu2.png'
-
+//redirect to display if not logged in
 function NoLoggedInView(props) {
     return (
         <>

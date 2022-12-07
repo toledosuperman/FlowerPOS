@@ -34,7 +34,7 @@ const ProductScreen = () => {
 
   const {  products } = productsList
  
-  
+  //recipe view
   return (<>
  
     {(user === null) && <NoLoggedInView />}

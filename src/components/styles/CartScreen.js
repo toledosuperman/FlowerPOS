@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-
+//css for second page of recipe page
 export const CartContainerStyle = styled.div`
   width: 80%;
   margin: 2% auto;
