@@ -80,41 +80,41 @@ function ViewOrders() {
       setIsLoading(false);
   }
 
-  const handleAddEditFormSubmit = (e) => {
+  const handleAddEditFormSubmit = async (e) => {
       e.preventDefault();
       const {currentOrderId, CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
              CustomerPhone,CustomerState, CustomerZip,DeliveryDate, Product,
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
-             RecipientZip,completed, created, active } = e.target.elements;
+             RecipientZip} = e.target.elements;
 
 
 
               setIsLoading(true);
             //meant to update firebase. throws console errors atm
-             return FirestoreService.UpdateOrder(currentOrderId,CustomerAddress,
-                                                                       CustomerCity,
-                                                                      CustomerEmail,
-                                                                       CustomerName,
-                                                                       CustomerPhone,
-                                                                       CustomerState,
-                                                                       CustomerZip,
-                                                                      DeliveryDate,
-                                                                      Product,
-                                                                      RecipientAddress,
-                                                                       RecipientCity,
-                                                                       RecipientName,
-                                                                       RecipientPhone,
-                                                                       RecipientState,
-                                                                      RecipientZip,
-                                                                       completed,
-                                                                       created, active ).then(() => {
-                  toast.success(`${CustomerName.value} is successfully updated.`);
-                  handleModalClose();
-                  window.location.reload(false);
-              }).catch((e) => {
-                  toast.error("Error occurred: " + e.message);
-                  setIsLoading(false);
-              })
+             try {
+          await FirestoreService.UpdateOrder(currentOrderId, CustomerAddress.value,
+              CustomerCity.value,
+              CustomerEmail.value,
+              CustomerName.value,
+              CustomerPhone.value,
+              CustomerState.value,
+              CustomerZip.value,
+              DeliveryDate.value,
+              Product.value,
+              RecipientAddress.value,
+              RecipientCity.value,
+              RecipientName.value,
+              RecipientPhone.value,
+              RecipientState.value,
+              RecipientZip.value,
+              );
+          toast.success(`${CustomerName.value} is successfully updated.`);
+          handleModalClose();
+          window.location.reload(false);
+      } catch (e_1) {
+          toast.error("Error occurred: " + e_1.message);
+          setIsLoading(false);
+      }
 
   }
 
@@ -427,7 +427,7 @@ function ViewOrders() {
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
-                                          <Button variant='primary' onClick={() => { //calls the edit modal while initializing the passthrough object
+                                          {/* <Button variant='primary' onClick={() => { //calls the edit modal while initializing the passthrough object
                                               setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
                                               setCurrentOrder({
                                               "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
@@ -451,7 +451,7 @@ function ViewOrders() {
                                               });
                                               setAddEditFormType("Edit");
                                               setShowAddEditForm(true);
-                                          }}>✎ Edit</Button>{' '}
+                                          }}>✎ Edit</Button>{' '} */}
 
                                       </td>
                                   </tr>

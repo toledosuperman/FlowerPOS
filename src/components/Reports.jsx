@@ -88,7 +88,7 @@ return (<>
                             <th>Product Name</th>
                             <th>Price ($)</th>
                             <th>Cost ($)</th>
-                            <th>Date Created</th>
+                            <th>Date Sold</th>
                           
                             
                         </tr>

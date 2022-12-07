@@ -14,7 +14,7 @@ import Toggle from 'react-toggle'
 function ViewProducts() {
     const { user } = UserAuth();
   const [Products, setProducts] = useState([]);
-const [  setSearch] = useState([])
+// const [  setSearch] = useState([])
   const [isLoading, setIsLoading] = useState(false);
 
   const [currentProduct, setCurrentProduct] = useState({
@@ -238,11 +238,11 @@ const [  setSearch] = useState([])
                           setShowAddEditForm(true);
                       }}>Add New Product</Button>
             {/* onChange for search */}
-            <Form.Control
+            {/* <Form.Control
               onChange={(e) => setSearch(e.target.value)}
               placeholder='Search Products'
               style={{ width: 350, }}
-            />
+            /> */}
           </InputGroup>
         </Form>
                   </Card.Header>
