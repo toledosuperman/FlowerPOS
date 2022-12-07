@@ -13,11 +13,12 @@ import PhoneInput from 'react-phone-number-input'
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
+
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const [user, loading] = useAuthState(auth);
        
-  
+        
   const[CustomerName, setCustomerName]= useState('');
   const[ CustomerCity,setCustomerCity ]= useState('');
   const[ CustomerAddress,setCustomerAddress]= useState('');
@@ -36,6 +37,7 @@ function OrderForm({  onClose,open}) {
   const navigate = useNavigate();
   const [name, setName] = useState("");
   
+  //firestore data fetch
   useEffect(() => {
     if (loading) return;
     const fetchUserName = async () => {
@@ -51,9 +53,11 @@ function OrderForm({  onClose,open}) {
     };
     fetchUserName();
   }, [user, loading]);
+  //calendar disable function
   const tileDisabled = ({  date}) => {
         return date < new Date() 
      }
+     //write to firestore upon submit
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -76,16 +80,19 @@ function OrderForm({  onClose,open}) {
         completed: false,
         active: true,
         created: Timestamp.now(),
-        user: name
+        user: name,
+        Price: 30,
+        Cost: 15
       })
       navigate('/account')
     } catch (err) {
       alert(err)
     }}
 
-   
+    
+    
 
-
+//display form
 return (<>
   {(user === null) && <NoLoggedInView />}
   {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
@@ -187,6 +194,7 @@ onChange={setRecipientPhone}/>
 <textarea className="form-control" id="comment" name="text" placeholder="Comment goes here"onChange={(e) => setProduct(e.target.value.toUpperCase())} 
     value={Product}></textarea>
 <label htmlFor="comment"> Product</label>
+
 
 </div>
 <h2>Select Delivery Date</h2>

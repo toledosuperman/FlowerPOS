@@ -6,7 +6,7 @@ import {
     CART_LIST_SUCCESS,
     CART_LIST_FAIL
   } from '../components/cartConstants'
-  
+  //switch statement for recipe actions
   export const listCartItemsReducer = (state = { cartItems: [] }, action) => {
     switch (action.type) {
       case CART_LIST_REQUEST:

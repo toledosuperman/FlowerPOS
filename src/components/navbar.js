@@ -9,7 +9,7 @@ import {  db, auth} from "../firebase.js";
 import { collection, getDocs, query, where} from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from 'react-hot-toast';
-
+//navbar data retrieval, user check
 const NavBar = (a={ }) => {
       const [role, setRole] = useState(false);
       const [user, loading] = useAuthState(auth);
@@ -53,7 +53,7 @@ const NavBar = (a={ }) => {
               marginTop: 8,}}  onClick={handleLogout}>Logout</Button>
           }
       }
-  
+  //navbar display
       return (
             <><header className="navbar">
                   <a className="navbar-brand" href="/">

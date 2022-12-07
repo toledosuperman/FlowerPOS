@@ -8,7 +8,7 @@ import {
   } from "firebase/firestore";
 import toast from 'react-hot-toast';
 import { db } from '../firebase'
-
+//firestore API functionality
 async function getAllProducts() {
     try {
         const colRef = collection(db, "Products");

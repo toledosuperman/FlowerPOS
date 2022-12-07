@@ -24,6 +24,7 @@ function CartScreen ({onClose,open})  {
   const[Inventory, setInventory]= useState(0);
   const[Price, setPrice]= useState(0);
   const { loading, error, cartItems } = cartItemsList
+  //write to product list
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -40,23 +41,12 @@ function CartScreen ({onClose,open})  {
       toast.error(err)
     }}
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault()
-  //   try {
-  //     await addDoc(collection(db, 'Recipe'), {
-        
-        
-  //       created: Timestamp.now()
-  //     })
-  //     navigate('/account')
-  //   } catch (err) {
-  //     toast.error(err)
-  //   }}
+ 
 
   useEffect(() => {
     dispatch(listCartItems())
   }, [dispatch])
-  
+  //display page
   return (<>
     {(user === null) && <NoLoggedInView />}
    {(isLoading === true) && <Spinner animation="border" variant="secondary" />}
@@ -112,7 +102,7 @@ function CartScreen ({onClose,open})  {
 <label htmlFor="comment">Starting Price</label>
 </div>
 
-{/* <div style={{ display: "flex", justifycontent: "center", alignitems: "center"}}> */}
+
 <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-half p-4 my-2 text-white' >
     Submit
   </button>
