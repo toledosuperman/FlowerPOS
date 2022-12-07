@@ -13,13 +13,12 @@ import PhoneInput from 'react-phone-number-input'
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
-import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
+
 function OrderForm({  onClose,open}) {
         const [isLoading] = useState(false);
         const [user, loading] = useAuthState(auth);
        
-        const animatedComponents = makeAnimated();
+        
   const[CustomerName, setCustomerName]= useState('');
   const[ CustomerCity,setCustomerCity ]= useState('');
   const[ CustomerAddress,setCustomerAddress]= useState('');
@@ -81,35 +80,17 @@ function OrderForm({  onClose,open}) {
         completed: false,
         active: true,
         created: Timestamp.now(),
-        user: name
+        user: name,
+        Price: 30,
+        Cost: 15
       })
       navigate('/account')
     } catch (err) {
       alert(err)
     }}
 
-    const [info , setInfo] = useState([]);
- 
-    // Start the fetch operation as soon as
-    // the page loads
-    window.addEventListener('load', () => {
-        Fetchdata();
-      });
- 
-    // Fetch the required data using the get() method
-    const Fetchdata = ()=>{
-      const orderCollectionRef = collection(db,'Products')
-      // const q = query(orderCollectionRef)
-      getDocs(orderCollectionRef)
-      .then(response =>{
-        const ord = response.docs.map(doc => ({
-            Name: doc.Name,
-           
-        }))
-        setInfo(ord)
-    })
-    .catch(error => console.log(error.message))
-};
+    
+    
 
 //display form
 return (<>
@@ -214,13 +195,7 @@ onChange={setRecipientPhone}/>
     value={Product}></textarea>
 <label htmlFor="comment"> Product</label>
 
-<Select
-      closeMenuOnSelect={false}
-      components={animatedComponents}
-      // defaultValue={[colourOptions[4], colourOptions[5]]}
-      isMulti
-      options={info}
-    />
+
 </div>
 <h2>Select Delivery Date</h2>
 <div>

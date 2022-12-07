@@ -10,7 +10,6 @@ import { Spinner, Card } from 'react-bootstrap';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import Footer from './footer';
-import "./account.css";
 function ViewOrders ()  {
   
   const [isLoading] = useState(false);
