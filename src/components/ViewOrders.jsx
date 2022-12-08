@@ -12,8 +12,7 @@ import toast, { Toaster } from 'react-hot-toast';
 function ViewOrders() {
     const { user } = UserAuth();
   const [Orders, setOrders] = useState([]);
-// const [ setSearch] = useState([])
-// const [hideCompleted]=useState(false);
+
 
   const [isLoading, setIsLoading] = useState(false);
 //all values in the order document, Currentorder used for passthrough
