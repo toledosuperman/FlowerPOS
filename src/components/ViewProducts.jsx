@@ -9,7 +9,7 @@ import NoLoggedInView from './NoLoggedInView.js';
 import toast, { Toaster } from 'react-hot-toast';
 import background from '../assets/FlowerField.jpg'
 import { FaRegTrashAlt } from 'react-icons/fa';
-import Toggle from 'react-toggle'
+
 
 function ViewProducts() {
     const { user } = UserAuth();
@@ -237,12 +237,7 @@ function ViewProducts() {
           <Button style={{ backgroundColor: '#0d6efd', borderWidth: 0, marginRight: 25, }} onClick={() => {
                           setShowAddEditForm(true);
                       }}>Add New Product</Button>
-            {/* onChange for search */}
-            {/* <Form.Control
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder='Search Products'
-              style={{ width: 350, }}
-            /> */}
+           
           </InputGroup>
         </Form>
                   </Card.Header>
@@ -254,11 +249,11 @@ function ViewProducts() {
                              <th>Product Price ($)</th>
                              <th>Product Count</th>
                              <th>Product Type</th>
-                             <th>Status</th>
+                             {/* <th>Status</th> */}
                              <th>Actions</th></tr>
                      </thead>
                           <tbody>
-                            {/* <tr><td><input type='text' onChange={(e)=>changeSearch(e.target.value)}></input></td></tr> */}
+                            
                               { (Products.map((product, index) => (
                                   <tr key={index}>
                                       <td>{index + 1}</td>
@@ -267,13 +262,7 @@ function ViewProducts() {
                                       <td>{product.doc.data.value.mapValue.fields.Price.doubleValue ? product.doc.data.value.mapValue.fields.Price.doubleValue : product.doc.data.value.mapValue.fields.Price.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Inventory.doubleValue ? product.doc.data.value.mapValue.fields.Inventory.doubleValue : product.doc.data.value.mapValue.fields.Inventory.integerValue}</td>
                                       <td>{product.doc.data.value.mapValue.fields.Type.stringValue}</td> 
-                                      <td>{product.doc.data.value.mapValue.fields.Countable.booleanValue ? '' : ''} <Toggle
-                                        id='Countable'
-                                        defaultChecked={product.doc.data.value.mapValue.fields.Countable.booleanValue}
-                                        onChange={(e) =>setCurrentProduct({
-          
-                                     "Countable": !(product.doc.data.value.mapValue.fields.Countable.booleanValue)
-                                        })} /></td>
+                                   
 
 
                                       <td>

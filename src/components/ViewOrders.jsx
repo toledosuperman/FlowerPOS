@@ -362,20 +362,10 @@ function ViewOrders() {
                       <div className="align-orders-center" style={{ marginRight: 8 }}>
                             <h4 style={{ marginTop: 8, }}>View Orders</h4>
                       </div>
-{/*                         <Button variant='primary' size="sm" onClick={() => { */}
-{/*                         hideCompleted =!hideCompleted; //flips boolean value */}
-{/*                         setIsLoading(true) */}
 
-{/*                         setIsLoading(false) */}
-{/*                                                                   }}>Display/Hide finished orders</Button>{' '} */}
                       <Form>
           <InputGroup className='my-3'>
-            {/* onChange for search */}
-{/*         <Form.Control */}
-{/*             onChange={(e) => setSearch(e.target.value)} */}
-{/*             placeholder='Search Orders' */}
-{/*             style={{ width: 350, }} */}
-{/*             /> */}
+           
         </InputGroup>
          </Form>
                   </Card.Header>
@@ -427,31 +417,7 @@ function ViewOrders() {
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
-                                          {/* <Button variant='primary' onClick={() => { //calls the edit modal while initializing the passthrough object
-                                              setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
-                                              setCurrentOrder({
-                                              "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
-                                              "CustomerCity": order.doc.data.value.mapValue.fields.CustomerCity.stringValue,
-                                              "CustomerEmail": order.doc.data.value.mapValue.fields.CustomerEmail.stringValue,
-                                              "CustomerName": order.doc.data.value.mapValue.fields.CustomerName.stringValue,
-                                              "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
-                                              "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
-                                              "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
-                                             "DeliveryDate": String(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
-                                              "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
-                                              "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
-                                              "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
-                                              "RecipientName": order.doc.data.value.mapValue.fields.RecipientName.stringValue,
-                                              "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
-                                              "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
-                                              "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
-                                            "completed": String(order.doc.data.value.mapValue.fields.completed.booleanValue),
-                                              "created": order.doc.data.value.mapValue.fields.created.timestampValue,
-                                              "active": String(order.doc.data.value.mapValue.fields.active.booleanValue),
-                                              });
-                                              setAddEditFormType("Edit");
-                                              setShowAddEditForm(true);
-                                          }}>✎ Edit</Button>{' '} */}
+                                          
 
                                       </td>
                                   </tr>
