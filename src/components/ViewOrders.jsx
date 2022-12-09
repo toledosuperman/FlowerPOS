@@ -36,7 +36,7 @@ function ViewOrders() {
           created: 0,
           active: false
   });
-  const [currentOrderId, setCurrentOrderId] = useState(['']);
+  const [CurrentOrderId, setCurrentOrderId] = useState(['']);
 //fetching all orders from firestore
   const fetchOrders = useCallback(() =>{
       setIsLoading(true);
@@ -45,13 +45,13 @@ function ViewOrders() {
           setIsLoading(false);
           setOrders(response._snapshot.docChanges);
           console.log(response._snapshot.docChanges)
-          console.log(currentOrderId)
+          console.log(CurrentOrderId)
          
       }).catch((e) => {
           setIsLoading(false);
           toast.error("Error occurred while fetching the menu order. " + e);
       })
-  }, [currentOrderId]);
+  }, [CurrentOrderId]);
 
   useEffect(() => {
       if (user !== null) {
@@ -81,17 +81,17 @@ function ViewOrders() {
 
   const handleAddEditFormSubmit = async (e) => {
       e.preventDefault();
-      const {currentOrderId, CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
+
+      const { CustomerAddress,CustomerCity,CustomerEmail,CustomerName,
              CustomerPhone,CustomerState, CustomerZip,DeliveryDate, Product,
              RecipientAddress, RecipientCity,RecipientName,RecipientPhone,RecipientState,
              RecipientZip} = e.target.elements;
-
-
+                console.log(CurrentOrderId)
 
               setIsLoading(true);
             //meant to update firebase. throws console errors atm
              try {
-          await FirestoreService.UpdateOrder(currentOrderId, CustomerAddress.value,
+          await FirestoreService.UpdateOrder(CurrentOrderId, CustomerAddress.value,
               CustomerCity.value,
               CustomerEmail.value,
               CustomerName.value,
@@ -99,7 +99,7 @@ function ViewOrders() {
               CustomerState.value,
               CustomerZip.value,
               DeliveryDate.value,
-              Product.value,
+              String(Product.value),
               RecipientAddress.value,
               RecipientCity.value,
               RecipientName.value,
@@ -205,7 +205,7 @@ function ViewOrders() {
                      <Form.Control required type='text' placeholder='Enter Delivery Date' size='md' value={currentOrder?.DeliveryDate} onChange={(e) => {
 
                                                      setCurrentOrder({
-                                                         "Delivery Date":Date.getTime(e.target.value)
+                                                         "Delivery Date":e.target.value
                                                      })
                                                  }} />
                      <Form.Control.Feedback type='invalid'>Delivery Date is required</Form.Control.Feedback>
@@ -280,7 +280,7 @@ function ViewOrders() {
 
                                     setCurrentOrder({
 
-                                        "completed": Boolean(e.target.value)
+                                        "completed": e.target.value
 
                                     })
                                 }} />
@@ -290,23 +290,25 @@ function ViewOrders() {
                       <Form.Control required type='text' placeholder='Enter creation date' size='md' value={currentOrder?.created} onChange={(e) => {
 
                                     setCurrentOrder({
-                                        "created": Date.getTime(e.target.value)
+                                        "created": e.target.value
                                     })
                                 }} />
                       <Form.Control.Feedback type='invalid'>Created is required</Form.Control.Feedback>
                       </FloatingLabel>
                        <FloatingLabel controlId="active" label="active" className="mb-3" >
-                                            <Form.Control required type='text' placeholder='Enter order status' size='md' value={currentOrder?.active} onChange={(e) => {
+                       <Form.Control required type='text' placeholder='Enter order status' size='md' value={currentOrder?.active} onChange={(e) => {
 
-                                                          setCurrentOrder({
-                                                              "active": Boolean(e.target.value)
-                                                          })
-                                                      }} />
-                                            <Form.Control.Feedback type='invalid'>active status is required</Form.Control.Feedback>
-                                            </FloatingLabel>
+                                     setCurrentOrder({
+                                         "active": e.target.value
+                                     })
+                                 }} />
+                       <Form.Control.Feedback type='invalid'>active status is required</Form.Control.Feedback>
+                       </FloatingLabel>
+                       {console.log(CurrentOrderId)}
+                       {/*{setCurrentOrder({"currentOrderId":currentOrder?.CurrentOrderId})}*/}
                       </Modal.Body>
                       <Modal.Footer>
-                          <Button type="submit">{(addEditFormType === 'Add') ? 'Add' : 'Update'}</Button>
+                          <Button type="submit">{'Update'}</Button>
                       </Modal.Footer>
                   </Form>
               </Modal>
@@ -388,7 +390,7 @@ function ViewOrders() {
                                     <td>{index + 1}</td>
 
                                     <td>{order.doc.data.value.mapValue.fields.CustomerName.stringValue}</td>
-                                     <td>{String(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue)}</td>
+                                     <td>{(order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue)}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientName.stringValue}</td>
                                     <td>{order.doc.data.value.mapValue.fields.RecipientPhone.stringValue}</td>
                                     <td>
@@ -416,6 +418,30 @@ function ViewOrders() {
                                       });
                                       setShowDetailsForm(true);
                                       }}>Details</Button>{' '}
+                                      <Button variant= 'primary' onClick={()=>{ //calls the edit modal while initializing the passthrough object
+                                      setCurrentOrderId(order.doc.key.path.segments[order.doc.key.path.segments.length - 1])
+                                      setCurrentOrder({
+                                      "CustomerAddress": order.doc.data.value.mapValue.fields.CustomerAddress.stringValue,
+                                      "CustomerCity": order.doc.data.value.mapValue.fields.CustomerCity.stringValue,
+                                      "CustomerEmail": order.doc.data.value.mapValue.fields.CustomerEmail.stringValue,
+                                      "CustomerName": order.doc.data.value.mapValue.fields.CustomerName.stringValue,
+                                      "CustomerPhone": order.doc.data.value.mapValue.fields.CustomerPhone.stringValue,
+                                      "CustomerState": order.doc.data.value.mapValue.fields.CustomerState.stringValue,
+                                      "CustomerZip": order.doc.data.value.mapValue.fields.CustomerZip.stringValue,
+                                      "DeliveryDate": (order.doc.data.value.mapValue.fields.DeliveryDate.timestampValue),
+                                      "Product": order.doc.data.value.mapValue.fields.Product.stringValue,
+                                      "RecipientAddress": order.doc.data.value.mapValue.fields.RecipientAddress.stringValue,
+                                      "RecipientCity": order.doc.data.value.mapValue.fields.RecipientCity.stringValue,
+                                      "RecipientName": order.doc.data.value.mapValue.fields.RecipientName.stringValue,
+                                      "RecipientPhone": order.doc.data.value.mapValue.fields.RecipientPhone.stringValue,
+                                      "RecipientState": order.doc.data.value.mapValue.fields.RecipientState.stringValue,
+                                      "RecipientZip": order.doc.data.value.mapValue.fields.RecipientZip.stringValue,
+                                      "completed ": (order.doc.data.value.mapValue.fields.completed.booleanValue),
+                                      "created": (order.doc.data.value.mapValue.fields.created.timestampValue),
+                                      "active": (order.doc.data.value.mapValue.fields.active),
+                                      });
+                                      setShowAddEditForm(true);
+                                      }}>✎ Edit</Button>{' '}
                                           
 
                                       </td>
